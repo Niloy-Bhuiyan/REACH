@@ -1,26 +1,209 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================================
+   REACH Design DNA v2 — token layer.
+   These values are the locked system. Do not introduce a hex outside this file.
+   ========================================================================= */
+
+@theme {
+  /* Surfaces */
+  --color-canvas: #f5f3fb;
+  --color-surface: #fbfafe;
+  --color-surface-inset: #ffffff;
+  --color-surface-read: #fffdf8;
+  --color-surface-read-border: #e7e1d6;
+  --color-console: #1b233a;
+  --color-console-text: #c4cbe0;
+  --color-console-meta: #7c88ac;
+  --color-console-accent: #9aa0f0;
+  --color-console-ok: #8fbf9a;
+  --color-table-head: #f5f3fb;
+  --color-row-hover: #f7f5fd;
+
+  /* Borders */
+  --color-line: #e7e4f0;
+  --color-hairline: #f1eff8;
+  --color-group: #dcd8ec;
+  --color-control: #c3bcec;
+  --color-active: #574fc0;
+
+  /* Ink */
+  --color-ink: #101b49;
+  --color-ink-link: #2e2a8c;
+  --color-ink-body: #4a5170;
+  --color-ink-muted: #666c8c;
+  --color-ink-placeholder: #6e7490;
+  --color-ink-disabled: #8a8fa8;
+
+  /* Violet — brand & action only, never a verdict */
+  --color-violet: #6c63d8;
+  --color-violet-hover: #5a51c0;
+  --color-violet-text: #574fc0;
+  --color-violet-tint: #f3effc;
+  --color-violet-line: #ded7f6;
+
+  /* Sage — Apply Now / eligible / verified / connected / free */
+  --color-sage: #3f7d53;
+  --color-sage-hover: #366b49;
+  --color-sage-text: #2e6742;
+  --color-sage-tint: #eef5ef;
+  --color-sage-line: #d3e4d8;
+
+  /* Apricot — One Fix Away / roadmap / improvement / stale */
+  --color-apricot: #c4762f;
+  --color-apricot-hover: #ae6828;
+  --color-apricot-text: #a85c22;
+  --color-apricot-tint: #fdf4ea;
+  --color-apricot-line: #f0dcc2;
+  --color-apricot-deco: #e0904f;
+
+  /* Terracotta — Skip / hard blockers / destructive. Quiet buttons only. */
+  --color-terracotta: #a33f28;
+  --color-terracotta-text: #a33f28;
+  --color-terracotta-tint: #fbede9;
+  --color-terracotta-line: #e3bcb2;
+
+  /* Meters */
+  --color-track: #edeaf7;
+
+  /* Type */
+  --font-display: var(--font-baloo), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  /* Motion — DNA v2 §07 */
+  --ease-enter: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+
+  /* Breakpoints matching the seven-width responsive matrix */
+  --breakpoint-xs: 30rem; /* 480 */
+  --breakpoint-sm: 48rem; /* 768 */
+  --breakpoint-md: 64rem; /* 1024 */
+  --breakpoint-lg: 80rem; /* 1280 */
+  --breakpoint-xl: 90rem; /* 1440 */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Elevation tiers — 1 flat, 2 grouped, 3 overlay. Max one tier per row. */
+@theme {
+  --shadow-tier2: 0 2px 6px -3px rgb(16 27 73 / 0.12);
+  --shadow-tier3: 0 18px 40px -24px rgb(16 27 73 / 0.4);
+  --shadow-search: 0 8px 20px -14px rgb(16 27 73 / 0.35);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ---------------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------------ */
+
+@layer base {
+  html {
+    background: var(--color-canvas);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 14.5px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    /* Forbidden at every width: horizontal scrolling of primary content. */
+    overflow-x: hidden;
+  }
+
+  /* Focus ring: 2px #574FC0 at 2px offset, keyboard only, never removed. */
+  :focus-visible {
+    outline: 2px solid var(--color-active);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  ::selection {
+    background: var(--color-violet-line);
+  }
+
+  /* Every count uses tabular numerals so widths never jump. */
+  .tnum,
+  [data-tnum] {
+    font-variant-numeric: tabular-nums;
+  }
+
+  img[data-pixel] {
+    image-rendering: pixelated;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ---------------------------------------------------------------------------
+   Utilities the system needs but Tailwind does not generate
+   ------------------------------------------------------------------------ */
+
+@utility font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+@utility pixel {
+  image-rendering: pixelated;
+}
+
+/* Skeleton at real row geometry, 1.2s shimmer. Never a spinner. */
+@utility skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-track) 0%,
+    #f4f2fb 50%,
+    var(--color-track) 100%
+  );
+  background-size: 200% 100%;
+  animation: reach-shimmer 1.2s linear infinite;
+  border-radius: 6px;
+}
+
+@keyframes reach-shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* Scenery is a background layer only — masked to transparent at the content edge. */
+@utility scenery-mask-r {
+  -webkit-mask-image: linear-gradient(to right, #000 62%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 62%, transparent 100%);
+}
+
+@utility scenery-mask-l {
+  -webkit-mask-image: linear-gradient(to left, #000 62%, transparent 100%);
+  mask-image: linear-gradient(to left, #000 62%, transparent 100%);
+}
+
+@utility scenery-mask-b {
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+}
+
+/* ---------------------------------------------------------------------------
+   Reduced motion — count-ups resolve instantly, slides become fades,
+   nothing else changes.
+   ------------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 100ms !important;
+    scroll-behavior: auto !important;
+  }
+  .skeleton {
+    animation: none;
+    background: var(--color-track);
+  }
 }
