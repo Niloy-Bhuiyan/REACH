@@ -374,7 +374,7 @@ function Discover() {
         <button
           type="button"
           onClick={() => setConsoleOpen(true)}
-          className="tnum fixed inset-x-4 bottom-[68px] z-20 min-h-[44px] rounded-xl bg-console px-4 font-mono text-meta text-console-text"
+          className="tnum fixed inset-x-4 bottom-[calc(76px+env(safe-area-inset-bottom))] z-20 min-h-[44px] rounded-xl bg-console px-4 font-mono text-meta text-console-text"
         >
           Finding opportunities · step {run?.step} of {run?.totalSteps}
         </button>
@@ -522,7 +522,7 @@ function NoResults({
 
   return (
     <EmptyState
-      glyph="g-empty-noresults"
+      icon="discover"
       title="Nothing matches these filters"
       body={
         cause ? (

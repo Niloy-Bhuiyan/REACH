@@ -10,7 +10,7 @@ import { useSetStatusLine } from "@/components/shell/AppShell";
 import { Arrow, ButtonLink } from "@/components/ui/Button";
 import { Meta, Mono } from "@/components/ui/Chip";
 import { Disclosure } from "@/components/ui/Disclosure";
-import { PixelIcon } from "@/components/ui/PixelIcon";
+import { Icon } from "@/components/ui/Icon";
 import { Hairline, Page, Stack } from "@/components/ui/Surface";
 import { Skeleton, SkeletonRows } from "@/components/ui/States";
 import { getDelta, getFix, getLatestRun } from "@/lib/api";
@@ -49,18 +49,7 @@ export default function OneFixPage({ params }: { params: Promise<{ id: string }>
           href={`/jobs/${data.jobId}`}
           className="inline-flex min-h-[40px] items-center gap-1.5 text-sm font-medium text-brand-text hover:underline"
         >
-          <svg
-            aria-hidden
-            viewBox="0 0 16 16"
-            className="size-3.5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.7"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M13 8H3M7 4L3 8l4 4" />
-          </svg>
+          <Icon name="chevronLeft" size={15} />
           {data.jobRole} · {data.jobCompany}
         </Link>
         <Mono className="ml-auto">
@@ -74,12 +63,12 @@ export default function OneFixPage({ params }: { params: Promise<{ id: string }>
             {/* The blocker is the headline. You know what to do before scrolling. */}
             <header>
               <div className="flex items-center gap-2.5">
-                <PixelIcon name="px-wrench" size={30} height={34} />
+                <Icon name="wrench" size={20} className="text-apricot" />
                 <span className="text-meta font-medium text-apricot-text">
                   {GAP_LABEL[data.gapType]}
                 </span>
               </div>
-              <h1 className="mt-3 max-w-[18ch] text-display text-ink">{data.headline}</h1>
+              <h1 className="font-display mt-3 max-w-[18ch] text-display text-ink">{data.headline}</h1>
               <p className="mt-3 max-w-[60ch] text-body text-ink-body">{data.body}</p>
 
               <div className="mt-6 flex flex-wrap items-center gap-2">
@@ -142,7 +131,7 @@ export default function OneFixPage({ params }: { params: Promise<{ id: string }>
                         className="-mx-2 flex items-baseline gap-4 rounded-lg border-b border-hairline px-2 py-3 transition-colors duration-100 hover:bg-surface-sunken"
                       >
                         <span className="min-w-0 flex-1">
-                          <span className="block text-body text-ink">{job.role}</span>
+                          <span className="font-display block text-[1.0625rem] text-ink">{job.role}</span>
                           <span className="mt-0.5 block">
                             <Meta>
                               {job.company} · {job.location} · {job.otherRequirements}
@@ -228,7 +217,7 @@ export default function OneFixPage({ params }: { params: Promise<{ id: string }>
         </aside>
       </div>
 
-      <div className="fixed inset-x-0 bottom-[56px] z-20 flex gap-2 border-t border-line bg-surface px-4 py-3 lg:hidden">
+      <div className="fixed inset-x-0 bottom-[calc(64px+env(safe-area-inset-bottom))] z-20 flex gap-2 border-t border-line bg-surface px-4 py-3 lg:hidden">
         <ButtonLink href="/resume" variant="secondary" size="lg">
           Fix my CV
         </ButtonLink>

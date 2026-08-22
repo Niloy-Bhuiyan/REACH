@@ -56,12 +56,6 @@ export const VERDICT_TONE: Record<Verdict, VerdictTone> = {
   },
 };
 
-export const VERDICT_GLYPH: Record<Verdict, string> = {
-  "apply-now": "px-apply",
-  "one-fix-away": "px-onefix",
-  skip: "px-skip",
-};
-
 export const VERDICT_ORDER: Verdict[] = ["apply-now", "one-fix-away", "skip"];
 
 /* ── Gap typing ─────────────────────────────────────────────────────────── */
@@ -72,10 +66,11 @@ export const GAP_LABEL: Record<GapType, string> = {
   signal: "Signal gap",
 };
 
-export const GAP_GLYPH: Record<GapType, string> = {
-  knowledge: "g-gap-knowledge",
-  proof: "g-gap-proof",
-  signal: "g-gap-signal",
+/** One icon per gap type, from the single icon system. */
+export const GAP_ICON: Record<GapType, "book" | "checkCircle" | "spark"> = {
+  knowledge: "book",
+  proof: "checkCircle",
+  signal: "spark",
 };
 
 export const GAP_DIAGNOSIS: Record<GapType, string> = {

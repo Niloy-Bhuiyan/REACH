@@ -10,20 +10,24 @@ import { VERDICT_LABEL, VERDICT_TONE } from "@/lib/utils/verdict";
 export function VerdictBadge({
   verdict,
   size = "md",
+  pill,
   className,
 }: {
   verdict: Verdict;
   size?: "sm" | "md" | "lg";
+  /** A tinted pill, for the one place on a screen where the verdict is the headline. */
+  pill?: boolean;
   className?: string;
 }) {
   const tone = VERDICT_TONE[verdict];
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 font-semibold",
+        "inline-flex items-center gap-2 font-semibold",
         size === "sm" && "text-meta",
         size === "md" && "text-sm",
         size === "lg" && "text-body",
+        pill && cn("rounded-full px-4 py-[7px]", tone.tint),
         tone.text,
         className,
       )}

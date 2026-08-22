@@ -168,7 +168,7 @@ export function AssistantSurface() {
                         href={action.href}
                         onClick={closeAssistant}
                         className={cn(
-                          "inline-flex min-h-[46px] items-center rounded-[10px] px-4 text-[14px] font-semibold",
+                          "inline-flex min-h-[46px] items-center rounded-full px-4.5 text-[14px] font-semibold",
                           action.tone === "primary"
                             ? "bg-brand text-surface hover:bg-brand-hover"
                             : "border-[1.5px] border-control bg-surface text-brand-text hover:bg-brand-tint",
@@ -233,7 +233,7 @@ export function AssistantSurface() {
                   <button
                     type="button"
                     onClick={() => submit(question)}
-                    className="flex min-h-[44px] w-full items-center rounded-[10px] border border-line bg-canvas px-3.5 text-left text-[13.5px] leading-snug text-ink-body transition-colors duration-100 hover:bg-row-hover hover:text-ink"
+                    className="flex min-h-[44px] w-full items-center rounded-xl border border-line bg-canvas px-3.5 text-left text-[13.5px] leading-snug text-ink-body transition-colors duration-100 hover:bg-row-hover hover:text-ink"
                   >
                     {question}
                   </button>

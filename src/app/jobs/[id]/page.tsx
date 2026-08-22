@@ -8,10 +8,11 @@ import { useAssistantSubject } from "@/components/assistant/AssistantProvider";
 import { AssistantEntry } from "@/components/assistant/AssistantSurface";
 import { OpportunityDelta } from "@/components/delta/OpportunityDelta";
 import { EvidenceRow } from "@/components/evidence/EvidenceRow";
-import { FreshnessStamp } from "@/components/job/JobRow";
+import { CompanyTile, FreshnessStamp } from "@/components/job/JobRow";
 import { useSetStatusLine } from "@/components/shell/AppShell";
 import { Arrow, Button, ButtonLink } from "@/components/ui/Button";
 import { Meta, Mono } from "@/components/ui/Chip";
+import { Icon } from "@/components/ui/Icon";
 import { Disclosure } from "@/components/ui/Disclosure";
 import { Hairline, Page, Stack } from "@/components/ui/Surface";
 import { Skeleton, SkeletonRows } from "@/components/ui/States";
@@ -95,18 +96,7 @@ export default function JobDetailPage({ params }: { params: Promise<{ id: string
           href="/discover"
           className="inline-flex min-h-[40px] items-center gap-1.5 text-sm font-medium text-brand-text hover:underline"
         >
-          <svg
-            aria-hidden
-            viewBox="0 0 16 16"
-            className="size-3.5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.7"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M13 8H3M7 4L3 8l4 4" />
-          </svg>
+          <Icon name="chevronLeft" size={15} />
           All results
         </Link>
         {index >= 0 && (
@@ -141,15 +131,21 @@ export default function JobDetailPage({ params }: { params: Promise<{ id: string
           <Stack gap="md">
             {/* Role, then verdict. Nothing between them. */}
             <header>
-              <div className="flex flex-wrap items-start justify-between gap-x-6 gap-y-2">
-                <h1 className="text-title text-ink">{detail.role}</h1>
-                <VerdictBadge verdict={detail.verdict} size="lg" className="mt-1" />
+              <div className="flex flex-wrap items-start justify-between gap-x-6 gap-y-3">
+                <div className="flex min-w-0 items-start gap-4">
+                  <CompanyTile name={detail.company} size={52} />
+                  <div className="min-w-0">
+                    <h1 className="font-display text-display text-ink">{detail.role}</h1>
+                    <p className="mt-1">
+                      <Meta>
+                        {detail.companyFull} · {detail.location} · {detail.mode} ·{" "}
+                        {detail.employment}
+                      </Meta>
+                    </p>
+                  </div>
+                </div>
+                <VerdictBadge verdict={detail.verdict} size="lg" pill className="mt-1.5" />
               </div>
-              <p className="mt-1.5">
-                <Meta>
-                  {detail.companyFull} · {detail.location} · {detail.mode} · {detail.employment}
-                </Meta>
-              </p>
               <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
                 {detail.salary && <Mono>{detail.salary}</Mono>}
                 {detail.experience && <Mono>{detail.experience}</Mono>}
@@ -163,7 +159,7 @@ export default function JobDetailPage({ params }: { params: Promise<{ id: string
 
             {/* The verdict is a sentence. There are no percentages on this screen. */}
             <section>
-              <h2 className="max-w-[38ch] text-section leading-snug text-ink">
+              <h2 className="font-display max-w-[30ch] text-[1.625rem] leading-[1.25] text-ink">
                 {detail.verdict === "skip" ? detail.skipBlocker?.title : detail.verdictHeadline}
               </h2>
               <p className="mt-2.5 max-w-[62ch] text-body text-ink-body">
@@ -176,7 +172,7 @@ export default function JobDetailPage({ params }: { params: Promise<{ id: string
                     href={detail.applyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex min-h-[44px] items-center gap-2 rounded-[10px] bg-sage px-4 text-body font-medium text-white transition-colors duration-100 hover:bg-sage-hover"
+                    className="inline-flex min-h-[50px] items-center gap-2.5 rounded-full bg-sage px-6 text-body font-medium text-white transition-colors duration-150 hover:bg-sage-hover"
                   >
                     Apply on company site
                     <Arrow />
@@ -406,7 +402,7 @@ export default function JobDetailPage({ params }: { params: Promise<{ id: string
 
       {/* Mobile keeps one primary action within thumb reach. */}
       {isMobile && (
-        <div className="fixed inset-x-0 bottom-[56px] z-20 flex gap-2 border-t border-line bg-surface px-4 py-3">
+        <div className="fixed inset-x-0 bottom-[calc(64px+env(safe-area-inset-bottom))] z-20 flex gap-2 border-t border-line bg-surface px-4 py-3">
           <Button variant="secondary" size="lg" onClick={() => save.mutate()}>
             {detail.saved ? "Saved" : "Save"}
           </Button>
@@ -415,7 +411,7 @@ export default function JobDetailPage({ params }: { params: Promise<{ id: string
               href={detail.applyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-[10px] bg-sage px-4 text-body font-medium text-white"
+              className="inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-full bg-sage px-4 text-body font-medium text-white"
             >
               Apply on company site
             </a>

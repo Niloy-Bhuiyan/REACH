@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils/cn";
-import { PixelIcon } from "./PixelIcon";
+import { Icon, type IconName } from "./Icon";
 
 /** Skeletons sit at the real row geometry so nothing jumps when data lands. */
 export function Skeleton({
@@ -31,19 +31,17 @@ export function SkeletonRows({
 }
 
 /**
- * Empty states are where the pixel art earns its place: one piece of art, one
- * sentence naming what is missing, one action. Never a blank card, never a spinner.
+ * An empty state names what is missing and what to do about it: one quiet mark,
+ * one sentence, one action. Never a blank card, never a spinner.
  */
 export function EmptyState({
-  glyph,
-  glyphSize = 64,
+  icon = "target",
   title,
   body,
   children,
   className,
 }: {
-  glyph: string;
-  glyphSize?: number;
+  icon?: IconName;
   title: string;
   body?: React.ReactNode;
   children?: React.ReactNode;
@@ -51,7 +49,12 @@ export function EmptyState({
 }) {
   return (
     <div className={cn("flex flex-col items-center gap-3 py-14 text-center", className)}>
-      <PixelIcon name={glyph} size={glyphSize} className="opacity-90" />
+      <span
+        aria-hidden
+        className="flex size-14 items-center justify-center rounded-full bg-canvas-deep text-ink-muted"
+      >
+        <Icon name={icon} size={24} />
+      </span>
       <h3 className="mt-1 text-section text-ink">{title}</h3>
       {body && <div className="max-w-[44ch] text-body text-ink-body">{body}</div>}
       {children && <div className="mt-3 flex flex-col items-center gap-2.5">{children}</div>}
@@ -64,22 +67,20 @@ export function ErrorNotice({
   title,
   children,
   actions,
-  glyph,
   className,
 }: {
   title: string;
   children?: React.ReactNode;
   actions?: React.ReactNode;
-  glyph?: string;
   className?: string;
 }) {
   return (
     <div
       role="alert"
-      className={cn("rounded-xl border border-terracotta-line bg-terracotta-tint p-4", className)}
+      className={cn("rounded-2xl border border-terracotta-line bg-terracotta-tint p-4", className)}
     >
       <div className="flex gap-3">
-        {glyph && <PixelIcon name={glyph} size={26} className="mt-0.5" />}
+        <Icon name="alert" size={19} className="mt-0.5 text-terracotta" />
         <div className="min-w-0 flex-1">
           <p className="text-subhead text-terracotta-text">{title}</p>
           {children && <div className="mt-1 text-sm text-ink-body">{children}</div>}

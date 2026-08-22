@@ -9,7 +9,8 @@ import { Button } from "@/components/ui/Button";
 import { Meta, Mono } from "@/components/ui/Chip";
 import { Input, Select, Toggle } from "@/components/ui/Controls";
 import { Disclosure } from "@/components/ui/Disclosure";
-import { PixelIcon } from "@/components/ui/PixelIcon";
+import { EngineMark } from "@/components/evidence/SourceMark";
+import { Icon } from "@/components/ui/Icon";
 import { Hairline, Page, Stack } from "@/components/ui/Surface";
 import { ErrorNotice, Skeleton, SkeletonRows } from "@/components/ui/States";
 import {
@@ -271,7 +272,7 @@ export default function SettingsPage() {
 
         {/* Attention, not error. */}
         <p className="flex items-start gap-2.5 text-sm text-apricot-text">
-          <PixelIcon name="g-stale" size={18} className="mt-px" />
+          <Icon name="alert" size={17} className="mt-px text-apricot" />
           {data.consequenceNote}
         </p>
       </Stack>
@@ -324,7 +325,9 @@ function EngineRow({
           />
         </label>
 
-        {engine.isProviderMark && <PixelIcon name={engine.icon} size={20} className="mt-0.5" />}
+        {engine.isProviderMark && (
+          <EngineMark id={engine.id} size={20} className="mt-0.5 text-ink-body" />
+        )}
 
         <div className="min-w-0 flex-1">
           <p className="flex flex-wrap items-baseline gap-x-2.5">

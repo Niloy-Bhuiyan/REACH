@@ -13,7 +13,7 @@ import { Meta, Mono } from "@/components/ui/Chip";
 import { Meter } from "@/components/ui/Meter";
 import { Disclosure } from "@/components/ui/Disclosure";
 import { Sheet, SheetGrip } from "@/components/ui/Overlay";
-import { PixelIcon } from "@/components/ui/PixelIcon";
+import { Icon } from "@/components/ui/Icon";
 import { Hairline, Page, Stack } from "@/components/ui/Surface";
 import { Skeleton, SkeletonRows } from "@/components/ui/States";
 import { completeMilestone, getDelta, getPlan, skipMilestone, startMilestone } from "@/lib/api";
@@ -100,7 +100,7 @@ export default function RoadmapPage() {
             {/* Progress and the next action, before anything else. */}
             <header>
               <div className="flex items-center gap-2.5">
-                <PixelIcon name="px-map" size={28} height={32} />
+                <Icon name="path" size={20} className="text-apricot" />
                 <span className="text-meta font-medium text-apricot-text">
                   {GAP_LABEL[data.gapType]}
                 </span>

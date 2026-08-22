@@ -298,7 +298,7 @@ export default function ResumePage() {
       </div>
 
       {isMobile && (
-        <div className="fixed inset-x-0 bottom-[56px] z-20 flex items-center gap-3 border-t border-line bg-surface px-4 py-3">
+        <div className="fixed inset-x-0 bottom-[calc(64px+env(safe-area-inset-bottom))] z-20 flex items-center gap-3 border-t border-line bg-surface px-4 py-3">
           <span className="min-w-0 flex-1 text-sm text-ink-muted">
             {acceptedCount > 0
               ? `${acceptedCount} pending edit${acceptedCount === 1 ? "" : "s"}`

@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils/cn";
-import { PixelIcon } from "./PixelIcon";
 
 /**
  * A surface only exists when it has a job: separating a working panel from the
@@ -50,13 +49,8 @@ export function Card({
   );
 }
 
-/**
- * A section head is type. The glyph is opt-in and reserved for the handful of
- * signature moments — never a decoration attached to every heading.
- */
+/** A section head is type, and only type. */
 export function SectionHead({
-  glyph,
-  glyphSize = 22,
   title,
   detail,
   count,
@@ -65,8 +59,6 @@ export function SectionHead({
   className,
   as: Tag = "h2",
 }: {
-  glyph?: string;
-  glyphSize?: number;
   title: string;
   detail?: string;
   count?: number;
@@ -85,9 +77,6 @@ export function SectionHead({
 
   return (
     <div className={cn("flex items-baseline gap-2.5", className)}>
-      {glyph && (
-        <PixelIcon name={glyph} size={glyphSize} className="translate-y-[3px] self-start" />
-      )}
       <div className="min-w-0 flex-1">
         <Tag className="text-section text-ink">
           {title}
