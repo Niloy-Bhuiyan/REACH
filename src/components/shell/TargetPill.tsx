@@ -53,7 +53,7 @@ export function TargetPill({
         <button
           type="button"
           onClick={() => setEditing(true)}
-          className="ml-1 min-h-[32px] font-semibold text-violet-text hover:underline"
+          className="ml-1 min-h-[44px] px-1 font-semibold text-violet-text hover:underline"
         >
           Change
         </button>

@@ -108,7 +108,7 @@ export default function SettingsPage() {
         <div className="min-w-0 flex-1">
           <Link
             href="/profile"
-            className="text-[13.5px] font-semibold text-violet-text hover:underline"
+            className="inline-flex min-h-[44px] items-center text-[13.5px] font-semibold text-violet-text hover:underline"
           >
             ← Profile
           </Link>
@@ -447,15 +447,18 @@ function EngineRow({
       )}
     >
       <div className="flex flex-wrap items-start gap-3">
-        <input
-          type="radio"
-          name="engine"
-          checked={active}
-          onChange={onSelect}
-          disabled={pending || engine.state === "not-connected" || invalid}
-          aria-label={`Use ${engine.name}`}
-          className="mt-1.5 h-[18px] w-[18px] accent-[#6C63D8]"
-        />
+        {/* The radio stays 18px; the label around it carries the 44px target. */}
+        <label className="-mt-1 -ml-1 flex h-[44px] w-[44px] shrink-0 cursor-pointer items-center justify-center">
+          <input
+            type="radio"
+            name="engine"
+            checked={active}
+            onChange={onSelect}
+            disabled={pending || engine.state === "not-connected" || invalid}
+            aria-label={`Use ${engine.name}`}
+            className="h-[18px] w-[18px] accent-[#6C63D8]"
+          />
+        </label>
         <PixelIcon name={engine.icon} size={28} className="mt-0.5" />
         <div className="min-w-0 flex-1">
           <p className="flex flex-wrap items-center gap-2 text-[15px] font-semibold text-ink">
@@ -516,14 +519,14 @@ function EngineRow({
           )}
         </div>
 
-        <div className="flex shrink-0 flex-col items-end gap-1.5">
+        <div className="flex w-full shrink-0 flex-col items-start gap-1.5 sm:w-auto sm:items-end">
           {engine.quota && (
             <Mono>
               {engine.quota.used} / {engine.quota.of} today
             </Mono>
           )}
           {engine.health && !active && <Mono>{engine.health}</Mono>}
-          <div className="flex flex-wrap justify-end gap-2">
+          <div className="flex flex-wrap gap-2 sm:justify-end">
             {!active && !invalid && engine.state !== "not-connected" && (
               <Button size="sm" onClick={onSelect} disabled={pending}>
                 Use this engine

@@ -44,7 +44,7 @@ function AppNav({ status }: { status: string | null }) {
         className="mx-auto flex h-full max-w-[1440px] items-center justify-between px-6 md:px-10"
       >
         <div className="flex items-center gap-8 lg:gap-11">
-          <Link href="/" className="flex items-center gap-2.5" aria-label="REACH — Focus">
+          <Link href="/" className="flex min-h-[44px] items-center gap-2.5" aria-label="REACH — Focus">
             <PixelIcon name="px-logo" size={34} height={33} priority />
             <span className="font-display text-[24px] leading-none font-extrabold text-ink">
               REACH

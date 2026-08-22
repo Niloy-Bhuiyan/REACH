@@ -274,7 +274,7 @@ export default function ResumePage() {
               {jobId && (
                 <Link
                   href={`/jobs/${jobId}`}
-                  className="text-[13px] font-semibold text-violet-text hover:underline"
+                  className="inline-flex min-h-[44px] items-center px-1 text-[13px] font-semibold text-violet-text hover:underline"
                 >
                   Open job detail ↗
                 </Link>
@@ -454,13 +454,13 @@ function EditorRow({
         <span className="block truncate text-[12.5px] text-ink-muted">{section.detail}</span>
       </button>
       <Chip tone={tone}>{section.health.label}</Chip>
-      <span className="flex flex-col">
+      <span className="flex items-center">
         <button
           type="button"
           onClick={() => onMove(-1)}
           disabled={first}
           aria-label={`Move ${section.title} up`}
-          className="flex h-[22px] w-[22px] items-center justify-center rounded text-[11px] text-ink-muted hover:bg-row-hover disabled:text-ink-disabled"
+          className="flex h-[44px] w-[30px] items-center justify-center rounded text-[12px] text-ink-muted hover:bg-row-hover disabled:text-ink-disabled"
         >
           ▲
         </button>
@@ -469,7 +469,7 @@ function EditorRow({
           onClick={() => onMove(1)}
           disabled={last}
           aria-label={`Move ${section.title} down`}
-          className="flex h-[22px] w-[22px] items-center justify-center rounded text-[11px] text-ink-muted hover:bg-row-hover disabled:text-ink-disabled"
+          className="flex h-[44px] w-[30px] items-center justify-center rounded text-[12px] text-ink-muted hover:bg-row-hover disabled:text-ink-disabled"
         >
           ▼
         </button>

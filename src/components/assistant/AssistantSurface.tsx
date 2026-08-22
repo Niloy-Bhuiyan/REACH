@@ -323,7 +323,7 @@ export function AssistantEntry({ className }: { className?: string }) {
     >
       <PixelIcon name="px-logo" size={19} height={18} />
       {subject.label}
-      <kbd className="tnum ml-1 hidden rounded border border-line bg-canvas px-1.5 py-0.5 font-mono text-[11px] text-ink-muted sm:inline">
+      <kbd className="tnum ml-1 hidden rounded border border-line bg-canvas px-1.5 py-0.5 font-mono text-[12px] text-ink-muted sm:inline">
         ⌘K
       </kbd>
     </button>

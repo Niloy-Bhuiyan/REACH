@@ -55,7 +55,7 @@ export function Notifications() {
       >
         <PixelIcon name="g-deadline" size={22} />
         {count > 0 && (
-          <span className="tnum absolute top-1 right-1 flex h-[16px] min-w-[16px] items-center justify-center rounded-full bg-apricot px-1 font-mono text-[10px] leading-none font-bold text-surface">
+          <span className="tnum absolute top-1 right-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-apricot px-1 font-mono text-[12px] leading-none font-bold text-surface">
             {count}
           </span>
         )}

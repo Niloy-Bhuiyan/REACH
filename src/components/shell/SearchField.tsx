@@ -44,7 +44,7 @@ export function SearchField({
         onChange={(event) => setValue(event.target.value)}
         placeholder={mobilePlaceholder && isNarrow ? mobilePlaceholder : placeholder}
         aria-label="Search jobs, internships, skills and companies"
-        className="min-w-0 flex-1 bg-transparent text-[15px] text-ink placeholder:text-ink-placeholder focus:outline-none"
+        className="min-h-[44px] min-w-0 flex-1 bg-transparent text-[15px] text-ink placeholder:text-ink-placeholder focus:outline-none"
       />
       <button
         type="submit"

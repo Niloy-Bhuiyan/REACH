@@ -148,7 +148,7 @@ export default function JobDetailPage({ params }: { params: Promise<{ id: string
 }
 
 function cnTab(active: boolean) {
-  return `pb-1.5 text-[13.5px] ${
+  return `flex min-h-[44px] items-center pb-1.5 text-[13.5px] ${
     active ? "border-b-2 border-active font-semibold text-ink" : "text-ink-body"
   }`;
 }

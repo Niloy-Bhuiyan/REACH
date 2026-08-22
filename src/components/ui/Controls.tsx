@@ -76,7 +76,7 @@ export function Select({
       </select>
       <span
         aria-hidden
-        className="pointer-events-none absolute right-3 text-[11px] text-ink-placeholder"
+        className="pointer-events-none absolute right-3 text-[12px] text-ink-placeholder"
       >
         ▾
       </span>
@@ -114,18 +114,22 @@ export function Toggle({
         aria-checked={checked}
         aria-label={label}
         onClick={() => onChange(!checked)}
-        className={cn(
-          "relative h-[26px] w-[46px] shrink-0 rounded-full border transition-colors duration-100",
-          checked ? "border-violet bg-violet" : "border-control bg-track",
-        )}
+        className="flex h-[44px] w-[46px] shrink-0 items-center justify-center"
       >
         <span
           aria-hidden
           className={cn(
-            "absolute top-[2px] h-[20px] w-[20px] rounded-full bg-surface shadow-tier2 transition-[left] duration-100",
-            checked ? "left-[23px]" : "left-[2px]",
+            "relative block h-[26px] w-[46px] rounded-full border transition-colors duration-100",
+            checked ? "border-violet bg-violet" : "border-control bg-track",
           )}
-        />
+        >
+          <span
+            className={cn(
+              "absolute top-[2px] h-[20px] w-[20px] rounded-full bg-surface shadow-tier2 transition-[left] duration-100",
+              checked ? "left-[23px]" : "left-[2px]",
+            )}
+          />
+        </span>
       </button>
     </div>
   );
