@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Controls";
 import { Drawer, Sheet, SheetGrip } from "@/components/ui/Overlay";
-import { PixelIcon } from "@/components/ui/PixelIcon";
 import { Eyebrow } from "@/components/ui/Surface";
 import { Skeleton } from "@/components/ui/States";
 import { askAssistant, getAssistantSuggestions } from "@/lib/api";
@@ -80,10 +79,7 @@ export function AssistantSurface() {
   const body = (
     <div className="flex h-full flex-col">
       <header className="flex shrink-0 items-center justify-between border-b border-line px-5 py-4">
-        <div className="flex items-center gap-2.5">
-          <PixelIcon name="g-assistant" size={26} />
-          <span className="font-display text-[19px] font-bold text-ink">Ask REACH</span>
-        </div>
+        <span className="text-section text-ink">Ask REACH</span>
         <div className="flex items-center gap-1">
           {thread.length > 0 && (
             <Button
@@ -110,7 +106,7 @@ export function AssistantSurface() {
       </header>
 
       {/* Scope is stated and changeable, so the user always knows what the answer is about. */}
-      <div className="flex shrink-0 items-center gap-2.5 border-b border-line bg-violet-tint px-5 py-2.5">
+      <div className="flex shrink-0 items-center gap-2.5 border-b border-line px-6 py-2.5">
         <Eyebrow tone="violet">Scope</Eyebrow>
         <span className="min-w-0 flex-1 truncate text-[13.5px] text-ink">{subject.subject}</span>
         <Link
@@ -141,10 +137,7 @@ export function AssistantSurface() {
               </div>
             ) : (
               <div key={message.id}>
-                <div className="flex items-center gap-2">
-                  <PixelIcon name="px-logo" size={18} height={17} />
-                  <Eyebrow>REACH</Eyebrow>
-                </div>
+                <Eyebrow>REACH</Eyebrow>
                 <p className="mt-1.5 text-[14.5px] leading-relaxed text-ink-body">
                   {message.text}
                 </p>
@@ -154,13 +147,9 @@ export function AssistantSurface() {
                     <Eyebrow tone="sage">Based on</Eyebrow>
                     <ul className="mt-1.5 flex flex-col gap-1.5">
                       {message.citations.map((citation, i) => (
-                        <li
-                          key={i}
-                          className="flex items-start gap-2.5 rounded-[10px] border border-sage-line bg-sage-tint px-3 py-2"
-                        >
-                          <PixelIcon name={citation.icon} size={18} />
-                          <span className="text-[13px] leading-snug text-ink-body">
-                            <span className="font-semibold text-sage-text">{citation.title}</span>
+                        <li key={i} className="border-b border-hairline py-2 last:border-b-0">
+                          <span className="text-sm text-ink-body">
+                            <span className="font-medium text-sage-text">{citation.title}</span>
                             {" · "}
                             {citation.detail}
                           </span>
@@ -197,12 +186,9 @@ export function AssistantSurface() {
           {/* Loading is a skeleton at answer geometry plus a mono status naming what it reads. */}
           {ask.isPending && (
             <div>
-              <div className="flex items-center gap-2">
-                <PixelIcon name="px-logo" size={18} height={17} />
-                <span className="tnum font-mono text-[12px] tracking-tight text-ink-muted uppercase">
-                  Reading your evidence · 3 sources
-                </span>
-              </div>
+              <span className="tnum font-mono text-meta text-ink-muted">
+                Reading your evidence · 3 sources
+              </span>
               <div className="mt-2.5 flex flex-col gap-2">
                 <Skeleton className="h-[13px] w-full" />
                 <Skeleton className="h-[13px] w-[92%]" />
@@ -317,15 +303,12 @@ export function AssistantEntry({ className }: { className?: string }) {
       type="button"
       onClick={openAssistant}
       className={cn(
-        "inline-flex min-h-[44px] items-center gap-2.5 rounded-[10px] border-[1.5px] border-control bg-surface px-3.5 text-[14px] font-semibold text-ink transition-colors duration-100 hover:bg-violet-tint",
+        "inline-flex min-h-[40px] items-center gap-2 rounded-lg border border-control bg-surface px-3 text-sm font-medium text-ink-body transition-colors duration-100 hover:bg-surface-sunken hover:text-ink",
         className,
       )}
     >
-      <PixelIcon name="px-logo" size={19} height={18} />
       {subject.label}
-      <kbd className="tnum ml-1 hidden rounded border border-line bg-canvas px-1.5 py-0.5 font-mono text-[12px] text-ink-muted sm:inline">
-        ⌘K
-      </kbd>
+      <kbd className="tnum hidden font-mono text-meta text-ink-disabled sm:inline">⌘K</kbd>
     </button>
   );
 }

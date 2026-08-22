@@ -1,17 +1,18 @@
-import { Chip, Mono } from "@/components/ui/Chip";
+import { Meta, Mono } from "@/components/ui/Chip";
+import { Disclosure } from "@/components/ui/Disclosure";
 import { Meter } from "@/components/ui/Meter";
-import { PixelIcon } from "@/components/ui/PixelIcon";
-import { Card, Eyebrow, Hairline } from "@/components/ui/Surface";
+import { Hairline } from "@/components/ui/Surface";
 import type { Keyword, MeterReading } from "@/lib/api/types";
 import { cn } from "@/lib/utils/cn";
 
 /**
- * Two meters, permanently separate. ATS Readiness is a property of the document — no job
- * involved. JD Match is a property of one posting. Neither shows a 0–100 number, both lead
- * with a word, and they are never summed or averaged.
+ * Two readings that never merge. ATS Readiness is a property of the document —
+ * no job involved. JD Match is a property of one posting. Each leads with a word,
+ * neither shows a 0–100 number, and their derivations are one click away rather
+ * than spread across the screen.
  *
- * With no JD selected, JD Match reads "Not yet measured" on a dashed surface with an empty
- * track. A 0% bar would be a false statement about the CV.
+ * With no JD selected, JD Match reads "Not yet measured" on an empty track. A 0%
+ * bar would be a false statement about the CV.
  */
 export function MeterPair({
   ats,
@@ -27,123 +28,96 @@ export function MeterPair({
   className?: string;
 }) {
   return (
-    <div className={cn("grid gap-3 sm:grid-cols-2", className)}>
-      <MeterPanel
-        glyph="g-ats"
+    <div className={cn("divide-y divide-line border-y border-line", className)}>
+      <Reading
         title="ATS Readiness"
-        caption={ats.caption}
+        subtitle="the document itself"
         reading={ats}
         tone="violet"
       />
 
       {jd ? (
-        <MeterPanel
-          glyph="g-jdmatch"
+        <Reading
           title="JD Match"
-          subtitle={jobLabel ?? undefined}
-          caption={jd.caption}
+          subtitle={jobLabel ?? "this posting only"}
           reading={jd}
-          // Sage is Apply Now only. A partial match is an improvement, so it reads apricot;
-          // a strong one reads violet, because neither meter is a verdict.
           tone={jd.value === "strong" ? "violet" : "apricot"}
         />
       ) : (
-        <Card className="border-dashed p-4">
-          <div className="flex items-center gap-2.5">
-            <PixelIcon name="g-jdmatch" size={24} />
-            <Eyebrow>JD Match</Eyebrow>
+        <div className="py-4">
+          <div className="flex items-baseline justify-between gap-3">
+            <span className="text-sm font-medium text-ink">JD Match</span>
+            <span className="text-body font-semibold text-ink-muted">Not yet measured</span>
           </div>
-          <p className="mt-2 font-display text-[22px] leading-tight font-bold text-ink-muted">
-            Not yet measured
-          </p>
-          <Meter fill={null} label="Not yet measured" className="mt-2.5" />
-          <p className="mt-2.5 text-[13px] leading-relaxed text-ink-body">
+          <Meter fill={null} label="Not yet measured" className="mt-2" />
+          <p className="mt-2 text-sm text-ink-muted">
             Needs one job description. It is never a score on its own.
           </p>
           <button
             type="button"
             onClick={onPickJob}
-            className="mt-2 min-h-[44px] text-[13.5px] font-semibold text-violet-text hover:underline"
+            className="mt-1 min-h-[36px] text-sm font-medium text-violet-text hover:underline"
           >
-            Pick a job to measure against →
+            Pick a job to measure against
           </button>
-        </Card>
+        </div>
       )}
     </div>
   );
 }
 
-function MeterPanel({
-  glyph,
+function Reading({
   title,
   subtitle,
-  caption,
   reading,
   tone,
 }: {
-  glyph: string;
   title: string;
-  subtitle?: string;
-  caption: string;
+  subtitle: string;
   reading: MeterReading;
-  tone: "violet" | "sage" | "apricot";
+  tone: "violet" | "apricot";
 }) {
   const word = reading.value ? reading.value[0].toUpperCase() + reading.value.slice(1) : "—";
 
   return (
-    <Card className="p-4">
-      <div className="flex flex-wrap items-center gap-2.5">
-        <PixelIcon name={glyph} size={24} />
-        <Eyebrow>{title}</Eyebrow>
-        {subtitle && <Mono className="normal-case">{subtitle}</Mono>}
-      </div>
-
-      {/* The verdict word leads; the bar supports it. */}
-      <p className="mt-2 flex items-baseline gap-2.5">
+    <div className="py-4">
+      <div className="flex items-baseline justify-between gap-3">
+        <span className="text-sm font-medium text-ink">{title}</span>
         <span
           className={cn(
-            "font-display text-[24px] leading-none font-extrabold",
-            tone === "violet"
-              ? "text-violet-text"
-              : tone === "apricot"
-                ? "text-apricot-text"
-                : "text-sage-text",
+            "text-body font-semibold",
+            tone === "violet" ? "text-violet-text" : "text-apricot-text",
           )}
         >
           {word}
         </span>
-        <span className="text-[12.5px] text-ink-muted">{caption}</span>
+      </div>
+      <Meter fill={reading.fill} tone={tone} label={`${title}: ${word}`} className="mt-2" />
+      <p className="mt-2">
+        <Meta>{subtitle}</Meta>
       </p>
 
-      <Meter
-        fill={reading.fill}
-        tone={tone}
-        label={`${title}: ${word}`}
-        className="mt-2.5"
-      />
-
-      <dl className="mt-3">
-        {reading.derivation.map((row, i) => (
-          <div key={row.label}>
-            {i > 0 && <Hairline />}
-            <div className="flex items-baseline justify-between gap-3 py-1.5">
-              <dt className="text-[13px] text-ink-body">{row.label}</dt>
-              <dd className="tnum font-mono text-[12.5px] text-ink">{row.value}</dd>
+      <Disclosure label="What this is from" className="mt-2 border-t-0">
+        <dl className="pt-1">
+          {reading.derivation.map((row, i) => (
+            <div key={row.label}>
+              {i > 0 && <Hairline />}
+              <div className="flex items-baseline justify-between gap-3 py-1.5">
+                <dt className="text-sm text-ink-body">{row.label}</dt>
+                <dd className="tnum font-mono text-meta text-ink">{row.value}</dd>
+              </div>
             </div>
-          </div>
-        ))}
-      </dl>
-
-      <p className="mt-2 border-t border-hairline pt-2.5 text-[12.5px] leading-snug text-ink-muted">
-        {reading.footnote}
-      </p>
-    </Card>
+          ))}
+        </dl>
+        <p className="mt-2 text-sm text-ink-muted">{reading.footnote}</p>
+      </Disclosure>
+    </div>
   );
 }
 
 /**
- * Keywords are grouped by consequence and every group is labelled, so colour never carries
- * the meaning alone.
+ * Keywords grouped by consequence, every group labelled, so colour is never the
+ * only cue.
  */
 export function KeywordGroups({
   keywords,
@@ -156,20 +130,23 @@ export function KeywordGroups({
   total: number | null;
   className?: string;
 }) {
-  const groups: { state: Keyword["state"]; label: string; tone: "terracotta" | "apricot" | "sage" }[] =
-    [
-      { state: "missing-high", label: "High priority · missing", tone: "terracotta" },
-      { state: "missing", label: "Missing · lower priority", tone: "apricot" },
-      { state: "matched", label: "Matched", tone: "sage" },
-    ];
+  const groups: {
+    state: Keyword["state"];
+    label: string;
+    tone: string;
+  }[] = [
+    { state: "missing-high", label: "High priority · missing", tone: "text-terracotta-text" },
+    { state: "missing", label: "Missing · lower priority", tone: "text-apricot-text" },
+    { state: "matched", label: "Matched", tone: "text-sage-text" },
+  ];
 
   return (
-    <div className={cn("flex flex-col gap-4", className)}>
-      <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <Eyebrow>Keywords from this JD</Eyebrow>
+    <div className={className}>
+      <div className="flex items-baseline justify-between gap-3 border-b border-line pb-2">
+        <h3 className="text-sm font-medium text-ink">Keywords from this JD</h3>
         {present !== null && total !== null && (
           <Mono>
-            {present} of {total} present
+            {present} of {total}
           </Mono>
         )}
       </div>
@@ -177,24 +154,12 @@ export function KeywordGroups({
       {groups.map((group) => {
         const items = keywords.filter((k) => k.state === group.state);
         if (items.length === 0) return null;
-        const shown = group.state === "matched" ? items.slice(0, 8) : items;
         return (
-          <div key={group.state}>
-            <Eyebrow tone={group.tone}>{group.label}</Eyebrow>
-            <div className="mt-1.5 flex flex-wrap gap-1.5">
-              {shown.map((keyword) => (
-                <Chip key={keyword.text} tone={group.tone}>
-                  <PixelIcon
-                    name={group.state === "matched" ? "g-kw-match" : "g-kw-missing"}
-                    size={13}
-                  />
-                  {keyword.text}
-                </Chip>
-              ))}
-              {items.length > shown.length && (
-                <Chip tone="stone">+{items.length - shown.length} more</Chip>
-              )}
-            </div>
+          <div key={group.state} className="border-b border-hairline py-3 last:border-b-0">
+            <p className={cn("text-meta font-medium", group.tone)}>{group.label}</p>
+            <p className="mt-1 text-sm text-ink-body">
+              {items.map((k) => k.text).join(", ")}
+            </p>
           </div>
         );
       })}

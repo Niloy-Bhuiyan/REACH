@@ -300,7 +300,7 @@ function Discover() {
                               {fix.fixable ? (
                                 <Link
                                   href={`/one-fix/${fix.id}`}
-                                  className="text-meta font-medium text-violet-text hover:underline"
+                                  className="inline-flex min-h-[36px] items-center text-meta font-medium text-violet-text hover:underline"
                                 >
                                   {fix.rolesAffected} roles · fixable
                                 </Link>

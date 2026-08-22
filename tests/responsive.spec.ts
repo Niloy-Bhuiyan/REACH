@@ -53,7 +53,7 @@ test.describe("verdict counts are never dropped", () => {
   for (const size of WIDTHS) {
     test(`${size.name}px keeps the counts on Discover`, async ({ page }) => {
       await page.setViewportSize({ width: size.width, height: size.height });
-      await goto(page, "/discover", "Live Discovery");
+      await goto(page, "/discover", "Discover");
       // K5 — verdict counts visible at every width.
       await expect(page.getByRole("tab", { name: /Apply/ })).toBeVisible();
       await expect(page.getByRole("tab", { name: /One fix/ })).toBeVisible();

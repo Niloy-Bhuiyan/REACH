@@ -12,14 +12,14 @@ export const WIDTHS = [
 ] as const;
 
 export const ROUTES = [
-  { path: "/", name: "focus", ready: "Your Focus" },
-  { path: "/discover", name: "discover", ready: "Live Discovery" },
+  { path: "/", name: "focus", ready: "Find what fits" },
+  { path: "/discover", name: "discover", ready: "Discover" },
   { path: "/jobs/walton-jda", name: "job-apply-now", ready: "Junior Data Analyst" },
   { path: "/jobs/bkash-da", name: "job-one-fix", ready: "Data Analyst" },
   { path: "/jobs/gp-sds", name: "job-skip", ready: "Senior Data Scientist" },
   { path: "/one-fix/sql", name: "one-fix", ready: "Say SQL out loud." },
   { path: "/roadmap", name: "roadmap", ready: "Make your SQL legible" },
-  { path: "/resume", name: "resume", ready: "Resume Builder" },
+  { path: "/resume", name: "resume", ready: "Resume" },
   { path: "/profile", name: "profile", ready: "Niloy Mahmud" },
   { path: "/profile/settings", name: "settings", ready: "Analysis engine" },
 ] as const;
@@ -27,9 +27,12 @@ export const ROUTES = [
 /** Waits until MSW has answered and the screen's own content is on the page. */
 export async function goto(page: Page, path: string, ready: string) {
   await page.goto(path);
-  // A screen renders one composition per width, so wait for a *visible* instance.
+  // Scope to main: several screen titles also appear as nav labels, and matching
+  // the nav would let a test run against a skeleton.
+  const main = page.locator("main");
+  await expect(main.locator("h1")).toBeVisible({ timeout: 20_000 });
   await expect(
-    page.getByText(ready, { exact: false }).locator("visible=true").first(),
+    main.getByText(ready, { exact: false }).locator("visible=true").first(),
   ).toBeVisible({ timeout: 20_000 });
 }
 

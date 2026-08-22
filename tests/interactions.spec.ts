@@ -7,14 +7,14 @@ test.use({ viewport: { width: 1440, height: 900 } });
 
 test.describe("Discovery", () => {
   test("a run streams observable events, then collapses to one summary line", async ({ page }) => {
-    await goto(page, "/discover", "Live Discovery");
+    await goto(page, "/discover", "Discover");
 
     await page.getByRole("button", { name: "Re-run", exact: true }).click();
 
     const console_ = page.getByLabel("Discovery run activity");
     await expect(console_).toBeVisible();
-    await expect(page.getByText("Activity Console")).toBeVisible();
-    await expect(page.getByRole("button", { name: "Stop run" })).toBeVisible();
+    await expect(page.getByText("Finding opportunities").first()).toBeVisible();
+    await expect(page.getByRole("button", { name: "Stop", exact: true })).toBeVisible();
 
     // C3 — the region is a polite live region, not per event.
     await expect(console_).toHaveAttribute("aria-live", "polite");
@@ -24,40 +24,40 @@ test.describe("Discovery", () => {
     await expect(page.locator("body")).not.toContainText("thinking");
 
     // C4 — completion collapses to the mono summary with Open log and Re-run.
-    await expect(page.getByText(/RUN COMPLETE/i)).toBeVisible({ timeout: 25_000 });
-    await expect(page.getByRole("button", { name: "Open log" })).toBeVisible();
+    await expect(page.getByText(/kept from/i)).toBeVisible({ timeout: 25_000 });
+    await expect(page.getByRole("button", { name: "Run log" })).toBeVisible();
   });
 
   test("stopping a run moves no count and keeps the last completed run authoritative", async ({
     page,
   }) => {
-    await goto(page, "/discover", "Live Discovery");
+    await goto(page, "/discover", "Discover");
     const countOf = async () =>
       (await page.getByRole("tab", { name: /^Apply/ }).innerText()).replace(/\D/g, "");
     const before = await countOf();
 
     await page.getByRole("button", { name: "Re-run", exact: true }).click();
-    await expect(page.getByRole("button", { name: "Stop run" })).toBeVisible();
-    await page.getByRole("button", { name: "Stop run" }).click();
+    await expect(page.getByRole("button", { name: "Stop", exact: true })).toBeVisible();
+    await page.getByRole("button", { name: "Stop", exact: true }).click();
 
     await expect(page.getByLabel("Discovery run activity")).toBeHidden();
     expect(await countOf()).toBe(before);
-    await expect(page.getByText(/RUN COMPLETE/i)).toBeVisible();
+    await expect(page.getByText(/kept from/i)).toBeVisible();
   });
 
   test("the canonical counts are 12 / 18 / 24 over 54 kept", async ({ page }) => {
-    await goto(page, "/discover", "Live Discovery");
+    await goto(page, "/discover", "Discover");
     await expect(page.getByRole("tab", { name: "Apply 12" })).toBeVisible();
     await expect(page.getByRole("tab", { name: "One fix 18" })).toBeVisible();
     await expect(page.getByRole("tab", { name: "Skip 24" })).toBeVisible();
-    await expect(page.getByText("54 opportunities")).toBeVisible();
+    await expect(page.getByText(/54 opportunities/)).toBeVisible();
   });
 
   // C12 / 12A — an empty set names its cause and quantifies the remedy.
   test("an empty result set names the filter that emptied it and offers a loosening", async ({
     page,
   }) => {
-    await goto(page, "/discover?verdict=skip&mode=Remote", "Live Discovery");
+    await goto(page, "/discover?verdict=skip&mode=Remote", "Discover");
     await expect(page.getByText(/Nothing matches/)).toBeVisible();
     await expect(page.getByText(/removes \d+ of them/)).toBeVisible();
 
@@ -72,24 +72,24 @@ test.describe("Discovery", () => {
   test("a failed run keeps the last good results, names the engine, and excludes the Delta", async ({
     page,
   }) => {
-    await goto(page, "/discover?state=failed", "Live Discovery");
-    await expect(page.getByText("Run stopped part-way")).toBeVisible();
+    await goto(page, "/discover?state=failed", "Discover");
+    await expect(page.getByText("The run stopped part-way")).toBeVisible();
     await expect(page.getByText(/Engine:/)).toBeVisible();
-    await expect(page.getByText("Showing the last completed run")).toBeVisible();
+    await expect(page.getByText(/Showing the last completed run/)).toBeVisible();
     await expect(page.getByRole("button", { name: "Keep these results" })).toBeVisible();
     // The results themselves are still on screen.
     await expect(page.getByRole("link", { name: "Junior Data Analyst" }).first()).toBeVisible();
   });
 
   test("saving a job survives a reload", async ({ page }) => {
-    await goto(page, "/discover", "Live Discovery");
-    const row = page.locator("tr", { hasText: "Junior Data Analyst" }).first();
+    await goto(page, "/discover", "Discover");
+    const row = page.locator("div.group", { hasText: "Junior Data Analyst" }).first();
     await row.getByRole("button", { name: "Save" }).click();
     await expect(row.getByRole("button", { name: "Saved" })).toBeVisible();
 
     await page.reload();
     await expect(
-      page.locator("tr", { hasText: "Junior Data Analyst" }).first().getByRole("button", { name: "Saved" }),
+      page.locator("div.group", { hasText: "Junior Data Analyst" }).first().getByRole("button", { name: "Saved" }),
     ).toBeVisible({ timeout: 20_000 });
   });
 });
@@ -129,9 +129,9 @@ test.describe("Job Detail", () => {
 
   test("Previous and Next walk the group without returning to the list", async ({ page }) => {
     await goto(page, "/jobs/walton-jda", "Junior Data Analyst");
-    await expect(page.getByText(/Role 1 of/)).toBeVisible();
+    await expect(page.getByText(/^1 of \d+$/)).toBeVisible();
     await page.getByRole("button", { name: "Next" }).first().click();
-    await expect(page.getByText(/Role 2 of/)).toBeVisible();
+    await expect(page.getByText(/^2 of \d+$/)).toBeVisible();
     await expect(page).toHaveURL(/\/jobs\//);
   });
 });
@@ -141,6 +141,7 @@ test.describe("Job Detail", () => {
 test.describe("One Fix Away", () => {
   test("the Delta is audited on the page and the exclusion is stated", async ({ page }) => {
     await goto(page, "/one-fix/sql", "Say SQL out loud.");
+    await page.getByRole("button", { name: /How the number was counted/ }).click();
     await expect(page.getByText("How this was counted")).toBeVisible();
     await expect(page.getByText("Verified postings in today's run")).toBeVisible();
     await expect(page.getByText(/not counted/)).toBeVisible();
@@ -169,7 +170,7 @@ test.describe("Roadmap", () => {
     await goto(page, "/roadmap", "Make your SQL legible");
     await expect(page.getByText("Best free resource")).toBeVisible();
     await expect(page.getByText(/Paid alternative — only if/)).toBeVisible();
-    await expect(page.getByText("Certificate verdict")).toBeVisible();
+    await expect(page.getByText("Certificate", { exact: true })).toBeVisible();
     await expect(page.getByText("Unnecessary")).toBeVisible();
     // The locked step stays one row tall — its detail is not rendered.
     await expect(page.getByText("Two suggested lines in the postings")).toBeHidden();
@@ -208,9 +209,14 @@ test.describe("Roadmap", () => {
 
 test.describe("Resume", () => {
   test("the two meters stay separate and neither shows a number", async ({ page }) => {
-    await goto(page, "/resume", "Resume Builder");
+    await goto(page, "/resume", "Resume");
     await expect(page.getByText("ATS Readiness").first()).toBeVisible();
     await expect(page.getByText("JD Match").first()).toBeVisible();
+
+    // The derivations are disclosed rather than always-on, but the guarantees still hold.
+    for (const trigger of await page.getByRole("button", { name: "What this is from" }).all()) {
+      await trigger.click();
+    }
     await expect(page.getByText("No job involved.")).toBeVisible();
     await expect(page.getByText(/Never averaged with ATS Readiness/)).toBeVisible();
 
@@ -223,8 +229,8 @@ test.describe("Resume", () => {
 
   // 12D — unavailable is never zero.
   test("with no JD selected, JD Match reads Not yet measured on an empty track", async ({ page }) => {
-    await goto(page, "/resume", "Resume Builder");
-    await page.getByRole("button", { name: "Clear" }).first().click();
+    await goto(page, "/resume", "Resume");
+    await page.getByRole("button", { name: "Clear", exact: true }).first().click();
     await expect(page.getByText("Not yet measured")).toBeVisible();
     await expect(page.getByText("It is never a score on its own.")).toBeVisible();
     await expect(page.getByText("Available without a job")).toBeVisible();
@@ -232,8 +238,8 @@ test.describe("Resume", () => {
   });
 
   test("the fabricated-metric edit is blocked and cannot be accepted", async ({ page }) => {
-    await goto(page, "/resume", "Resume Builder");
-    await page.getByRole("button", { name: /Review suggested edits/ }).click();
+    await goto(page, "/resume", "Resume");
+    await page.getByRole("tab", { name: /Suggested edits/ }).click();
 
     const blocked = page.locator("article", { hasText: "No supporting evidence" });
     await expect(blocked).toBeVisible();
@@ -247,26 +253,30 @@ test.describe("Resume", () => {
   });
 
   test("accepting marks the preview pending and enables saving a new version", async ({ page }) => {
-    await goto(page, "/resume", "Resume Builder");
-    await page.getByRole("button", { name: /Review suggested edits/ }).click();
+    await goto(page, "/resume", "Resume");
+    await page.getByRole("tab", { name: /Suggested edits/ }).click();
 
     const first = page.locator("article").first();
     await first.getByRole("button", { name: "Accept", exact: true }).click();
     await expect(first.getByText("Accepted · applies on save")).toBeVisible();
+
+    await page.getByRole("tab", { name: "Preview" }).click();
     await expect(page.getByText("pending").first()).toBeVisible();
 
     const save = page.getByRole("button", { name: /Save version/ });
     await expect(save).toBeEnabled();
     await save.click();
-    await expect(page.getByText(/Versions \(4\)/)).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByRole("button", { name: /Versions \(4\)/ })).toBeVisible({ timeout: 15_000 });
   });
 
   test("sections reorder by keyboard-reachable controls", async ({ page }) => {
-    await goto(page, "/resume", "Resume Builder");
-    const firstBefore = await page.locator("li", { hasText: "Header & contact" }).first().innerText();
+    await goto(page, "/resume", "Resume");
+    await page.getByRole("tab", { name: "Sections" }).click();
+    const list = page.locator("ul").filter({ hasText: "Header & contact" }).first();
+    const firstBefore = await list.locator("li").first().innerText();
     await page.getByRole("button", { name: /Move Experience up/ }).click();
     await page.waitForTimeout(300);
-    const firstAfter = await page.locator("ul li").first().innerText();
+    const firstAfter = await list.locator("li").first().innerText();
     expect(firstAfter).not.toEqual(firstBefore);
   });
 });
@@ -329,7 +339,7 @@ test.describe("Settings", () => {
     const providerMarks = page.locator('img[src*="px-claude"], img[src*="px-chatgpt"]');
     expect(await providerMarks.count()).toBeGreaterThan(0);
 
-    await goto(page, "/", "Your Focus");
+    await goto(page, "/", "Find what fits");
     expect(await page.locator('img[src*="px-claude"], img[src*="px-chatgpt"]').count()).toBe(0);
 
     await goto(page, "/profile", "Niloy Mahmud");
@@ -338,11 +348,14 @@ test.describe("Settings", () => {
 
   test("every engine declares its exposure and the fallback is explicit", async ({ page }) => {
     await goto(page, "/profile/settings", "Analysis engine");
+    const exposures = await page.getByRole("button", { name: "What this engine can see" }).all();
+    expect(exposures.length).toBe(4);
+    for (const trigger of exposures) await trigger.click();
     expect(await page.getByText("Sees", { exact: true }).count()).toBe(4);
     expect(await page.getByText("Never sees", { exact: true }).count()).toBe(4);
     expect(await page.getByText("Retention", { exact: true }).count()).toBe(4);
     await expect(page.getByText(/retries once, then falls back to REACH-hosted/)).toBeVisible();
-    await expect(page.getByText("What the engine cannot do")).toBeVisible();
+    await expect(page.getByRole("button", { name: "What the engine cannot do" })).toBeVisible();
   });
 
   // 12F — a recoverable error shows the workaround already in effect.
@@ -362,9 +375,10 @@ test.describe("Settings", () => {
 
   test("changing the engine warns about consequence, not danger", async ({ page }) => {
     await goto(page, "/profile/settings", "Analysis engine");
-    await expect(page.getByText("One setting affects your results")).toBeVisible();
     await expect(
-      page.getByText(/Opportunity Delta may move by a point or two. Eligibility verdicts will not change/),
+      page.getByText(
+        /Opportunity Delta may move by a point or two. Eligibility verdicts will not change/,
+      ),
     ).toBeVisible();
   });
 });
@@ -373,29 +387,25 @@ test.describe("Settings", () => {
 
 test.describe("Focus", () => {
   test("lists show exactly three rows plus a working see-all", async ({ page }) => {
-    await goto(page, "/", "Your Focus");
+    await goto(page, "/", "Find what fits");
     // Exactly 3 preview rows plus the see-all CTA.
-    const applyCard = page
-      .locator("div")
-      .filter({ hasText: "Great matches you can apply for today." })
-      .filter({ has: page.getByRole("link", { name: /Browse More Opportunities/ }) })
-      .last();
-    // Exactly three preview rows plus the see-all CTA.
-    expect(await applyCard.getByRole("link").count()).toBe(4);
+    const applySection = page.locator("section").filter({ hasText: "See all 12" }).first();
+    // Exactly three preview rows plus the see-all link.
+    expect(await applySection.getByRole("link").count()).toBe(4);
 
-    await page.getByRole("link", { name: /Browse More Opportunities/ }).click();
+    await page.getByRole("link", { name: "See all 12" }).click();
     await expect(page).toHaveURL(/verdict=apply-now/);
   });
 
   test("the analysis engine is one status row that links to Settings", async ({ page }) => {
-    await goto(page, "/", "Your Focus");
-    await expect(page.getByText("REACH-hosted engine")).toBeVisible();
-    await page.getByRole("link", { name: "Change in Settings" }).click();
+    await goto(page, "/", "Find what fits");
+    await expect(page.getByText(/REACH-hosted engine/)).toBeVisible();
+    await page.getByRole("link", { name: /Analysis engine/ }).click();
     await expect(page).toHaveURL(/\/profile\/settings/);
   });
 
   test("search lands on Discover with the query applied", async ({ page }) => {
-    await goto(page, "/", "Your Focus");
+    await goto(page, "/", "Find what fits");
     await page.getByRole("searchbox").fill("bKash");
     await page.getByRole("button", { name: "Search" }).click();
     await expect(page).toHaveURL(/\/discover\?q=bKash/);

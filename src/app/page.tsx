@@ -124,7 +124,7 @@ export default function FocusPage() {
                 <h2 className="text-section text-ink">{VERDICT_LABEL[verdict]}</h2>
                 <Link
                   href={`/discover?verdict=${verdict}`}
-                  className="text-sm font-medium text-violet-text hover:underline"
+                  className="inline-flex min-h-[36px] items-center text-sm font-medium text-violet-text hover:underline"
                 >
                   See all {data.counts[verdict]}
                 </Link>
