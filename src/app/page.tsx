@@ -90,14 +90,30 @@ function Hero({ data }: { data: FocusSummary }) {
         height={250}
         className="scenery-mask-l right-0 bottom-0 hidden opacity-90 md:block"
       />
-      {/* Mobile: one band, masked at the bottom so the navy headline keeps contrast. */}
-      <Scenery
-        name="horizon-mobile"
-        width={390}
-        height={178}
-        className="scenery-mask-b inset-x-0 top-0 opacity-50 md:hidden"
-        style={{ width: "100%", height: 178, objectFit: "cover", objectPosition: "center 30%" }}
-      />
+      {/*
+        Mobile: one band, masked at the bottom so the navy headline keeps contrast.
+        Built from the two clean halves — horizon-mobile.png is another opaque crop
+        with a line of the old UI baked across its top edge.
+      */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-[178px] overflow-hidden md:hidden"
+      >
+        <Scenery
+          name="horizon-left"
+          width={352}
+          height={250}
+          className="scenery-mask-b top-0 left-0 opacity-55"
+          style={{ width: "58%", height: 178, objectFit: "cover", objectPosition: "left bottom" }}
+        />
+        <Scenery
+          name="horizon-right"
+          width={352}
+          height={250}
+          className="scenery-mask-b top-0 right-0 opacity-55"
+          style={{ width: "58%", height: 178, objectFit: "cover", objectPosition: "right bottom" }}
+        />
+      </span>
 
       <div className="relative mx-auto flex max-w-[760px] flex-col items-center gap-3.5 px-5 pt-8 pb-8 text-center sm:pt-11 md:pt-[46px] md:pb-11">
         <h1 className="font-display text-[34px] leading-none font-extrabold tracking-[-.03em] text-ink sm:text-[52px] md:text-[62px] xl:text-[74px]">
