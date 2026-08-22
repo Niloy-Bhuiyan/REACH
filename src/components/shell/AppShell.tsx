@@ -113,15 +113,16 @@ function MobileTopBar() {
       {current && (
         <>
           <span aria-hidden className="h-5 w-px bg-line" />
-          <span className="relative min-w-0 truncate pb-1 text-subhead font-medium text-brand-text">
+          <span className="relative min-w-0 truncate pb-2 text-subhead font-medium text-brand-text">
             {current.label}
             <span
               aria-hidden
-              className="absolute inset-x-0 -bottom-0.5 flex items-center justify-center"
-            >
-              <span className="h-[2px] w-full rounded-full bg-brand/35" />
-              <span className="absolute size-[5px] rounded-full bg-brand" />
-            </span>
+              className="absolute inset-x-0 bottom-0 h-[2px] rounded-full bg-brand/30"
+            />
+            <span
+              aria-hidden
+              className="absolute bottom-[-2px] left-1/2 size-[6px] -translate-x-1/2 rounded-full bg-brand"
+            />
           </span>
         </>
       )}

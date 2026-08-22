@@ -133,7 +133,7 @@ export default function ResumePage() {
           </p>
         </div>
 
-        <div className="ml-auto flex flex-wrap items-center gap-2">
+        <div className="flex w-full flex-wrap items-center gap-2 sm:ml-auto sm:w-auto">
           <VersionMenu versions={versions.data ?? []} />
           <Button
             onClick={() => save.mutate()}
