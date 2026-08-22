@@ -168,7 +168,7 @@ export function Tabs<T extends string>({
     <div
       role="tablist"
       aria-label={ariaLabel}
-      className={cn("flex items-stretch gap-5 overflow-x-auto border-b border-line", className)}
+      className={cn("no-scrollbar flex items-stretch gap-5 overflow-x-auto border-b border-line", className)}
     >
       {items.map((item) => {
         const active = item.value === value;

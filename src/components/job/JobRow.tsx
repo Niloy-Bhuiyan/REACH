@@ -198,30 +198,28 @@ export function JobCard({
   const href =
     job.verdict === "one-fix-away" ? `/one-fix/${job.blocker?.fixId ?? "sql"}` : `/jobs/${job.id}`;
 
+  // Freshness sits on its own line: beside the title it steals the width the
+  // role name needs to stay on one line.
   const inner = (
-    <>
-      <div className="flex items-start gap-2.5">
-        <span
-          aria-hidden
-          className={cn("mt-[7px] size-[7px] shrink-0 rounded-full", tone.rule)}
-        />
-        <div className="min-w-0 flex-1">
-          <span className="text-subhead text-ink">{job.role}</span>
-          <p className="mt-0.5">
-            <Meta>{placeLine(job)}</Meta>
-          </p>
-          <p className="mt-1.5">
-            <Signal job={job} />
-          </p>
-        </div>
-        <FreshnessStamp
-          iso={job.provenance.verifiedAt}
-          delisted={job.provenance.delisted}
-          onReverify={onReverify}
-          className="shrink-0"
-        />
+    <div className="flex items-start gap-2.5">
+      <span aria-hidden className={cn("mt-[7px] size-[7px] shrink-0 rounded-full", tone.rule)} />
+      <div className="min-w-0 flex-1">
+        <span className="text-subhead text-ink">{job.role}</span>
+        <p className="mt-0.5">
+          <Meta>{placeLine(job)}</Meta>
+        </p>
+        <p className="mt-1.5">
+          <Signal job={job} />
+        </p>
+        <p className="mt-1">
+          <FreshnessStamp
+            iso={job.provenance.verifiedAt}
+            delisted={job.provenance.delisted}
+            onReverify={onReverify}
+          />
+        </p>
       </div>
-    </>
+    </div>
   );
 
   if (compact) {
@@ -244,12 +242,7 @@ export function JobCard({
         </Button>
         <Link
           href={href}
-          className={cn(
-            "inline-flex min-h-[40px] flex-1 items-center justify-center rounded-lg text-sm font-medium text-white transition-colors duration-100",
-            job.verdict === "apply-now" && "bg-sage hover:bg-sage-hover",
-            job.verdict === "one-fix-away" && "bg-apricot hover:bg-apricot-hover",
-            job.verdict === "skip" && "bg-surface-sunken !text-ink-body hover:bg-group",
-          )}
+          className="inline-flex min-h-[40px] flex-1 items-center justify-center rounded-lg border border-control bg-surface text-sm font-medium text-ink transition-colors duration-100 hover:bg-surface-sunken"
         >
           {job.verdict === "one-fix-away" ? "See the fix" : "Open role"}
         </Link>

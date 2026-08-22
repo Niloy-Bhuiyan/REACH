@@ -72,7 +72,7 @@ export function FilterBar({
           { value: "newest", label: "Newest" },
           { value: "closing-soon", label: "Closing soon" },
         ]}
-        className="ml-auto"
+        className="sm:ml-auto"
       />
     </div>
   );

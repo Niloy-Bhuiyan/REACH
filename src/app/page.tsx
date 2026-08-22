@@ -10,7 +10,7 @@ import { SearchField } from "@/components/shell/SearchField";
 import { TargetSheet } from "@/components/shell/TargetPill";
 import { useSetStatusLine } from "@/components/shell/AppShell";
 import { Arrow, Button, ButtonLink } from "@/components/ui/Button";
-import { Meta, Mono } from "@/components/ui/Chip";
+import { Meta } from "@/components/ui/Chip";
 import { PixelIcon, Scenery } from "@/components/ui/PixelIcon";
 import { Card, Page, Stack } from "@/components/ui/Surface";
 import { Skeleton, SkeletonRows } from "@/components/ui/States";
@@ -51,8 +51,8 @@ export default function FocusPage() {
         <header className="max-w-[42rem]">
           <h1 className="text-display text-ink">Find what fits. Fix what blocks.</h1>
           <p className="mt-3 text-body text-ink-body">
-            REACH checked {data.lastRun.scanned.toLocaleString()} live postings against your
-            evidence this morning.
+            {data.lastRun.scanned.toLocaleString()} live postings checked against your evidence,{" "}
+            {ago(data.lastRun.verifiedAt)}.
           </p>
 
           <div className="mt-6 flex flex-wrap items-baseline gap-x-2 gap-y-1">
@@ -166,13 +166,6 @@ export default function FocusPage() {
           />
         </div>
 
-        <p className="flex items-center gap-2">
-          <PixelIcon name="px-logo" size={13} height={12} className="opacity-40" />
-          <Mono>
-            Verified {ago(data.lastRun.verifiedAt)} · {data.lastRun.scanned.toLocaleString()} postings
-            scanned
-          </Mono>
-        </p>
       </Stack>
 
       <TargetSheet open={editTarget} onClose={() => setEditTarget(false)} target={target} />
@@ -195,11 +188,13 @@ function QuietRow({
   return (
     <Link
       href={href}
-      className="group flex items-center gap-4 border-b border-line py-4 transition-colors duration-100 hover:bg-surface-sunken"
+      className="group grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-4 gap-y-1 border-b border-line py-4 transition-colors duration-100 hover:bg-surface-sunken sm:grid-cols-[220px_minmax(0,1fr)_auto]"
     >
-      <span className="w-[220px] shrink-0 text-body font-medium text-ink">{label}</span>
-      <span className="min-w-0 flex-1 truncate text-sm text-ink-muted">{detail}</span>
-      <span className="shrink-0 text-sm font-medium text-violet-text group-hover:underline">
+      <span className="text-body font-medium text-ink">{label}</span>
+      <span className="col-span-2 min-w-0 text-sm text-ink-muted sm:col-span-1 sm:truncate">
+        {detail}
+      </span>
+      <span className="col-start-2 row-start-1 shrink-0 text-sm font-medium text-violet-text group-hover:underline sm:col-start-3">
         {action}
       </span>
     </Link>

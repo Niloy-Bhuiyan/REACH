@@ -196,6 +196,15 @@
   image-rendering: pixelated;
 }
 
+/** Horizontal strips scroll when they must, without painting a bar over the UI. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /** A section label: small, quiet, and doing the work a border used to do. */
 @utility eyebrow {
   font-size: 0.78125rem;
