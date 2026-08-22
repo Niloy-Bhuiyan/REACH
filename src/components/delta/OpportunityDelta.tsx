@@ -40,7 +40,7 @@ export function OpportunityDelta({
 
   const numbers = (
     <span className="tnum flex items-baseline gap-2.5">
-      <span className="text-[30px] leading-none font-semibold tracking-[-0.03em] text-ink-muted">
+      <span className="font-display text-[34px] leading-none text-ink-muted">
         {delta.now}
       </span>
       <svg
@@ -55,7 +55,7 @@ export function OpportunityDelta({
       >
         <path d="M3 8h10M9 4l4 4-4 4" />
       </svg>
-      <span className="text-[30px] leading-none font-semibold tracking-[-0.03em] text-sage-text">
+      <span className="font-display text-[34px] leading-none text-sage-text">
         {after}
       </span>
       <span className="text-body font-semibold text-sage-text">+{delta.gain}</span>

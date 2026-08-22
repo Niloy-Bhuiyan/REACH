@@ -57,7 +57,7 @@ export default function FocusPage() {
       {/* The promise, the target, the way in. Nothing else above the fold. */}
       <section className="relative overflow-hidden">
         <Page className="relative pt-7 pb-2 sm:pt-14">
-          <div className="relative grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_340px] lg:grid-cols-[minmax(0,1fr)_400px]">
+          <div className="relative grid items-center gap-8 sm:grid-cols-[minmax(0,1fr)_280px] md:grid-cols-[minmax(0,1fr)_340px] lg:grid-cols-[minmax(0,1fr)_400px]">
             <div className="relative z-10 max-w-[34rem]">
               <p className="flex items-center gap-2 text-sm text-brand-text">
                 <Icon name="spark" size={16} />
@@ -65,7 +65,7 @@ export default function FocusPage() {
                 {ago(data.lastRun.verifiedAt)}
               </p>
 
-              <h1 className="font-display mt-4 text-[2.5rem] leading-[1.05] text-ink sm:text-hero">
+              <h1 className="font-display mt-4 text-[2.5rem] leading-[1.05] text-ink sm:text-[2.625rem] md:text-[3rem] lg:text-hero">
                 Find what <span className="text-sage-text">fits.</span>
                 <br />
                 Fix what <span className="text-terracotta-text">blocks.</span>
@@ -84,16 +84,16 @@ export default function FocusPage() {
 
             {/* On a phone the valley sits behind the promise, at the right edge,
                 exactly as it frames the headline on a wide screen. */}
-            <div className="pointer-events-none absolute -top-6 -right-9 z-0 w-[205px] md:relative md:inset-auto md:mx-auto md:w-full md:max-w-[380px]">
+            <div className="pointer-events-none absolute -top-6 -right-9 z-0 w-[205px] sm:relative sm:inset-auto sm:mx-auto sm:w-full sm:max-w-[380px]">
               <LeafSprig
                 side="left"
-                className="absolute -left-6 bottom-0 hidden h-[210px] w-[74px] md:block lg:-left-10 lg:h-[240px] lg:w-[86px]"
+                className="absolute -left-4 bottom-0 hidden h-[190px] w-[64px] md:block md:-left-6 md:h-[210px] md:w-[74px] lg:-left-10 lg:h-[240px] lg:w-[86px]"
               />
               <LeafSprig
                 side="right"
-                className="absolute -right-6 bottom-0 hidden h-[210px] w-[74px] md:block lg:-right-10 lg:h-[240px] lg:w-[86px]"
+                className="absolute -right-4 bottom-0 hidden h-[190px] w-[64px] md:block md:-right-6 md:h-[210px] md:w-[74px] lg:-right-10 lg:h-[240px] lg:w-[86px]"
               />
-              <ArchScene className="relative mx-auto h-[240px] w-full md:h-[260px] md:max-w-[290px] lg:h-[300px]" />
+              <ArchScene className="relative mx-auto h-[240px] w-full sm:h-[230px] sm:max-w-[240px] md:h-[260px] md:max-w-[290px] lg:h-[300px]" />
             </div>
           </div>
 
