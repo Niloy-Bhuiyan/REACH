@@ -12,14 +12,14 @@ export const WIDTHS = [
 ] as const;
 
 export const ROUTES = [
-  { path: "/", name: "focus", ready: "Find what fits" },
-  { path: "/discover", name: "discover", ready: "Discover" },
+  { path: "/", name: "focus", ready: "Your Focus" },
+  { path: "/discover", name: "discover", ready: "Live Discovery" },
   { path: "/jobs/walton-jda", name: "job-apply-now", ready: "Junior Data Analyst" },
   { path: "/jobs/bkash-da", name: "job-one-fix", ready: "Data Analyst" },
   { path: "/jobs/gp-sds", name: "job-skip", ready: "Senior Data Scientist" },
   { path: "/one-fix/sql", name: "one-fix", ready: "Say SQL out loud." },
   { path: "/roadmap", name: "roadmap", ready: "Make your SQL legible" },
-  { path: "/resume", name: "resume", ready: "Resume" },
+  { path: "/resume", name: "resume", ready: "Resume Builder" },
   { path: "/profile", name: "profile", ready: "Niloy Mahmud" },
   { path: "/profile/settings", name: "settings", ready: "Analysis engine" },
 ] as const;

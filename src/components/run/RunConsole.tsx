@@ -2,18 +2,19 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef } from "react";
-import { Mono } from "@/components/ui/Chip";
-import { Icon } from "@/components/ui/Icon";
-import { Eyebrow, Hairline } from "@/components/ui/Surface";
+import { PixelIcon } from "@/components/ui/PixelIcon";
+import { Eyebrow } from "@/components/ui/Surface";
 import type { DiscoveryRun } from "@/lib/api/types";
 import { useReducedMotion } from "@/lib/hooks";
 import { cn } from "@/lib/utils/cn";
-import { ago } from "@/lib/utils/time";
+import { ago, clock } from "@/lib/utils/time";
 
 /**
- * The console is the signature moment while a run is live — and only then.
- * It shows what the system did, never what it thought. The region is a single
- * polite live region; it is not read event by event.
+ * The only dark surface in REACH. Exists while a run is active, then collapses to a single
+ * summary line. Mono face, observable events only — no chain-of-thought, no fake code, and
+ * never on Focus.
+ *
+ * The region is aria-live polite; it is not read event by event.
  */
 export function RunConsole({
   run,
@@ -33,25 +34,32 @@ export function RunConsole({
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
   }, [run.events.length]);
 
+  const queued = run.events.length;
+
   return (
-    <section className={cn("overflow-hidden rounded-2xl bg-console", className)}>
-      <header className="flex items-center justify-between gap-3 px-5 pt-4 pb-3.5">
+    <section
+      className={cn(
+        "overflow-hidden rounded-[14px] border border-group bg-console",
+        className,
+      )}
+    >
+      <header className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
         <div className="flex items-center gap-2.5">
-          <span aria-hidden className="relative flex size-2.5 items-center justify-center">
-            <span className="absolute size-2.5 rounded-full bg-console-ok/30" />
-            <span className="size-[6px] rounded-full bg-console-ok" />
-          </span>
-          <span className="text-subhead text-console-text">Finding opportunities</span>
-          <span className="tnum font-mono text-meta text-console-meta">
-            step {run.step} of {run.totalSteps}
-          </span>
+          <PixelIcon name="g-scan" size={22} />
+          <div>
+            <p className="text-[15px] font-semibold text-console-text">Activity Console</p>
+            <p className="tnum font-mono text-[11.5px] tracking-tight text-console-meta uppercase">
+              Step {run.step} of {run.totalSteps} · elapsed{" "}
+              {elapsed(run.startedAt)}
+            </p>
+          </div>
         </div>
         <button
           type="button"
           onClick={onStop}
-          className="min-h-[38px] rounded-full px-4 text-sm font-medium text-console-meta transition-colors duration-150 hover:bg-white/10 hover:text-console-text focus-visible:outline-console-accent"
+          className="min-h-[44px] rounded-[9px] border border-white/20 px-3.5 text-[13.5px] font-semibold text-console-text transition-colors duration-100 hover:bg-white/10 focus-visible:outline-console-accent"
         >
-          Stop
+          Stop run
         </button>
       </header>
 
@@ -60,51 +68,76 @@ export function RunConsole({
         aria-live="polite"
         aria-label="Discovery run activity"
         className={cn(
-          "no-scrollbar flex flex-col overflow-y-auto px-5 pb-1",
-          compact ? "max-h-[34vh]" : "max-h-[232px]",
+          "flex flex-col overflow-y-auto px-4 py-3",
+          compact ? "max-h-[38vh]" : "max-h-[320px]",
         )}
       >
         <AnimatePresence initial={false}>
           {run.events.map((event) => (
             <motion.li
               key={event.id}
-              initial={reduced ? { opacity: 1 } : { opacity: 0, y: 3 }}
+              initial={reduced ? { opacity: 1 } : { opacity: 0, y: 2 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.14 }}
-              className="grid grid-cols-[16px_minmax(0,1fr)_auto] items-center gap-3 py-[7px]"
+              transition={{ duration: 0.12 }}
+              className="tnum grid grid-cols-[68px_1fr_auto] items-baseline gap-3 py-[5px] font-mono text-[12.5px]"
             >
-              <Icon name="check" size={13} className="text-console-ok" strokeWidth={2.2} />
-              <span className="min-w-0 truncate text-sm text-console-text">{event.label}</span>
-              <span className="tnum font-mono text-meta text-console-accent">{event.detail}</span>
+              <span className="text-console-meta">{clock(event.at)}</span>
+              <span className="text-console-text">{event.label}</span>
+              <span className="text-console-ok">{event.detail}</span>
             </motion.li>
           ))}
         </AnimatePresence>
 
-        {/* The stage now running. Named by its own event the moment it lands. */}
-        <li className="grid grid-cols-[16px_minmax(0,1fr)_auto] items-center gap-3 py-[7px]">
-          <span aria-hidden className="flex size-4 items-center justify-center">
-            <span className="size-[7px] animate-pulse rounded-full bg-console-meta" />
-          </span>
-          <span className="text-sm text-console-meta">Working…</span>
-        </li>
+        {/* Queued steps are named, so the console shows what the system will do, not what it thinks. */}
+        {QUEUED_LABELS.slice(queued, queued + 3).map((label) => (
+          <li
+            key={label}
+            className="tnum grid grid-cols-[68px_1fr_auto] items-baseline gap-3 py-[5px] font-mono text-[12.5px] text-console-meta"
+          >
+            <span aria-hidden>—</span>
+            <span>{label}</span>
+            <span>queued</span>
+          </li>
+        ))}
       </ol>
 
-      <div className="flex items-center gap-3 px-5 pt-2.5 pb-4">
-        <div className="h-[3px] flex-1 overflow-hidden rounded-full bg-white/12">
+      <div className="flex items-center gap-3 border-t border-white/10 px-4 py-3">
+        <div className="h-[6px] flex-1 overflow-hidden rounded-full bg-white/12">
           <div
-            className="h-full rounded-full bg-console-ok transition-[width] duration-[240ms] ease-linear"
+            className="h-full rounded-full bg-console-accent transition-[width] duration-[240ms] ease-linear"
             style={{ width: `${run.progress}%` }}
           />
         </div>
-        <span className="tnum font-mono text-meta text-console-meta">{run.progress}%</span>
+        <span className="tnum font-mono text-[12px] text-console-text">{run.progress}%</span>
       </div>
     </section>
   );
 }
 
+const QUEUED_LABELS = [
+  "Loading your evidence record",
+  "Searching opportunity index",
+  "Checking company career pages",
+  "Querying trusted sources",
+  "Deduplicating",
+  "Verifying listings",
+  "Applying eligibility filters",
+  "Matching candidate evidence",
+  "Ranking opportunities",
+  "Identifying blockers",
+  "Calculating Opportunity Delta",
+  "Preparing results",
+  "Run complete",
+];
+
+function elapsed(startedAt: string): string {
+  const seconds = Math.max(0, Math.round((Date.now() - new Date(startedAt).getTime()) / 1000));
+  return `${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`;
+}
+
 /**
- * Once the run is done the console stops being the point. What remains is one
- * quiet line of provenance — no dark bar, no statistics competing with results.
+ * On completion the console collapses to one mono line — found, deduped, eligible, kept,
+ * verified. That line is the only dark surface left on the screen.
  */
 export function RunSummaryLine({
   run,
@@ -117,60 +150,66 @@ export function RunSummaryLine({
   onOpenLog: () => void;
   className?: string;
 }) {
+  const reduced = useReducedMotion();
   const { counts } = run;
+
   return (
-    <div className={cn("flex flex-wrap items-center gap-x-3 gap-y-1.5", className)}>
-      <Mono>
-        {counts.kept} kept from {counts.found.toLocaleString()} · verified{" "}
-        {ago(run.completedAt ?? run.startedAt)}
-      </Mono>
-      <button
-        type="button"
-        onClick={onOpenLog}
-        className="text-sm font-medium text-brand-text hover:underline"
-      >
-        Run log
-      </button>
-      <button
-        type="button"
-        onClick={onRerun}
-        className="text-sm font-medium text-brand-text hover:underline"
-      >
-        Re-run
-      </button>
-    </div>
+    <motion.div
+      initial={reduced ? false : { height: 0, opacity: 0 }}
+      animate={{ height: "auto", opacity: 1 }}
+      transition={{ duration: 0.22, ease: [0.2, 0.8, 0.2, 1] }}
+      className={cn("overflow-hidden rounded-[12px] bg-console", className)}
+    >
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 px-4 py-2.5">
+        <span className="tnum font-mono text-[12px] tracking-tight text-console-text uppercase">
+          Run complete · {counts.found.toLocaleString()} found ·{" "}
+          {counts.deduped.toLocaleString()} deduped · {counts.eligible} eligible · {counts.kept}{" "}
+          kept · verified {ago(run.completedAt ?? run.startedAt)}
+        </span>
+        <span className="ml-auto flex items-center gap-1">
+          <button
+            type="button"
+            onClick={onOpenLog}
+            className="min-h-[36px] rounded-md px-2.5 font-mono text-[12px] text-console-accent uppercase hover:bg-white/10 focus-visible:outline-console-accent"
+          >
+            Open log
+          </button>
+          <button
+            type="button"
+            onClick={onRerun}
+            className="min-h-[36px] rounded-md border border-white/20 px-2.5 font-mono text-[12px] text-console-text uppercase hover:bg-white/10 focus-visible:outline-console-accent"
+          >
+            Re-run
+          </button>
+        </span>
+      </div>
+    </motion.div>
   );
 }
 
-/**
- * The run's numbers, available on demand rather than occupying the rail.
- * Nothing here is what the user came for.
- */
+/** The run stats block in the Discovery rail. */
 export function RunStats({ run }: { run: DiscoveryRun }) {
   const rows = [
-    { label: "Found in index", value: run.counts.found.toLocaleString() },
+    { label: "Index results", value: run.counts.found.toLocaleString() },
     { label: "After dedupe", value: run.counts.deduped.toLocaleString() },
     { label: "Eligible for you", value: run.counts.eligible },
     { label: "Kept", value: run.counts.kept },
   ];
 
   return (
-    <div>
+    <div className="rounded-[14px] border border-line bg-surface p-4">
       <Eyebrow>This run</Eyebrow>
-      <dl className="mt-1.5">
-        {rows.map((row, i) => (
-          <div key={row.label}>
-            {i > 0 && <Hairline />}
-            <div className="flex items-baseline justify-between gap-4 py-1.5">
-              <dt className="text-sm text-ink-body">{row.label}</dt>
-              <dd className="tnum font-mono text-meta text-ink">{row.value}</dd>
-            </div>
+      <dl className="mt-2.5 flex flex-col gap-2">
+        {rows.map((row) => (
+          <div key={row.label} className="flex items-baseline justify-between gap-4">
+            <dt className="text-[13.5px] text-ink-body">{row.label}</dt>
+            <dd className="tnum font-mono text-[13px] font-medium text-ink">{row.value}</dd>
           </div>
         ))}
       </dl>
-      <p className="mt-2.5 text-sm text-ink-muted">
-        Scanned {run.scan.careersPages} career pages, {run.scan.trustedSources} trusted sources and{" "}
-        {run.scan.referralNetworks} referral network.
+      <p className="mt-3 border-t border-hairline pt-2.5 text-[12.5px] text-ink-muted">
+        {run.scan.careersPages} career pages · {run.scan.trustedSources} trusted sources ·{" "}
+        {run.scan.referralNetworks} referral network
       </p>
     </div>
   );

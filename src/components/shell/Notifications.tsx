@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { Icon } from "@/components/ui/Icon";
+import { PixelIcon } from "@/components/ui/PixelIcon";
 import { Eyebrow } from "@/components/ui/Surface";
 import { getDelta, listSources } from "@/lib/api";
 import { qk } from "@/lib/api/keys";
@@ -51,9 +51,9 @@ export function Notifications() {
         aria-label={
           count > 0 ? `Notifications — ${count} need attention` : "Notifications — nothing waiting"
         }
-        className="relative flex size-[44px] items-center justify-center rounded-full border border-line bg-surface text-ink-body transition-colors duration-150 hover:bg-surface-sunken hover:text-ink"
+        className="relative flex h-[44px] w-[44px] items-center justify-center rounded-[9px] transition-colors duration-100 hover:bg-row-hover"
       >
-        <Icon name="bell" size={19} />
+        <PixelIcon name="g-deadline" size={22} />
         {count > 0 && (
           <span className="tnum absolute top-1 right-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-apricot px-1 font-mono text-[12px] leading-none font-bold text-surface">
             {count}
@@ -65,7 +65,7 @@ export function Notifications() {
         <div
           role="dialog"
           aria-label="Notifications"
-          className="absolute top-[52px] right-0 z-40 w-[340px] rounded-2xl border border-line bg-surface p-4 shadow-tier3"
+          className="absolute top-[52px] right-0 z-40 w-[340px] rounded-[14px] border border-group bg-surface p-4 shadow-tier3"
         >
           <Eyebrow>What needs you</Eyebrow>
 
@@ -75,9 +75,9 @@ export function Notifications() {
                 <Link
                   href="/profile"
                   onClick={() => setOpen(false)}
-                  className="flex items-start gap-2.5 rounded-xl border border-apricot-line bg-apricot-tint px-3 py-2.5 transition-colors duration-100 hover:bg-apricot-tint/70"
+                  className="flex items-start gap-2.5 rounded-[10px] border border-apricot-line bg-apricot-tint px-3 py-2.5 transition-colors duration-100 hover:bg-apricot-tint/70"
                 >
-                  <Icon name="alert" size={18} className="mt-0.5 text-apricot-text" />
+                  <PixelIcon name={source.icon} size={20} />
                   <span className="text-[13px] leading-snug text-ink-body">
                     <span className="font-semibold text-apricot-text">
                       {source.name} needs attention
@@ -94,9 +94,9 @@ export function Notifications() {
                 <Link
                   href={`/jobs/${job.jobId}`}
                   onClick={() => setOpen(false)}
-                  className="flex items-start gap-2.5 rounded-xl border border-line px-3 py-2.5 transition-colors duration-100 hover:bg-row-hover"
+                  className="flex items-start gap-2.5 rounded-[10px] border border-line px-3 py-2.5 transition-colors duration-100 hover:bg-row-hover"
                 >
-                  <Icon name="clock" size={18} className="mt-0.5 text-ink-muted" />
+                  <PixelIcon name="g-deadline" size={20} />
                   <span className="text-[13px] leading-snug text-ink-body">
                     <span className="font-semibold text-ink">
                       {job.role} · {job.company}
@@ -109,7 +109,7 @@ export function Notifications() {
             ))}
 
             {count === 0 && (
-              <li className="rounded-xl border border-line px-3 py-3 text-[13px] text-ink-body">
+              <li className="rounded-[10px] border border-line px-3 py-3 text-[13px] text-ink-body">
                 Nothing needs you right now.
               </li>
             )}

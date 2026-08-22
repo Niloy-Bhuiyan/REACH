@@ -1,135 +1,93 @@
 @import "tailwindcss";
-@import "@fontsource-variable/playfair-display";
 
 /* ============================================================================
-   REACH — visual system.
-
-   Warm off-white paper, deep ink, a forest-green brand, and two earth accents.
-   Structure is carried by typography, spacing and alignment; borders and fills
-   are the exception. Semantic colour means something and never travels alone:
-   sage is Apply Now, apricot is One Fix Away, terracotta is Skip.
-
-   The brand green is a deeper, solid value than the sage verdict tint, and the
-   two never appear in the same role — a filled button is always a verb, and a
-   verdict is always a tinted pill carrying its word.
+   REACH Design DNA v2 — token layer.
+   These values are the locked system. Do not introduce a hex outside this file.
    ========================================================================= */
 
 @theme {
-  /* ── Paper: warm, low-glare, never clinical white ─────────────────────── */
-  --color-canvas: #faf7f2;
-  --color-canvas-deep: #f4efe6;
-  --color-surface: #fffdfa;
-  --color-surface-sunken: #f4f0e8;
+  /* Surfaces */
+  --color-canvas: #f5f3fb;
+  --color-surface: #fbfafe;
+  --color-surface-inset: #ffffff;
   --color-surface-read: #fffdf8;
-  --color-surface-read-border: #ece4d6;
-  --color-console: #1e2320;
-  --color-console-text: #d6dcd4;
-  --color-console-meta: #7f8a80;
-  --color-console-accent: #a8c3ac;
-  --color-console-ok: #8fbf96;
-  --color-table-head: #faf7f1;
-  --color-row-hover: #f8f4ed;
+  --color-surface-read-border: #e7e1d6;
+  --color-console: #1b233a;
+  --color-console-text: #c4cbe0;
+  --color-console-meta: #7c88ac;
+  --color-console-accent: #9aa0f0;
+  --color-console-ok: #8fbf9a;
+  --color-table-head: #f5f3fb;
+  --color-row-hover: #f7f5fd;
 
-  /* ── Lines: warm hairlines, not frames ────────────────────────────────── */
-  --color-line: #ece5d9;
-  --color-hairline: #f2ece2;
-  --color-group: #e2d9ca;
-  --color-control: #d9cfbe;
-  --color-active: #4a6551;
+  /* Borders */
+  --color-line: #e7e4f0;
+  --color-hairline: #f1eff8;
+  --color-group: #dcd8ec;
+  --color-control: #c3bcec;
+  --color-active: #574fc0;
 
-  /* ── Ink: one warm near-black, three greys ────────────────────────────── */
-  --color-ink: #1b1b17;
-  --color-ink-link: #1b1b17;
-  --color-ink-body: #5a574e;
-  --color-ink-muted: #8b8779;
-  --color-ink-placeholder: #9a9588;
-  --color-ink-disabled: #b6b1a4;
+  /* Ink */
+  --color-ink: #101b49;
+  --color-ink-link: #2e2a8c;
+  --color-ink-body: #4a5170;
+  --color-ink-muted: #666c8c;
+  --color-ink-placeholder: #6e7490;
+  --color-ink-disabled: #8a8fa8;
 
-  /* ── Brand — forest. Action and identity. Never a verdict. ────────────── */
-  --color-brand: #4a6551;
-  --color-brand-hover: #3c5442;
-  --color-brand-text: #3f5946;
-  --color-brand-tint: #edf2ec;
-  --color-brand-line: #dae3d8;
+  /* Violet — brand & action only, never a verdict */
+  --color-violet: #6c63d8;
+  --color-violet-hover: #5a51c0;
+  --color-violet-text: #574fc0;
+  --color-violet-tint: #f3effc;
+  --color-violet-line: #ded7f6;
 
-  /* ── Sage — Apply Now, met, verified, free ────────────────────────────── */
-  --color-sage: #4e8560;
-  --color-sage-hover: #427152;
-  --color-sage-text: #3a6b4a;
-  --color-sage-tint: #e9f1e8;
-  --color-sage-line: #d3e3d2;
+  /* Sage — Apply Now / eligible / verified / connected / free */
+  --color-sage: #3f7d53;
+  --color-sage-hover: #366b49;
+  --color-sage-text: #2e6742;
+  --color-sage-tint: #eef5ef;
+  --color-sage-line: #d3e4d8;
 
-  /* ── Apricot — One Fix Away, roadmap, stale, attention ────────────────── */
-  --color-apricot: #b07c2a;
-  --color-apricot-hover: #966820;
-  --color-apricot-text: #8d6221;
-  --color-apricot-tint: #f8efdd;
-  --color-apricot-line: #ecdcbd;
-  --color-apricot-deco: #d3a25c;
+  /* Apricot — One Fix Away / roadmap / improvement / stale */
+  --color-apricot: #c4762f;
+  --color-apricot-hover: #ae6828;
+  --color-apricot-text: #a85c22;
+  --color-apricot-tint: #fdf4ea;
+  --color-apricot-line: #f0dcc2;
+  --color-apricot-deco: #e0904f;
 
-  /* ── Terracotta — Skip, hard blockers, destructive. Quiet only. ───────── */
-  --color-terracotta: #a85841;
-  --color-terracotta-text: #9c5039;
-  --color-terracotta-tint: #f8e9e2;
-  --color-terracotta-line: #eed8cc;
+  /* Terracotta — Skip / hard blockers / destructive. Quiet buttons only. */
+  --color-terracotta: #a33f28;
+  --color-terracotta-text: #a33f28;
+  --color-terracotta-tint: #fbede9;
+  --color-terracotta-line: #e3bcb2;
 
-  --color-track: #e9e2d6;
+  /* Meters */
+  --color-track: #edeaf7;
 
-  /* ── Type: a serif for display moments, one sans for the product ──────── */
-  --font-display: "Playfair Display Variable", ui-serif, Georgia, serif;
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  /* Type */
+  --font-display: var(--font-baloo), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 
-  /* ── Scale. Hero and display are serif; everything below is sans. ─────── */
-  --text-hero: 3.5rem; /* 56 — the promise, once per product */
-  --text-hero--line-height: 1.06;
-  --text-hero--letter-spacing: -0.02em;
-  --text-hero--font-weight: 400;
-
-  --text-display: 2.375rem; /* 38 — a serif screen title */
-  --text-display--line-height: 1.14;
-  --text-display--letter-spacing: -0.016em;
-  --text-display--font-weight: 400;
-
-  --text-title: 1.625rem; /* 26 — page title */
-  --text-title--line-height: 1.22;
-  --text-title--letter-spacing: -0.018em;
-  --text-title--font-weight: 600;
-
-  --text-section: 1.1875rem; /* 19 — section head */
-  --text-section--line-height: 1.35;
-  --text-section--letter-spacing: -0.012em;
-  --text-section--font-weight: 600;
-
-  --text-subhead: 1rem; /* 16 — row title, card head */
-  --text-subhead--line-height: 1.4;
-  --text-subhead--letter-spacing: -0.006em;
-  --text-subhead--font-weight: 550;
-
-  --text-body: 0.9375rem; /* 15 — body */
-  --text-body--line-height: 1.62;
-
-  --text-sm: 0.84375rem; /* 13.5 — secondary body, table text */
-  --text-sm--line-height: 1.5;
-
-  --text-meta: 0.78125rem; /* 12.5 — labels, meta, mono */
-  --text-meta--line-height: 1.45;
-
+  /* Motion — DNA v2 §07 */
   --ease-enter: cubic-bezier(0.2, 0.8, 0.2, 1);
   --ease-exit: cubic-bezier(0.4, 0, 1, 1);
 
-  --breakpoint-xs: 30rem;
-  --breakpoint-sm: 48rem;
-  --breakpoint-md: 64rem;
-  --breakpoint-lg: 80rem;
-  --breakpoint-xl: 90rem;
+  /* Breakpoints matching the seven-width responsive matrix */
+  --breakpoint-xs: 30rem; /* 480 */
+  --breakpoint-sm: 48rem; /* 768 */
+  --breakpoint-md: 64rem; /* 1024 */
+  --breakpoint-lg: 80rem; /* 1280 */
+  --breakpoint-xl: 90rem; /* 1440 */
 }
 
-/* Elevation is warm and soft — paper resting on paper, never a hard drop. */
+/* Elevation tiers — 1 flat, 2 grouped, 3 overlay. Max one tier per row. */
 @theme {
-  --shadow-tier2: 0 1px 2px rgb(60 48 30 / 0.04), 0 8px 24px -12px rgb(60 48 30 / 0.1);
-  --shadow-tier3: 0 2px 6px rgb(60 48 30 / 0.06), 0 28px 60px -28px rgb(45 36 22 / 0.24);
-  --shadow-search: 0 1px 2px rgb(60 48 30 / 0.04), 0 12px 28px -16px rgb(60 48 30 / 0.16);
+  --shadow-tier2: 0 2px 6px -3px rgb(16 27 73 / 0.12);
+  --shadow-tier3: 0 18px 40px -24px rgb(16 27 73 / 0.4);
+  --shadow-search: 0 8px 20px -14px rgb(16 27 73 / 0.35);
 }
 
 /* ---------------------------------------------------------------------------
@@ -146,28 +104,28 @@
     background: var(--color-canvas);
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: 0.9375rem;
-    line-height: 1.62;
-    letter-spacing: -0.005em;
+    font-size: 14.5px;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
+    /* Forbidden at every width: horizontal scrolling of primary content. */
     overflow-x: hidden;
   }
 
-  /* Focus ring: 2px at 2px offset, keyboard only, never removed. */
+  /* Focus ring: 2px #574FC0 at 2px offset, keyboard only, never removed. */
   :focus-visible {
     outline: 2px solid var(--color-active);
     outline-offset: 2px;
-    border-radius: 6px;
+    border-radius: 4px;
   }
   :focus:not(:focus-visible) {
     outline: none;
   }
 
   ::selection {
-    background: var(--color-brand-line);
+    background: var(--color-violet-line);
   }
 
+  /* Every count uses tabular numerals so widths never jump. */
   .tnum,
   [data-tnum] {
     font-variant-numeric: tabular-nums;
@@ -180,61 +138,32 @@
   button:disabled {
     cursor: not-allowed;
   }
-
-  h1,
-  h2,
-  h3,
-  h4 {
-    text-wrap: balance;
-  }
-
-  p {
-    text-wrap: pretty;
-  }
 }
 
 /* ---------------------------------------------------------------------------
-   Utilities
+   Utilities the system needs but Tailwind does not generate
    ------------------------------------------------------------------------ */
 
-/** The serif. Display moments only — a promise, a screen title, a big number. */
 @utility font-display {
   font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: -0.014em;
+  letter-spacing: -0.02em;
 }
 
 @utility pixel {
   image-rendering: pixelated;
 }
 
-/** Horizontal strips scroll when they must, without painting a bar over the UI. */
-@utility no-scrollbar {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-/** A section label: small, quiet, doing the work a border used to do. */
-@utility eyebrow {
-  font-size: 0.78125rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  color: var(--color-ink-muted);
-}
-
+/* Skeleton at real row geometry, 1.2s shimmer. Never a spinner. */
 @utility skeleton {
   background: linear-gradient(
     90deg,
-    var(--color-surface-sunken) 0%,
-    #faf7f1 50%,
-    var(--color-surface-sunken) 100%
+    var(--color-track) 0%,
+    #f4f2fb 50%,
+    var(--color-track) 100%
   );
   background-size: 200% 100%;
   animation: reach-shimmer 1.2s linear infinite;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 @keyframes reach-shimmer {
@@ -243,23 +172,25 @@
   }
 }
 
+/* Scenery is a background layer only — masked to transparent at the content edge. */
 @utility scenery-mask-r {
-  -webkit-mask-image: linear-gradient(to right, #000 55%, transparent 100%);
-  mask-image: linear-gradient(to right, #000 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, #000 62%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 62%, transparent 100%);
 }
 
 @utility scenery-mask-l {
-  -webkit-mask-image: linear-gradient(to left, #000 55%, transparent 100%);
-  mask-image: linear-gradient(to left, #000 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to left, #000 62%, transparent 100%);
+  mask-image: linear-gradient(to left, #000 62%, transparent 100%);
 }
 
 @utility scenery-mask-b {
-  -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 45%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
 }
 
 /* ---------------------------------------------------------------------------
-   Reduced motion
+   Reduced motion — count-ups resolve instantly, slides become fades,
+   nothing else changes.
    ------------------------------------------------------------------------ */
 
 @media (prefers-reduced-motion: reduce) {
@@ -273,6 +204,6 @@
   }
   .skeleton {
     animation: none;
-    background: var(--color-surface-sunken);
+    background: var(--color-track);
   }
 }

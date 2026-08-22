@@ -9,12 +9,11 @@ import { DiffCard } from "@/components/resume/DiffCard";
 import { KeywordGroups, MeterPair } from "@/components/resume/MeterPair";
 import { useSetStatusLine } from "@/components/shell/AppShell";
 import { Arrow, Button } from "@/components/ui/Button";
-import { Meta, Mono } from "@/components/ui/Chip";
-import { Icon } from "@/components/ui/Icon";
+import { Chip, Mono } from "@/components/ui/Chip";
 import { Tabs, Textarea } from "@/components/ui/Controls";
-import { Disclosure } from "@/components/ui/Disclosure";
 import { Sheet, SheetGrip } from "@/components/ui/Overlay";
-import { Hairline, Page } from "@/components/ui/Surface";
+import { PixelIcon } from "@/components/ui/PixelIcon";
+import { Card, Eyebrow, Hairline, SectionHead } from "@/components/ui/Surface";
 import { Skeleton, SkeletonRows } from "@/components/ui/States";
 import {
   acceptEdit,
@@ -27,26 +26,30 @@ import {
   reorderResumeSections,
   saveResumeVersion,
 } from "@/lib/api";
-import { ApiError } from "@/lib/api/client";
 import { qk } from "@/lib/api/keys";
+import { ApiError } from "@/lib/api/client";
 import type { ResumeDocument, ResumeSection, SuggestedEdit } from "@/lib/api/types";
-import { useIsMobile, usePersistentState } from "@/lib/hooks";
+import { useIsMobile, useMediaQuery, usePersistentState } from "@/lib/hooks";
 import { cn } from "@/lib/utils/cn";
-import { VERDICT_SHORT } from "@/lib/utils/verdict";
+import { VERDICT_SHORT, VERDICT_TONE } from "@/lib/utils/verdict";
 
-type Pane = "preview" | "sections" | "edits";
+type Pane = "analysis" | "edits" | "keywords" | "preview";
+type MobileTab = "analysis" | "edits" | "preview";
 
 /**
- * One workspace: the document is the work, and the analysis supports it from the
- * side. Sections, preview and the edit queue share a single work area rather than
- * competing as three dashboards.
+ * An evidence-constrained workspace. Two meters that never merge, every suggested change as
+ * before / after / why / evidence with accept and reject, and anything the sources cannot
+ * support visibly blocked rather than quietly written.
  */
 export default function ResumePage() {
   const client = useQueryClient();
   const isMobile = useIsMobile();
+  // 768–1023: the preview is not a third pane, so it becomes a pane you switch to.
+  const previewIsAPane = useMediaQuery("(max-width: 1023px)");
 
   const [jobId, setJobId] = usePersistentState<string | null>("resume:jobId", "bkash-da");
-  const [pane, setPane] = useState<Pane>("preview");
+  const [pane, setPane] = useState<Pane>("analysis");
+  const [mobileTab, setMobileTab] = useState<MobileTab>("analysis");
   const [selectedSection, setSelectedSection] = useState("experience");
   const [jdSheet, setJdSheet] = useState(false);
   const [jdText, setJdText] = useState("");
@@ -72,6 +75,7 @@ export default function ResumePage() {
       void client.invalidateQueries({ queryKey: ["resume", "analysis"] });
     },
     onError: (error) => {
+      // The only path to that sentence is proving it first.
       setBlockedNotice(error instanceof ApiError ? error.message : "That edit cannot be accepted.");
     },
   });
@@ -93,7 +97,7 @@ export default function ResumePage() {
     },
   });
 
-  useSetStatusLine(current ? `Saved · ${current.label}` : null);
+  useSetStatusLine(current ? `Saved ${current.label}` : null);
   useAssistantSubject({
     scope: "resume-bullet",
     id: selectedSection,
@@ -105,8 +109,9 @@ export default function ResumePage() {
 
   const data = analysis.data;
   const pendingEdits = data.edits.filter((e) => e.state === "pending");
-  const acceptedCount = data.edits.filter((e) => e.state === "accepted").length;
-  const blockedCount = data.edits.filter((e) => e.state === "blocked").length;
+  const acceptedIds = new Set(
+    data.edits.filter((e) => e.state === "accepted").map((e) => e.id),
+  );
   const sections = orderSections(doc.data, order);
 
   const moveSection = (id: string, delta: number) => {
@@ -119,215 +124,273 @@ export default function ResumePage() {
     reorder.mutate(ids);
   };
 
+  const analysisPane = (
+    <div className="flex flex-col gap-5">
+      <MeterPair
+        ats={data.atsReadiness}
+        jd={data.jdMatch}
+        jobLabel={data.jobLabel}
+        onPickJob={() => setJdSheet(true)}
+      />
+
+      {!data.jdMatch && (
+        <>
+          <Card className="p-4">
+            <Eyebrow>Pick a job to measure against</Eyebrow>
+            <ul className="mt-2.5 flex flex-col">
+              {(jobs.data?.jobs ?? [])
+                .filter((job) => job.verdict !== "skip")
+                .slice(0, 3)
+                .map((job, i) => (
+                  <li key={job.id}>
+                    {i > 0 && <Hairline />}
+                    <div className="flex items-center gap-3 py-2.5">
+                      <Chip tone={job.verdict === "apply-now" ? "sage" : "apricot"}>
+                        {VERDICT_SHORT[job.verdict]}
+                      </Chip>
+                      <span className="min-w-0 flex-1 truncate text-[14px] font-semibold text-ink">
+                        {job.role} · {job.company}
+                      </span>
+                      <Button size="sm" variant="secondary" onClick={() => setJobId(job.id)}>
+                        Use
+                      </Button>
+                    </div>
+                  </li>
+                ))}
+            </ul>
+            <button
+              type="button"
+              onClick={() => setJdSheet(true)}
+              className="mt-2 min-h-[44px] text-[13.5px] font-semibold text-violet-text hover:underline"
+            >
+              Or paste a job description →
+            </button>
+          </Card>
+
+          <Card className="p-4">
+            <Eyebrow>Available without a job</Eyebrow>
+            <ul className="mt-2.5 flex flex-col gap-2">
+              {data.withoutJob.map((item) => (
+                <li key={item.id}>
+                  <button
+                    type="button"
+                    onClick={() => setPane("edits")}
+                    className="flex min-h-[44px] w-full items-center gap-2.5 rounded-[10px] border border-line px-3 text-left hover:bg-row-hover"
+                  >
+                    <PixelIcon name={item.icon} size={20} />
+                    <span className="flex-1 text-[14px] font-semibold text-ink">{item.label}</span>
+                    <Mono>{item.detail}</Mono>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </Card>
+        </>
+      )}
+
+      {data.jdMatch && (
+        <Card className="p-4">
+          <p className="text-[13.5px] leading-relaxed text-ink-body">
+            {data.edits.length} suggested edits ·{" "}
+            {data.edits.filter((e) => e.state === "blocked").length} blocked for lack of evidence
+          </p>
+          <Button className="mt-3" onClick={() => setPane("edits")} full>
+            Review suggested edits <Arrow />
+          </Button>
+        </Card>
+      )}
+    </div>
+  );
+
+  const editsPane = (
+    <div className="flex flex-col gap-3">
+      {blockedNotice && (
+        <p role="alert" className="rounded-[10px] border-2 border-terracotta-line bg-terracotta-tint px-3 py-2 text-[13px] text-terracotta-text">
+          {blockedNotice}
+        </p>
+      )}
+      {data.edits.length === 0 && (
+        <p className="text-[14px] text-ink-body">
+          No suggested edits for this document yet. Choose a job description to generate them.
+        </p>
+      )}
+      {data.edits.map((edit, i) => (
+        <DiffCard
+          key={edit.id}
+          edit={edit}
+          index={i + 1}
+          total={data.edits.length}
+          pending={decide.isPending}
+          onAccept={() => decide.mutate({ id: edit.id, action: "accept" })}
+          onReject={() => decide.mutate({ id: edit.id, action: "reject" })}
+        />
+      ))}
+    </div>
+  );
+
+  const keywordsPane = data.jdMatch ? (
+    <KeywordGroups
+      keywords={data.keywords}
+      present={data.keywordsPresent}
+      total={data.keywordsTotal}
+    />
+  ) : (
+    <p className="text-[14px] leading-relaxed text-ink-body">
+      Keyword coverage, hard-requirement checks and suggested edits are all relative to one
+      posting — so they stay off until you choose one.
+    </p>
+  );
+
   return (
-    <Page className="pt-6 pb-24 sm:pt-8 sm:pb-16">
-      <header className="flex flex-wrap items-end gap-x-4 gap-y-3">
-        <div className="min-w-0">
-          <p className="flex items-center gap-2 text-sm text-brand-text">
-            <Icon name="spark" size={16} />
-            Your evidence, in the words screeners read
-          </p>
-          <h1 className="font-display mt-2 text-display text-ink">Resume</h1>
-          <p className="mt-1">
-            <Mono>{current?.label}</Mono>
-          </p>
+    <div className="mx-auto w-full max-w-[1440px] px-5 pb-28 sm:px-8 md:px-10 md:pb-12 xl:px-16">
+      <header className="flex flex-col gap-3 pt-5 sm:pt-6">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+          <PixelIcon name="px-cv" size={28} height={32} />
+          <h1 className="font-display text-[26px] leading-tight font-extrabold text-ink sm:text-[30px]">
+            Resume Builder
+          </h1>
+          <Mono>{current?.label}</Mono>
+          <div className="ml-auto flex flex-wrap items-center gap-2">
+            <VersionMenu versions={versions.data ?? []} />
+            <Button
+              variant="secondary"
+              onClick={() => save.mutate()}
+              disabled={save.isPending || acceptedIds.size === 0}
+              reason="Accept an edit first — nothing is written until you do"
+            >
+              {save.isPending ? "Saving…" : "Save version"}
+            </Button>
+            <div className="hidden sm:block">
+              <AssistantEntry />
+            </div>
+          </div>
         </div>
 
-        <div className="flex w-full flex-wrap items-center gap-2 sm:ml-auto sm:w-auto">
-          <VersionMenu versions={versions.data ?? []} />
-          <Button
-            onClick={() => save.mutate()}
-            disabled={save.isPending || acceptedCount === 0}
-            reason="Accept an edit first — nothing is written until you do"
-          >
-            {save.isPending ? "Saving…" : "Save version"}
-          </Button>
-          <div className="hidden lg:block">
-            <AssistantEntry />
-          </div>
+        {/* JD Match names its posting. ATS Readiness never does. */}
+        <div className="flex flex-wrap items-center gap-2.5">
+          <Eyebrow>Target job</Eyebrow>
+          {data.jobLabel ? (
+            <>
+              <Chip tone="violet">{data.jobLabel}</Chip>
+              <Mono>{data.jdParsedNote}</Mono>
+              {jobId && (
+                <Link
+                  href={`/jobs/${jobId}`}
+                  className="inline-flex min-h-[44px] items-center px-1 text-[13px] font-semibold text-violet-text hover:underline"
+                >
+                  Open job detail ↗
+                </Link>
+              )}
+              <Button variant="tertiary" onClick={() => setJobId(null)}>
+                Clear
+              </Button>
+            </>
+          ) : (
+            <>
+              <Chip tone="stone">No job selected</Chip>
+              <Button variant="tertiary" onClick={() => setJdSheet(true)}>
+                Paste a JD instead
+              </Button>
+            </>
+          )}
         </div>
       </header>
 
-      {/* The one thing JD Match depends on, stated plainly. */}
-      <p className="mt-2 flex flex-wrap items-baseline gap-x-2 gap-y-1">
-        <Meta>Measuring against</Meta>
-        {data.jobLabel ? (
-          <>
-            <span className="text-body text-ink">{data.jobLabel}</span>
-            {jobId && (
-              <Link
-                href={`/jobs/${jobId}`}
-                className="inline-flex min-h-[36px] items-center text-sm font-medium text-brand-text hover:underline"
-              >
-                Open
-              </Link>
-            )}
-            <Button variant="link" onClick={() => setJobId(null)}>
-              Clear
-            </Button>
-          </>
-        ) : (
-          <>
-            <span className="text-body text-ink-muted">No job selected</span>
-            <Button variant="link" onClick={() => setJdSheet(true)}>
-              Choose one
-            </Button>
-          </>
-        )}
-      </p>
+      {/* Desktop: three panes — editor, analysis, ivory preview. */}
+      {!isMobile && (
+      <div className="mt-5 grid gap-5 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)_minmax(0,380px)] xl:grid-cols-[minmax(0,360px)_minmax(0,1fr)_minmax(0,440px)]">
+        <section className="min-w-0">
+          <SectionHead glyph="g-reorder" glyphSize={24} title="Editor" detail="Reorder sections · click to edit" />
+          <ul className="mt-3 flex flex-col gap-1.5">
+            {sections.map((section, i) => (
+              <EditorRow
+                key={section.id}
+                section={section}
+                selected={section.id === selectedSection}
+                first={i === 0}
+                last={i === sections.length - 1}
+                onSelect={() => setSelectedSection(section.id)}
+                onMove={(delta) => moveSection(section.id, delta)}
+              />
+            ))}
+          </ul>
+        </section>
 
-      <div className="mt-6 grid gap-10 lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-12">
-        {/* The work area. One pane at a time. */}
-        <div className="min-w-0">
+        <section className="min-w-0">
           <Tabs
-            ariaLabel="Resume workspace"
+            ariaLabel="Analysis panes"
             value={pane}
             onChange={setPane}
             items={[
-              { value: "preview", label: "Preview" },
-              { value: "sections", label: "Sections" },
+              { value: "analysis", label: "Analysis" },
               { value: "edits", label: "Suggested edits", count: pendingEdits.length },
+              { value: "keywords", label: "Keywords" },
+              ...(previewIsAPane ? [{ value: "preview" as Pane, label: "Preview" }] : []),
             ]}
           />
-
-          <div className="mt-5">
+          <div className="mt-4">
+            {pane === "analysis" && analysisPane}
+            {pane === "edits" && editsPane}
+            {pane === "keywords" && keywordsPane}
             {pane === "preview" && (
               <ResumePreview doc={doc.data} sections={sections} edits={data.edits} />
             )}
-
-            {pane === "sections" && (
-              <ul>
-                {sections.map((section, i) => (
-                  <EditorRow
-                    key={section.id}
-                    section={section}
-                    selected={section.id === selectedSection}
-                    first={i === 0}
-                    last={i === sections.length - 1}
-                    onSelect={() => setSelectedSection(section.id)}
-                    onMove={(delta) => moveSection(section.id, delta)}
-                  />
-                ))}
-              </ul>
-            )}
-
-            {pane === "edits" && (
-              <div>
-                {blockedNotice && (
-                  <p
-                    role="alert"
-                    className="mb-4 rounded-xl border border-terracotta-line bg-terracotta-tint px-3 py-2 text-sm text-terracotta-text"
-                  >
-                    {blockedNotice}
-                  </p>
-                )}
-                {data.edits.length === 0 ? (
-                  <p className="text-body text-ink-body">
-                    No suggested edits yet. Choose a job description to generate them.
-                  </p>
-                ) : (
-                  data.edits.map((edit, i) => (
-                    <DiffCard
-                      key={edit.id}
-                      edit={edit}
-                      index={i + 1}
-                      total={data.edits.length}
-                      pending={decide.isPending}
-                      onAccept={() => decide.mutate({ id: edit.id, action: "accept" })}
-                      onReject={() => decide.mutate({ id: edit.id, action: "reject" })}
-                    />
-                  ))
-                )}
-              </div>
-            )}
           </div>
-        </div>
+        </section>
 
-        {/* The analysis rail. Two readings, then detail on demand. */}
-        <aside className="min-w-0">
-          <div className="lg:sticky lg:top-24">
-            <MeterPair
-              ats={data.atsReadiness}
-              jd={data.jdMatch}
-              jobLabel={data.jobLabel}
-              onPickJob={() => setJdSheet(true)}
-            />
-
-            {data.edits.length > 0 && (
-              <div className="mt-5">
-                <p className="text-sm text-ink-body">
-                  {pendingEdits.length} suggested edit{pendingEdits.length === 1 ? "" : "s"} to
-                  review
-                  {blockedCount > 0 && `, ${blockedCount} blocked for lack of evidence`}.
-                </p>
-                <Button className="mt-3" full onClick={() => setPane("edits")}>
-                  Review edits
-                  <Arrow />
-                </Button>
-              </div>
-            )}
-
-            {data.jdMatch && (
-              <div className="mt-6">
-                <Disclosure
-                  label="Keyword coverage"
-                  detail={`${data.keywordsPresent} of ${data.keywordsTotal}`}
-                >
-                  <KeywordGroups
-                    keywords={data.keywords}
-                    present={data.keywordsPresent}
-                    total={data.keywordsTotal}
-                    className="pt-1"
-                  />
-                </Disclosure>
-              </div>
-            )}
-
-            {!data.jdMatch && data.withoutJob.length > 0 && (
-              <div className="mt-6">
-                <h3 className="text-sm font-medium text-ink">Available without a job</h3>
-                <ul className="mt-2">
-                  {data.withoutJob.map((item) => (
-                    <li key={item.id} className="border-b border-hairline last:border-b-0">
-                      <button
-                        type="button"
-                        onClick={() => setPane("edits")}
-                        className="flex min-h-[44px] w-full items-baseline justify-between gap-3 text-left"
-                      >
-                        <span className="text-sm text-ink">{item.label}</span>
-                        <Mono>{item.detail}</Mono>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        </aside>
+        <section className="hidden min-w-0 lg:block">
+          <SectionHead glyph="g-version" glyphSize={24} title="Live preview" detail="A4 · 1 page" />
+          <ResumePreview doc={doc.data} sections={sections} edits={data.edits} className="mt-3" />
+        </section>
       </div>
+      )}
 
+      {/* Mobile: three tabs, never three panes. */}
       {isMobile && (
-        <div className="fixed inset-x-0 bottom-[calc(64px+env(safe-area-inset-bottom))] z-20 flex items-center gap-3 border-t border-line bg-surface px-4 py-3">
-          <span className="min-w-0 flex-1 text-sm text-ink-muted">
-            {acceptedCount > 0
-              ? `${acceptedCount} pending edit${acceptedCount === 1 ? "" : "s"}`
-              : "Nothing is written until you accept it"}
-          </span>
-          {pane === "edits" ? (
-            <Button
-              size="lg"
-              onClick={() => save.mutate()}
-              disabled={acceptedCount === 0 || save.isPending}
-              reason="Accept an edit first"
-            >
-              Save version
-            </Button>
-          ) : (
-            <Button size="lg" onClick={() => setPane("edits")}>
-              Review edits
-            </Button>
+      <div className="mt-4">
+        <Tabs
+          ariaLabel="Resume tabs"
+          value={mobileTab}
+          onChange={setMobileTab}
+          items={[
+            { value: "analysis", label: "Analysis" },
+            { value: "edits", label: "Edits", count: pendingEdits.length },
+            { value: "preview", label: "Preview" },
+          ]}
+        />
+        <div className="mt-4">
+          {mobileTab === "analysis" && analysisPane}
+          {mobileTab === "edits" && editsPane}
+          {mobileTab === "preview" && (
+            <ResumePreview doc={doc.data} sections={sections} edits={data.edits} />
           )}
         </div>
+      </div>
+      )}
+
+      {/* One sticky primary per mobile tab. */}
+      {isMobile && (
+      <div className="fixed inset-x-0 bottom-[58px] z-20 flex items-center gap-3 border-t border-line bg-surface px-4 py-3 shadow-tier3">
+        <span className="min-w-0 flex-1 text-[12.5px] leading-snug text-ink-muted">
+          {acceptedIds.size > 0
+            ? `${acceptedIds.size} pending edit${acceptedIds.size === 1 ? "" : "s"} not yet saved`
+            : "Nothing is written until you accept it"}
+        </span>
+        {mobileTab === "preview" ? (
+          <Button
+            size="lg"
+            onClick={() => save.mutate()}
+            disabled={acceptedIds.size === 0 || save.isPending}
+            reason="Accept an edit first"
+          >
+            Save version
+          </Button>
+        ) : (
+          <Button size="lg" onClick={() => setMobileTab(mobileTab === "edits" ? "preview" : "edits")}>
+            {mobileTab === "edits" ? "Preview" : "Review edits"} <Arrow />
+          </Button>
+        )}
+      </div>
       )}
 
       <JdSheet
@@ -343,11 +406,11 @@ export default function ResumePage() {
           setJdSheet(false);
         }}
       />
-    </Page>
+    </div>
   );
 }
 
-/* ── Sections ───────────────────────────────────────────────────────────── */
+/* ── Editor ─────────────────────────────────────────────────────────────── */
 
 function orderSections(doc: ResumeDocument, order: string[] | null): ResumeSection[] {
   if (!order) return doc.sections;
@@ -355,7 +418,10 @@ function orderSections(doc: ResumeDocument, order: string[] | null): ResumeSecti
   return order.map((id) => map.get(id)!).filter(Boolean);
 }
 
-/** Evidence health is stated where the section is edited, so gaps are visible there. */
+/**
+ * The editor states evidence health per section, so gaps are visible where they are edited.
+ * Reordering works by keyboard as well as by the handle.
+ */
 function EditorRow({
   section,
   selected,
@@ -373,43 +439,45 @@ function EditorRow({
 }) {
   const tone =
     section.health.tone === "ok"
-      ? "text-sage-text"
+      ? "sage"
       : section.health.tone === "attention"
-        ? "text-apricot-text"
-        : "text-ink-muted";
+        ? "apricot"
+        : "stone";
 
   return (
     <li
       className={cn(
-        "flex items-center gap-3 border-b border-hairline py-2.5 last:border-b-0",
-        selected && "bg-surface-sunken",
+        "relative flex items-center gap-2 rounded-[12px] border px-2.5 py-2.5 transition-colors duration-100",
+        selected ? "border-control bg-violet-tint" : "border-line bg-surface hover:bg-row-hover",
       )}
     >
-      <button type="button" onClick={onSelect} className="min-w-0 flex-1 py-1 text-left">
-        <span className="block text-body text-ink">{section.title}</span>
-        <span className="mt-0.5 block">
-          <Meta>{section.detail}</Meta>
-        </span>
+      {selected && (
+        <span aria-hidden className="absolute top-2.5 bottom-2.5 left-0 w-[3px] rounded-r bg-violet" />
+      )}
+      <PixelIcon name="g-reorder" size={16} />
+      <button type="button" onClick={onSelect} className="min-w-0 flex-1 text-left">
+        <span className="block text-[14px] font-semibold text-ink">{section.title}</span>
+        <span className="block truncate text-[12.5px] text-ink-muted">{section.detail}</span>
       </button>
-      <span className={cn("shrink-0 text-sm", tone)}>{section.health.label}</span>
-      <span className="flex shrink-0 items-center">
+      <Chip tone={tone}>{section.health.label}</Chip>
+      <span className="flex items-center">
         <button
           type="button"
           onClick={() => onMove(-1)}
           disabled={first}
           aria-label={`Move ${section.title} up`}
-          className="flex h-[44px] w-[30px] items-center justify-center rounded text-meta text-ink-muted hover:bg-surface-sunken disabled:text-ink-disabled"
+          className="flex h-[44px] w-[30px] items-center justify-center rounded text-[12px] text-ink-muted hover:bg-row-hover disabled:text-ink-disabled"
         >
-          ↑
+          ▲
         </button>
         <button
           type="button"
           onClick={() => onMove(1)}
           disabled={last}
           aria-label={`Move ${section.title} down`}
-          className="flex h-[44px] w-[30px] items-center justify-center rounded text-meta text-ink-muted hover:bg-surface-sunken disabled:text-ink-disabled"
+          className="flex h-[44px] w-[30px] items-center justify-center rounded text-[12px] text-ink-muted hover:bg-row-hover disabled:text-ink-disabled"
         >
-          ↓
+          ▼
         </button>
       </span>
     </li>
@@ -418,7 +486,10 @@ function EditorRow({
 
 /* ── Preview ────────────────────────────────────────────────────────────── */
 
-/** The ivory reading surface. Pending edits are marked; nothing is written until saved. */
+/**
+ * The ivory reading surface. Pending accepted edits are marked with a violet rule and the
+ * word "pending" — nothing is written to the document until the version is saved.
+ */
 function ResumePreview({
   doc,
   sections,
@@ -436,43 +507,43 @@ function ResumePreview({
   return (
     <div
       className={cn(
-        "min-w-[300px] rounded-xl border border-surface-read-border bg-surface-read px-7 py-8 sm:px-9 sm:py-10",
+        "min-w-[300px] rounded-[14px] border border-surface-read-border bg-surface-read p-5",
         className,
       )}
     >
-      <h2 className="text-section text-ink">{doc.name}</h2>
-      <p className="mt-0.5 text-sm text-ink-muted">{doc.contact}</p>
+      <h2 className="font-display text-[20px] font-bold text-ink">{doc.name}</h2>
+      <p className="mt-0.5 text-[12.5px] text-ink-body">{doc.contact}</p>
 
       {sections
         .filter((section) => section.body && section.body.length > 0)
         .map((section) => (
-          <section key={section.id} className="mt-7">
-            <h3 className="text-meta font-semibold tracking-[0.06em] text-ink-muted uppercase">
+          <section key={section.id} className="mt-4">
+            <h3 className="text-[11.5px] font-bold tracking-[.12em] text-ink-muted uppercase">
               {section.title}
             </h3>
-            <div className="mt-2 border-t border-surface-read-border pt-3">
+            <div className="mt-1.5 border-t border-surface-read-border pt-2">
               {section.body!.map((block) => (
-                <div key={block.id} className="mt-3 first:mt-0">
+                <div key={block.id} className="mt-2 first:mt-0">
                   {block.heading && (
                     <p className="flex items-baseline justify-between gap-3">
-                      <span className="text-body font-medium text-ink">{block.heading}</span>
+                      <span className="text-[13.5px] font-semibold text-ink">{block.heading}</span>
                       {block.meta && <Mono>{block.meta}</Mono>}
                     </p>
                   )}
-                  <ul className="mt-1 space-y-1">
+                  <ul className="mt-1 flex flex-col gap-1">
                     {block.lines.map((line) => {
                       const after = replacement.get(line.text);
                       return (
                         <li
                           key={line.id}
                           className={cn(
-                            "text-sm leading-relaxed text-ink-body",
-                            after && "border-l-2 border-brand pl-3",
+                            "text-[13px] leading-relaxed text-ink-body",
+                            after && "border-l-[3px] border-violet pl-2.5",
                           )}
                         >
                           {after ?? line.text}
                           {after && (
-                            <span className="ml-2 text-meta font-medium text-brand-text">
+                            <span className="ml-1.5 rounded bg-violet-tint px-1.5 py-0.5 text-[11px] font-semibold text-violet-text">
                               pending
                             </span>
                           )}
@@ -486,9 +557,9 @@ function ResumePreview({
           </section>
         ))}
 
-      <p className="mt-8 border-t border-surface-read-border pt-4 text-sm text-ink-muted">
-        Marked lines are edits you have accepted. Nothing is written to your file until you save a
-        version.
+      <p className="mt-5 border-t border-surface-read-border pt-3 text-[12px] leading-snug text-ink-muted">
+        Violet marks show pending accepted edits. Nothing is written to your file until you save
+        a version.
       </p>
     </div>
   );
@@ -496,35 +567,31 @@ function ResumePreview({
 
 /* ── Versions & JD ──────────────────────────────────────────────────────── */
 
-function VersionMenu({
-  versions,
-}: {
-  versions: { id: string; label: string; isCurrent: boolean }[];
-}) {
+function VersionMenu({ versions }: { versions: { id: string; label: string; isCurrent: boolean }[] }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="relative">
       <Button variant="secondary" onClick={() => setOpen((v) => !v)} aria-expanded={open}>
-        Versions ({versions.length})
+        Versions ({versions.length}) ▾
       </Button>
       {open && (
-        <div className="absolute top-[46px] right-0 z-30 w-[248px] rounded-xl border border-line bg-surface p-2 shadow-tier3">
+        <div className="absolute top-[50px] right-0 z-30 w-[240px] rounded-[12px] border border-group bg-surface p-2 shadow-tier3">
           <ul>
             {versions.map((version) => (
               <li key={version.id}>
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="flex min-h-[44px] w-full items-center gap-2 rounded-lg px-2.5 text-left text-sm hover:bg-surface-sunken"
+                  className="flex min-h-[44px] w-full items-center gap-2 rounded-lg px-2.5 text-left text-[13.5px] hover:bg-row-hover"
                 >
-                  <span className="flex-1 text-ink">{version.label}</span>
-                  {version.isCurrent && <Meta>current</Meta>}
+                  <span className="flex-1 font-semibold text-ink">{version.label}</span>
+                  {version.isCurrent && <Chip tone="violet">Current</Chip>}
                 </button>
               </li>
             ))}
           </ul>
-          <p className="border-t border-hairline px-2.5 pt-2 text-sm text-ink-muted">
-            Accepting edits creates a new version, never overwrites.
+          <p className="border-t border-hairline px-2.5 pt-2 text-[12px] leading-snug text-ink-muted">
+            One version per target role. Accepting edits creates a new version, never overwrites.
           </p>
         </div>
       )}
@@ -548,20 +615,17 @@ function JdSheet({
   onText: (value: string) => void;
   onAnalyse: () => void;
   pending: boolean;
-  jobs: {
-    id: string;
-    role: string;
-    company: string;
-    verdict: "apply-now" | "one-fix-away" | "skip";
-  }[];
+  jobs: { id: string; role: string; company: string; verdict: keyof typeof VERDICT_TONE }[];
   onPick: (id: string) => void;
 }) {
   return (
-    <Sheet open={open} onClose={onClose} label="Choose a job description" height="min(620px, 90%)">
+    <Sheet open={open} onClose={onClose} label="Choose a job description" height="min(660px, 90%)">
       <SheetGrip />
-      <div className="flex min-h-0 flex-1 flex-col px-6 pb-6">
-        <h2 className="text-section text-ink">Measure against one posting</h2>
-        <p className="mt-1 text-body text-ink-body">
+      <div className="flex min-h-0 flex-1 flex-col px-5 pb-5">
+        <h2 className="font-display text-[22px] font-bold text-ink">
+          Measure against one posting
+        </h2>
+        <p className="mt-1.5 text-[14px] leading-relaxed text-ink-body">
           JD Match is a property of one job. ATS Readiness is unaffected by this choice.
         </p>
 
@@ -575,23 +639,26 @@ function JdSheet({
                 <button
                   type="button"
                   onClick={() => onPick(job.id)}
-                  className="flex min-h-[48px] w-full items-baseline gap-3 text-left"
+                  className="flex min-h-[48px] w-full items-center gap-3 text-left"
                 >
-                  <span className="min-w-0 flex-1 truncate text-body text-ink">
+                  <Chip tone={job.verdict === "apply-now" ? "sage" : "apricot"}>
+                    {VERDICT_SHORT[job.verdict]}
+                  </Chip>
+                  <span className="min-w-0 flex-1 truncate text-[14px] font-semibold text-ink">
                     {job.role} · {job.company}
                   </span>
-                  <Meta>{VERDICT_SHORT[job.verdict]}</Meta>
+                  <span className="text-[13px] font-semibold text-violet-text">Use</span>
                 </button>
               </li>
             ))}
         </ul>
 
-        <div className="mt-4 border-t border-line pt-4">
-          <h3 className="text-sm font-medium text-ink">Or paste a job description</h3>
+        <div className="mt-4 border-t border-hairline pt-4">
+          <Eyebrow>Or paste a job description</Eyebrow>
           <Textarea
             value={text}
             onChange={(event) => onText(event.target.value)}
-            rows={4}
+            rows={5}
             placeholder="We are looking for a Data Analyst with strong SQL, including window functions…"
             aria-label="Paste a job description"
             className="mt-2"
@@ -607,8 +674,8 @@ function JdSheet({
               {pending ? "Analysing…" : "Analyse this JD"}
             </Button>
           </div>
-          <p className="mt-2 text-sm text-ink-muted">
-            A pasted JD produces a JD Match only — ATS Readiness is unaffected.
+          <p className="mt-2 text-[12.5px] text-ink-muted">
+            Pasted JDs produce a JD Match only — ATS Readiness is unaffected.
           </p>
         </div>
       </div>
@@ -618,16 +685,17 @@ function JdSheet({
 
 function ResumeSkeleton() {
   return (
-    <Page className="pt-8">
-      <Skeleton className="h-[30px] w-[160px]" />
-      <Skeleton className="mt-3 h-[16px] w-[300px]" />
-      <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_280px]">
+    <div className="mx-auto w-full max-w-[1440px] px-5 pt-8 sm:px-8 md:px-10 xl:px-16">
+      <Skeleton className="h-[30px] w-[260px]" />
+      <Skeleton className="mt-3 h-[18px] w-[340px]" />
+      <div className="mt-6 grid gap-5 lg:grid-cols-[320px_1fr_380px]">
+        <SkeletonRows rows={6} height={54} />
         <div>
-          <Skeleton className="h-[40px] w-[320px]" />
-          <Skeleton className="mt-5 h-[460px]" />
+          <Skeleton className="h-[44px] w-full" />
+          <Skeleton className="mt-4 h-[210px]" />
         </div>
-        <SkeletonRows rows={3} height={90} />
+        <Skeleton className="h-[420px]" />
       </div>
-    </Page>
+    </div>
   );
 }

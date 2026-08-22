@@ -8,7 +8,7 @@ test.use({ viewport: { width: 1440, height: 900 } });
  */
 
 test("the focus ring is visible and is never removed", async ({ page }) => {
-  await goto(page, "/discover", "Discover");
+  await goto(page, "/discover", "Live Discovery");
   await page.keyboard.press("Tab");
   await page.keyboard.press("Tab");
 
@@ -26,7 +26,7 @@ test("the focus ring is visible and is never removed", async ({ page }) => {
 
   expect(ring.outlineStyle).not.toBe("none");
   expect(parseFloat(ring.outlineWidth)).toBeGreaterThanOrEqual(2);
-  expect(ring.outlineColor).toBe("rgb(74, 101, 81)");
+  expect(ring.outlineColor).toBe("rgb(87, 79, 192)");
   expect(ring.offset).toBe("2px");
 });
 
@@ -53,7 +53,7 @@ test("a drawer traps focus and restores it to the trigger on close", async ({ pa
 });
 
 test("meters announce the word, never a bare number", async ({ page }) => {
-  await goto(page, "/resume", "Resume");
+  await goto(page, "/resume", "Resume Builder");
   for (const meter of await page.getByRole("meter").all()) {
     const valuetext = await meter.getAttribute("aria-valuetext");
     expect(valuetext, "a meter without an announced word").toBeTruthy();
@@ -62,7 +62,7 @@ test("meters announce the word, never a bare number", async ({ page }) => {
 });
 
 test("the activity console is one polite live region, not per event", async ({ page }) => {
-  await goto(page, "/discover", "Discover");
+  await goto(page, "/discover", "Live Discovery");
   await page.getByRole("button", { name: "Re-run", exact: true }).click();
 
   const console_ = page.getByLabel("Discovery run activity");
@@ -73,7 +73,7 @@ test("the activity console is one polite live region, not per event", async ({ p
 });
 
 test("every verdict is a word, so colour is never the only cue", async ({ page }) => {
-  await goto(page, "/discover", "Discover");
+  await goto(page, "/discover", "Live Discovery");
   // Wait for the grouped results, not just the page header.
   await expect(page.getByRole("heading", { name: "Apply Now" })).toBeVisible();
 
@@ -120,19 +120,15 @@ for (const route of ROUTES) {
   });
 }
 
-test("every drawn mark is either hidden or named", async ({ page }) => {
-  // Icons and scenery are SVG now, so the guarantee moved with them: an icon
-  // either sits beside a word and is hidden, or it carries its own label.
-  await goto(page, "/", "Find what fits");
-  const exposed = await page.evaluate(() =>
-    [...document.querySelectorAll("svg")]
-      .filter(
-        (svg) =>
-          svg.getAttribute("aria-hidden") !== "true" && !svg.getAttribute("aria-label"),
-      )
-      .map((svg) => svg.outerHTML.slice(0, 70)),
+test("art is pixel-rendered and carries true alpha", async ({ page }) => {
+  await goto(page, "/", "Your Focus");
+  const smoothed = await page.evaluate(() =>
+    [...document.querySelectorAll("img")]
+      .filter((img) => (img.getAttribute("src") ?? "").includes("/art/"))
+      .filter((img) => getComputedStyle(img).imageRendering !== "pixelated")
+      .map((img) => img.getAttribute("src") ?? ""),
   );
-  expect(exposed, `unlabelled, unhidden marks: ${exposed.join(" | ")}`).toEqual([]);
+  expect(smoothed, `art rendered smoothed: ${smoothed.join(", ")}`).toEqual([]);
 });
 
 test("no dead controls: every rendered button does something", async ({ page }) => {

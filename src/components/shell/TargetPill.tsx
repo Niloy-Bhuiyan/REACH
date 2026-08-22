@@ -29,12 +29,12 @@ export function TargetPill({
     <>
       <div
         className={cn(
-          "inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-brand-line bg-surface/85 px-4 py-1.5 text-[13.5px] text-ink-body",
+          "inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-violet-line bg-surface/85 px-4 py-1.5 text-[13.5px] text-ink-body",
           className,
         )}
       >
-        <Eyebrow tone="brand">Target</Eyebrow>
-        <span aria-hidden className="h-3 w-px bg-brand-line" />
+        <Eyebrow tone="violet">Target</Eyebrow>
+        <span aria-hidden className="h-3 w-px bg-violet-line" />
         <span className="text-ink">{target.role}</span>
         <span aria-hidden className="text-ink-placeholder">
           ·
@@ -53,7 +53,7 @@ export function TargetPill({
         <button
           type="button"
           onClick={() => setEditing(true)}
-          className="ml-1 min-h-[44px] px-1 font-semibold text-brand-text hover:underline"
+          className="ml-1 min-h-[44px] px-1 font-semibold text-violet-text hover:underline"
         >
           Change
         </button>

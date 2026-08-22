@@ -1,15 +1,16 @@
 import Link from "next/link";
-import { Meta, Mono } from "@/components/ui/Chip";
-import { ConnectionState, SourceMark } from "./SourceMark";
-import { Icon } from "@/components/ui/Icon";
+import { GapTypeBadge } from "@/components/gap/GapTypeBadge";
+import { Chip } from "@/components/ui/Chip";
+import { LetterTile, PixelIcon } from "@/components/ui/PixelIcon";
 import type { EvidenceSource, RequirementRow } from "@/lib/api/types";
 import { cn } from "@/lib/utils/cn";
-import { GAP_LABEL } from "@/lib/utils/verdict";
 
 /**
- * A requirement row is a claim and its receipt. Met rows are quiet; the one that
- * is missing is the only thing on the list that takes colour, because it is the
- * only thing the verdict rests on.
+ * Every requirement row carries its evidence and the source it came from, so the verdict is
+ * auditable line by line. Nothing is inferred.
+ *
+ * Missing items are separated by consequence: a missing hard requirement drives the verdict
+ * (terracotta); a missing preferred item is an optional gain (stone).
  */
 export function EvidenceRow({
   row,
@@ -19,78 +20,69 @@ export function EvidenceRow({
   preferred?: boolean;
 }) {
   const met = row.state === "met";
-  // A typed gap is the One Fix Away item — amber. An untyped missing hard
-  // requirement is a blocker, and blockers are terracotta.
+  // A typed gap is the One Fix Away item — apricot. An untyped missing hard requirement is a
+  // blocker, and blockers are terracotta.
   const isGap = !met && !!row.gapType;
+  const glyph = met ? "g-req-met" : preferred || isGap ? "g-noevidence" : "g-req-missing";
 
   return (
-    <li className="grid gap-x-6 gap-y-1 border-b border-hairline py-3 last:border-b-0 sm:grid-cols-[minmax(0,1fr)_minmax(0,17rem)]">
-      <div className="flex min-w-0 items-baseline gap-2.5">
-        <span
-          aria-hidden
-          className={cn(
-            "mt-[3px]",
-            met ? "text-sage" : isGap ? "text-apricot" : "text-terracotta",
-          )}
-        >
-          {met ? (
-            <Icon name="check" size={14} strokeWidth={2.2} />
-          ) : (
-            <Icon name="minus" size={14} strokeWidth={2.2} />
-          )}
-        </span>
+    <li
+      className={cn(
+        "grid gap-x-4 gap-y-1.5 border-t border-hairline px-3 py-3 first:border-t-0 sm:grid-cols-[minmax(0,1fr)_minmax(0,15rem)]",
+        row.state === "missing" && !preferred && (isGap ? "bg-apricot-tint/60" : "bg-terracotta-tint/50"),
+      )}
+    >
+      <div className="flex min-w-0 gap-2.5">
+        <PixelIcon name={glyph} size={18} className="mt-[3px]" />
         <div className="min-w-0">
           <p
             className={cn(
-              "text-body",
-              met
-                ? "text-ink"
-                : preferred
-                  ? "text-ink-body"
-                  : isGap
-                    ? "font-medium text-apricot-text"
-                    : "font-medium text-terracotta-text",
+              "text-[14.5px] leading-snug font-semibold",
+              met ? "text-ink" : preferred ? "text-ink-body" : isGap ? "text-apricot-text" : "text-terracotta-text",
             )}
           >
             {row.label}
           </p>
-          <p className="mt-0.5 text-sm text-ink-muted">{row.detail}</p>
+          <p className="mt-0.5 text-[13px] leading-snug text-ink-muted">{row.detail}</p>
         </div>
       </div>
 
-      <div className="min-w-0 sm:text-right">
+      <div className="min-w-0 sm:pl-0">
         {row.evidence && (
-          <p className="text-sm text-ink-body">
-            {row.evidence.text}{" "}
+          <p className="flex flex-wrap items-center gap-1.5 text-[13px] leading-snug text-ink-body">
+            <span>{row.evidence.text}</span>
             {row.evidence.href ? (
-              <Link href={row.evidence.href} className="font-medium text-sage-text hover:underline">
-                {row.evidence.source}
+              <Link
+                href={row.evidence.href}
+                className="rounded-md border border-sage-line bg-sage-tint px-1.5 py-0.5 text-[12px] font-semibold text-sage-text hover:underline"
+              >
+                {row.evidence.source} ↗
               </Link>
             ) : (
-              <span className="font-medium text-sage-text">{row.evidence.source}</span>
+              <span className="rounded-md border border-sage-line bg-sage-tint px-1.5 py-0.5 text-[12px] font-semibold text-sage-text">
+                {row.evidence.source}
+              </span>
             )}
           </p>
         )}
 
-        {row.missingNote && <Meta>{row.missingNote}</Meta>}
+        {row.missingNote && (
+          <p className="text-[13px] leading-snug text-ink-muted">{row.missingNote}</p>
+        )}
 
         {(row.gapType || row.effortHours || row.unlocksElsewhere) && (
-          <p className="mt-1 flex flex-wrap items-baseline gap-x-2 sm:justify-end">
-            {row.gapType && (
-              <span className="text-meta font-medium text-apricot-text">
-                {GAP_LABEL[row.gapType]}
-              </span>
-            )}
-            {row.effortHours && <Mono>~{row.effortHours} h to close</Mono>}
+          <div className="mt-1.5 flex flex-wrap items-center gap-2">
+            {row.gapType && <GapTypeBadge gap={row.gapType} />}
+            {row.effortHours && <Chip tone="stone" mono>{`~${row.effortHours} h to close`}</Chip>}
             {row.unlocksElsewhere && row.fixId && (
               <Link
                 href={`/one-fix/${row.fixId}`}
-                className="text-meta font-medium text-brand-text hover:underline"
+                className="text-[13px] font-semibold text-apricot-text hover:underline"
               >
-                Unlocks {row.unlocksElsewhere} other roles
+                Closing this unlocks {row.unlocksElsewhere} other roles →
               </Link>
             )}
-          </p>
+          </div>
         )}
       </div>
     </li>
@@ -98,42 +90,65 @@ export function EvidenceRow({
 }
 
 /**
- * An evidence connection: its own mark, its name, the state as a word, and what
- * it contributes. These are the things REACH reasons from, so they are meant to
- * be recognised at a glance rather than tucked into settings.
+ * Four real connection states — connected/syncing (sage), needs attention (apricot + reason +
+ * Reconnect), not connected (stone, effect stated), missing-and-costing (violet, because it is
+ * the product's ask).
  */
+const SOURCE_TONE = {
+  connected: { dot: "bg-sage", text: "text-sage-text", border: "border-line" },
+  syncing: { dot: "bg-sage", text: "text-sage-text", border: "border-line" },
+  attention: {
+    dot: "bg-apricot",
+    text: "text-apricot-text",
+    border: "border-apricot-line bg-apricot-tint",
+  },
+  "not-connected": { dot: "bg-ink-disabled", text: "text-ink-muted", border: "border-line" },
+  "missing-costly": {
+    dot: "bg-violet",
+    text: "text-violet-text",
+    border: "border-violet-line bg-violet-tint",
+  },
+} as const;
+
 export function IntegrationRow({
   source,
   onAction,
   pending,
+  compact,
 }: {
   source: EvidenceSource;
   onAction?: () => void;
   pending?: boolean;
+  compact?: boolean;
 }) {
+  const tone = SOURCE_TONE[source.state];
+
   return (
-    <div className="flex items-center gap-3.5 border-b border-hairline py-4 last:border-b-0">
-      <span
-        aria-hidden
-        className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-canvas-deep text-ink-body"
-      >
-        <SourceMark id={source.id} size={19} />
-      </span>
-
+    <div
+      className={cn(
+        "flex items-center gap-3 rounded-[12px] border px-3.5 py-3",
+        tone.border,
+        !tone.border.includes("bg-") && "bg-surface",
+      )}
+    >
+      {source.icon ? (
+        <PixelIcon name={source.icon} size={compact ? 22 : 26} />
+      ) : (
+        <LetterTile letter={source.name[0]} size={compact ? 22 : 26} />
+      )}
       <div className="min-w-0 flex-1">
-        <p className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
-          <span className="text-body font-medium text-ink">{source.name}</span>
-          <ConnectionState state={source.state} label={source.stateLabel} />
+        <p className="flex items-center gap-2 text-[14px] font-semibold text-ink">
+          {source.name}
+          <span aria-hidden className={cn("h-[7px] w-[7px] shrink-0 rounded-full", tone.dot)} />
         </p>
-        <p className="mt-0.5 truncate text-sm text-ink-muted">{source.stateDetail}</p>
+        <p className={cn("truncate text-[12.5px]", tone.text)}>{source.stateDetail}</p>
       </div>
-
       {onAction && (
         <button
           type="button"
           onClick={onAction}
           disabled={pending}
-          className="min-h-[40px] shrink-0 rounded-full px-3 text-sm font-medium text-brand-text hover:underline disabled:text-ink-disabled"
+          className="min-h-[44px] shrink-0 px-1 text-[13.5px] font-semibold text-violet-text hover:underline disabled:text-ink-disabled"
         >
           {pending ? "Working…" : source.action}
         </button>

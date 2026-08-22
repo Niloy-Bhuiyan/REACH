@@ -2,21 +2,21 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import { GapTypeBadge } from "@/components/gap/GapTypeBadge";
 import { Button } from "@/components/ui/Button";
-import { Chip, Meta, Mono } from "@/components/ui/Chip";
-import { Icon } from "@/components/ui/Icon";
+import { Chip } from "@/components/ui/Chip";
+import { PixelIcon } from "@/components/ui/PixelIcon";
 import { saveJob } from "@/lib/api";
 import type { JobSummary } from "@/lib/api/types";
 import { cn } from "@/lib/utils/cn";
 import { closingDate, daysUntil, freshness, verifiedAgo } from "@/lib/utils/time";
-import { GAP_LABEL, VERDICT_LABEL, VERDICT_TONE } from "@/lib/utils/verdict";
+import { VERDICT_TONE } from "@/lib/utils/verdict";
 
-/** "Remote · BD" already says the mode; do not say it twice. */
-function placeLine(job: JobSummary) {
-  const parts = [job.location];
-  if (!job.location.toLowerCase().includes(job.mode.toLowerCase())) parts.push(job.mode);
-  return parts.join(" · ");
-}
+const SOURCE_GLYPH = {
+  "careers-page": "g-src-company",
+  "job-board": "g-src-board",
+  referral: "g-src-aggregator",
+} as const;
 
 const SOURCE_SHORT = {
   "careers-page": "Careers page",
@@ -24,26 +24,7 @@ const SOURCE_SHORT = {
   referral: "Referral",
 } as const;
 
-/**
- * A company tile, lettered until real logos exist. Warm and neutral on purpose:
- * the verdict already has a colour, and a coloured tile would say it twice.
- */
-export function CompanyTile({ name, size = 46 }: { name: string; size?: number }) {
-  return (
-    <span
-      aria-hidden
-      className="font-display flex shrink-0 items-center justify-center rounded-xl bg-canvas-deep text-ink-body"
-      style={{ width: size, height: size, fontSize: Math.round(size * 0.42) }}
-    >
-      {name.slice(0, 1).toUpperCase()}
-    </span>
-  );
-}
-
-/**
- * Freshness is mono and muted until it matters. Stale content stays on screen
- * and offers a re-check; it is never hidden.
- */
+/** Freshness stamp. Stale content stays visible and offers a re-verify — it is never hidden. */
 export function FreshnessStamp({
   iso,
   onReverify,
@@ -52,22 +33,28 @@ export function FreshnessStamp({
 }: {
   iso: string;
   onReverify?: () => void;
+  /** Rule 03 — shown for 48 h, labelled, and excluded from every count. */
   delisted?: boolean;
   className?: string;
 }) {
+  const band = freshness(iso);
   if (delisted) {
     return (
-      <span className={cn("tnum font-mono text-meta text-apricot-text", className)}>
-        No longer listed · not counted
+      <span
+        className={cn(
+          'tnum font-mono text-[11.5px] tracking-tight whitespace-nowrap text-apricot-text uppercase',
+          className,
+        )}
+      >
+        No longer listed at source · not counted
       </span>
     );
   }
-  const band = freshness(iso);
   return (
-    <span className={cn("inline-flex flex-wrap items-baseline gap-x-1.5", className)}>
+    <span className={cn("inline-flex items-center gap-1.5", className)}>
       <span
         className={cn(
-          "tnum font-mono text-meta whitespace-nowrap",
+          "tnum font-mono text-[11.5px] tracking-tight whitespace-nowrap uppercase",
           band === "fresh" ? "text-ink-muted" : "text-apricot-text",
         )}
       >
@@ -78,7 +65,7 @@ export function FreshnessStamp({
         <button
           type="button"
           onClick={onReverify}
-          className="min-h-[36px] text-meta font-medium text-brand-text hover:underline"
+          className="text-[12px] font-semibold text-violet-text hover:underline"
         >
           Re-verify
         </button>
@@ -98,45 +85,10 @@ function useSave(job: JobSummary) {
   });
 }
 
-/** The one line that says why this row is where it is. */
-function Signal({ job }: { job: JobSummary }) {
-  if (job.blocker) {
-    return (
-      <span className="text-sm text-apricot-text">
-        Needs {job.blocker.label.replace(/^Add /, "")} ·{" "}
-        {GAP_LABEL[job.blocker.gapType].toLowerCase()}
-      </span>
-    );
-  }
-  if (job.hardBlocker) {
-    return <span className="text-sm text-terracotta-text">{job.hardBlocker}</span>;
-  }
-  return (
-    <span className="text-sm text-sage-text">
-      {job.evidence.met} of {job.evidence.total} requirements met
-    </span>
-  );
-}
-
-const VERDICT_CHIP_TONE = {
-  "apply-now": "sage",
-  "one-fix-away": "apricot",
-  skip: "terracotta",
-} as const;
-
-/** The verdict, as a word in its own colour. Never a colour on its own. */
-export function VerdictChip({ job }: { job: JobSummary }) {
-  return (
-    <Chip tone={VERDICT_CHIP_TONE[job.verdict]}>
-      <span aria-hidden className="size-[6px] rounded-full bg-current" />
-      {VERDICT_LABEL[job.verdict]}
-    </Chip>
-  );
-}
-
 /**
- * Desktop row. Two lines and a hairline: role, then everything that qualifies it.
- * Actions stay quiet until the row is hovered, so a list of forty reads as a list.
+ * Desktop table row. Every row carries provenance: source, last-verified time in mono, the
+ * evidence verdict or the single blocker with its gap type, then Save and one verdict-coloured
+ * primary action.
  */
 export function JobRow({
   job,
@@ -149,83 +101,97 @@ export function JobRow({
 }) {
   const save = useSave(job);
   const tone = VERDICT_TONE[job.verdict];
-  const closes = job.provenance.closesAt ? daysUntil(job.provenance.closesAt) : null;
-  const href =
-    job.verdict === "one-fix-away" ? `/one-fix/${job.blocker?.fixId ?? "sql"}` : `/jobs/${job.id}`;
+  const action =
+    job.verdict === "one-fix-away"
+      ? { label: "See fix", href: `/one-fix/${job.blocker?.fixId ?? "sql"}`, tone: "apricot" as const }
+      : job.verdict === "skip"
+        ? { label: "Open", href: `/jobs/${job.id}`, tone: "terracotta" as const }
+        : { label: "Open", href: `/jobs/${job.id}`, tone: "sage" as const };
 
   return (
-    <div
+    <tr
       className={cn(
-        "group relative flex items-center gap-4 rounded-xl border-t border-hairline py-3.5 pl-4 transition-colors duration-150 first:border-t-0 hover:bg-row-hover",
-        selected && "bg-brand-tint",
+        "border-t border-hairline transition-colors duration-100 hover:bg-row-hover",
+        selected && "bg-violet-tint",
       )}
     >
-      <span
-        aria-hidden
-        className={cn("absolute top-1/2 left-0 size-[7px] -translate-y-1/2 rounded-full", tone.rule)}
-      />
-
-      <div className="min-w-0 flex-1">
+      <td className="py-3 pr-4 pl-4 align-top">
+        {selected && (
+          <span aria-hidden className={cn("absolute left-0 h-9 w-[3px] rounded-r", tone.rule)} />
+        )}
         <Link
           href={`/jobs/${job.id}`}
-          className="font-display text-[1.0625rem] text-ink hover:underline"
+          className="text-[14.5px] font-semibold text-ink-link hover:underline"
         >
           {job.role}
         </Link>
-        <p className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5">
-          <Meta>
-            {job.company} · {placeLine(job)}
-          </Meta>
+        <p className="mt-0.5 text-[13px] text-ink-body">
+          {job.company} · {job.location} · {job.mode} · {job.employment}
         </p>
-      </div>
+      </td>
 
-      <div className="hidden w-[220px] shrink-0 md:block">
-        <Signal job={job} />
-        <p className="mt-0.5">
-          <Mono>{SOURCE_SHORT[job.provenance.kind]}</Mono>
-        </p>
-      </div>
+      <td className="py-3 pr-4 align-top">
+        {job.blocker ? (
+          <span className="flex flex-wrap items-center gap-1.5">
+            <Chip tone="apricot">{job.blocker.label}</Chip>
+            <GapTypeBadge gap={job.blocker.gapType} />
+          </span>
+        ) : job.hardBlocker ? (
+          <Chip tone="terracotta">{job.hardBlocker}</Chip>
+        ) : (
+          <Chip tone="sage">
+            <PixelIcon name="g-req-met" size={14} />
+            {job.evidence.met} of {job.evidence.total} met
+          </Chip>
+        )}
+      </td>
 
-      <div className="hidden w-[196px] shrink-0 lg:block">
+      <td className="py-3 pr-4 align-top">
+        <span className="flex items-center gap-1.5 text-[13px] text-ink-body">
+          <PixelIcon name={SOURCE_GLYPH[job.provenance.kind]} size={16} />
+          {job.provenance.label}
+        </span>
         <FreshnessStamp
           iso={job.provenance.verifiedAt}
           delisted={job.provenance.delisted}
           onReverify={onReverify}
+          className="mt-1"
         />
-        {closes !== null && closes <= 10 && (
-          <p className="mt-0.5">
-            <Mono className="text-apricot-text">
-              Closes {closingDate(job.provenance.closesAt!)}
-            </Mono>
-          </p>
-        )}
-      </div>
+      </td>
 
-      <div className="flex shrink-0 items-center gap-1 pr-3">
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => save.mutate()}
-          aria-pressed={job.saved}
-          className={cn(!job.saved && "opacity-0 focus-visible:opacity-100 group-hover:opacity-100")}
-        >
-          {job.saved ? "Saved" : "Save"}
-        </Button>
-        <Link
-          href={href}
-          className="inline-flex min-h-[38px] items-center rounded-full border border-control bg-surface px-4 text-sm font-medium text-ink transition-colors duration-150 hover:bg-surface-sunken"
-        >
-          {job.verdict === "one-fix-away" ? "See fix" : "Open"}
-        </Link>
-      </div>
-    </div>
+      <td className="py-3 pr-4 align-top">
+        <div className="flex items-center justify-end gap-2">
+          <Button
+            variant="secondary"
+            size="sm"
+            tone={job.saved ? "sage" : "violet"}
+            onClick={() => save.mutate()}
+            aria-pressed={job.saved}
+          >
+            {job.saved ? "Saved" : "Save"}
+          </Button>
+          <Link
+            href={action.href}
+            className={cn(
+              "inline-flex min-h-[36px] items-center rounded-lg border px-3.5 text-[13.5px] font-semibold transition-colors duration-100",
+              action.tone === "sage" && "border-sage bg-sage text-surface hover:bg-sage-hover",
+              action.tone === "apricot" &&
+                "border-apricot bg-apricot text-surface hover:bg-apricot-hover",
+              action.tone === "terracotta" &&
+                "border-terracotta-line bg-terracotta-tint text-terracotta-text hover:bg-[#f7e3dd]",
+            )}
+          >
+            {action.label}
+          </Link>
+        </div>
+      </td>
+    </tr>
   );
 }
 
 /**
- * Mobile card. The same information as the row, composed for a thumb: a tile to
- * anchor the eye, the role in the display face, the verdict as a word, and one
- * filled action.
+ * Mobile card. Two lines: title and freshness, then company · city · mode, then the evidence
+ * chip and the gap type. 44px actions.
  */
 export function JobCard({
   job,
@@ -233,121 +199,124 @@ export function JobCard({
   onReverify,
 }: {
   job: JobSummary;
+  /** Home previews are compact: no action row, the whole card navigates. */
   compact?: boolean;
   onReverify?: () => void;
 }) {
   const save = useSave(job);
-  const tone = VERDICT_TONE[job.verdict];
-  const href =
-    job.verdict === "one-fix-away" ? `/one-fix/${job.blocker?.fixId ?? "sql"}` : `/jobs/${job.id}`;
+  const closes = job.provenance.closesAt ? daysUntil(job.provenance.closesAt) : null;
 
-  if (compact) {
-    return (
-      <Link
-        href={href}
-        className="-mx-2 block rounded-xl px-2 py-3 transition-colors duration-150 hover:bg-surface-sunken"
-      >
-        <div className="flex items-start gap-2.5">
-          <span
-            aria-hidden
-            className={cn("mt-[7px] size-[7px] shrink-0 rounded-full", tone.rule)}
-          />
-          <div className="min-w-0 flex-1">
-            <span className="font-display text-[1.0625rem] text-ink">{job.role}</span>
-            <p className="mt-0.5">
-              <Meta>
-                {job.company} · {placeLine(job)}
-              </Meta>
-            </p>
-            <p className="mt-1.5">
-              <Signal job={job} />
-            </p>
-          </div>
-        </div>
-      </Link>
-    );
-  }
-
-  return (
-    <article className="mt-3 rounded-2xl border border-line bg-surface p-4 first:mt-0">
-      <div className="flex items-start gap-3.5">
-        <CompanyTile name={job.company} />
-        <div className="min-w-0 flex-1">
-          <Link href={`/jobs/${job.id}`} className="font-display text-[1.25rem] text-ink">
-            {job.role}
-          </Link>
-          <p className="mt-0.5 flex items-center gap-1.5">
-            <Meta>{job.company}</Meta>
-            {!job.provenance.delisted && (
-              <Icon name="checkCircle" size={13} className="text-sage" />
-            )}
-          </p>
-        </div>
-        <VerdictChip job={job} />
-      </div>
-
-      <p className="mt-3 flex items-center gap-1.5 text-sm text-ink-body">
-        <Icon name="pin" size={14} className="text-ink-muted" />
-        {placeLine(job)}
-      </p>
-
-      <p className="mt-1.5">
-        <Signal job={job} />
-      </p>
-
-      {/* Provenance gets its own line: beside two buttons it wraps to shreds. */}
-      <div className="mt-4 border-t border-hairline pt-3">
+  const inner = (
+    <>
+      <div className="flex items-start justify-between gap-3">
+        <span className="text-[14.5px] leading-snug font-semibold text-ink-link">{job.role}</span>
         <FreshnessStamp
           iso={job.provenance.verifiedAt}
           delisted={job.provenance.delisted}
           onReverify={onReverify}
         />
-        <div className="mt-2.5 flex items-center gap-2">
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={() => save.mutate()}
-            aria-pressed={job.saved}
-            className="shrink-0"
-          >
-            {job.saved ? "Saved" : "Save"}
-          </Button>
-          <Link
-            href={href}
-            className="inline-flex min-h-[42px] flex-1 items-center justify-center gap-1.5 rounded-full bg-brand px-4 text-sm font-medium text-white transition-colors duration-150 hover:bg-brand-hover"
-          >
-            {job.verdict === "one-fix-away" ? "See the fix" : "View role"}
-            <Icon name="arrowRight" size={14} className="opacity-80" />
-          </Link>
-        </div>
       </div>
-    </article>
+      <p className="mt-0.5 text-[13px] text-ink-body">
+        {job.company} · {job.location} · {job.mode}
+      </p>
+      <div className="mt-2 flex flex-wrap items-center gap-1.5">
+        {job.blocker ? (
+          <>
+            <Chip tone="apricot">{job.blocker.label}</Chip>
+            <GapTypeBadge gap={job.blocker.gapType} />
+          </>
+        ) : job.hardBlocker ? (
+          <Chip tone="terracotta">{job.hardBlocker}</Chip>
+        ) : (
+          <Chip tone="sage">
+            {job.evidence.met} of {job.evidence.total} met
+          </Chip>
+        )}
+        <Chip tone="stone">{job.employment}</Chip>
+        {closes !== null && closes <= 10 && (
+          <Chip tone="apricot" mono>
+            Closes {closingDate(job.provenance.closesAt!)}
+          </Chip>
+        )}
+      </div>
+    </>
+  );
+
+  if (compact) {
+    return (
+      <Link
+        href={`/jobs/${job.id}`}
+        className="block rounded-[12px] border border-line bg-surface p-3.5 transition-colors duration-100 hover:bg-row-hover"
+      >
+        {inner}
+      </Link>
+    );
+  }
+
+  return (
+    <div className="rounded-[12px] border border-line bg-surface p-3.5">
+      {inner}
+      <div className="mt-3 flex items-center gap-2">
+        <Button
+          variant="secondary"
+          size="md"
+          tone={job.saved ? "sage" : "violet"}
+          onClick={() => save.mutate()}
+          aria-pressed={job.saved}
+          className="flex-1"
+        >
+          {job.saved ? "Saved" : "Save"}
+        </Button>
+        <Link
+          href={
+            job.verdict === "one-fix-away"
+              ? `/one-fix/${job.blocker?.fixId ?? "sql"}`
+              : `/jobs/${job.id}`
+          }
+          className={cn(
+            "inline-flex min-h-[44px] flex-1 items-center justify-center rounded-[10px] text-[14px] font-semibold transition-colors duration-100",
+            job.verdict === "apply-now" && "bg-sage text-surface hover:bg-sage-hover",
+            job.verdict === "one-fix-away" && "bg-apricot text-surface hover:bg-apricot-hover",
+            job.verdict === "skip" &&
+              "border border-terracotta-line bg-terracotta-tint text-terracotta-text",
+          )}
+        >
+          {job.verdict === "one-fix-away" ? "See fix" : "Open role"}
+        </Link>
+      </div>
+    </div>
   );
 }
 
-/** Home's preview row: title, one qualifier, nothing else. */
+/** Home's Summary Mode row: exactly three of these, then "see all". */
 export function JobPreviewRow({ job }: { job: JobSummary }) {
   return (
     <Link
       href={`/jobs/${job.id}`}
-      className="-mx-2 flex items-baseline justify-between gap-4 rounded-xl px-2 py-2.5 transition-colors duration-150 hover:bg-surface-sunken"
+      className="-mx-2 flex items-center justify-between gap-3 rounded-[10px] px-2 py-3 transition-colors duration-100 hover:bg-row-hover"
     >
-      <span className="font-display min-w-0 flex-1 truncate text-[1.0625rem] text-ink">
-        {job.role}
+      <span className="min-w-0">
+        <span className="block truncate text-[14.5px] font-semibold text-ink-link">
+          {job.role}
+        </span>
+        <span className="block truncate text-[13px] text-ink-muted">{job.company}</span>
       </span>
-      <span className="shrink-0">
+      <span className="flex shrink-0 items-center gap-1.5">
         {job.blocker ? (
-          <span className="text-sm text-apricot-text">
-            {job.blocker.label.replace(/^Add /, "Needs ")}
-          </span>
+          <Chip tone="apricot">{job.blocker.label}</Chip>
         ) : job.hardBlocker ? (
-          <Meta>{job.hardBlocker}</Meta>
+          <Chip tone="terracotta">{job.hardBlocker}</Chip>
         ) : (
-          <Meta>{job.company}</Meta>
+          <>
+            <Chip tone="stone">{job.location}</Chip>
+            <Chip tone="stone" className="hidden md:inline-flex">
+              {job.employment}
+            </Chip>
+          </>
         )}
       </span>
     </Link>
   );
 }
 
-export { SOURCE_SHORT };
+export { SOURCE_GLYPH, SOURCE_SHORT };

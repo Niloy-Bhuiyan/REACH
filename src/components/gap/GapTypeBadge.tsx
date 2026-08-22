@@ -1,7 +1,7 @@
-import { Icon } from "@/components/ui/Icon";
+import { PixelIcon } from "@/components/ui/PixelIcon";
 import type { GapType } from "@/lib/api/types";
 import { cn } from "@/lib/utils/cn";
-import { GAP_DIAGNOSIS, GAP_ICON, GAP_LABEL } from "@/lib/utils/verdict";
+import { GAP_DIAGNOSIS, GAP_GLYPH, GAP_LABEL } from "@/lib/utils/verdict";
 
 /** Each gap type has its own glyph and a one-line diagnosis. */
 export function GapTypeBadge({
@@ -16,12 +16,12 @@ export function GapTypeBadge({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full border border-apricot-line bg-apricot-tint font-semibold text-apricot-text",
+        "inline-flex items-center gap-1.5 rounded-md border border-apricot-line bg-apricot-tint font-semibold text-apricot-text",
         size === "sm" ? "px-2 py-[3px] text-[12px]" : "px-2.5 py-1 text-[13px]",
         className,
       )}
     >
-      <Icon name={GAP_ICON[gap]} size={size === "sm" ? 13 : 16} />
+      <PixelIcon name={GAP_GLYPH[gap]} size={size === "sm" ? 14 : 18} />
       {GAP_LABEL[gap]}
     </span>
   );
@@ -48,14 +48,14 @@ export function GapTypeRow({
           <div
             key={gap}
             className={cn(
-              "flex flex-col gap-2 rounded-2xl border p-4",
+              "flex flex-col gap-2 rounded-[14px] border p-4",
               mine
                 ? "border-apricot-line bg-apricot-tint"
                 : "border-line bg-surface",
             )}
           >
             <div className="flex items-center gap-2.5">
-              <Icon name={GAP_ICON[gap]} size={20} className={cn(!mine && "opacity-65")} />
+              <PixelIcon name={GAP_GLYPH[gap]} size={28} className={cn(!mine && "opacity-65")} />
               <span
                 className={cn(
                   "font-display text-[17px] font-bold",

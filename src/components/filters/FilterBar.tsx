@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/components/ui/Button";
-import { Icon } from "@/components/ui/Icon";
+import { Chip } from "@/components/ui/Chip";
 import { Select } from "@/components/ui/Controls";
 import { Sheet, SheetGrip } from "@/components/ui/Overlay";
 import { Eyebrow } from "@/components/ui/Surface";
@@ -11,79 +12,123 @@ import { cn } from "@/lib/utils/cn";
 export const MODES: WorkMode[] = ["Remote", "Hybrid", "On-site"];
 export const TYPES: Employment[] = ["Full-time", "Internship", "Part-time"];
 export const POSTED = [
-  { value: "3", label: "Last 3 days" },
-  { value: "7", label: "Last week" },
-  { value: "14", label: "Last 2 weeks" },
+  { value: "3", label: "Posted < 3 days" },
+  { value: "7", label: "Posted < 1 week" },
+  { value: "14", label: "Posted < 2 weeks" },
 ];
 
-/** Filters the toolbar hides are grouped and labelled in the sheet, never dropped. */
+/** Filters the toolbar hides are grouped and labelled, never dropped. */
 export function activeFilterCount(query: JobQuery): number {
-  return [query.employment, query.postedWithinDays, query.savedOnly].filter(Boolean).length;
+  return [query.location, query.mode, query.employment, query.postedWithinDays, query.savedOnly]
+    .filter(Boolean).length;
 }
 
 /**
- * Two filters that most people change, one door to the rest, and sort. Anything
- * more on the toolbar is a decision the user has not asked to make yet.
+ * Working Mode toolbar: four visible controls plus "More filters · n", sort and the saved
+ * count — the five-control cap. Sticky under the page header.
  */
 export function FilterBar({
   query,
   onChange,
-  onOpenSheet,
+  savedCount,
   className,
 }: {
   query: JobQuery;
   onChange: (patch: Partial<JobQuery>) => void;
-  onOpenSheet: () => void;
+  savedCount: number;
   className?: string;
 }) {
+  const [sheetOpen, setSheetOpen] = useState(false);
   const extra = activeFilterCount(query);
 
   return (
-    <div className={cn("flex flex-wrap items-center gap-2", className)}>
-      <Select
-        icon="pin"
-        value={query.location ?? ""}
-        onChange={(value) => onChange({ location: value || undefined })}
-        options={[
-          { value: "", label: "Anywhere" },
-          { value: "Dhaka", label: "Dhaka" },
-          { value: "Remote", label: "Remote" },
-        ]}
-      />
-      <Select
-        icon="briefcase"
-        value={query.mode ?? ""}
-        onChange={(value) => onChange({ mode: (value || undefined) as WorkMode })}
-        options={[
-          { value: "", label: "Any mode" },
-          ...MODES.map((m) => ({ value: m, label: m })),
-        ]}
-      />
+    <>
+      <div className={cn("flex flex-wrap items-center gap-2", className)}>
+        <Select
+          label="Role:"
+          value={query.q ?? ""}
+          onChange={(value) => onChange({ q: value || undefined })}
+          options={[
+            { value: "", label: "Any role" },
+            { value: "Data Analyst", label: "Data Analyst" },
+            { value: "Business Analyst", label: "Business Analyst" },
+            { value: "Analyst", label: "Any analyst role" },
+          ]}
+          className="hidden md:inline-flex"
+        />
+        <Select
+          value={query.location ?? ""}
+          onChange={(value) => onChange({ location: value || undefined })}
+          options={[
+            { value: "", label: "Anywhere" },
+            { value: "Dhaka", label: "Dhaka" },
+            { value: "Remote", label: "Remote · BD" },
+          ]}
+          className="hidden sm:inline-flex"
+        />
+        <Select
+          value={query.mode ?? ""}
+          onChange={(value) => onChange({ mode: (value || undefined) as WorkMode })}
+          options={[
+            { value: "", label: "Any mode" },
+            ...MODES.map((m) => ({ value: m, label: m })),
+          ]}
+          className="hidden sm:inline-flex"
+        />
+        <Select
+          value={query.employment ?? ""}
+          onChange={(value) => onChange({ employment: (value || undefined) as Employment })}
+          options={[
+            { value: "", label: "Any type" },
+            ...TYPES.map((t) => ({ value: t, label: t })),
+          ]}
+          className="hidden lg:inline-flex"
+        />
 
-      <Button variant="secondary" size="md" onClick={onOpenSheet}>
-        <Icon name="sliders" size={16} className="text-ink-muted" />
-        More filters
-        {extra > 0 && <span className="tnum font-semibold text-brand-text">{extra}</span>}
-      </Button>
+        <Button variant="secondary" size="md" onClick={() => setSheetOpen(true)}>
+          <span className="sm:hidden">Filters</span>
+          <span className="hidden sm:inline">More filters</span>
+          {extra > 0 && (
+            <span className="tnum ml-1 rounded-md bg-violet-tint px-1.5 py-0.5 text-[12px] font-bold text-violet-text">
+              {extra}
+            </span>
+          )}
+        </Button>
 
-      <Select
-        icon="sort"
-        label="Sort"
-        value={query.sort ?? "best-fit"}
-        onChange={(value) => onChange({ sort: value as JobQuery["sort"] })}
-        neutralValue="best-fit"
-        options={[
-          { value: "best-fit", label: "Best fit" },
-          { value: "newest", label: "Newest" },
-          { value: "closing-soon", label: "Closing soon" },
-        ]}
-        className="sm:ml-auto"
+        <Select
+          label="Sort:"
+          value={query.sort ?? "best-fit"}
+          onChange={(value) => onChange({ sort: value as JobQuery["sort"] })}
+          options={[
+            { value: "best-fit", label: "Best fit" },
+            { value: "newest", label: "Newest" },
+            { value: "closing-soon", label: "Closing soon" },
+          ]}
+          className="hidden md:inline-flex"
+        />
+
+        <Button
+          variant={query.savedOnly ? "primary" : "secondary"}
+          size="md"
+          onClick={() => onChange({ savedOnly: query.savedOnly ? undefined : true })}
+          aria-pressed={!!query.savedOnly}
+          className="ml-auto"
+        >
+          Saved <span className="tnum ml-1">{savedCount}</span>
+        </Button>
+      </div>
+
+      <FilterSheet
+        open={sheetOpen}
+        onClose={() => setSheetOpen(false)}
+        query={query}
+        onChange={onChange}
       />
-    </div>
+    </>
   );
 }
 
-/** What narrowed the set is always visible, and always removable. */
+/** Active filters render as removable chips, so what narrowed the set is always visible. */
 export function ActiveFilterChips({
   query,
   onChange,
@@ -94,10 +139,12 @@ export function ActiveFilterChips({
   className?: string;
 }) {
   const chips: { key: keyof JobQuery; label: string }[] = [];
-  if (query.q) chips.push({ key: "q", label: `“${query.q}”` });
+  if (query.q) chips.push({ key: "q", label: query.q });
+  if (query.location) chips.push({ key: "location", label: query.location });
+  if (query.mode) chips.push({ key: "mode", label: query.mode });
   if (query.employment) chips.push({ key: "employment", label: query.employment });
   if (query.postedWithinDays)
-    chips.push({ key: "postedWithinDays", label: `Posted in ${query.postedWithinDays} days` });
+    chips.push({ key: "postedWithinDays", label: `Posted < ${query.postedWithinDays} days` });
   if (query.savedOnly) chips.push({ key: "savedOnly", label: "Saved only" });
 
   if (chips.length === 0) return null;
@@ -110,20 +157,14 @@ export function ActiveFilterChips({
           type="button"
           onClick={() => onChange({ [chip.key]: undefined })}
           aria-label={`Remove filter ${chip.label}`}
-          className="inline-flex min-h-[36px] items-center gap-1.5 rounded-full bg-brand-tint px-3 text-meta font-medium text-brand-text transition-colors duration-100 hover:bg-brand-line"
+          className="min-h-[36px]"
         >
-          {chip.label}
-          <svg
-            aria-hidden
-            viewBox="0 0 16 16"
-            className="size-3 opacity-70"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-          >
-            <path d="M4 4l8 8M12 4l-8 8" />
-          </svg>
+          <Chip tone="violet">
+            {chip.label}
+            <span aria-hidden className="text-[13px]">
+              ✕
+            </span>
+          </Chip>
         </button>
       ))}
       <button
@@ -138,15 +179,18 @@ export function ActiveFilterChips({
             savedOnly: undefined,
           })
         }
-        className="min-h-[36px] px-1 text-meta font-medium text-ink-muted hover:text-ink hover:underline"
+        className="min-h-[36px] px-1 text-[13px] font-semibold text-violet-text hover:underline"
       >
-        Clear
+        Clear all
       </button>
     </div>
   );
 }
 
-/** Everything the toolbar hides, grouped and labelled, with the count on the button. */
+/**
+ * The sheet holds every filter the toolbar hides, grouped and labelled, 44px minimum targets,
+ * with the result count live on the primary button.
+ */
 export function FilterSheet({
   open,
   onClose,
@@ -162,28 +206,16 @@ export function FilterSheet({
 }) {
   const groups = [
     {
-      label: "Employment type",
-      options: TYPES.map((t) => ({
-        label: t,
-        active: query.employment === t,
-        apply: () => onChange({ employment: query.employment === t ? undefined : t }),
-      })),
+      label: "Type",
+      options: TYPES.map((t) => ({ label: t, active: query.employment === t, apply: () => onChange({ employment: query.employment === t ? undefined : t }) })),
     },
     {
       label: "Work mode",
-      options: MODES.map((m) => ({
-        label: m,
-        active: query.mode === m,
-        apply: () => onChange({ mode: query.mode === m ? undefined : m }),
-      })),
+      options: MODES.map((m) => ({ label: m, active: query.mode === m, apply: () => onChange({ mode: query.mode === m ? undefined : m }) })),
     },
     {
       label: "Location",
-      options: ["Dhaka", "Remote"].map((l) => ({
-        label: l,
-        active: query.location === l,
-        apply: () => onChange({ location: query.location === l ? undefined : l }),
-      })),
+      options: ["Dhaka", "Remote"].map((l) => ({ label: l, active: query.location === l, apply: () => onChange({ location: query.location === l ? undefined : l }) })),
     },
     {
       label: "Posted",
@@ -197,26 +229,16 @@ export function FilterSheet({
           }),
       })),
     },
-    {
-      label: "Saved",
-      options: [
-        {
-          label: "Saved only",
-          active: !!query.savedOnly,
-          apply: () => onChange({ savedOnly: query.savedOnly ? undefined : true }),
-        },
-      ],
-    },
   ];
 
   return (
-    <Sheet open={open} onClose={onClose} label="Filters" height="min(640px, 92%)">
+    <Sheet open={open} onClose={onClose} label="Filters" height="min(620px, 92%)">
       <SheetGrip />
       <div className="flex min-h-0 flex-1 flex-col">
-        <header className="flex shrink-0 items-center justify-between px-6 pb-2">
-          <h2 className="text-section text-ink">Filters</h2>
-          <Button
-            variant="link"
+        <header className="flex shrink-0 items-center justify-between px-5 pb-3">
+          <h2 className="font-display text-[21px] font-bold text-ink">Filters</h2>
+          <button
+            type="button"
             onClick={() =>
               onChange({
                 q: undefined,
@@ -227,14 +249,15 @@ export function FilterSheet({
                 savedOnly: undefined,
               })
             }
+            className="min-h-[44px] px-1 text-[13.5px] font-semibold text-violet-text hover:underline"
           >
             Reset
-          </Button>
+          </button>
         </header>
 
-        <div className="min-h-0 flex-1 overflow-y-auto px-6">
+        <div className="min-h-0 flex-1 overflow-y-auto px-5">
           {groups.map((group) => (
-            <div key={group.label} className="border-t border-line py-5 first:border-t-0">
+            <div key={group.label} className="border-t border-hairline py-4 first:border-t-0">
               <Eyebrow>{group.label}</Eyebrow>
               <div className="mt-2.5 flex flex-wrap gap-2">
                 {group.options.map((option) => (
@@ -244,10 +267,10 @@ export function FilterSheet({
                     onClick={option.apply}
                     aria-pressed={option.active}
                     className={cn(
-                      "min-h-[44px] rounded-lg border px-3.5 text-sm transition-colors duration-100",
+                      "min-h-[48px] rounded-[10px] border-[1.5px] px-4 text-[14px] transition-colors duration-100",
                       option.active
-                        ? "border-brand-line bg-brand-tint font-medium text-brand-text"
-                        : "border-control bg-surface text-ink-body hover:bg-surface-sunken",
+                        ? "border-control bg-violet-tint font-semibold text-violet-text"
+                        : "border-line bg-surface text-ink-body hover:bg-row-hover",
                     )}
                   >
                     {option.label}
@@ -258,7 +281,7 @@ export function FilterSheet({
           ))}
         </div>
 
-        <div className="shrink-0 border-t border-line px-6 py-4">
+        <div className="shrink-0 border-t border-line px-5 py-3.5">
           <Button size="lg" full onClick={onClose}>
             {resultCount === undefined ? "Show results" : `Show ${resultCount} results`}
           </Button>

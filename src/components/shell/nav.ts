@@ -6,16 +6,16 @@
  * The nav is where terminology is enforced, so these labels are the canonical terms.
  */
 export const NAV_ITEMS = [
-  { href: "/", label: "Focus", glyph: "g-nav-focus", icon: "focus" as const, match: ["/"] },
+  { href: "/", label: "Focus", glyph: "g-nav-focus", match: ["/"] },
   {
     href: "/discover",
     label: "Discover",
-    glyph: "g-nav-discover", icon: "discover" as const,
+    glyph: "g-nav-discover",
     match: ["/discover", "/jobs", "/one-fix"],
   },
-  { href: "/roadmap", label: "Roadmap", glyph: "g-nav-roadmap", icon: "roadmap" as const, match: ["/roadmap"] },
-  { href: "/resume", label: "Resume", glyph: "g-nav-resume", icon: "resume" as const, match: ["/resume"] },
-  { href: "/profile", label: "Profile", glyph: "g-nav-profile", icon: "profile" as const, match: ["/profile"] },
+  { href: "/roadmap", label: "Roadmap", glyph: "g-nav-roadmap", match: ["/roadmap"] },
+  { href: "/resume", label: "Resume", glyph: "g-nav-resume", match: ["/resume"] },
+  { href: "/profile", label: "Profile", glyph: "g-nav-profile", match: ["/profile"] },
 ] as const;
 
 export function isActive(pathname: string, match: readonly string[]): boolean {

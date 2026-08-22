@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Drawer, Sheet, SheetGrip } from "@/components/ui/Overlay";
-import { Meta, Mono } from "@/components/ui/Chip";
+import { PixelIcon } from "@/components/ui/PixelIcon";
 import { Eyebrow, Hairline } from "@/components/ui/Surface";
 import type { OpportunityDelta as Delta } from "@/lib/api/types";
 import { useCountUp, useInView, useIsMobile } from "@/lib/hooks";
@@ -12,126 +12,134 @@ import { closingDate, daysUntil } from "@/lib/utils/time";
 import { VERDICT_LABEL } from "@/lib/utils/verdict";
 
 /**
- * Counted, never projected. The figure is stored against a completed run and
- * rendered here — it is never derived on the client, so the same number cannot
- * differ between two screens.
+ * Five required parts: current set, projected set, delta badge, plain-language basis,
+ * drill-down. Counted, never projected — the number is stored against a completed run and
+ * rendered, never derived here.
  *
- * It stays distinctive by being the only place two large numbers sit either side
- * of an arrow, not by adding chrome around them. The projected figure counts up
- * once on first reveal and never again.
+ * The projected number counts up once on first reveal, 240 ms, in tabular numerals so the
+ * width never jumps. It never loops and never re-runs on scroll.
  */
 export function OpportunityDelta({
   delta,
   variant = "full",
   nowLabel = "reachable now",
   afterLabel = "after this fix",
+  eyebrow = "Opportunity Delta",
   className,
 }: {
   delta: Delta;
-  variant?: "full" | "inline" | "strip";
+  variant?: "full" | "strip";
   nowLabel?: string;
   afterLabel?: string;
+  eyebrow?: string;
   className?: string;
 }) {
   const [ref, seen] = useInView<HTMLDivElement>();
   const after = useCountUp(delta.after, seen);
-  const [open, setOpen] = useState(false);
+  const [drillOpen, setDrillOpen] = useState(false);
   const isMobile = useIsMobile();
-
-  const numbers = (
-    <span className="tnum flex items-baseline gap-2.5">
-      <span className="font-display text-[34px] leading-none text-ink-muted">
-        {delta.now}
-      </span>
-      <svg
-        aria-hidden
-        viewBox="0 0 16 16"
-        className="size-4 shrink-0 self-center text-ink-muted"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M3 8h10M9 4l4 4-4 4" />
-      </svg>
-      <span className="font-display text-[34px] leading-none text-sage-text">
-        {after}
-      </span>
-      <span className="text-body font-semibold text-sage-text">+{delta.gain}</span>
-    </span>
-  );
 
   if (variant === "strip") {
     return (
       <>
-        <div ref={ref} className={cn("flex items-center gap-3", className)}>
+        <div
+          ref={ref}
+          className={cn(
+            "flex items-center gap-3 rounded-[12px] border border-group bg-canvas px-3.5 py-3",
+            className,
+          )}
+        >
+          <PixelIcon name="g-delta" size={22} />
           <div className="min-w-0 flex-1">
-            <Eyebrow>Opportunity Delta</Eyebrow>
-            <div className="mt-1">{numbers}</div>
+            <Eyebrow>{eyebrow}</Eyebrow>
+            <p className="tnum mt-0.5 flex items-baseline gap-1.5 font-display text-[19px] leading-none font-extrabold text-ink">
+              {delta.now}
+              <span aria-hidden className="text-ink-muted">
+                →
+              </span>
+              {after}
+              <span className="ml-1 rounded-md border border-sage-line bg-sage-tint px-1.5 py-0.5 text-[13px] text-sage-text">
+                +{delta.gain}
+              </span>
+            </p>
           </div>
           <button
             type="button"
-            onClick={() => setOpen(true)}
-            className="min-h-[44px] shrink-0 text-sm font-medium text-brand-text hover:underline"
+            onClick={() => setDrillOpen(true)}
+            className="min-h-[44px] shrink-0 px-2 text-[13.5px] font-semibold text-violet-text hover:underline"
           >
             Inspect
           </button>
         </div>
-        <DrillDown delta={delta} open={open} onClose={() => setOpen(false)} asSheet={isMobile} />
-      </>
-    );
-  }
-
-  if (variant === "inline") {
-    return (
-      <>
-        <div ref={ref} className={cn("sm:border-l sm:border-line sm:pl-7", className)}>
-          <Eyebrow>Opportunity Delta</Eyebrow>
-          <div className="mt-2">{numbers}</div>
-          <p className="mt-2 text-sm text-ink-muted">
-            {nowLabel} → {afterLabel}
-          </p>
-          <button
-            type="button"
-            onClick={() => setOpen(true)}
-            className="mt-2 min-h-[36px] text-sm font-medium text-brand-text hover:underline"
-          >
-            Inspect the {delta.gain}
-          </button>
-        </div>
-        <DrillDown delta={delta} open={open} onClose={() => setOpen(false)} asSheet={isMobile} />
+        <DrillDown
+          delta={delta}
+          open={drillOpen}
+          onClose={() => setDrillOpen(false)}
+          asSheet={isMobile}
+        />
       </>
     );
   }
 
   return (
     <>
-      <div ref={ref} className={className}>
-        <div className="flex items-baseline justify-between gap-3">
-          <Eyebrow>Opportunity Delta</Eyebrow>
+      <div
+        ref={ref}
+        className={cn(
+          "rounded-[14px] border border-group bg-surface p-5 shadow-tier2",
+          className,
+        )}
+      >
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2.5">
+            <PixelIcon name="g-delta" size={24} />
+            <Eyebrow>{eyebrow}</Eyebrow>
+          </div>
           <button
             type="button"
-            onClick={() => setOpen(true)}
-            className="min-h-[36px] text-sm font-medium text-brand-text hover:underline"
+            onClick={() => setDrillOpen(true)}
+            className="min-h-[44px] text-[13.5px] font-semibold text-violet-text hover:underline"
           >
             Inspect the {delta.gain}
           </button>
         </div>
-        <div className="mt-3">{numbers}</div>
-        <p className="mt-1.5 text-sm text-ink-muted">
-          {nowLabel} → {afterLabel}
-        </p>
-        {/* Every number this size has its derivation on the same screen. */}
-        <p className="mt-3 text-sm leading-relaxed text-ink-body">{delta.basis}</p>
+
+        <div className="mt-4 flex items-end gap-4">
+          <div>
+            <p className="tnum font-display text-[40px] leading-none font-extrabold text-ink">
+              {delta.now}
+            </p>
+            <p className="mt-1 text-[13px] text-ink-muted">{nowLabel}</p>
+          </div>
+          <span aria-hidden className="pb-5 text-[22px] text-ink-placeholder">
+            →
+          </span>
+          <div>
+            <p className="tnum font-display text-[40px] leading-none font-extrabold text-sage-text">
+              {after}
+            </p>
+            <p className="mt-1 text-[13px] text-ink-muted">{afterLabel}</p>
+          </div>
+          <span className="tnum mb-5 ml-auto rounded-lg border border-sage-line bg-sage-tint px-2.5 py-1 font-display text-[19px] font-extrabold text-sage-text">
+            +{delta.gain}
+          </span>
+        </div>
+
+        {/* Every number over 24px has an inspectable derivation on the same screen. */}
+        <p className="mt-3 text-[13px] leading-relaxed text-ink-body">{delta.basis}</p>
       </div>
 
-      <DrillDown delta={delta} open={open} onClose={() => setOpen(false)} asSheet={isMobile} />
+      <DrillDown
+        delta={delta}
+        open={drillOpen}
+        onClose={() => setDrillOpen(false)}
+        asSheet={isMobile}
+      />
     </>
   );
 }
 
-/** The audit: 54 verified, 12 already Apply Now, 8 blocked by this alone, 4 excluded. */
+/** The audit table — 54 verified, 12 already Apply Now, 8 blocked by this alone, 4 excluded. */
 export function DeltaAudit({ delta, className }: { delta: Delta; className?: string }) {
   const rows = [
     { label: "Verified postings in today's run", value: delta.audit.verified },
@@ -145,19 +153,24 @@ export function DeltaAudit({ delta, className }: { delta: Delta; className?: str
   ];
 
   return (
-    <div className={className}>
+    <div className={cn("rounded-[14px] border border-line bg-surface p-4", className)}>
       <Eyebrow>How this was counted</Eyebrow>
-      <dl className="mt-2">
+      <dl className="mt-2.5 flex flex-col">
         {rows.map((row, i) => (
           <div key={row.label}>
             {i > 0 && <Hairline />}
-            <div className="flex items-baseline justify-between gap-4 py-2">
-              <dt className={cn("text-sm", row.muted ? "text-ink-muted" : "text-ink-body")}>
+            <div className="flex items-center justify-between gap-4 py-2.5">
+              <dt
+                className={cn(
+                  "text-[13.5px]",
+                  row.muted ? "text-ink-muted" : "text-ink-body",
+                )}
+              >
                 {row.label}
               </dt>
               <dd
                 className={cn(
-                  "tnum font-mono text-meta whitespace-nowrap",
+                  "tnum font-mono text-[13px] whitespace-nowrap",
                   row.strong ? "font-semibold text-sage-text" : "text-ink",
                   row.muted && "text-ink-muted",
                 )}
@@ -168,8 +181,8 @@ export function DeltaAudit({ delta, className }: { delta: Delta; className?: str
           </div>
         ))}
       </dl>
-      {/* The exclusion is what makes the number trustworthy. */}
-      <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+      {/* The exclusion is stated — that is what makes the number trustworthy. */}
+      <p className="mt-2 border-t border-hairline pt-2.5 text-[13px] leading-relaxed text-ink-body">
         Only postings where this is the sole remaining requirement are counted. The{" "}
         {delta.audit.blockedByThisPlusOther} that need a second fix stay out of the number — you
         can see them under Roadmap.
@@ -178,6 +191,7 @@ export function DeltaAudit({ delta, className }: { delta: Delta; className?: str
   );
 }
 
+/** The drill-down is a lookup of stored posting ids, not a reconstruction. */
 function DrillDown({
   delta,
   open,
@@ -193,61 +207,45 @@ function DrillDown({
 
   const list = (
     <div className="flex h-full flex-col">
-      <header className="flex shrink-0 items-start justify-between gap-3 px-6 pt-6 pb-4">
+      <header className="flex shrink-0 items-center justify-between border-b border-line px-5 py-4">
         <div>
-          <h2 className="text-section text-ink">Where the +{delta.gain} comes from</h2>
-          <p className="mt-0.5 text-sm text-ink-muted">
-            {delta.affected.length} postings, looked up — not recalculated
+          <Eyebrow>Where the +{delta.gain} comes from</Eyebrow>
+          <p className="mt-0.5 font-display text-[19px] font-bold text-ink">
+            {delta.affected.length} affected postings
           </p>
         </div>
         <button
           type="button"
           onClick={onClose}
           aria-label="Close"
-          className="-mt-1 -mr-2 flex size-[44px] items-center justify-center rounded-lg text-ink-muted hover:bg-surface-sunken"
+          className="flex h-[44px] w-[44px] items-center justify-center rounded-[9px] text-ink-body hover:bg-row-hover"
         >
-          <svg
-            aria-hidden
-            viewBox="0 0 16 16"
-            className="size-4"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-          >
-            <path d="M4 4l8 8M12 4l-8 8" />
-          </svg>
+          ✕
         </button>
       </header>
 
-      <div className="min-h-0 flex-1 overflow-y-auto px-6 pb-6">
-        <DeltaAudit delta={delta} className="border-b border-line pb-5" />
+      <div className="min-h-0 flex-1 overflow-y-auto px-5 py-4">
+        <DeltaAudit delta={delta} />
 
-        <ul className="mt-2">
+        <ul className="mt-4 flex flex-col gap-2">
           {delta.affected.map((job) => (
-            <li key={job.jobId} className="border-b border-hairline last:border-b-0">
+            <li key={job.jobId}>
               <Link
                 href={`/jobs/${job.jobId}`}
                 onClick={onClose}
-                className="-mx-2 block rounded-lg px-2 py-3 transition-colors duration-100 hover:bg-surface-sunken"
+                className="block rounded-[12px] border border-line bg-surface p-3.5 transition-colors duration-100 hover:bg-row-hover"
               >
-                <div className="flex items-baseline justify-between gap-3">
-                  <span className="text-subhead text-ink">{job.role}</span>
-                  <span className="shrink-0 text-meta font-semibold text-sage-text">
+                <div className="flex items-start justify-between gap-3">
+                  <span className="text-[14.5px] font-semibold text-ink-link">{job.role}</span>
+                  <span className="shrink-0 rounded-md border border-sage-line bg-sage-tint px-2 py-0.5 text-[12px] font-bold text-sage-text">
                     → {VERDICT_LABEL[job.verdictAfter]}
                   </span>
                 </div>
-                <p className="mt-0.5">
-                  <Meta>
-                    {job.company} · {job.location} · {job.otherRequirements}
-                  </Meta>
+                <p className="mt-0.5 text-[13px] text-ink-body">
+                  {job.company} · {job.location} · {job.otherRequirements}
                 </p>
-                <p className="mt-1">
-                  <Mono
-                    className={daysUntil(job.closesAt) <= 10 ? "text-apricot-text" : undefined}
-                  >
-                    Closes {closingDate(job.closesAt)}
-                  </Mono>
+                <p className="tnum mt-1.5 font-mono text-[11.5px] tracking-tight text-ink-muted uppercase">
+                  {job.source.replace("-", " ")} · closes {closingDate(job.closesAt)}
                 </p>
               </Link>
             </li>
@@ -255,7 +253,7 @@ function DrillDown({
         </ul>
 
         {soon > 0 && (
-          <p className="mt-4 text-sm text-ink-body">
+          <p className="mt-3 text-[13px] text-ink-body">
             {soon} of these close within 10 days — the roadmap puts them first.
           </p>
         )}

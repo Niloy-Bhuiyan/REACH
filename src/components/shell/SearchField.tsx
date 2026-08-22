@@ -2,18 +2,14 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Icon } from "@/components/ui/Icon";
+import { PixelIcon } from "@/components/ui/PixelIcon";
 import { useIsMobile } from "@/lib/hooks";
 import { cn } from "@/lib/utils/cn";
 
-/**
- * Search is never hidden at any width. One long pill, a magnifier that labels
- * it, and a single filled action at the end — so the way in is unmistakable
- * without any surrounding copy explaining it.
- */
+/** Search is the only input in Summary Mode, and it is never hidden at any width. */
 export function SearchField({
-  placeholder = "Search roles, skills or companies",
-  mobilePlaceholder = "Search roles or companies",
+  placeholder = "Search jobs, internships, skills, companies…",
+  mobilePlaceholder = "Search jobs, skills, companies…",
   defaultValue = "",
   className,
   size = "lg",
@@ -36,32 +32,29 @@ export function SearchField({
         router.push(value.trim() ? `/discover?q=${encodeURIComponent(value.trim())}` : "/discover");
       }}
       className={cn(
-        "flex items-center gap-3 rounded-full border border-line bg-surface shadow-search transition-colors duration-150 focus-within:border-active hover:border-group",
-        size === "lg" ? "py-2 pr-2 pl-5 sm:pl-6" : "py-1.5 pr-1.5 pl-4",
+        "flex items-center gap-2.5 rounded-[12px] border-[1.5px] border-control bg-surface shadow-search",
+        size === "lg" ? "py-2 pr-2 pl-4" : "py-1.5 pr-1.5 pl-3.5",
         className,
       )}
     >
-      <Icon name="discover" size={size === "lg" ? 20 : 18} className="text-ink-muted" />
+      <PixelIcon name="g-scan" size={20} />
       <input
         type="search"
         value={value}
         onChange={(event) => setValue(event.target.value)}
         placeholder={mobilePlaceholder && isNarrow ? mobilePlaceholder : placeholder}
-        aria-label="Search roles, skills and companies"
-        className={cn(
-          "min-w-0 flex-1 bg-transparent text-ink placeholder:text-ink-placeholder focus:outline-none",
-          size === "lg" ? "min-h-[48px] text-[1.0625rem]" : "min-h-[44px] text-body",
-        )}
+        aria-label="Search jobs, internships, skills and companies"
+        className="min-h-[44px] min-w-0 flex-1 bg-transparent text-[15px] text-ink placeholder:text-ink-placeholder focus:outline-none"
       />
       <button
         type="submit"
         aria-label="Search"
         className={cn(
-          "flex shrink-0 items-center justify-center rounded-full bg-brand text-white transition-colors duration-150 hover:bg-brand-hover",
-          size === "lg" ? "size-[48px]" : "size-[44px]",
+          "flex shrink-0 items-center justify-center rounded-[9px] bg-violet text-surface transition-colors duration-100 hover:bg-violet-hover",
+          size === "lg" ? "h-[46px] w-[46px]" : "h-[40px] w-[40px]",
         )}
       >
-        <Icon name="arrowRight" size={19} strokeWidth={1.7} />
+        <PixelIcon name="g-nav-discover" size={20} />
       </button>
     </form>
   );

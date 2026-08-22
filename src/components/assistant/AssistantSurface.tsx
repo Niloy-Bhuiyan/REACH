@@ -4,9 +4,9 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/Button";
-import { Icon } from "@/components/ui/Icon";
 import { Input } from "@/components/ui/Controls";
 import { Drawer, Sheet, SheetGrip } from "@/components/ui/Overlay";
+import { PixelIcon } from "@/components/ui/PixelIcon";
 import { Eyebrow } from "@/components/ui/Surface";
 import { Skeleton } from "@/components/ui/States";
 import { askAssistant, getAssistantSuggestions } from "@/lib/api";
@@ -80,11 +80,14 @@ export function AssistantSurface() {
   const body = (
     <div className="flex h-full flex-col">
       <header className="flex shrink-0 items-center justify-between border-b border-line px-5 py-4">
-        <span className="font-display text-[1.375rem] text-ink">Ask REACH</span>
+        <div className="flex items-center gap-2.5">
+          <PixelIcon name="g-assistant" size={26} />
+          <span className="font-display text-[19px] font-bold text-ink">Ask REACH</span>
+        </div>
         <div className="flex items-center gap-1">
           {thread.length > 0 && (
             <Button
-              variant="ghost"
+              variant="tertiary"
               size="sm"
               onClick={() => {
                 setThread([]);
@@ -99,21 +102,21 @@ export function AssistantSurface() {
             type="button"
             onClick={closeAssistant}
             aria-label="Close the assistant"
-            className="flex size-[44px] items-center justify-center rounded-full text-ink-body transition-colors duration-150 hover:bg-row-hover"
+            className="flex h-[44px] w-[44px] items-center justify-center rounded-[9px] text-ink-body transition-colors duration-100 hover:bg-row-hover"
           >
-            <Icon name="close" size={17} />
+            ✕
           </button>
         </div>
       </header>
 
       {/* Scope is stated and changeable, so the user always knows what the answer is about. */}
-      <div className="flex shrink-0 items-center gap-2.5 border-b border-line px-6 py-2.5">
-        <Eyebrow tone="brand">Scope</Eyebrow>
+      <div className="flex shrink-0 items-center gap-2.5 border-b border-line bg-violet-tint px-5 py-2.5">
+        <Eyebrow tone="violet">Scope</Eyebrow>
         <span className="min-w-0 flex-1 truncate text-[13.5px] text-ink">{subject.subject}</span>
         <Link
           href="/profile"
           onClick={closeAssistant}
-          className="min-h-[36px] text-meta font-semibold text-brand-text hover:underline"
+          className="text-[13px] font-semibold text-violet-text hover:underline"
         >
           Change
         </Link>
@@ -138,7 +141,10 @@ export function AssistantSurface() {
               </div>
             ) : (
               <div key={message.id}>
-                <Eyebrow>REACH</Eyebrow>
+                <div className="flex items-center gap-2">
+                  <PixelIcon name="px-logo" size={18} height={17} />
+                  <Eyebrow>REACH</Eyebrow>
+                </div>
                 <p className="mt-1.5 text-[14.5px] leading-relaxed text-ink-body">
                   {message.text}
                 </p>
@@ -148,9 +154,13 @@ export function AssistantSurface() {
                     <Eyebrow tone="sage">Based on</Eyebrow>
                     <ul className="mt-1.5 flex flex-col gap-1.5">
                       {message.citations.map((citation, i) => (
-                        <li key={i} className="border-b border-hairline py-2 last:border-b-0">
-                          <span className="text-sm text-ink-body">
-                            <span className="font-medium text-sage-text">{citation.title}</span>
+                        <li
+                          key={i}
+                          className="flex items-start gap-2.5 rounded-[10px] border border-sage-line bg-sage-tint px-3 py-2"
+                        >
+                          <PixelIcon name={citation.icon} size={18} />
+                          <span className="text-[13px] leading-snug text-ink-body">
+                            <span className="font-semibold text-sage-text">{citation.title}</span>
                             {" · "}
                             {citation.detail}
                           </span>
@@ -169,10 +179,10 @@ export function AssistantSurface() {
                         href={action.href}
                         onClick={closeAssistant}
                         className={cn(
-                          "inline-flex min-h-[46px] items-center rounded-full px-4.5 text-[14px] font-semibold",
+                          "inline-flex min-h-[46px] items-center rounded-[10px] px-4 text-[14px] font-semibold",
                           action.tone === "primary"
-                            ? "bg-brand text-surface hover:bg-brand-hover"
-                            : "border border-control bg-surface text-brand-text hover:bg-brand-tint",
+                            ? "bg-violet text-surface hover:bg-violet-hover"
+                            : "border-[1.5px] border-control bg-surface text-violet-text hover:bg-violet-tint",
                         )}
                       >
                         {action.label}
@@ -187,9 +197,12 @@ export function AssistantSurface() {
           {/* Loading is a skeleton at answer geometry plus a mono status naming what it reads. */}
           {ask.isPending && (
             <div>
-              <span className="tnum font-mono text-meta text-ink-muted">
-                Reading your evidence · 3 sources
-              </span>
+              <div className="flex items-center gap-2">
+                <PixelIcon name="px-logo" size={18} height={17} />
+                <span className="tnum font-mono text-[12px] tracking-tight text-ink-muted uppercase">
+                  Reading your evidence · 3 sources
+                </span>
+              </div>
               <div className="mt-2.5 flex flex-col gap-2">
                 <Skeleton className="h-[13px] w-full" />
                 <Skeleton className="h-[13px] w-[92%]" />
@@ -202,7 +215,7 @@ export function AssistantSurface() {
           {error && (
             <div
               role="alert"
-              className="rounded-2xl border border-terracotta-line bg-terracotta-tint p-4"
+              className="rounded-[12px] border-2 border-terracotta-line bg-terracotta-tint p-4"
             >
               <p className="text-[14px] leading-relaxed text-ink-body">
                 Could not reach the engine.{" "}
@@ -217,7 +230,7 @@ export function AssistantSurface() {
                 >
                   Retry
                 </Button>
-                <Button size="sm" variant="ghost" className="px-2">
+                <Button size="sm" variant="tertiary" className="px-2">
                   Use {error.fallback} instead
                 </Button>
               </div>
@@ -234,7 +247,7 @@ export function AssistantSurface() {
                   <button
                     type="button"
                     onClick={() => submit(question)}
-                    className="flex min-h-[44px] w-full items-center rounded-xl border border-line bg-canvas px-3.5 text-left text-[13.5px] leading-snug text-ink-body transition-colors duration-100 hover:bg-row-hover hover:text-ink"
+                    className="flex min-h-[44px] w-full items-center rounded-[10px] border border-line bg-canvas px-3.5 text-left text-[13.5px] leading-snug text-ink-body transition-colors duration-100 hover:bg-row-hover hover:text-ink"
                   >
                     {question}
                   </button>
@@ -265,12 +278,12 @@ export function AssistantSurface() {
             aria-label="Send"
             disabled={!draft.trim() || ask.isPending}
             reason="Type a question first"
-            className="size-[46px] shrink-0 px-0"
+            className="w-[46px] px-0"
           >
-            <Icon name="arrowRight" size={17} />
+            →
           </Button>
         </form>
-        <p className="mt-2 text-meta leading-snug text-ink-muted">
+        <p className="mt-2 text-[12px] leading-snug text-ink-muted">
           Suggested CV changes still go through accept / reject.
         </p>
       </footer>
@@ -304,12 +317,15 @@ export function AssistantEntry({ className }: { className?: string }) {
       type="button"
       onClick={openAssistant}
       className={cn(
-        "inline-flex min-h-[44px] items-center gap-2 rounded-full border border-control bg-surface px-4 text-sm font-medium text-ink-body transition-colors duration-150 hover:bg-surface-sunken hover:text-ink",
+        "inline-flex min-h-[44px] items-center gap-2.5 rounded-[10px] border-[1.5px] border-control bg-surface px-3.5 text-[14px] font-semibold text-ink transition-colors duration-100 hover:bg-violet-tint",
         className,
       )}
     >
+      <PixelIcon name="px-logo" size={19} height={18} />
       {subject.label}
-      <kbd className="tnum hidden font-mono text-meta text-ink-disabled sm:inline">⌘K</kbd>
+      <kbd className="tnum ml-1 hidden rounded border border-line bg-canvas px-1.5 py-0.5 font-mono text-[12px] text-ink-muted sm:inline">
+        ⌘K
+      </kbd>
     </button>
   );
 }

@@ -3,14 +3,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { Wordmark } from "@/components/ui/Brand";
-import { Icon } from "@/components/ui/Icon";
+import { PixelIcon } from "@/components/ui/PixelIcon";
 import { cn } from "@/lib/utils/cn";
 import { isActive, NAV_ITEMS } from "./nav";
 import { Notifications } from "./Notifications";
 
 /* ── Status line ────────────────────────────────────────────────────────── */
 
+/**
+ * The right cluster on desktop is one status line, one bell, one avatar. Nothing else.
+ * Pages set the line's text; the shell owns the slot.
+ */
 interface StatusValue {
   status: string | null;
   setStatus: (value: string | null) => void;
@@ -35,44 +38,49 @@ function AppNav({ status }: { status: string | null }) {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-30 hidden h-[72px] border-b border-line bg-canvas/85 backdrop-blur-md sm:block">
+    <header className="sticky top-0 z-30 hidden h-[72px] border-b border-line bg-surface sm:block">
       <nav
         aria-label="Primary"
-        className="mx-auto flex h-full max-w-[1200px] items-center gap-10 px-5 sm:px-8 lg:px-10"
+        className="mx-auto flex h-full max-w-[1440px] items-center justify-between px-6 md:px-10"
       >
-        <Link
-          href="/"
-          className="flex min-h-[44px] items-center"
-          aria-label="REACH — Focus"
-        >
-          <Wordmark size={26} />
-        </Link>
+        <div className="flex items-center gap-8 lg:gap-11">
+          <Link href="/" className="flex min-h-[44px] items-center gap-2.5" aria-label="REACH — Focus">
+            <PixelIcon name="px-logo" size={34} height={33} priority />
+            <span className="font-display text-[24px] leading-none font-extrabold text-ink">
+              REACH
+            </span>
+          </Link>
 
-        <ul className="flex items-center gap-1">
-          {NAV_ITEMS.map((item) => {
-            const active = isActive(pathname, item.match);
-            return (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  aria-current={active ? "page" : undefined}
-                  className={cn(
-                    "flex min-h-[44px] items-center rounded-full px-4 text-sm transition-colors duration-150",
-                    active
-                      ? "font-semibold text-ink"
-                      : "font-medium text-ink-body hover:bg-surface-sunken hover:text-ink",
-                  )}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+          <ul className="flex items-center gap-5 lg:gap-[30px]">
+            {NAV_ITEMS.map((item) => {
+              const active = isActive(pathname, item.match);
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={active ? "page" : undefined}
+                    className={cn(
+                      "relative flex h-[72px] items-center text-[15px] transition-colors duration-100",
+                      active ? "font-bold text-ink" : "text-ink-body hover:text-ink",
+                    )}
+                  >
+                    {item.label}
+                    {active && (
+                      <span
+                        aria-hidden
+                        className="absolute inset-x-0 bottom-0 h-[3px] rounded-t-full bg-violet"
+                      />
+                    )}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
 
-        <div className="ml-auto flex items-center gap-2">
+        <div className="flex items-center gap-4">
           {status && (
-            <span className="tnum mr-1 hidden font-mono text-meta text-ink-muted lg:inline">
+            <span className="tnum hidden font-mono text-[12px] tracking-tight text-ink-muted md:inline">
               {status}
             </span>
           )}
@@ -80,55 +88,12 @@ function AppNav({ status }: { status: string | null }) {
           <Link
             href="/profile"
             aria-label="Your profile"
-            className="flex size-[44px] items-center justify-center"
+            className="flex h-[44px] w-[44px] items-center justify-center rounded-[10px] border border-violet-line bg-violet-tint font-display text-[14px] font-bold text-violet-text transition-colors duration-100 hover:bg-violet-line"
           >
-            <span
-              aria-hidden
-              className="flex size-9 items-center justify-center rounded-full border border-line bg-surface text-meta font-semibold text-ink-body transition-colors duration-150 hover:bg-surface-sunken"
-            >
-              NM
-            </span>
+            NM
           </Link>
         </div>
       </nav>
-    </header>
-  );
-}
-
-/* ── Mobile top bar ─────────────────────────────────────────────────────── */
-
-/**
- * The phone keeps the mark and says where you are — the section name carries an
- * underline so the answer is available without reading the bottom bar.
- */
-function MobileTopBar() {
-  const pathname = usePathname();
-  const current = NAV_ITEMS.find((item) => isActive(pathname, item.match));
-
-  return (
-    <header className="sticky top-0 z-30 flex h-[60px] items-center gap-3 border-b border-line bg-canvas/90 px-4 backdrop-blur-md sm:hidden">
-      <Link href="/" className="flex min-h-[44px] items-center" aria-label="REACH — Focus">
-        <Wordmark size={22} />
-      </Link>
-      {current && (
-        <>
-          <span aria-hidden className="h-5 w-px bg-line" />
-          <span className="relative min-w-0 truncate pb-2 text-subhead font-medium text-brand-text">
-            {current.label}
-            <span
-              aria-hidden
-              className="absolute inset-x-0 bottom-0 h-[2px] rounded-full bg-brand/30"
-            />
-            <span
-              aria-hidden
-              className="absolute bottom-[-2px] left-1/2 size-[6px] -translate-x-1/2 rounded-full bg-brand"
-            />
-          </span>
-        </>
-      )}
-      <div className="ml-auto">
-        <Notifications />
-      </div>
     </header>
   );
 }
@@ -141,9 +106,9 @@ function MobileNav() {
   return (
     <nav
       aria-label="Primary"
-      className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md sm:hidden"
+      className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-surface pb-[env(safe-area-inset-bottom)] sm:hidden"
     >
-      <ul className="flex h-[64px] items-stretch">
+      <ul className="flex h-[58px] items-stretch">
         {NAV_ITEMS.map((item) => {
           const active = isActive(pathname, item.match);
           return (
@@ -151,27 +116,23 @@ function MobileNav() {
               <Link
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className="relative flex h-full min-h-[44px] flex-col items-center justify-center gap-1"
+                className="relative flex h-full min-h-[44px] flex-col items-center justify-center gap-[3px]"
               >
-                <Icon
-                  name={item.icon}
-                  size={21}
-                  className={active ? "text-brand" : "text-ink-muted"}
-                />
+                {active && (
+                  <span
+                    aria-hidden
+                    className="absolute inset-x-3 top-0 h-[3px] rounded-b-full bg-violet"
+                  />
+                )}
+                <PixelIcon name={item.glyph} size={22} className={cn(!active && "opacity-70")} />
                 <span
                   className={cn(
-                    "max-w-full truncate px-1 text-meta leading-none",
-                    active ? "font-semibold text-brand-text" : "text-ink-muted",
+                    "max-w-full truncate px-1 text-[12px] leading-none",
+                    active ? "font-bold text-violet-text" : "text-ink-muted",
                   )}
                 >
                   {item.label}
                 </span>
-                {active && (
-                  <span
-                    aria-hidden
-                    className="absolute bottom-1 size-[4px] rounded-full bg-brand"
-                  />
-                )}
               </Link>
             </li>
           );
@@ -191,8 +152,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <StatusContext.Provider value={value}>
       <div className="flex min-h-dvh flex-col bg-canvas">
         <AppNav status={status} />
-        <MobileTopBar />
-        <main className="flex-1 pb-[calc(64px+env(safe-area-inset-bottom))] sm:pb-0">
+        {/* Bottom-bar clearance so a sticky primary action is never covered. */}
+        <main className="flex-1 pb-[calc(58px+env(safe-area-inset-bottom))] sm:pb-0">
           {children}
         </main>
         <MobileNav />

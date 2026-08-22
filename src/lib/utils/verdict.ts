@@ -2,7 +2,7 @@ import type { GapType, Verdict } from "@/lib/api/types";
 
 /**
  * Verdict colour is single-valued: sage = Apply Now, apricot = One Fix Away,
- * terracotta = Skip. The forest brand green is action and identity, never a verdict.
+ * terracotta = Skip. Violet is brand and action and is never a verdict.
  *
  * Every entry pairs the colour with its canonical word — colour is never the only cue.
  */
@@ -56,6 +56,12 @@ export const VERDICT_TONE: Record<Verdict, VerdictTone> = {
   },
 };
 
+export const VERDICT_GLYPH: Record<Verdict, string> = {
+  "apply-now": "px-apply",
+  "one-fix-away": "px-onefix",
+  skip: "px-skip",
+};
+
 export const VERDICT_ORDER: Verdict[] = ["apply-now", "one-fix-away", "skip"];
 
 /* ── Gap typing ─────────────────────────────────────────────────────────── */
@@ -66,11 +72,10 @@ export const GAP_LABEL: Record<GapType, string> = {
   signal: "Signal gap",
 };
 
-/** One icon per gap type, from the single icon system. */
-export const GAP_ICON: Record<GapType, "book" | "checkCircle" | "spark"> = {
-  knowledge: "book",
-  proof: "checkCircle",
-  signal: "spark",
+export const GAP_GLYPH: Record<GapType, string> = {
+  knowledge: "g-gap-knowledge",
+  proof: "g-gap-proof",
+  signal: "g-gap-signal",
 };
 
 export const GAP_DIAGNOSIS: Record<GapType, string> = {
