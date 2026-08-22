@@ -29,11 +29,11 @@ import {
 import { qk } from "@/lib/api/keys";
 import { ApiError } from "@/lib/api/client";
 import type { ResumeDocument, ResumeSection, SuggestedEdit } from "@/lib/api/types";
-import { useIsMobile, usePersistentState } from "@/lib/hooks";
+import { useIsMobile, useMediaQuery, usePersistentState } from "@/lib/hooks";
 import { cn } from "@/lib/utils/cn";
 import { VERDICT_SHORT, VERDICT_TONE } from "@/lib/utils/verdict";
 
-type Pane = "analysis" | "edits" | "keywords";
+type Pane = "analysis" | "edits" | "keywords" | "preview";
 type MobileTab = "analysis" | "edits" | "preview";
 
 /**
@@ -44,6 +44,8 @@ type MobileTab = "analysis" | "edits" | "preview";
 export default function ResumePage() {
   const client = useQueryClient();
   const isMobile = useIsMobile();
+  // 768–1023: the preview is not a third pane, so it becomes a pane you switch to.
+  const previewIsAPane = useMediaQuery("(max-width: 1023px)");
 
   const [jobId, setJobId] = usePersistentState<string | null>("resume:jobId", "bkash-da");
   const [pane, setPane] = useState<Pane>("analysis");
@@ -323,12 +325,16 @@ export default function ResumePage() {
               { value: "analysis", label: "Analysis" },
               { value: "edits", label: "Suggested edits", count: pendingEdits.length },
               { value: "keywords", label: "Keywords" },
+              ...(previewIsAPane ? [{ value: "preview" as Pane, label: "Preview" }] : []),
             ]}
           />
           <div className="mt-4">
             {pane === "analysis" && analysisPane}
             {pane === "edits" && editsPane}
             {pane === "keywords" && keywordsPane}
+            {pane === "preview" && (
+              <ResumePreview doc={doc.data} sections={sections} edits={data.edits} />
+            )}
           </div>
         </section>
 
