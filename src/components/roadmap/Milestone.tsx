@@ -1,6 +1,7 @@
 "use client";
 
 import { Arrow, Button } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
 import { Mono } from "@/components/ui/Chip";
 import { Eyebrow } from "@/components/ui/Surface";
 import type { CertificateVerdictValue, Milestone, Resource } from "@/lib/api/types";
@@ -14,14 +15,14 @@ export function MilestoneNode({ state, n }: { state: Milestone["state"]; n: numb
   return (
     <span
       className={cn(
-        "tnum relative z-10 flex size-6 shrink-0 items-center justify-center rounded-full text-meta font-semibold",
+        "tnum relative z-10 flex size-7 shrink-0 items-center justify-center rounded-full text-meta font-semibold",
         state === "done" && "bg-sage text-white",
         state === "current" && "bg-apricot text-white",
         (state === "locked" || state === "skipped") &&
           "border border-group bg-surface text-ink-disabled",
       )}
     >
-      {state === "done" ? "✓" : n}
+      {state === "done" ? <Icon name="check" size={13} strokeWidth={2.4} /> : n}
     </span>
   );
 }
@@ -131,7 +132,7 @@ export function MilestoneCard({
         <span
           aria-hidden
           className={cn(
-            "absolute top-7 bottom-0 left-[11px] w-px transition-colors duration-300",
+            "absolute top-8 bottom-0 left-[13px] w-px transition-colors duration-300",
             milestone.state === "done" ? "bg-sage-line" : "bg-line",
           )}
         />
@@ -143,7 +144,7 @@ export function MilestoneCard({
         <div className="flex flex-wrap items-baseline justify-between gap-x-3">
           <h3
             className={cn(
-              "text-subhead",
+              "font-display text-[1.125rem]",
               milestone.state === "skipped" ? "text-ink-muted line-through" : "text-ink",
             )}
           >
@@ -169,7 +170,7 @@ export function MilestoneCard({
           </span>
           <span className="text-sm text-ink-muted">
             {milestone.artefact}
-            {milestone.state === "done" && " ✓"}
+            {milestone.state === "done" && " · done"}
           </span>
           {milestone.blocksOpportunities && (
             <span className="text-sm text-ink-muted">

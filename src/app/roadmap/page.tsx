@@ -75,18 +75,7 @@ export default function RoadmapPage() {
           href={`/one-fix/${data.fixId}`}
           className="inline-flex min-h-[40px] items-center gap-1.5 text-sm font-medium text-brand-text hover:underline"
         >
-          <svg
-            aria-hidden
-            viewBox="0 0 16 16"
-            className="size-3.5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.7"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M13 8H3M7 4L3 8l4 4" />
-          </svg>
+          <Icon name="chevronLeft" size={15} />
           The {data.fixId.toUpperCase()} fix
         </Link>
         <div className="ml-auto hidden sm:block">
@@ -100,12 +89,12 @@ export default function RoadmapPage() {
             {/* Progress and the next action, before anything else. */}
             <header>
               <div className="flex items-center gap-2.5">
-                <Icon name="path" size={20} className="text-apricot" />
+                <Icon name="roadmap" size={19} className="text-apricot" />
                 <span className="text-meta font-medium text-apricot-text">
                   {GAP_LABEL[data.gapType]}
                 </span>
               </div>
-              <h1 className="mt-3 text-title text-ink">{data.title}</h1>
+              <h1 className="font-display mt-3 max-w-[20ch] text-display text-ink">{data.title}</h1>
 
               <div className="mt-5 flex flex-wrap items-baseline gap-x-6 gap-y-2">
                 <span className="tnum text-body font-medium text-ink">

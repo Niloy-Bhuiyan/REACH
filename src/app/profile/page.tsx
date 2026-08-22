@@ -55,21 +55,27 @@ export default function ProfilePage() {
   return (
     <Page width="reading" className="pt-8 pb-20 sm:pt-12">
       <Stack gap="md">
-        <header>
-          <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2">
-            <h1 className="text-title text-ink">{data.name}</h1>
-            <div className="ml-auto flex items-center gap-2">
-              <ButtonLink href="/profile/settings" variant="secondary">
-                Settings
-              </ButtonLink>
-              <div className="hidden sm:block">
-                <AssistantEntry />
-              </div>
+        <header className="flex flex-wrap items-start gap-x-5 gap-y-4">
+          <span
+            aria-hidden
+            className="font-display flex size-16 shrink-0 items-center justify-center rounded-2xl bg-canvas-deep text-[1.5rem] text-ink-body"
+          >
+            {data.initials}
+          </span>
+          <div className="min-w-0 flex-1">
+            <h1 className="font-display text-display text-ink">{data.name}</h1>
+            <p className="mt-1.5 max-w-[46ch]">
+              <Meta>{data.headline}</Meta>
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <ButtonLink href="/profile/settings" variant="secondary">
+              Settings
+            </ButtonLink>
+            <div className="hidden sm:block">
+              <AssistantEntry />
             </div>
           </div>
-          <p className="mt-1">
-            <Meta>{data.headline}</Meta>
-          </p>
         </header>
 
         {/* Completeness as capability. The percentage supports the sentence. */}

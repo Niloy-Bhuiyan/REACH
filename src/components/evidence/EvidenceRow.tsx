@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Meta, Mono } from "@/components/ui/Chip";
+import { ConnectionState, SourceMark } from "./SourceMark";
+import { Icon } from "@/components/ui/Icon";
 import type { EvidenceSource, RequirementRow } from "@/lib/api/types";
 import { cn } from "@/lib/utils/cn";
 import { GAP_LABEL } from "@/lib/utils/verdict";
@@ -27,11 +29,15 @@ export function EvidenceRow({
         <span
           aria-hidden
           className={cn(
-            "text-[13px]",
+            "mt-[3px]",
             met ? "text-sage" : isGap ? "text-apricot" : "text-terracotta",
           )}
         >
-          {met ? "✓" : "—"}
+          {met ? (
+            <Icon name="check" size={14} strokeWidth={2.2} />
+          ) : (
+            <Icon name="minus" size={14} strokeWidth={2.2} />
+          )}
         </span>
         <div className="min-w-0">
           <p
@@ -92,17 +98,10 @@ export function EvidenceRow({
 }
 
 /**
- * Four real connection states. The dot carries the colour, the words carry the
- * meaning, and only the state that costs the user something takes a tint.
+ * An evidence connection: its own mark, its name, the state as a word, and what
+ * it contributes. These are the things REACH reasons from, so they are meant to
+ * be recognised at a glance rather than tucked into settings.
  */
-const SOURCE_TONE = {
-  connected: { dot: "bg-sage", text: "text-ink-muted" },
-  syncing: { dot: "bg-sage", text: "text-ink-muted" },
-  attention: { dot: "bg-apricot", text: "text-apricot-text" },
-  "not-connected": { dot: "bg-ink-disabled", text: "text-ink-muted" },
-  "missing-costly": { dot: "bg-brand", text: "text-brand-text" },
-} as const;
-
 export function IntegrationRow({
   source,
   onAction,
@@ -112,21 +111,29 @@ export function IntegrationRow({
   onAction?: () => void;
   pending?: boolean;
 }) {
-  const tone = SOURCE_TONE[source.state];
-
   return (
-    <div className="flex items-center gap-3 border-b border-hairline py-3 last:border-b-0">
-      <span aria-hidden className={cn("size-[7px] shrink-0 rounded-full", tone.dot)} />
+    <div className="flex items-center gap-3.5 border-b border-hairline py-4 last:border-b-0">
+      <span
+        aria-hidden
+        className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-canvas-deep text-ink-body"
+      >
+        <SourceMark id={source.id} size={19} />
+      </span>
+
       <div className="min-w-0 flex-1">
-        <p className="text-body text-ink">{source.name}</p>
-        <p className={cn("truncate text-sm", tone.text)}>{source.stateDetail}</p>
+        <p className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
+          <span className="text-body font-medium text-ink">{source.name}</span>
+          <ConnectionState state={source.state} label={source.stateLabel} />
+        </p>
+        <p className="mt-0.5 truncate text-sm text-ink-muted">{source.stateDetail}</p>
       </div>
+
       {onAction && (
         <button
           type="button"
           onClick={onAction}
           disabled={pending}
-          className="min-h-[40px] shrink-0 text-sm font-medium text-brand-text hover:underline disabled:text-ink-disabled"
+          className="min-h-[40px] shrink-0 rounded-full px-3 text-sm font-medium text-brand-text hover:underline disabled:text-ink-disabled"
         >
           {pending ? "Working…" : source.action}
         </button>

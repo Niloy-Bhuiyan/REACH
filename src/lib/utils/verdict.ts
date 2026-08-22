@@ -2,7 +2,7 @@ import type { GapType, Verdict } from "@/lib/api/types";
 
 /**
  * Verdict colour is single-valued: sage = Apply Now, apricot = One Fix Away,
- * terracotta = Skip. Violet is brand and action and is never a verdict.
+ * terracotta = Skip. The forest brand green is action and identity, never a verdict.
  *
  * Every entry pairs the colour with its canonical word — colour is never the only cue.
  */

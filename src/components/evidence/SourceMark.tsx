@@ -79,7 +79,7 @@ const ENGINE_PATHS: Record<string, string> = {
   claude:
     "M12 4.2v4M12 15.8v4M4.2 12h4M15.8 12h4M6.5 6.5l2.8 2.8M14.7 14.7l2.8 2.8M17.5 6.5l-2.8 2.8M9.3 14.7l-2.8 2.8",
   // OpenAI / ChatGPT — the interlocked hexagonal knot, simplified.
-  chatgpt:
+  openai:
     "M12 3.4l7.4 4.3v8.6L12 20.6l-7.4-4.3V7.7zM12 8.2l4.2 2.4v2.8L12 15.8l-4.2-2.4v-2.8z",
   codex:
     "M9.2 8.4L5.6 12l3.6 3.6M14.8 8.4L18.4 12l-3.6 3.6M13.2 6.4l-2.4 11.2",

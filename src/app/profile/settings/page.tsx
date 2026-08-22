@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { Meta, Mono } from "@/components/ui/Chip";
 import { Input, Select, Toggle } from "@/components/ui/Controls";
 import { Disclosure } from "@/components/ui/Disclosure";
-import { EngineMark } from "@/components/evidence/SourceMark";
+import { EngineMark, SourceMark } from "@/components/evidence/SourceMark";
 import { Icon } from "@/components/ui/Icon";
 import { Hairline, Page, Stack } from "@/components/ui/Surface";
 import { ErrorNotice, Skeleton, SkeletonRows } from "@/components/ui/States";
@@ -109,7 +109,7 @@ export default function SettingsPage() {
             </svg>
             Profile
           </Link>
-          <h1 className="mt-1 text-title text-ink">Settings</h1>
+          <h1 className="font-display mt-1 text-display text-ink">Settings</h1>
           <p className="mt-1.5 max-w-[58ch] text-body text-ink-body">
             What changes how REACH judges you — not what it knows about you. Evidence is edited in
             Profile.
@@ -189,11 +189,14 @@ export default function SettingsPage() {
             </Link>
           </div>
           <ul className="mt-1">
-            {(sources.data ?? []).slice(0, 4).map((source, i) => (
+            {(sources.data ?? []).map((source, i) => (
               <li key={source.id}>
                 {i > 0 && <Hairline />}
-                <div className="flex items-baseline justify-between gap-3 py-2.5">
-                  <span className="text-body text-ink">{source.name}</span>
+                <div className="flex items-center justify-between gap-3 py-2.5">
+                  <span className="flex min-w-0 items-center gap-2.5">
+                    <SourceMark id={source.id} size={17} className="text-ink-muted" />
+                    <span className="truncate text-body text-ink">{source.name}</span>
+                  </span>
                   <Meta>{source.shortNote}</Meta>
                 </div>
               </li>
@@ -321,7 +324,7 @@ function EngineRow({
             onChange={onSelect}
             disabled={pending || engine.state === "not-connected" || invalid}
             aria-label={`Use ${engine.name}`}
-            className="size-[16px] accent-[#5B53D1]"
+            className="size-[16px] accent-brand"
           />
         </label>
 
