@@ -19,6 +19,7 @@ import { Chip, Mono } from "@/components/ui/Chip";
 import { Tabs } from "@/components/ui/Controls";
 import { Sheet, SheetGrip } from "@/components/ui/Overlay";
 import { PixelIcon } from "@/components/ui/PixelIcon";
+import { Disclosure } from "@/components/ui/Disclosure";
 import { Card, Eyebrow, Hairline } from "@/components/ui/Surface";
 import { EmptyState, ErrorNotice, Skeleton, SkeletonRows, StaleNotice } from "@/components/ui/States";
 import {
@@ -306,10 +307,12 @@ function Discover() {
           )}
         </div>
 
-        {/* Rail — run summary, Delta, blocker tally, provenance, evidence in use. */}
+        {/*
+          Rail — the Delta leads because it is the only figure here the user came
+          for. The run's own statistics, its provenance and the evidence behind it
+          are all true and all secondary, so each waits behind a disclosure.
+        */}
         <aside className="flex min-w-0 flex-col gap-4">
-          {run && <RunStats run={run} />}
-
           {delta.data && (
             <OpportunityDelta
               delta={delta.data}
@@ -350,40 +353,41 @@ function Discover() {
           )}
 
           {run && (
-            <Card className="p-4">
-              <Eyebrow>Where these came from</Eyebrow>
-              <Mono className="mt-1 block">{run.counts.kept} kept</Mono>
-              <ul className="mt-2.5 flex flex-col gap-2">
-                {[
-                  { label: "Company career pages", value: run.sources.careersPages },
-                  { label: "Trusted job boards", value: run.sources.jobBoards },
-                  { label: "Referral network", value: run.sources.referrals },
-                ].map((row) => (
-                  <li key={row.label} className="flex items-baseline justify-between gap-3">
-                    <span className="text-[13.5px] text-ink-body">{row.label}</span>
-                    <span className="tnum font-mono text-[13px] text-ink">{row.value}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-3 border-t border-hairline pt-2.5 text-[12.5px] leading-snug text-ink-muted">
-                Every row keeps its source and last-verified time. Stale rows are re-checked
-                before you open them.
-              </p>
+            <Card className="px-4">
+              <Disclosure label="About this run" detail={`${run.counts.kept} kept`}>
+                <RunStats run={run} bare className="pt-1" />
+                <ul className="mt-3 flex flex-col gap-2 border-t border-hairline pt-3">
+                  {[
+                    { label: "Company career pages", value: run.sources.careersPages },
+                    { label: "Trusted job boards", value: run.sources.jobBoards },
+                    { label: "Referral network", value: run.sources.referrals },
+                  ].map((row) => (
+                    <li key={row.label} className="flex items-baseline justify-between gap-3">
+                      <span className="text-[13.5px] text-ink-body">{row.label}</span>
+                      <span className="tnum font-mono text-[13px] text-ink">{row.value}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-3 text-[12.5px] leading-snug text-ink-muted">
+                  Every row keeps its source and last-verified time. Stale rows are re-checked
+                  before you open them.
+                </p>
+              </Disclosure>
             </Card>
           )}
 
           {focus.data && (
-            <Card className="p-4">
-              <Eyebrow>Evidence in use</Eyebrow>
-              <div className="mt-2.5 flex flex-col gap-2">
-                {focus.data.sources.map((source) => (
-                  <IntegrationRow key={source.id} source={source} compact />
-                ))}
-              </div>
-              <p className="mt-3 text-[12.5px] leading-snug text-ink-muted">
-                Matching quality is limited by what we can prove. A portfolio would strengthen 7
-                of today&apos;s roles.
-              </p>
+            <Card className="px-4">
+              <Disclosure
+                label="Evidence in use"
+                detail={`${focus.data.sources.filter((s) => s.state !== "not-connected").length} of ${focus.data.sources.length} connected`}
+              >
+                <div className="flex flex-col gap-2 pt-1">
+                  {focus.data.sources.map((source) => (
+                    <IntegrationRow key={source.id} source={source} compact />
+                  ))}
+                </div>
+              </Disclosure>
             </Card>
           )}
 
@@ -463,7 +467,7 @@ function ResultGroups({
 
   return (
     <div className="flex flex-col gap-4">
-      {shown.map((verdict) => {
+      {shown.map((verdict, i) => {
         const group = jobs.filter((job) => job.verdict === verdict);
         if (group.length === 0) return null;
         return (
@@ -473,6 +477,7 @@ function ResultGroups({
             jobs={group}
             count={counts[verdict]}
             defaultOpen={verdict !== "skip" || shown.length === 1}
+            first={i === 0}
             onReverify={onReverify}
             isMobile={isMobile}
             blockers={blockers}
@@ -485,7 +490,7 @@ function ResultGroups({
 }
 
 const GROUP_NOTE: Record<Verdict, string> = {
-  "apply-now": "All hard requirements met",
+  "apply-now": "",
   "one-fix-away": "One unmet item each · SQL closes 8 of them",
   skip: "Hard blockers",
 };
@@ -495,6 +500,7 @@ function Group({
   jobs,
   count,
   defaultOpen,
+  first,
   onReverify,
   isMobile,
   blockers,
@@ -504,6 +510,8 @@ function Group({
   jobs: import("@/lib/api/types").JobSummary[];
   count: number;
   defaultOpen: boolean;
+  /** Only the first group paints its column heads; the rest keep them for screen readers. */
+  first: boolean;
   onReverify: (id: string) => void;
   isMobile: boolean;
   blockers: string[];
@@ -547,7 +555,7 @@ function Group({
           <div className="hidden sm:block">
             <table className="w-full border-collapse text-left">
               <thead>
-                <tr className="bg-table-head">
+                <tr className={first ? "bg-table-head" : "sr-only"}>
                   <th scope="col" className="px-4 py-2 text-[11.5px] font-bold tracking-[.1em] text-ink-muted uppercase">
                     Role
                   </th>

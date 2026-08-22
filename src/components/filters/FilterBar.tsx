@@ -24,8 +24,9 @@ export function activeFilterCount(query: JobQuery): number {
 }
 
 /**
- * Working Mode toolbar: four visible controls plus "More filters · n", sort and the saved
- * count — the five-control cap. Sticky under the page header.
+ * Working Mode toolbar. Two visible narrowings, one door to the rest, sort, and the saved
+ * count. Role and employment type moved into the sheet: the target pill above already names
+ * the role, and a toolbar of six controls is a decision the user has not asked to make.
  */
 export function FilterBar({
   query,
@@ -45,18 +46,6 @@ export function FilterBar({
     <>
       <div className={cn("flex flex-wrap items-center gap-2", className)}>
         <Select
-          label="Role:"
-          value={query.q ?? ""}
-          onChange={(value) => onChange({ q: value || undefined })}
-          options={[
-            { value: "", label: "Any role" },
-            { value: "Data Analyst", label: "Data Analyst" },
-            { value: "Business Analyst", label: "Business Analyst" },
-            { value: "Analyst", label: "Any analyst role" },
-          ]}
-          className="hidden md:inline-flex"
-        />
-        <Select
           value={query.location ?? ""}
           onChange={(value) => onChange({ location: value || undefined })}
           options={[
@@ -74,15 +63,6 @@ export function FilterBar({
             ...MODES.map((m) => ({ value: m, label: m })),
           ]}
           className="hidden sm:inline-flex"
-        />
-        <Select
-          value={query.employment ?? ""}
-          onChange={(value) => onChange({ employment: (value || undefined) as Employment })}
-          options={[
-            { value: "", label: "Any type" },
-            ...TYPES.map((t) => ({ value: t, label: t })),
-          ]}
-          className="hidden lg:inline-flex"
         />
 
         <Button variant="secondary" size="md" onClick={() => setSheetOpen(true)}>

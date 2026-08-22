@@ -188,7 +188,16 @@ export function RunSummaryLine({
 }
 
 /** The run stats block in the Discovery rail. */
-export function RunStats({ run }: { run: DiscoveryRun }) {
+/** `bare` drops the card chrome, for when the panel is already inside one. */
+export function RunStats({
+  run,
+  bare,
+  className,
+}: {
+  run: DiscoveryRun;
+  bare?: boolean;
+  className?: string;
+}) {
   const rows = [
     { label: "Index results", value: run.counts.found.toLocaleString() },
     { label: "After dedupe", value: run.counts.deduped.toLocaleString() },
@@ -197,9 +206,11 @@ export function RunStats({ run }: { run: DiscoveryRun }) {
   ];
 
   return (
-    <div className="rounded-[14px] border border-line bg-surface p-4">
-      <Eyebrow>This run</Eyebrow>
-      <dl className="mt-2.5 flex flex-col gap-2">
+    <div
+      className={`${bare ? "" : "rounded-[14px] border border-line bg-surface p-4"} ${className ?? ""}`}
+    >
+      {!bare && <Eyebrow>This run</Eyebrow>}
+      <dl className={`flex flex-col gap-2 ${bare ? "" : "mt-2.5"}`}>
         {rows.map((row) => (
           <div key={row.label} className="flex items-baseline justify-between gap-4">
             <dt className="text-[13.5px] text-ink-body">{row.label}</dt>

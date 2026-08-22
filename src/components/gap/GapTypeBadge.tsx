@@ -16,8 +16,10 @@ export function GapTypeBadge({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-md border border-apricot-line bg-apricot-tint font-semibold text-apricot-text",
-        size === "sm" ? "px-2 py-[3px] text-[12px]" : "px-2.5 py-1 text-[13px]",
+        // A label, not a box: the row already carries one chip, and two boxes
+        // side by side read as two states rather than one state and its kind.
+        "inline-flex items-center gap-1.5 font-semibold text-apricot-text",
+        size === "sm" ? "text-[12.5px]" : "text-[13px]",
         className,
       )}
     >
