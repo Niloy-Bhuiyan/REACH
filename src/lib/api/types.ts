@@ -447,6 +447,8 @@ export interface EvidenceSource {
   handle: string;
   icon: string;
   contributes: string;
+  /** The one-line form used where a row has no space for the full contribution. */
+  shortNote: string;
   state: SourceState;
   stateLabel: string;
   stateDetail: string;

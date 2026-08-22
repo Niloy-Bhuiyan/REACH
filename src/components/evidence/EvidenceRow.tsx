@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { GapTypeBadge } from "@/components/gap/GapTypeBadge";
 import { Chip } from "@/components/ui/Chip";
-import { PixelIcon } from "@/components/ui/PixelIcon";
+import { LetterTile, PixelIcon } from "@/components/ui/PixelIcon";
 import type { EvidenceSource, RequirementRow } from "@/lib/api/types";
 import { cn } from "@/lib/utils/cn";
 
@@ -131,7 +131,11 @@ export function IntegrationRow({
         !tone.border.includes("bg-") && "bg-surface",
       )}
     >
-      <PixelIcon name={source.icon} size={compact ? 22 : 26} />
+      {source.icon ? (
+        <PixelIcon name={source.icon} size={compact ? 22 : 26} />
+      ) : (
+        <LetterTile letter={source.name[0]} size={compact ? 22 : 26} />
+      )}
       <div className="min-w-0 flex-1">
         <p className="flex items-center gap-2 text-[14px] font-semibold text-ink">
           {source.name}

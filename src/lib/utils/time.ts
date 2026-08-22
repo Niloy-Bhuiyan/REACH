@@ -50,10 +50,8 @@ export function ago(iso: string, now = Date.now()): string {
 
 /** "30 Aug" — used only for closing dates, where the calendar date is the point. */
 export function closingDate(iso: string): string {
-  return new Date(iso).toLocaleDateString(undefined, {
-    day: "2-digit",
-    month: "short",
-  });
+  // Day before month, matching every dated stamp in the design.
+  return new Date(iso).toLocaleDateString("en-GB", { day: "2-digit", month: "short" });
 }
 
 /** "9 days" until a deadline, floored at 0. */

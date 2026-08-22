@@ -706,7 +706,8 @@ function currentPlan(): Plan {
 
   const doneCount = resolved.filter((m) => m.state === "done").length;
   const complete = firstOpen === -1;
-  const artefacts = Math.min(db.plan.artefactsTotal, doneCount * 2);
+  // Milestone 1 produces one countable artefact; each later one adds two.
+  const artefacts = Math.min(db.plan.artefactsTotal, Math.max(0, doneCount * 2 - 1));
 
   return {
     ...db.plan,

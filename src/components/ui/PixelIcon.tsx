@@ -8,6 +8,19 @@ import { cn } from "@/lib/utils/cn";
  * Assets are the restored true-alpha family in `/public/art`. Integer scaling only,
  * `image-rendering: pixelated`, no drop shadow, no glow.
  */
+/** Fallback ladder step 2: a lettered tile, because a wrong glyph is worse than none. */
+export function LetterTile({ letter, size = 24 }: { letter: string; size?: number }) {
+  return (
+    <span
+      aria-hidden
+      className="flex shrink-0 items-center justify-center rounded-md border border-group bg-canvas font-display font-bold text-ink-muted"
+      style={{ width: size, height: size, fontSize: Math.round(size * 0.55) }}
+    >
+      {letter}
+    </span>
+  );
+}
+
 export function PixelIcon({
   name,
   size = 24,
@@ -32,6 +45,7 @@ export function PixelIcon({
       width={size}
       height={height ?? size}
       priority={priority}
+      loading="eager"
       aria-hidden={alt === "" ? true : undefined}
       className={cn("pixel shrink-0", className)}
       style={{ width: size, height: height ?? size }}
