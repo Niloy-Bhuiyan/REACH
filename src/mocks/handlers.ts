@@ -211,7 +211,7 @@ export const handlers = [
         skip: pick("skip", 3),
       },
       skipBlockers: ["Swift", "AWS", "Figma"],
-      sources: db.sources.slice(0, 3),
+      sources: db.sources,
       engine: {
         name:
           db.engineSettings.engines.find((e) => e.id === state.activeEngine)?.name ??

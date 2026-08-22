@@ -107,12 +107,12 @@ export function AssistantSurface() {
 
       {/* Scope is stated and changeable, so the user always knows what the answer is about. */}
       <div className="flex shrink-0 items-center gap-2.5 border-b border-line px-6 py-2.5">
-        <Eyebrow tone="violet">Scope</Eyebrow>
+        <Eyebrow tone="brand">Scope</Eyebrow>
         <span className="min-w-0 flex-1 truncate text-[13.5px] text-ink">{subject.subject}</span>
         <Link
           href="/profile"
           onClick={closeAssistant}
-          className="text-[13px] font-semibold text-violet-text hover:underline"
+          className="text-[13px] font-semibold text-brand-text hover:underline"
         >
           Change
         </Link>
@@ -170,8 +170,8 @@ export function AssistantSurface() {
                         className={cn(
                           "inline-flex min-h-[46px] items-center rounded-[10px] px-4 text-[14px] font-semibold",
                           action.tone === "primary"
-                            ? "bg-violet text-surface hover:bg-violet-hover"
-                            : "border-[1.5px] border-control bg-surface text-violet-text hover:bg-violet-tint",
+                            ? "bg-brand text-surface hover:bg-brand-hover"
+                            : "border-[1.5px] border-control bg-surface text-brand-text hover:bg-brand-tint",
                         )}
                       >
                         {action.label}

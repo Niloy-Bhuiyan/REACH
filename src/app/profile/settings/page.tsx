@@ -92,7 +92,7 @@ export default function SettingsPage() {
         <header>
           <Link
             href="/profile"
-            className="inline-flex min-h-[40px] items-center gap-1.5 text-sm font-medium text-violet-text hover:underline"
+            className="inline-flex min-h-[40px] items-center gap-1.5 text-sm font-medium text-brand-text hover:underline"
           >
             <svg
               aria-hidden
@@ -182,7 +182,7 @@ export default function SettingsPage() {
             <h2 className="text-section text-ink">Evidence sources</h2>
             <Link
               href="/profile"
-              className="inline-flex min-h-[36px] items-center text-sm font-medium text-violet-text hover:underline"
+              className="inline-flex min-h-[36px] items-center text-sm font-medium text-brand-text hover:underline"
             >
               Manage in Profile
             </Link>

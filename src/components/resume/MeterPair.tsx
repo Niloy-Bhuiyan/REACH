@@ -33,7 +33,7 @@ export function MeterPair({
         title="ATS Readiness"
         subtitle="the document itself"
         reading={ats}
-        tone="violet"
+        tone="brand"
       />
 
       {jd ? (
@@ -41,7 +41,7 @@ export function MeterPair({
           title="JD Match"
           subtitle={jobLabel ?? "this posting only"}
           reading={jd}
-          tone={jd.value === "strong" ? "violet" : "apricot"}
+          tone={jd.value === "strong" ? "brand" : "apricot"}
         />
       ) : (
         <div className="py-4">
@@ -56,7 +56,7 @@ export function MeterPair({
           <button
             type="button"
             onClick={onPickJob}
-            className="mt-1 min-h-[36px] text-sm font-medium text-violet-text hover:underline"
+            className="mt-1 min-h-[36px] text-sm font-medium text-brand-text hover:underline"
           >
             Pick a job to measure against
           </button>
@@ -75,7 +75,7 @@ function Reading({
   title: string;
   subtitle: string;
   reading: MeterReading;
-  tone: "violet" | "apricot";
+  tone: "brand" | "apricot";
 }) {
   const word = reading.value ? reading.value[0].toUpperCase() + reading.value.slice(1) : "—";
 
@@ -86,7 +86,7 @@ function Reading({
         <span
           className={cn(
             "text-body font-semibold",
-            tone === "violet" ? "text-violet-text" : "text-apricot-text",
+            tone === "brand" ? "text-brand-text" : "text-apricot-text",
           )}
         >
           {word}

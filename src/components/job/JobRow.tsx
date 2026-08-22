@@ -61,7 +61,7 @@ export function FreshnessStamp({
         <button
           type="button"
           onClick={onReverify}
-          className="text-meta font-medium text-violet-text hover:underline"
+          className="text-meta font-medium text-brand-text hover:underline"
         >
           Re-verify
         </button>
@@ -123,7 +123,7 @@ export function JobRow({
     <div
       className={cn(
         "group relative flex items-center gap-4 border-t border-hairline py-3.5 pl-4 transition-colors duration-100 first:border-t-0 hover:bg-row-hover",
-        selected && "bg-violet-tint",
+        selected && "bg-brand-tint",
       )}
     >
       <span

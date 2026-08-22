@@ -148,7 +148,7 @@ export default function ResumePage() {
             {jobId && (
               <Link
                 href={`/jobs/${jobId}`}
-                className="inline-flex min-h-[36px] items-center text-sm font-medium text-violet-text hover:underline"
+                className="inline-flex min-h-[36px] items-center text-sm font-medium text-brand-text hover:underline"
               >
                 Open
               </Link>
@@ -458,12 +458,12 @@ function ResumePreview({
                           key={line.id}
                           className={cn(
                             "text-sm leading-relaxed text-ink-body",
-                            after && "border-l-2 border-violet pl-3",
+                            after && "border-l-2 border-brand pl-3",
                           )}
                         >
                           {after ?? line.text}
                           {after && (
-                            <span className="ml-2 text-meta font-medium text-violet-text">
+                            <span className="ml-2 text-meta font-medium text-brand-text">
                               pending
                             </span>
                           )}

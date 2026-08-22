@@ -79,7 +79,7 @@ export function EvidenceRow({
             {row.unlocksElsewhere && row.fixId && (
               <Link
                 href={`/one-fix/${row.fixId}`}
-                className="text-meta font-medium text-violet-text hover:underline"
+                className="text-meta font-medium text-brand-text hover:underline"
               >
                 Unlocks {row.unlocksElsewhere} other roles
               </Link>
@@ -100,7 +100,7 @@ const SOURCE_TONE = {
   syncing: { dot: "bg-sage", text: "text-ink-muted" },
   attention: { dot: "bg-apricot", text: "text-apricot-text" },
   "not-connected": { dot: "bg-ink-disabled", text: "text-ink-muted" },
-  "missing-costly": { dot: "bg-violet", text: "text-violet-text" },
+  "missing-costly": { dot: "bg-brand", text: "text-brand-text" },
 } as const;
 
 export function IntegrationRow({
@@ -126,7 +126,7 @@ export function IntegrationRow({
           type="button"
           onClick={onAction}
           disabled={pending}
-          className="min-h-[40px] shrink-0 text-sm font-medium text-violet-text hover:underline disabled:text-ink-disabled"
+          className="min-h-[40px] shrink-0 text-sm font-medium text-brand-text hover:underline disabled:text-ink-disabled"
         >
           {pending ? "Working…" : source.action}
         </button>

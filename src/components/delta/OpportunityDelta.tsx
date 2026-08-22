@@ -73,7 +73,7 @@ export function OpportunityDelta({
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="min-h-[44px] shrink-0 text-sm font-medium text-violet-text hover:underline"
+            className="min-h-[44px] shrink-0 text-sm font-medium text-brand-text hover:underline"
           >
             Inspect
           </button>
@@ -95,7 +95,7 @@ export function OpportunityDelta({
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="mt-2 min-h-[36px] text-sm font-medium text-violet-text hover:underline"
+            className="mt-2 min-h-[36px] text-sm font-medium text-brand-text hover:underline"
           >
             Inspect the {delta.gain}
           </button>
@@ -113,7 +113,7 @@ export function OpportunityDelta({
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="min-h-[36px] text-sm font-medium text-violet-text hover:underline"
+            className="min-h-[36px] text-sm font-medium text-brand-text hover:underline"
           >
             Inspect the {delta.gain}
           </button>

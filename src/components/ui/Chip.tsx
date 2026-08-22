@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils/cn";
 
 export type ChipTone =
   | "neutral"
-  | "violet"
+  | "brand"
   | "sage"
   | "apricot"
   | "terracotta"
@@ -12,13 +12,13 @@ export type ChipTone =
  * A chip exists for a verdict or a state — something the eye must catch.
  * Ordinary metadata is plain text, so use `Meta` for that instead.
  *
- * Tints carry the meaning; borders are dropped, because a fill is already
- * a boundary.
+ * Pills, tinted, no border: a fill is already a boundary, and a rounded fill on
+ * warm paper reads as a label rather than a box.
  */
 const TONES: Record<ChipTone, string> = {
   neutral: "bg-surface-sunken text-ink-body",
   stone: "bg-surface-sunken text-ink-muted",
-  violet: "bg-violet-tint text-violet-text",
+  brand: "bg-brand-tint text-brand-text",
   sage: "bg-sage-tint text-sage-text",
   apricot: "bg-apricot-tint text-apricot-text",
   terracotta: "bg-terracotta-tint text-terracotta-text",
@@ -27,18 +27,21 @@ const TONES: Record<ChipTone, string> = {
 export function Chip({
   tone = "neutral",
   mono,
+  size = "sm",
   className,
   children,
 }: {
   tone?: ChipTone;
   mono?: boolean;
+  size?: "sm" | "md";
   className?: string;
   children: React.ReactNode;
 }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-md px-2 py-[3px] text-meta font-medium whitespace-nowrap",
+        "inline-flex items-center gap-1.5 rounded-full font-medium whitespace-nowrap",
+        size === "sm" ? "px-2.5 py-[3px] text-meta" : "px-3.5 py-[7px] text-sm",
         mono && "tnum font-mono",
         TONES[tone],
         className,

@@ -47,7 +47,7 @@ export default function OneFixPage({ params }: { params: Promise<{ id: string }>
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
         <Link
           href={`/jobs/${data.jobId}`}
-          className="inline-flex min-h-[40px] items-center gap-1.5 text-sm font-medium text-violet-text hover:underline"
+          className="inline-flex min-h-[40px] items-center gap-1.5 text-sm font-medium text-brand-text hover:underline"
         >
           <svg
             aria-hidden
@@ -121,7 +121,7 @@ export default function OneFixPage({ params }: { params: Promise<{ id: string }>
               </ol>
               <p className="mt-3 text-sm text-ink-muted">
                 {data.noCourseNote}{" "}
-                <Link href="/roadmap" className="font-medium text-violet-text hover:underline">
+                <Link href="/roadmap" className="font-medium text-brand-text hover:underline">
                   See the certificate verdict
                 </Link>
               </p>

@@ -300,7 +300,7 @@ function Discover() {
                               {fix.fixable ? (
                                 <Link
                                   href={`/one-fix/${fix.id}`}
-                                  className="inline-flex min-h-[36px] items-center text-meta font-medium text-violet-text hover:underline"
+                                  className="inline-flex min-h-[36px] items-center text-meta font-medium text-brand-text hover:underline"
                                 >
                                   {fix.rolesAffected} roles · fixable
                                 </Link>
@@ -438,7 +438,7 @@ function Results({
               .slice(0, 4)
               .join(", ")}
           </span>
-          <span className="shrink-0 text-sm font-medium text-violet-text">Review</span>
+          <span className="shrink-0 text-sm font-medium text-brand-text">Review</span>
         </Link>
       )}
     </div>
@@ -488,7 +488,7 @@ function Group({
         <button
           type="button"
           onClick={() => setShowAll(true)}
-          className="mt-1 min-h-[44px] text-sm font-medium text-violet-text hover:underline"
+          className="mt-1 min-h-[44px] text-sm font-medium text-brand-text hover:underline"
         >
           Show {jobs.length - visible.length} more
         </button>

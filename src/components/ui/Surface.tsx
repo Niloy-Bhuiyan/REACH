@@ -7,9 +7,9 @@ import { PixelIcon } from "./PixelIcon";
  * is done with spacing.
  *
  *   plain    — no border, no fill. The default. Spacing does the grouping.
- *   panel    — white, hairline, gentle radius. For a genuine working surface.
- *   raised   — panel plus a soft shadow. For the one thing that must lead.
- *   accent   — a semantic tint, used sparingly and only where the colour means something.
+ *   panel    — warm white, hairline, generous radius. A genuine working surface.
+ *   raised   — panel plus a soft warm shadow. For the one thing that must lead.
+ *   soft     — a sunken warm tone, for a strip that groups without competing.
  */
 export function Card({
   as: Tag = "div",
@@ -20,13 +20,13 @@ export function Card({
   ...rest
 }: {
   as?: "div" | "section" | "article" | "aside";
-  variant?: "plain" | "panel" | "raised";
-  tint?: "violet" | "sage" | "apricot" | "terracotta" | "read";
+  variant?: "plain" | "panel" | "raised" | "soft";
+  tint?: "brand" | "sage" | "apricot" | "terracotta" | "read";
   className?: string;
   children: React.ReactNode;
 } & React.HTMLAttributes<HTMLDivElement>) {
   const tints = {
-    violet: "bg-violet-tint",
+    brand: "bg-brand-tint",
     sage: "bg-sage-tint",
     apricot: "bg-apricot-tint",
     terracotta: "bg-terracotta-tint",
@@ -36,9 +36,10 @@ export function Card({
   return (
     <Tag
       className={cn(
-        variant !== "plain" && "rounded-xl",
+        variant !== "plain" && "rounded-2xl",
         variant === "panel" && !tint && "border border-line bg-surface",
         variant === "raised" && !tint && "border border-line bg-surface shadow-tier2",
+        variant === "soft" && !tint && "bg-canvas-deep",
         tint && tints[tint],
         className,
       )}
@@ -69,14 +70,14 @@ export function SectionHead({
   title: string;
   detail?: string;
   count?: number;
-  countTone?: "muted" | "violet" | "sage" | "apricot" | "terracotta";
+  countTone?: "muted" | "brand" | "sage" | "apricot" | "terracotta";
   action?: React.ReactNode;
   className?: string;
   as?: "h1" | "h2" | "h3";
 }) {
   const countTones = {
     muted: "text-ink-muted",
-    violet: "text-violet-text",
+    brand: "text-brand-text",
     sage: "text-sage-text",
     apricot: "text-apricot-text",
     terracotta: "text-terracotta-text",
@@ -108,12 +109,12 @@ export function Eyebrow({
   className,
 }: {
   children: React.ReactNode;
-  tone?: "muted" | "violet" | "sage" | "apricot" | "terracotta";
+  tone?: "muted" | "brand" | "sage" | "apricot" | "terracotta";
   className?: string;
 }) {
   const tones = {
     muted: "text-ink-muted",
-    violet: "text-violet-text",
+    brand: "text-brand-text",
     sage: "text-sage-text",
     apricot: "text-apricot-text",
     terracotta: "text-terracotta-text",
@@ -144,7 +145,7 @@ export function Stack({
         "flex flex-col",
         gap === "sm" && "gap-3",
         gap === "md" && "gap-6",
-        gap === "lg" && "gap-10 sm:gap-12",
+        gap === "lg" && "gap-10 sm:gap-14",
         className,
       )}
     >
@@ -167,7 +168,7 @@ export function Page({
     <div
       className={cn(
         "mx-auto w-full px-5 sm:px-8 lg:px-10",
-        width === "wide" ? "max-w-[1180px]" : "max-w-[760px]",
+        width === "wide" ? "max-w-[1200px]" : "max-w-[780px]",
         className,
       )}
     >

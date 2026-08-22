@@ -59,7 +59,7 @@ export function FilterBar({
 
       <Button variant="secondary" size="md" onClick={onOpenSheet}>
         More filters
-        {extra > 0 && <span className="tnum font-semibold text-violet-text">{extra}</span>}
+        {extra > 0 && <span className="tnum font-semibold text-brand-text">{extra}</span>}
       </Button>
 
       <Select
@@ -105,7 +105,7 @@ export function ActiveFilterChips({
           type="button"
           onClick={() => onChange({ [chip.key]: undefined })}
           aria-label={`Remove filter ${chip.label}`}
-          className="inline-flex min-h-[36px] items-center gap-1.5 rounded-lg bg-violet-tint px-2.5 text-meta font-medium text-violet-text transition-colors duration-100 hover:bg-violet-line"
+          className="inline-flex min-h-[36px] items-center gap-1.5 rounded-lg bg-brand-tint px-2.5 text-meta font-medium text-brand-text transition-colors duration-100 hover:bg-brand-line"
         >
           {chip.label}
           <svg
@@ -241,7 +241,7 @@ export function FilterSheet({
                     className={cn(
                       "min-h-[44px] rounded-lg border px-3.5 text-sm transition-colors duration-100",
                       option.active
-                        ? "border-violet-line bg-violet-tint font-medium text-violet-text"
+                        ? "border-brand-line bg-brand-tint font-medium text-brand-text"
                         : "border-control bg-surface text-ink-body hover:bg-surface-sunken",
                     )}
                   >

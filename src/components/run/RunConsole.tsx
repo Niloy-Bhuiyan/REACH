@@ -114,14 +114,14 @@ export function RunSummaryLine({
       <button
         type="button"
         onClick={onOpenLog}
-        className="text-sm font-medium text-violet-text hover:underline"
+        className="text-sm font-medium text-brand-text hover:underline"
       >
         Run log
       </button>
       <button
         type="button"
         onClick={onRerun}
-        className="text-sm font-medium text-violet-text hover:underline"
+        className="text-sm font-medium text-brand-text hover:underline"
       >
         Re-run
       </button>

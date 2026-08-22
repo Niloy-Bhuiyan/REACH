@@ -93,7 +93,7 @@ export default function JobDetailPage({ params }: { params: Promise<{ id: string
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
         <Link
           href="/discover"
-          className="inline-flex min-h-[40px] items-center gap-1.5 text-sm font-medium text-violet-text hover:underline"
+          className="inline-flex min-h-[40px] items-center gap-1.5 text-sm font-medium text-brand-text hover:underline"
         >
           <svg
             aria-hidden

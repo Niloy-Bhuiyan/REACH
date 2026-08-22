@@ -66,7 +66,7 @@ function formatMinutes(minutes: number) {
 
 const CERT: Record<CertificateVerdictValue, { label: string; tone: string }> = {
   recommended: { label: "Recommended", tone: "text-sage-text" },
-  optional: { label: "Optional", tone: "text-violet-text" },
+  optional: { label: "Optional", tone: "text-brand-text" },
   unnecessary: { label: "Unnecessary", tone: "text-ink-muted" },
   "low-roi": { label: "Low ROI", tone: "text-terracotta-text" },
 };
@@ -93,7 +93,7 @@ export function CertificateVerdict({
         <button
           type="button"
           onClick={onHowWeDecide}
-          className="mt-1 min-h-[36px] text-sm font-medium text-violet-text hover:underline"
+          className="mt-1 min-h-[36px] text-sm font-medium text-brand-text hover:underline"
         >
           How we decide
         </button>

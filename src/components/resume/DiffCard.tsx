@@ -97,7 +97,7 @@ export function DiffCard({
             {blocked && (
               <a
                 href="/profile"
-                className="ml-auto min-h-[36px] content-center text-sm font-medium text-violet-text hover:underline"
+                className="ml-auto min-h-[36px] content-center text-sm font-medium text-brand-text hover:underline"
               >
                 Add the evidence
               </a>

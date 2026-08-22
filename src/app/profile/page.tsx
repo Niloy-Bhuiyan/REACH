@@ -87,7 +87,7 @@ export default function ProfilePage() {
 
           {/* The costly gap, named once, with one action. */}
           <p className="mt-4 flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
-            <span className="text-body font-medium text-violet-text">{data.biggestGap.title}</span>
+            <span className="text-body font-medium text-brand-text">{data.biggestGap.title}</span>
             <Meta>{data.biggestGap.cost}</Meta>
             <Button
               variant="link"
@@ -216,7 +216,7 @@ export default function ProfilePage() {
             <span className="min-w-0 flex-1 truncate text-sm text-ink-muted">
               Who runs the reasoning — configured in Settings
             </span>
-            <span className="text-sm font-medium text-violet-text">Open</span>
+            <span className="text-sm font-medium text-brand-text">Open</span>
           </Link>
         </section>
       </Stack>

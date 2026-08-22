@@ -6,19 +6,19 @@ import { cn } from "@/lib/utils/cn";
  */
 export function Meter({
   fill,
-  tone = "violet",
+  tone = "brand",
   label,
   className,
   height = 5,
 }: {
   fill: number | null;
-  tone?: "violet" | "sage" | "apricot" | "neutral";
+  tone?: "brand" | "sage" | "apricot" | "neutral";
   label: string;
   className?: string;
   height?: number;
 }) {
   const tones = {
-    violet: "bg-violet",
+    brand: "bg-brand",
     sage: "bg-sage",
     apricot: "bg-apricot",
     neutral: "bg-ink",
