@@ -13,6 +13,7 @@ import { useSetStatusLine } from "@/components/shell/AppShell";
 import { Arrow, Button, ButtonLink } from "@/components/ui/Button";
 import { Chip, Mono } from "@/components/ui/Chip";
 import { PixelIcon } from "@/components/ui/PixelIcon";
+import { Disclosure } from "@/components/ui/Disclosure";
 import { Card, Eyebrow, Hairline, SectionHead } from "@/components/ui/Surface";
 import { Skeleton, SkeletonRows } from "@/components/ui/States";
 import { VerdictBadge } from "@/components/verdict/VerdictBadge";
@@ -382,7 +383,6 @@ function JobPanel({
                 glyph="px-cv"
                 glyphSize={26}
                 title="Hard requirements"
-                detail="Every row shows the evidence behind it"
                 className="px-4 pt-4 pb-2"
                 action={
                   <Chip tone={detail.evidence.met === detail.evidence.total ? "sage" : "apricot"}>
@@ -469,59 +469,76 @@ function JobPanel({
           </Card>
         </div>
 
-        {/* Provenance is a rail, not a footnote. */}
+        {/*
+          Provenance is a rail, not a footnote — but it is not the decision either.
+          The live/stale state stays on the surface because it changes whether you
+          should act today; the dates and the evidence tally wait behind it.
+        */}
         <aside className="flex min-w-0 flex-col gap-4">
-          <Card className="p-4">
-            <div className="flex items-center gap-2">
+          <Card className="px-4">
+            <div className="flex items-center gap-2 pt-4">
               <span aria-hidden className="h-[7px] w-[7px] rounded-full bg-sage" />
               <Eyebrow tone="sage">Listing is live</Eyebrow>
+              <FreshnessStamp
+                iso={detail.provenance.verifiedAt}
+                delisted={detail.provenance.delisted}
+                className="ml-auto"
+              />
             </div>
-            <dl className="mt-2.5 flex flex-col">
-              {[
-                { label: "Source", value: detail.provenance.label },
-                { label: "First seen", value: closingDate(detail.provenance.firstSeenAt) },
-                { label: "Last verified", value: `${ago(detail.provenance.verifiedAt)}` },
-                { label: "Posting age", value: `${detail.postedDaysAgo} days` },
-                ...(detail.provenance.closesAt
-                  ? [{ label: "Deadline", value: closingDate(detail.provenance.closesAt) }]
-                  : []),
-              ].map((row, i) => (
-                <div key={row.label}>
-                  {i > 0 && <Hairline />}
-                  <div className="flex items-baseline justify-between gap-3 py-2">
-                    <dt className="text-[13px] text-ink-body">{row.label}</dt>
-                    <dd className="tnum font-mono text-[12.5px] text-ink uppercase">{row.value}</dd>
+            <Disclosure
+              label="Where this came from"
+              detail={detail.provenance.label}
+              className="mt-3"
+            >
+              <dl className="flex flex-col pt-1">
+                {[
+                  { label: "First seen", value: closingDate(detail.provenance.firstSeenAt) },
+                  { label: "Last verified", value: `${ago(detail.provenance.verifiedAt)}` },
+                  { label: "Posting age", value: `${detail.postedDaysAgo} days` },
+                  ...(detail.provenance.closesAt
+                    ? [{ label: "Deadline", value: closingDate(detail.provenance.closesAt) }]
+                    : []),
+                ].map((row, i) => (
+                  <div key={row.label}>
+                    {i > 0 && <Hairline />}
+                    <div className="flex items-baseline justify-between gap-3 py-2">
+                      <dt className="text-[13px] text-ink-body">{row.label}</dt>
+                      <dd className="tnum font-mono text-[12.5px] text-ink uppercase">
+                        {row.value}
+                      </dd>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </dl>
-            {detail.provenance.dedupeNote && (
-              <p className="mt-2 border-t border-hairline pt-2.5 text-[12.5px] leading-snug text-ink-muted">
-                {detail.provenance.dedupeNote}
-              </p>
-            )}
-            <FreshnessStamp
-              iso={detail.provenance.verifiedAt}
-              delisted={detail.provenance.delisted}
-              className="mt-2 block"
-            />
+                ))}
+              </dl>
+              {detail.provenance.dedupeNote && (
+                <p className="mt-2 border-t border-hairline pt-2.5 text-[12.5px] leading-snug text-ink-muted">
+                  {detail.provenance.dedupeNote}
+                </p>
+              )}
+            </Disclosure>
           </Card>
 
           {detail.evidenceUsed.length > 0 && detail.verdict !== "skip" && (
-            <Card className="p-4">
-              <Eyebrow>Evidence used here</Eyebrow>
-              <ul className="mt-2.5 flex flex-col gap-2">
-                {detail.evidenceUsed.map((row) => (
-                  <li key={row.label} className="flex items-center gap-2.5">
-                    <PixelIcon name={row.icon} size={20} />
-                    <span className="flex-1 text-[13.5px] font-semibold text-ink">{row.label}</span>
-                    <Mono>{row.detail}</Mono>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-3 text-[12.5px] leading-snug text-ink-muted">
-                Every ✓ above links to the row it came from. Nothing is inferred.
-              </p>
+            <Card className="px-4">
+              <Disclosure
+                label="Evidence used here"
+                detail={detail.evidenceUsed.map((row) => row.label).join(" · ")}
+              >
+                <ul className="flex flex-col gap-2 pt-1">
+                  {detail.evidenceUsed.map((row) => (
+                    <li key={row.label} className="flex items-center gap-2.5">
+                      <PixelIcon name={row.icon} size={20} />
+                      <span className="flex-1 text-[13.5px] font-semibold text-ink">
+                        {row.label}
+                      </span>
+                      <Mono>{row.detail}</Mono>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-3 text-[12.5px] leading-snug text-ink-muted">
+                  Every tick above links to the row it came from. Nothing is inferred.
+                </p>
+              </Disclosure>
             </Card>
           )}
 
