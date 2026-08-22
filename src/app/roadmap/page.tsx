@@ -148,7 +148,6 @@ export default function RoadmapPage() {
           <SectionHead
             glyph="px-map"
             title="The plan"
-            detail="Week by week · each milestone names the evidence it produces"
           />
           <ol className="mt-4 flex flex-col">
             {data.milestones.map((milestone, i) => (

@@ -156,7 +156,6 @@ export default function ProfilePage() {
             <SectionHead
               glyph="px-cv"
               title="Evidence sources"
-              detail="What your fit is judged from"
               action={
                 <div className="hidden gap-1.5 sm:flex">
                   <Chip tone="sage">3 connected</Chip>
@@ -190,7 +189,6 @@ export default function ProfilePage() {
             <SectionHead
               glyph="g-engine"
               title="AI engine connections"
-              detail="Who runs the analysis — never evidence about you"
               action={<Mono>Configured in Settings</Mono>}
             />
             <Card className="mt-3 p-4">
@@ -318,7 +316,6 @@ export default function ProfilePage() {
             <SectionHead
               glyph="px-github"
               title="Skills, and the evidence behind each"
-              detail="A claim with no source is treated as unproven"
             />
             <Card className="mt-3 overflow-hidden">
               <table className="w-full border-collapse text-left">

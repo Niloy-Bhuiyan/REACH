@@ -5,6 +5,7 @@ import { Arrow, Button } from "@/components/ui/Button";
 import { Chip, Mono } from "@/components/ui/Chip";
 import { PixelIcon } from "@/components/ui/PixelIcon";
 import { Eyebrow } from "@/components/ui/Surface";
+import { Disclosure } from "@/components/ui/Disclosure";
 import type { CertificateVerdictValue, Milestone, Resource } from "@/lib/api/types";
 import { useReducedMotion } from "@/lib/hooks";
 import { cn } from "@/lib/utils/cn";
@@ -114,21 +115,28 @@ export function CertificateVerdict({
   reason,
   onHowWeDecide,
   compact,
+  bare,
 }: {
   verdict: CertificateVerdictValue;
   reason: string;
   onHowWeDecide?: () => void;
   compact?: boolean;
+  /** Inside a disclosure the row above already carries the box and the word. */
+  bare?: boolean;
 }) {
   const meta = CERT[verdict];
   return (
-    <div className="rounded-[12px] border border-line bg-surface p-3.5">
-      <div className="flex items-center gap-2.5">
-        <PixelIcon name={meta.glyph} size={compact ? 22 : 26} />
-        <Eyebrow>Certificate verdict</Eyebrow>
-        <Chip tone={meta.tone}>{meta.label}</Chip>
-      </div>
-      <p className="mt-2 text-[13px] leading-relaxed text-ink-body">{reason}</p>
+    <div className={bare ? "" : "rounded-[12px] border border-line bg-surface p-3.5"}>
+      {!bare && (
+        <div className="flex items-center gap-2.5">
+          <PixelIcon name={meta.glyph} size={compact ? 22 : 26} />
+          <Eyebrow>Certificate verdict</Eyebrow>
+          <Chip tone={meta.tone}>{meta.label}</Chip>
+        </div>
+      )}
+      <p className={`text-[13px] leading-relaxed text-ink-body ${bare ? "" : "mt-2"}`}>
+        {reason}
+      </p>
       {onHowWeDecide && (
         <button
           type="button"
@@ -166,6 +174,8 @@ export function MilestoneCard({
   pending: boolean;
 }) {
   const open = milestone.state === "current";
+  const free = milestone.resources.filter((resource) => resource.cost === "free");
+  const paid = milestone.resources.filter((resource) => resource.cost !== "free");
 
   return (
     <li className="relative flex gap-4 pb-4">
@@ -236,21 +246,44 @@ export function MilestoneCard({
 
         {open && (
           <>
-            {milestone.resources.length > 0 && (
+            {/*
+              The free resource is the recommendation, so it stays on the surface.
+              The paid alternative and the certificate verdict are answers to
+              questions the user may not be asking yet, so they wait one row down.
+            */}
+            {free.length > 0 && (
               <div className="mt-3 flex flex-col gap-2">
-                {milestone.resources.map((resource) => (
+                {free.map((resource) => (
                   <ResourceCard key={resource.title} resource={resource} />
                 ))}
               </div>
             )}
 
-            {milestone.certificate && (
-              <div className="mt-2">
-                <CertificateVerdict
-                  verdict={milestone.certificate.verdict}
-                  reason={milestone.certificate.reason}
-                  onHowWeDecide={onHowWeDecide}
-                />
+            {(paid.length > 0 || milestone.certificate) && (
+              <div className="mt-3">
+                {paid.map((resource) => (
+                  <Disclosure
+                    key={resource.title}
+                    label="Is there a paid option?"
+                    detail={`${resource.costLabel} · not required`}
+                  >
+                    <ResourceCard resource={resource} />
+                  </Disclosure>
+                ))}
+
+                {milestone.certificate && (
+                  <Disclosure
+                    label="Do I need a certificate?"
+                    detail={CERT[milestone.certificate.verdict].label}
+                  >
+                    <CertificateVerdict
+                      verdict={milestone.certificate.verdict}
+                      reason={milestone.certificate.reason}
+                      onHowWeDecide={onHowWeDecide}
+                      bare
+                    />
+                  </Disclosure>
+                )}
               </div>
             )}
 

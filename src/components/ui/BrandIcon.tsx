@@ -79,6 +79,7 @@ export function BrandIcon({
       width={size}
       height={size}
       fill="currentColor"
+      data-brand={name}
       role={title ? "img" : undefined}
       aria-hidden={title ? undefined : true}
       aria-label={title}

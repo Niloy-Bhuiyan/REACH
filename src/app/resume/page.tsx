@@ -300,7 +300,7 @@ export default function ResumePage() {
       {!isMobile && (
       <div className="mt-5 grid gap-5 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:grid-cols-[minmax(0,320px)_minmax(0,1fr)_minmax(0,380px)] xl:grid-cols-[minmax(0,360px)_minmax(0,1fr)_minmax(0,440px)]">
         <section className="min-w-0">
-          <SectionHead glyph="g-reorder" glyphSize={24} title="Editor" detail="Reorder sections · click to edit" />
+          <SectionHead glyph="g-reorder" glyphSize={24} title="Editor" />
           <ul className="mt-3 flex flex-col gap-1.5">
             {sections.map((section, i) => (
               <EditorRow

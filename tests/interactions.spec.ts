@@ -167,16 +167,23 @@ test.describe("One Fix Away", () => {
 test.describe("Roadmap", () => {
   test("only the current milestone is expanded, and the free resource leads", async ({ page }) => {
     await goto(page, "/roadmap", "Make your SQL legible");
+    // The recommendation is on the surface; the money questions are one row down,
+    // named rather than hidden.
     await expect(page.getByText("Best free resource")).toBeVisible();
-    await expect(page.getByText(/Paid alternative — only if/)).toBeVisible();
-    await expect(page.getByText("Certificate verdict")).toBeVisible();
-    await expect(page.getByText("Unnecessary")).toBeVisible();
+    await expect(page.getByRole("button", { name: /Is there a paid option/ })).toBeVisible();
+    await expect(page.getByRole("button", { name: /Do I need a certificate/ })).toBeVisible();
+    await expect(page.getByText(/Paid alternative — only if/)).toBeHidden();
+
+    await page.getByRole("button", { name: /Do I need a certificate/ }).click();
+    await expect(page.getByText("None of the 8 affected postings")).toBeVisible();
+
     // The locked step stays one row tall — its detail is not rendered.
     await expect(page.getByText("Two suggested lines in the postings")).toBeHidden();
   });
 
   test("how we decide is inspectable", async ({ page }) => {
     await goto(page, "/roadmap", "Make your SQL legible");
+    await page.getByRole("button", { name: /Do I need a certificate/ }).click();
     await page.getByRole("button", { name: /How we decide/ }).click();
     await expect(page.getByRole("dialog", { name: /certificate verdicts/i })).toBeVisible();
     await page.keyboard.press("Escape");
@@ -326,14 +333,15 @@ test.describe("Contextual assistant", () => {
 test.describe("Settings", () => {
   test("provider marks appear here and nowhere else", async ({ page }) => {
     await goto(page, "/profile/settings", "Analysis engine");
-    const providerMarks = page.locator('img[src*="px-claude"], img[src*="px-chatgpt"]');
-    expect(await providerMarks.count()).toBeGreaterThan(0);
+    // Engine marks are real brand SVGs now, matched by the mark rather than a filename.
+    const MARKS = '[data-brand="claude"], [data-brand="openai"]';
+    expect(await page.locator(MARKS).count()).toBeGreaterThan(0);
 
     await goto(page, "/", "Your Focus");
-    expect(await page.locator('img[src*="px-claude"], img[src*="px-chatgpt"]').count()).toBe(0);
+    expect(await page.locator(MARKS).count()).toBe(0);
 
     await goto(page, "/profile", "Niloy Mahmud");
-    expect(await page.locator('img[src*="px-claude"], img[src*="px-chatgpt"]').count()).toBe(0);
+    expect(await page.locator(MARKS).count()).toBe(0);
   });
 
   test("every engine declares its exposure and the fallback is explicit", async ({ page }) => {
@@ -374,23 +382,22 @@ test.describe("Settings", () => {
 test.describe("Focus", () => {
   test("lists show exactly three rows plus a working see-all", async ({ page }) => {
     await goto(page, "/", "Your Focus");
-    // Exactly 3 preview rows plus the see-all CTA.
     const applyCard = page
       .locator("div")
-      .filter({ hasText: "Great matches you can apply for today." })
-      .filter({ has: page.getByRole("link", { name: /Browse More Opportunities/ }) })
+      .filter({ has: page.getByRole("heading", { name: "Apply Now" }) })
+      .filter({ has: page.getByRole("link", { name: /Browse all opportunities/ }) })
       .last();
     // Exactly three preview rows plus the see-all CTA.
     expect(await applyCard.getByRole("link").count()).toBe(4);
 
-    await page.getByRole("link", { name: /Browse More Opportunities/ }).click();
+    await page.getByRole("link", { name: /Browse all opportunities/ }).click();
     await expect(page).toHaveURL(/verdict=apply-now/);
   });
 
   test("the analysis engine is one status row that links to Settings", async ({ page }) => {
     await goto(page, "/", "Your Focus");
     await expect(page.getByText("REACH-hosted engine")).toBeVisible();
-    await page.getByRole("link", { name: "Change in Settings" }).click();
+    await page.getByRole("link", { name: "Settings", exact: true }).click();
     await expect(page).toHaveURL(/\/profile\/settings/);
   });
 
