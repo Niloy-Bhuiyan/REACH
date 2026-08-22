@@ -11,7 +11,8 @@ import { Arrow, Button, ButtonLink } from "@/components/ui/Button";
 import { Chip, Mono } from "@/components/ui/Chip";
 import { Meter } from "@/components/ui/Meter";
 import { Sheet, SheetGrip } from "@/components/ui/Overlay";
-import { LetterTile, PixelIcon } from "@/components/ui/PixelIcon";
+import { SourceGlyph } from "@/components/evidence/Marks";
+import { PixelIcon } from "@/components/ui/PixelIcon";
 import { Card, Eyebrow, Hairline, SectionHead } from "@/components/ui/Surface";
 import { Skeleton, SkeletonRows } from "@/components/ui/States";
 import { connectSource, getEngines, getProfile, listSources, reconnectSource } from "@/lib/api";
@@ -460,7 +461,7 @@ function SourceRow({
         )}
       >
         <div className="flex items-center gap-2.5">
-          {source.icon ? <PixelIcon name={source.icon} size={24} /> : <LetterTile letter={source.name[0]} size={24} />}
+          <SourceGlyph id={source.id} icon={source.icon} name={source.name} size={24} />
           <span className="min-w-0">
             <span className="block text-[14.5px] font-semibold text-ink">{source.name}</span>
             <span className="block truncate text-[12.5px] text-ink-muted">{source.handle}</span>

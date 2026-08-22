@@ -9,7 +9,8 @@ import { Arrow, Button } from "@/components/ui/Button";
 import { Chip, Mono } from "@/components/ui/Chip";
 import { Input, Select, Toggle } from "@/components/ui/Controls";
 import { Sheet, SheetGrip } from "@/components/ui/Overlay";
-import { LetterTile, PixelIcon } from "@/components/ui/PixelIcon";
+import { EngineGlyph, SourceGlyph } from "@/components/evidence/Marks";
+import { PixelIcon } from "@/components/ui/PixelIcon";
 import { Card, Eyebrow, Hairline, SectionHead } from "@/components/ui/Surface";
 import { ErrorNotice, Skeleton, SkeletonRows } from "@/components/ui/States";
 import {
@@ -253,11 +254,7 @@ export default function SettingsPage() {
                   <li key={source.id}>
                     {i > 0 && <Hairline />}
                     <div className="flex flex-wrap items-center gap-3 px-4 py-3">
-                      {source.icon ? (
-                        <PixelIcon name={source.icon} size={24} />
-                      ) : (
-                        <LetterTile letter={source.name[0]} size={24} />
-                      )}
+                      <SourceGlyph id={source.id} icon={source.icon} name={source.name} size={24} />
                       <span className="min-w-0 flex-1">
                         <span className="block text-[14px] font-semibold text-ink">
                           {source.name}
@@ -459,7 +456,7 @@ function EngineRow({
             className="h-[18px] w-[18px] accent-[#6C63D8]"
           />
         </label>
-        <PixelIcon name={engine.icon} size={28} className="mt-0.5" />
+        <EngineGlyph id={engine.id} icon={engine.icon} size={28} className="mt-0.5" />
         <div className="min-w-0 flex-1">
           <p className="flex flex-wrap items-center gap-2 text-[15px] font-semibold text-ink">
             {engine.name}
@@ -592,7 +589,7 @@ function EngineChoiceSheet({
             <li key={engine.id}>
               {i > 0 && <Hairline />}
               <div className="flex items-center gap-3 py-3">
-                <PixelIcon name={engine.icon} size={26} />
+                <EngineGlyph id={engine.id} icon={engine.icon} size={26} />
                 <span className="min-w-0 flex-1">
                   <span className="block text-[14.5px] font-semibold text-ink">{engine.name}</span>
                   <span className="block text-[12.5px] text-ink-muted">
