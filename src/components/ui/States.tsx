@@ -1,10 +1,7 @@
 import { cn } from "@/lib/utils/cn";
 import { PixelIcon } from "./PixelIcon";
 
-/**
- * Loading is a skeleton bar at the real row geometry, 1.2 s shimmer.
- * Runs use the Activity Console instead. Never a spinner for anything over a second.
- */
+/** Skeletons sit at the real row geometry so nothing jumps when data lands. */
 export function Skeleton({
   className,
   style,
@@ -15,7 +12,6 @@ export function Skeleton({
   return <div aria-hidden className={cn("skeleton", className)} style={style} />;
 }
 
-/** Skeleton rows at the geometry of the list they replace. */
 export function SkeletonRows({
   rows = 3,
   height = 56,
@@ -35,13 +31,12 @@ export function SkeletonRows({
 }
 
 /**
- * Empty state: a scenery vignette, one sentence naming what is missing, and exactly one
- * action. Never a blank card, never a spinner. Where the state has a cause, it is named
- * and quantified — "Posted under 3 days removes 51 of them" — never a shrug.
+ * Empty states are where the pixel art earns its place: one piece of art, one
+ * sentence naming what is missing, one action. Never a blank card, never a spinner.
  */
 export function EmptyState({
   glyph,
-  glyphSize = 72,
+  glyphSize = 64,
   title,
   body,
   children,
@@ -51,36 +46,25 @@ export function EmptyState({
   glyphSize?: number;
   title: string;
   body?: React.ReactNode;
-  /** Exactly one primary action, plus at most one quiet alternative. */
   children?: React.ReactNode;
   className?: string;
 }) {
   return (
-    <div
-      className={cn(
-        "flex flex-col items-center gap-3 rounded-[14px] border border-line bg-surface px-6 py-10 text-center",
-        className,
-      )}
-    >
-      <PixelIcon name={glyph} size={glyphSize} />
-      <h3 className="font-display text-[22px] leading-tight font-bold text-ink">{title}</h3>
-      {body && (
-        <div className="max-w-[46ch] text-[14.5px] leading-relaxed text-ink-body">{body}</div>
-      )}
-      {children && <div className="mt-2 flex flex-col items-center gap-2">{children}</div>}
+    <div className={cn("flex flex-col items-center gap-3 py-14 text-center", className)}>
+      <PixelIcon name={glyph} size={glyphSize} className="opacity-90" />
+      <h3 className="mt-1 text-section text-ink">{title}</h3>
+      {body && <div className="max-w-[44ch] text-body text-ink-body">{body}</div>}
+      {children && <div className="mt-3 flex flex-col items-center gap-2.5">{children}</div>}
     </div>
   );
 }
 
-/**
- * Error: 2px terracotta border, terracotta tint, a 13px message with a word.
- * Never a red border alone.
- */
+/** An error names what happened and what is still true. It is quiet, not alarming. */
 export function ErrorNotice({
   title,
   children,
   actions,
-  glyph = "g-failed",
+  glyph,
   className,
 }: {
   title: string;
@@ -92,27 +76,21 @@ export function ErrorNotice({
   return (
     <div
       role="alert"
-      className={cn(
-        "flex gap-3.5 rounded-[14px] border-2 border-terracotta-line bg-terracotta-tint p-4",
-        className,
-      )}
+      className={cn("rounded-xl border border-terracotta-line bg-terracotta-tint p-4", className)}
     >
-      <PixelIcon name={glyph} size={32} />
-      <div className="min-w-0 flex-1">
-        <p className="text-[15px] font-bold text-terracotta-text">{title}</p>
-        {children && (
-          <div className="mt-1 text-[13px] leading-relaxed text-ink-body">{children}</div>
-        )}
-        {actions && <div className="mt-3 flex flex-wrap gap-2">{actions}</div>}
+      <div className="flex gap-3">
+        {glyph && <PixelIcon name={glyph} size={26} className="mt-0.5" />}
+        <div className="min-w-0 flex-1">
+          <p className="text-subhead text-terracotta-text">{title}</p>
+          {children && <div className="mt-1 text-sm text-ink-body">{children}</div>}
+          {actions && <div className="mt-3 flex flex-wrap gap-2">{actions}</div>}
+        </div>
       </div>
     </div>
   );
 }
 
-/**
- * Stale: an apricot chip plus a Re-verify action. Content stays visible —
- * it is never silently hidden.
- */
+/** Stale content stays visible and offers a re-check. It is never hidden. */
 export function StaleNotice({
   children,
   action,
@@ -123,16 +101,8 @@ export function StaleNotice({
   className?: string;
 }) {
   return (
-    <div
-      className={cn(
-        "flex flex-wrap items-center gap-2.5 rounded-[10px] border border-apricot-line bg-apricot-tint px-3 py-2",
-        className,
-      )}
-    >
-      <PixelIcon name="g-stale" size={20} />
-      <span className="tnum font-mono text-[12px] tracking-tight text-apricot-text uppercase">
-        {children}
-      </span>
+    <div className={cn("flex flex-wrap items-center gap-2.5", className)}>
+      <span className="tnum font-mono text-meta text-apricot-text">{children}</span>
       {action}
     </div>
   );

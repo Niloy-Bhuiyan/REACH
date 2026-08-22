@@ -1,93 +1,124 @@
 @import "tailwindcss";
 
 /* ============================================================================
-   REACH Design DNA v2 — token layer.
-   These values are the locked system. Do not introduce a hex outside this file.
+   REACH — visual system.
+
+   Structure is carried by typography, spacing and alignment. Borders, fills and
+   colour are the exception, not the default. Semantic colour means something:
+   sage is Apply Now, amber is One Fix Away, terracotta is Skip, violet is action.
+   Everything structural is neutral.
    ========================================================================= */
 
 @theme {
-  /* Surfaces */
-  --color-canvas: #f5f3fb;
-  --color-surface: #fbfafe;
-  --color-surface-inset: #ffffff;
+  /* ── Surfaces: neutral, quiet, mostly white ───────────────────────────── */
+  --color-canvas: #f6f6f8;
+  --color-surface: #ffffff;
+  --color-surface-sunken: #f1f1f4;
   --color-surface-read: #fffdf8;
-  --color-surface-read-border: #e7e1d6;
-  --color-console: #1b233a;
-  --color-console-text: #c4cbe0;
-  --color-console-meta: #7c88ac;
+  --color-surface-read-border: #ece7dc;
+  --color-console: #16161c;
+  --color-console-text: #d3d3da;
+  --color-console-meta: #7c7c88;
   --color-console-accent: #9aa0f0;
-  --color-console-ok: #8fbf9a;
-  --color-table-head: #f5f3fb;
-  --color-row-hover: #f7f5fd;
+  --color-console-ok: #86c39a;
+  --color-table-head: #fafafb;
+  --color-row-hover: #fafafb;
 
-  /* Borders */
-  --color-line: #e7e4f0;
-  --color-hairline: #f1eff8;
-  --color-group: #dcd8ec;
-  --color-control: #c3bcec;
+  /* ── Lines: hairlines, not frames ─────────────────────────────────────── */
+  --color-line: #ececef;
+  --color-hairline: #f2f2f4;
+  --color-group: #e2e2e7;
+  --color-control: #d8d8de;
   --color-active: #574fc0;
 
-  /* Ink */
-  --color-ink: #101b49;
-  --color-ink-link: #2e2a8c;
-  --color-ink-body: #4a5170;
-  --color-ink-muted: #666c8c;
-  --color-ink-placeholder: #6e7490;
-  --color-ink-disabled: #8a8fa8;
+  /* ── Ink: one near-black, three greys ─────────────────────────────────── */
+  --color-ink: #16161a;
+  --color-ink-link: #16161a;
+  --color-ink-body: #55555f;
+  --color-ink-muted: #86868f;
+  --color-ink-placeholder: #8b8b95;
+  --color-ink-disabled: #b0b0b8;
 
-  /* Violet — brand & action only, never a verdict */
-  --color-violet: #6c63d8;
-  --color-violet-hover: #5a51c0;
-  --color-violet-text: #574fc0;
-  --color-violet-tint: #f3effc;
-  --color-violet-line: #ded7f6;
+  /* ── Violet — action and brand only. Never a verdict. ─────────────────── */
+  --color-violet: #5b53d1;
+  --color-violet-hover: #4c44be;
+  --color-violet-text: #4f47bd;
+  --color-violet-tint: #f2f1fd;
+  --color-violet-line: #ddd9f7;
 
-  /* Sage — Apply Now / eligible / verified / connected / free */
-  --color-sage: #3f7d53;
-  --color-sage-hover: #366b49;
-  --color-sage-text: #2e6742;
-  --color-sage-tint: #eef5ef;
-  --color-sage-line: #d3e4d8;
+  /* ── Sage — Apply Now, met, verified, free ────────────────────────────── */
+  --color-sage: #2f7d52;
+  --color-sage-hover: #276a45;
+  --color-sage-text: #266b45;
+  --color-sage-tint: #eef6f0;
+  --color-sage-line: #d3e6da;
 
-  /* Apricot — One Fix Away / roadmap / improvement / stale */
-  --color-apricot: #c4762f;
-  --color-apricot-hover: #ae6828;
-  --color-apricot-text: #a85c22;
-  --color-apricot-tint: #fdf4ea;
-  --color-apricot-line: #f0dcc2;
-  --color-apricot-deco: #e0904f;
+  /* ── Amber — One Fix Away, roadmap, stale, attention ──────────────────── */
+  --color-apricot: #b4721f;
+  --color-apricot-hover: #9d6318;
+  --color-apricot-text: #96601c;
+  --color-apricot-tint: #fdf5e9;
+  --color-apricot-line: #f0e2c6;
+  --color-apricot-deco: #d69a49;
 
-  /* Terracotta — Skip / hard blockers / destructive. Quiet buttons only. */
-  --color-terracotta: #a33f28;
-  --color-terracotta-text: #a33f28;
-  --color-terracotta-tint: #fbede9;
-  --color-terracotta-line: #e3bcb2;
+  /* ── Terracotta — Skip, hard blockers, destructive. Quiet only. ───────── */
+  --color-terracotta: #a4402a;
+  --color-terracotta-text: #9c3d28;
+  --color-terracotta-tint: #fdf0ed;
+  --color-terracotta-line: #f0d6ce;
 
-  /* Meters */
-  --color-track: #edeaf7;
+  --color-track: #ececef;
 
-  /* Type */
-  --font-display: var(--font-baloo), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  /* ── Type: one interface family, one mono ─────────────────────────────── */
+  --font-display: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
-  /* Motion — DNA v2 §07 */
+  /* ── A real scale. Eight steps, each doing distinct work. ─────────────── */
+  --text-display: 2.5rem; /* 40 — one per screen, at most */
+  --text-display--line-height: 1.08;
+  --text-display--letter-spacing: -0.032em;
+  --text-display--font-weight: 600;
+
+  --text-title: 1.75rem; /* 28 — page title */
+  --text-title--line-height: 1.2;
+  --text-title--letter-spacing: -0.024em;
+  --text-title--font-weight: 600;
+
+  --text-section: 1.1875rem; /* 19 — section head */
+  --text-section--line-height: 1.35;
+  --text-section--letter-spacing: -0.014em;
+  --text-section--font-weight: 600;
+
+  --text-subhead: 1rem; /* 16 — row title, card head */
+  --text-subhead--line-height: 1.4;
+  --text-subhead--letter-spacing: -0.008em;
+  --text-subhead--font-weight: 550;
+
+  --text-body: 0.9375rem; /* 15 — body */
+  --text-body--line-height: 1.6;
+
+  --text-sm: 0.84375rem; /* 13.5 — secondary body, table text */
+  --text-sm--line-height: 1.5;
+
+  --text-meta: 0.78125rem; /* 12.5 — labels, meta, mono */
+  --text-meta--line-height: 1.45;
+
   --ease-enter: cubic-bezier(0.2, 0.8, 0.2, 1);
   --ease-exit: cubic-bezier(0.4, 0, 1, 1);
 
-  /* Breakpoints matching the seven-width responsive matrix */
-  --breakpoint-xs: 30rem; /* 480 */
-  --breakpoint-sm: 48rem; /* 768 */
-  --breakpoint-md: 64rem; /* 1024 */
-  --breakpoint-lg: 80rem; /* 1280 */
-  --breakpoint-xl: 90rem; /* 1440 */
+  --breakpoint-xs: 30rem;
+  --breakpoint-sm: 48rem;
+  --breakpoint-md: 64rem;
+  --breakpoint-lg: 80rem;
+  --breakpoint-xl: 90rem;
 }
 
-/* Elevation tiers — 1 flat, 2 grouped, 3 overlay. Max one tier per row. */
+/* Elevation exists for overlays. Ordinary content does not float. */
 @theme {
-  --shadow-tier2: 0 2px 6px -3px rgb(16 27 73 / 0.12);
-  --shadow-tier3: 0 18px 40px -24px rgb(16 27 73 / 0.4);
-  --shadow-search: 0 8px 20px -14px rgb(16 27 73 / 0.35);
+  --shadow-tier2: 0 1px 2px rgb(20 20 26 / 0.04), 0 4px 12px -6px rgb(20 20 26 / 0.06);
+  --shadow-tier3: 0 1px 3px rgb(20 20 26 / 0.06), 0 20px 48px -24px rgb(20 20 26 / 0.28);
+  --shadow-search: 0 1px 2px rgb(20 20 26 / 0.04);
 }
 
 /* ---------------------------------------------------------------------------
@@ -104,18 +135,19 @@
     background: var(--color-canvas);
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: 14.5px;
-    line-height: 1.55;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    letter-spacing: -0.006em;
     -webkit-font-smoothing: antialiased;
-    /* Forbidden at every width: horizontal scrolling of primary content. */
+    text-rendering: optimizeLegibility;
     overflow-x: hidden;
   }
 
-  /* Focus ring: 2px #574FC0 at 2px offset, keyboard only, never removed. */
+  /* Focus ring: 2px at 2px offset, keyboard only, never removed. */
   :focus-visible {
     outline: 2px solid var(--color-active);
     outline-offset: 2px;
-    border-radius: 4px;
+    border-radius: 5px;
   }
   :focus:not(:focus-visible) {
     outline: none;
@@ -125,7 +157,6 @@
     background: var(--color-violet-line);
   }
 
-  /* Every count uses tabular numerals so widths never jump. */
   .tnum,
   [data-tnum] {
     font-variant-numeric: tabular-nums;
@@ -138,28 +169,47 @@
   button:disabled {
     cursor: not-allowed;
   }
+
+  /* Headings inherit the scale; nothing shouts by accident. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    letter-spacing: -0.018em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
 }
 
 /* ---------------------------------------------------------------------------
-   Utilities the system needs but Tailwind does not generate
+   Utilities
    ------------------------------------------------------------------------ */
 
 @utility font-display {
   font-family: var(--font-display);
-  letter-spacing: -0.02em;
 }
 
 @utility pixel {
   image-rendering: pixelated;
 }
 
-/* Skeleton at real row geometry, 1.2s shimmer. Never a spinner. */
+/** A section label: small, quiet, and doing the work a border used to do. */
+@utility eyebrow {
+  font-size: 0.78125rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--color-ink-muted);
+}
+
 @utility skeleton {
   background: linear-gradient(
     90deg,
-    var(--color-track) 0%,
-    #f4f2fb 50%,
-    var(--color-track) 100%
+    var(--color-surface-sunken) 0%,
+    #f7f7f9 50%,
+    var(--color-surface-sunken) 100%
   );
   background-size: 200% 100%;
   animation: reach-shimmer 1.2s linear infinite;
@@ -172,25 +222,23 @@
   }
 }
 
-/* Scenery is a background layer only — masked to transparent at the content edge. */
 @utility scenery-mask-r {
-  -webkit-mask-image: linear-gradient(to right, #000 62%, transparent 100%);
-  mask-image: linear-gradient(to right, #000 62%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, #000 55%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 55%, transparent 100%);
 }
 
 @utility scenery-mask-l {
-  -webkit-mask-image: linear-gradient(to left, #000 62%, transparent 100%);
-  mask-image: linear-gradient(to left, #000 62%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to left, #000 55%, transparent 100%);
+  mask-image: linear-gradient(to left, #000 55%, transparent 100%);
 }
 
 @utility scenery-mask-b {
-  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 45%, transparent 100%);
 }
 
 /* ---------------------------------------------------------------------------
-   Reduced motion — count-ups resolve instantly, slides become fades,
-   nothing else changes.
+   Reduced motion
    ------------------------------------------------------------------------ */
 
 @media (prefers-reduced-motion: reduce) {
@@ -204,6 +252,6 @@
   }
   .skeleton {
     animation: none;
-    background: var(--color-track);
+    background: var(--color-surface-sunken);
   }
 }

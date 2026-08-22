@@ -2,57 +2,64 @@ import { cn } from "@/lib/utils/cn";
 import { PixelIcon } from "./PixelIcon";
 
 /**
- * Elevation tiers — 1 flat, 2 grouped, 3 overlay. Max one tier per row.
- * Shadows only on tier 3 and search.
+ * A surface only exists when it has a job: separating a working panel from the
+ * page, or lifting an overlay above it. Grouping that can be done with spacing
+ * is done with spacing.
+ *
+ *   plain    — no border, no fill. The default. Spacing does the grouping.
+ *   panel    — white, hairline, gentle radius. For a genuine working surface.
+ *   raised   — panel plus a soft shadow. For the one thing that must lead.
+ *   accent   — a semantic tint, used sparingly and only where the colour means something.
  */
 export function Card({
-  tier = 1,
+  as: Tag = "div",
+  variant = "panel",
   tint,
   className,
   children,
   ...rest
 }: {
-  tier?: 1 | 2 | 3;
+  as?: "div" | "section" | "article" | "aside";
+  variant?: "plain" | "panel" | "raised";
   tint?: "violet" | "sage" | "apricot" | "terracotta" | "read";
   className?: string;
   children: React.ReactNode;
 } & React.HTMLAttributes<HTMLDivElement>) {
   const tints = {
-    violet: "bg-violet-tint border-violet-line",
-    sage: "bg-sage-tint border-sage-line",
-    apricot: "bg-apricot-tint border-apricot-line",
-    terracotta: "bg-terracotta-tint border-terracotta-line",
-    read: "bg-surface-read border-surface-read-border",
+    violet: "bg-violet-tint",
+    sage: "bg-sage-tint",
+    apricot: "bg-apricot-tint",
+    terracotta: "bg-terracotta-tint",
+    read: "bg-surface-read border border-surface-read-border",
   } as const;
 
   return (
-    <div
+    <Tag
       className={cn(
-        "rounded-[14px] border",
-        tint ? tints[tint] : "bg-surface",
-        !tint && tier === 1 && "border-line",
-        !tint && tier === 2 && "border-group shadow-tier2",
-        !tint && tier === 3 && "border-group shadow-tier3",
+        variant !== "plain" && "rounded-xl",
+        variant === "panel" && !tint && "border border-line bg-surface",
+        variant === "raised" && !tint && "border border-line bg-surface shadow-tier2",
+        tint && tints[tint],
         className,
       )}
       {...rest}
     >
       {children}
-    </div>
+    </Tag>
   );
 }
 
 /**
- * Section head: pixel glyph at 22–34px plus a Baloo title. When no glyph fits, ship the
- * type-only head — a missing glyph is acceptable, a wrong glyph is not.
+ * A section head is type. The glyph is opt-in and reserved for the handful of
+ * signature moments — never a decoration attached to every heading.
  */
 export function SectionHead({
   glyph,
-  glyphSize = 30,
+  glyphSize = 22,
   title,
   detail,
   count,
-  countTone = "violet",
+  countTone = "muted",
   action,
   className,
   as: Tag = "h2",
@@ -62,47 +69,39 @@ export function SectionHead({
   title: string;
   detail?: string;
   count?: number;
-  countTone?: "violet" | "sage" | "apricot" | "terracotta";
+  countTone?: "muted" | "violet" | "sage" | "apricot" | "terracotta";
   action?: React.ReactNode;
   className?: string;
   as?: "h1" | "h2" | "h3";
 }) {
   const countTones = {
-    violet: "bg-violet-tint text-violet-text border-violet-line",
-    sage: "bg-sage-tint text-sage-text border-sage-line",
-    apricot: "bg-apricot-tint text-apricot-text border-apricot-line",
-    terracotta: "bg-terracotta-tint text-terracotta-text border-terracotta-line",
+    muted: "text-ink-muted",
+    violet: "text-violet-text",
+    sage: "text-sage-text",
+    apricot: "text-apricot-text",
+    terracotta: "text-terracotta-text",
   } as const;
 
   return (
-    <div className={cn("flex items-center gap-3", className)}>
-      {glyph && <PixelIcon name={glyph} size={glyphSize} />}
+    <div className={cn("flex items-baseline gap-2.5", className)}>
+      {glyph && (
+        <PixelIcon name={glyph} size={glyphSize} className="translate-y-[3px] self-start" />
+      )}
       <div className="min-w-0 flex-1">
-        <div className="flex items-center gap-2.5">
-          <Tag className="font-display text-[20px] leading-tight font-bold text-ink sm:text-[22px]">
-            {title}
-          </Tag>
+        <Tag className="text-section text-ink">
+          {title}
           {count !== undefined && (
-            <span
-              className={cn(
-                "tnum rounded-full border px-2.5 py-0.5 text-[13px] font-bold",
-                countTones[countTone],
-              )}
-            >
-              {count}
-            </span>
+            <span className={cn("tnum ml-2 font-medium", countTones[countTone])}>{count}</span>
           )}
-        </div>
-        {detail && (
-          <p className="mt-0.5 text-[13.5px] leading-snug text-ink-body">{detail}</p>
-        )}
+        </Tag>
+        {detail && <p className="mt-0.5 text-sm text-ink-muted">{detail}</p>}
       </div>
-      {action}
+      {action && <div className="shrink-0 self-center">{action}</div>}
     </div>
   );
 }
 
-/** Eyebrow label — 12px floor, .08–.14em tracking, muted. */
+/** A quiet label. Sentence case, not shouted — tracking-heavy caps read as chrome. */
 export function Eyebrow({
   children,
   tone = "muted",
@@ -120,19 +119,59 @@ export function Eyebrow({
     terracotta: "text-terracotta-text",
   } as const;
   return (
-    <span
+    <span className={cn("text-meta font-medium", tones[tone], className)}>{children}</span>
+  );
+}
+
+/** A divider, used where two things genuinely need separating. */
+export function Hairline({ className }: { className?: string }) {
+  return <div className={cn("h-px w-full bg-hairline", className)} />;
+}
+
+/** The vertical rhythm between page sections. One tier, used consistently. */
+export function Stack({
+  className,
+  children,
+  gap = "lg",
+}: {
+  className?: string;
+  gap?: "sm" | "md" | "lg";
+  children: React.ReactNode;
+}) {
+  return (
+    <div
       className={cn(
-        "text-[12px] leading-none font-bold tracking-[.12em] uppercase",
-        tones[tone],
+        "flex flex-col",
+        gap === "sm" && "gap-3",
+        gap === "md" && "gap-6",
+        gap === "lg" && "gap-10 sm:gap-12",
         className,
       )}
     >
       {children}
-    </span>
+    </div>
   );
 }
 
-/** In-card row divider — decorative hairline, never a structural border. */
-export function Hairline({ className }: { className?: string }) {
-  return <div className={cn("h-px w-full bg-hairline", className)} />;
+/** Page shell: one max width, one inset rhythm, everywhere. */
+export function Page({
+  className,
+  children,
+  width = "wide",
+}: {
+  className?: string;
+  width?: "wide" | "reading";
+  children: React.ReactNode;
+}) {
+  return (
+    <div
+      className={cn(
+        "mx-auto w-full px-5 sm:px-8 lg:px-10",
+        width === "wide" ? "max-w-[1180px]" : "max-w-[760px]",
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
 }

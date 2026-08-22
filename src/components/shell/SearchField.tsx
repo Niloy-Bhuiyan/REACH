@@ -2,14 +2,17 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { PixelIcon } from "@/components/ui/PixelIcon";
 import { useIsMobile } from "@/lib/hooks";
 import { cn } from "@/lib/utils/cn";
 
-/** Search is the only input in Summary Mode, and it is never hidden at any width. */
+/**
+ * Search is never hidden at any width. The icon here is a plain glyph rather
+ * than pixel art — inside a control, pixel art competes with the input instead
+ * of supporting it.
+ */
 export function SearchField({
-  placeholder = "Search jobs, internships, skills, companies…",
-  mobilePlaceholder = "Search jobs, skills, companies…",
+  placeholder = "Search roles, skills or companies",
+  mobilePlaceholder = "Search roles or companies",
   defaultValue = "",
   className,
   size = "lg",
@@ -32,30 +35,58 @@ export function SearchField({
         router.push(value.trim() ? `/discover?q=${encodeURIComponent(value.trim())}` : "/discover");
       }}
       className={cn(
-        "flex items-center gap-2.5 rounded-[12px] border-[1.5px] border-control bg-surface shadow-search",
-        size === "lg" ? "py-2 pr-2 pl-4" : "py-1.5 pr-1.5 pl-3.5",
+        "flex items-center gap-2.5 rounded-xl border border-control bg-surface px-3.5 transition-colors duration-100 focus-within:border-active hover:border-group",
         className,
       )}
     >
-      <PixelIcon name="g-scan" size={20} />
+      <SearchGlyph />
       <input
         type="search"
         value={value}
         onChange={(event) => setValue(event.target.value)}
         placeholder={mobilePlaceholder && isNarrow ? mobilePlaceholder : placeholder}
-        aria-label="Search jobs, internships, skills and companies"
-        className="min-h-[44px] min-w-0 flex-1 bg-transparent text-[15px] text-ink placeholder:text-ink-placeholder focus:outline-none"
+        aria-label="Search roles, skills and companies"
+        className={cn(
+          "min-w-0 flex-1 bg-transparent text-body text-ink placeholder:text-ink-placeholder focus:outline-none",
+          size === "lg" ? "min-h-[52px]" : "min-h-[46px]",
+        )}
       />
       <button
         type="submit"
         aria-label="Search"
-        className={cn(
-          "flex shrink-0 items-center justify-center rounded-[9px] bg-violet text-surface transition-colors duration-100 hover:bg-violet-hover",
-          size === "lg" ? "h-[46px] w-[46px]" : "h-[40px] w-[40px]",
-        )}
+        className="-mr-1.5 flex size-[44px] shrink-0 items-center justify-center rounded-lg text-ink-muted transition-colors duration-100 hover:bg-surface-sunken hover:text-ink"
       >
-        <PixelIcon name="g-nav-discover" size={20} />
+        <svg
+          aria-hidden
+          viewBox="0 0 16 16"
+          className="size-4"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M3 8h10M9 4l4 4-4 4" />
+        </svg>
       </button>
     </form>
+  );
+}
+
+function SearchGlyph() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 16 16"
+      className="size-[18px] shrink-0 text-ink-muted"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="7" cy="7" r="4.5" />
+      <path d="M10.5 10.5L14 14" />
+    </svg>
   );
 }

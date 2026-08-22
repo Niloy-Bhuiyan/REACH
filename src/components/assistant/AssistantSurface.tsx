@@ -87,7 +87,7 @@ export function AssistantSurface() {
         <div className="flex items-center gap-1">
           {thread.length > 0 && (
             <Button
-              variant="tertiary"
+              variant="ghost"
               size="sm"
               onClick={() => {
                 setThread([]);
@@ -230,7 +230,7 @@ export function AssistantSurface() {
                 >
                   Retry
                 </Button>
-                <Button size="sm" variant="tertiary" className="px-2">
+                <Button size="sm" variant="ghost" className="px-2">
                   Use {error.fallback} instead
                 </Button>
               </div>

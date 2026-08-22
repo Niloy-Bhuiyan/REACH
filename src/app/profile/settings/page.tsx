@@ -226,7 +226,7 @@ export default function SettingsPage() {
               <p className="min-w-0 flex-1 text-[13.5px] leading-relaxed text-ink-body">
                 {data.fallbackNote}
               </p>
-              <Button variant="tertiary" onClick={() => setEngineSheet(true)}>
+              <Button variant="ghost" onClick={() => setEngineSheet(true)}>
                 Change order
               </Button>
             </Card>

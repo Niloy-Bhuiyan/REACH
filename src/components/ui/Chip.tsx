@@ -8,19 +8,22 @@ export type ChipTone =
   | "terracotta"
   | "stone";
 
+/**
+ * A chip exists for a verdict or a state — something the eye must catch.
+ * Ordinary metadata is plain text, so use `Meta` for that instead.
+ *
+ * Tints carry the meaning; borders are dropped, because a fill is already
+ * a boundary.
+ */
 const TONES: Record<ChipTone, string> = {
-  neutral: "bg-canvas text-ink-body border-line",
-  stone: "bg-canvas text-ink-muted border-group",
-  violet: "bg-violet-tint text-violet-text border-violet-line",
-  sage: "bg-sage-tint text-sage-text border-sage-line",
-  apricot: "bg-apricot-tint text-apricot-text border-apricot-line",
-  terracotta: "bg-terracotta-tint text-terracotta-text border-terracotta-line",
+  neutral: "bg-surface-sunken text-ink-body",
+  stone: "bg-surface-sunken text-ink-muted",
+  violet: "bg-violet-tint text-violet-text",
+  sage: "bg-sage-tint text-sage-text",
+  apricot: "bg-apricot-tint text-apricot-text",
+  terracotta: "bg-terracotta-tint text-terracotta-text",
 };
 
-/**
- * A chip always carries a word. Colour is never the only cue, so a tone without a
- * readable label is a bug, not a style choice.
- */
 export function Chip({
   tone = "neutral",
   mono,
@@ -35,8 +38,8 @@ export function Chip({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-[12.5px] leading-none font-semibold whitespace-nowrap",
-        mono && "font-mono tnum text-[12px] tracking-tight",
+        "inline-flex items-center gap-1.5 rounded-md px-2 py-[3px] text-meta font-medium whitespace-nowrap",
+        mono && "tnum font-mono",
         TONES[tone],
         className,
       )}
@@ -46,7 +49,21 @@ export function Chip({
   );
 }
 
-/** Mono meta line — timestamps, counts, ids. 12px floor, tabular numerals. */
+/**
+ * Metadata as text. Separated by a middot, never boxed — this is what replaces
+ * most of the chips.
+ */
+export function Meta({
+  className,
+  children,
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return <span className={cn("text-sm text-ink-muted", className)}>{children}</span>;
+}
+
+/** Mono is for timestamps, counts and ids — data, not decoration. */
 export function Mono({
   className,
   children,
@@ -55,13 +72,6 @@ export function Mono({
   children: React.ReactNode;
 }) {
   return (
-    <span
-      className={cn(
-        "tnum font-mono text-[12px] tracking-tight text-ink-muted uppercase",
-        className,
-      )}
-    >
-      {children}
-    </span>
+    <span className={cn("tnum font-mono text-meta text-ink-muted", className)}>{children}</span>
   );
 }

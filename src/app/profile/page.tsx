@@ -248,7 +248,7 @@ export default function ProfilePage() {
               glyph="px-apply"
               title="Targets & preferences"
               action={
-                <Button variant="tertiary" onClick={() => setEditTarget(true)}>
+                <Button variant="ghost" onClick={() => setEditTarget(true)}>
                   Edit
                 </Button>
               }

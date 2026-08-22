@@ -281,14 +281,14 @@ export default function ResumePage() {
                   Open job detail ↗
                 </Link>
               )}
-              <Button variant="tertiary" onClick={() => setJobId(null)}>
+              <Button variant="ghost" onClick={() => setJobId(null)}>
                 Clear
               </Button>
             </>
           ) : (
             <>
               <Chip tone="stone">No job selected</Chip>
-              <Button variant="tertiary" onClick={() => setJdSheet(true)}>
+              <Button variant="ghost" onClick={() => setJdSheet(true)}>
                 Paste a JD instead
               </Button>
             </>

@@ -254,7 +254,6 @@ export default function OneFixPage({ params }: { params: Promise<{ id: string }>
             <>
               <OpportunityDelta
                 delta={delta.data}
-                eyebrow="Opportunity Delta"
                 nowLabel="reachable now"
                 afterLabel="after this fix"
               />

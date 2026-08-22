@@ -174,7 +174,7 @@ export default function RoadmapPage() {
               {GAP_LABEL[data.queuedNext.gapType].toLowerCase()}, {data.queuedNext.roles} roles,
               about {data.queuedNext.weeks} weeks. It stays queued until this plan closes.
             </p>
-            <Button variant="tertiary" disabled reason="One plan at a time — this one is active">
+            <Button variant="ghost" disabled reason="One plan at a time — this one is active">
               Preview ↗
             </Button>
           </Card>
@@ -335,7 +335,7 @@ function PlanComplete({ plan }: { plan: Plan }) {
       </header>
 
       {/* Realised against predicted, with the reason for the difference. */}
-      <Card tier={2} className="mt-6 p-5">
+      <Card variant="raised" className="mt-6 p-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <Eyebrow>Delta · realised</Eyebrow>
           <Mono>Predicted +{completion.predicted}</Mono>
