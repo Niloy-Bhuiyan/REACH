@@ -1,0 +1,283 @@
+ITERATION 08 · CAREER PROFILE · DESKTOP + MOBILE · WORKING MODE
+Career Profile
+An evidence record, not a social profile. No followers, no headline, no recruiter view. Completion is stated as what it unlocks, evidence sources are separated from AI engine connections, and every missing item says which opportunities it is costing. Detailed engine configuration lives here — the one place in the product it belongs.
+8A
+Desktop
+Section rail + inline groups · connection states shown live
+[IMG refs/i/px-logo.png]
+REACH
+Focus
+Discover
+Roadmap
+Resume
+Profile
+1 source needs attention
+NM
+NM
+Niloy Mahmud
+BSc Statistics, Dhaka University
+·
+Graduating Dec 2026
+·
+Dhaka
+Evidence completeness
+82%
+Enough to judge 46 of today’s 54 postings. The 8 we cannot fully assess are all missing the same thing: a portfolio.
+BIGGEST EVIDENCE GAP
+No portfolio connected
+Weakens 7 One Fix Away roles.
+Add portfolio
+SECTIONS
+Evidence sources
+AI engine connections
+Targets & preferences
+Eligibility
+Skills & evidence
+Projects
+Education
+Certificates
+Publications
+Nothing here is public. REACH uses it only to judge fit and explain verdicts.
+[IMG refs/i/px-cv.png]
+Evidence sources
+What your fit is judged from
+3 connected
+1 needs attention
+1 missing
+SOURCE
+WHAT IT CONTRIBUTES
+STATUS
+ACTION
+[IMG refs/i/px-cv.png]
+CV
+niloy-cv-v4.pdf
+Education, experience, stated skills — 14 evidence rows
+Connected · parsed
+UPLOADED 12 AUG
+Replace
+[IMG refs/i/px-github.png]
+GitHub
+@niloy-m
+14 repos, 118 commits — proof for Python, SQL, dashboards
+Connected · syncing
+LAST SYNC 2 H AGO
+Manage
+[IMG refs/i/px-linkedin.png]
+LinkedIn
+/in/niloy-mahmud
+Roles and dates — cross-checks your CV timeline
+Needs attention · token expired
+Stale since 6 Aug — 3 roles unverified
+Reconnect
+K
+Kaggle
+Not linked
+Competition results — optional for your current target
+Not connected
+No effect on today’s 54 roles
+Connect
+[IMG refs/i/px-pportfolio.png]
+Portfolio
+Not linked
+Your weakest area. Published work is how proof gaps get closed
+Missing · costing you
+Weakens 7 One Fix Away roles
+Add link
+[IMG refs/i/px-claude.png]
+AI engine connections
+Who runs the analysis — never evidence about you
+Configured here only
+[IMG refs/i/px-claude.png]
+Claude
+DEFAULT ENGINE
+Connected
+Used for
+Matching · fix diagnosis · CV wording
+Runs this month
+38
+Data shared
+Job text + your evidence rows
+Configure
+Disconnect
+[IMG refs/i/px-chatgpt.png]
+ChatGPT
+Connected · fallback engine
+Configure
+[IMG refs/i/px-codex.png]
+Codex
+Not connected · used for repo reading
+Connect
+[IMG refs/i/px-cloud.png]
+Cloud Connect
+Needs attention · re-auth required
+Fix
+Engines change who computes a verdict, never what counts as evidence. Removing one never removes your data.
+[IMG refs/i/px-apply.png]
+Targets & preferences
+Edit
+Desired roles
+Data Analyst
+Business Analyst
+BI Analyst
+Location
+Dhaka, Bangladesh
+Work mode
+Hybrid
+Remote
+On-site
+Employment type
+Full-time · internships considered
+Relocation
+Open within Bangladesh · not abroad
+Earliest start
+Jan 2027
+[IMG refs/i/px-skip.png]
+Eligibility
+Drives every Skip verdict
+Work authorisation
+Bangladesh citizen
+Visa sponsorship
+Not required domestically
+Graduation date
+Dec 2026 · final year
+Experience
+1 internship — blocks 6 senior roles
+Notice period
+Not set
+[IMG refs/i/px-github.png]
+Skills, and the evidence behind each
+A claim with no source is treated as unproven
+Add skill
+SKILL
+EVIDENCE
+STRENGTH
+USED IN
+Python · pandas
+4 repos, 118 commits · CV line
+Proven
+31 ROLES
+Excel modelling
+Forecast workbook · CV line
+Proven
+22 ROLES
+SQL
+Queries in 2 repos — not described anywhere
+Signal gap
+8 ROLES
+Power BI
+Coursework dashboard · no public link
+Proof gap
+14 ROLES
+Django
+No evidence in any source
+Knowledge gap
+4 ROLES
+Projects
+3
+reporting-pipeline
+Public · Python, SQL · 14 files
+sales-dashboard
+Private — make public to count
+churn-analysis
+Public · pandas · 41 commits
+Education
+2
+BSc Statistics
+Dhaka University · 2022–2026
+HSC Science
+Notre Dame College · 2020
+Certificates & publications
+Google Data Analytics
+2025 · verified link
+No publications yet
+Optional for analyst roles
+Add certificate
+8B
+Mobile
+Completeness and the costly gap first · sources as status rows · engines in a sheet
+Profile — evidence sources with live states
+9:41
+NM
+Niloy Mahmud
+BSc Statistics · grad Dec 2026
+Edit
+Evidence completeness
+82%
+Enough to judge 46 of 54 postings. The other 8 need a portfolio.
+[IMG refs/i/px-pportfolio.png]
+No portfolio connected
+Weakens 7 One Fix Away roles
+Add
+[IMG refs/i/px-cv.png]
+Evidence sources
+Judged from these
+[IMG refs/i/px-cv.png]
+CV
+Parsed · 14 rows
+Replace
+[IMG refs/i/px-github.png]
+GitHub
+Synced 2 h ago · 14 repos
+Manage
+[IMG refs/i/px-linkedin.png]
+LinkedIn
+Token expired · 3 roles unverified
+Reconnect
+K
+Kaggle
+Not connected · optional
+Connect
+[IMG refs/i/px-claude.png]
+AI engine connections
+Claude default · 1 needs re-auth
+Configure
+[IMG refs/i/g-nav-focus.png]
+Focus
+[IMG refs/i/g-nav-discover.png]
+Discover
+[IMG refs/i/g-nav-roadmap.png]
+Roadmap
+[IMG refs/i/g-nav-resume.png]
+Resume
+[IMG refs/i/g-nav-profile.png]
+Profile
+Engine configuration sheet — the only place providers are managed
+9:41
+NM
+Niloy Mahmud
+AI engine connections
+Engines decide who computes a verdict. They are never evidence about you, and removing one never removes your data.
+[IMG refs/i/px-claude.png]
+Claude
+DEFAULT
+Connected
+Used for
+Matching · diagnosis · wording
+Runs this month
+38
+Configure
+Disconnect
+[IMG refs/i/px-chatgpt.png]
+ChatGPT
+Connected · fallback
+Configure
+[IMG refs/i/px-codex.png]
+Codex
+Not connected · repo reading
+Connect
+[IMG refs/i/px-cloud.png]
+Cloud Connect
+Re-authentication required
+Fix
+Job text and your evidence rows are shared with the engine that runs a verdict. Nothing is shared publicly.
+Done
+Profile decisions
+Completeness is stated as capability — “enough to judge 46 of today’s 54 postings” — with the 82% as a supporting figure, not the headline.
+The costly gap is named at the top. No portfolio → weakens 7 One Fix Away roles, with one action. Missing evidence always says what it costs.
+Evidence sources and AI engines are separate sections with different visual weight: sources are a five-row settings table with contribution stated; engines are a default card plus quiet rows.
+Four real connection states — connected/syncing (sage dot), needs attention (apricot square + reason + Reconnect), not connected (grey dot, effect stated), missing-and-costing (violet, because it is the product’s ask).
+Skills carry their evidence and gap type. Proven / signal gap / proof gap / knowledge gap per row, with the role count each affects — the same vocabulary as One Fix Away.
+Eligibility is its own group because it is what produces Skip: authorisation, visa, graduation, experience floor, notice period — including the apricot row that blocks 6 senior roles.
+Inline groups, not card soup. A sticky section rail plus hairline-divided tables; the only bordered surfaces are the completeness card, the gap card, the default-engine card and the state-highlighted rows.
+Nothing social: no headline, no connections, no endorsements, no recruiter view, no public visibility — and a standing note that nothing here is public.
+Working Mode art density: 22–34px glyphs at section heads, no scenery band, no decorative illustration. Still on the missing-asset list: a Kaggle status mark (lettered tile stands in), publication / certification / education glyphs, visa and relocation glyphs, and an engine-configuration mark.

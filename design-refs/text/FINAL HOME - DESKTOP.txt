@@ -1,0 +1,140 @@
+FINAL HOME — DESKTOP · 1440 · CONCEPT A + DNA v2 CORRECTIONS
+Final Home — Desktop
+Concept A unchanged in composition, density, scenery, scale and colour richness. The only edits are the DNA v2 corrections listed below — no redesign, no removed sections.
+NAV · FIVE DESTINATIONS
+SAGE = APPLY NOW
+APRICOT = ONE FIX AWAY
+TERRACOTTA = SKIP
+AA CONTRAST PASS
+[IMG refs/i/px-logo.png]
+REACH
+Focus
+Discover
+Roadmap
+Resume
+Profile
+🔔
+NM
+[IMG refs/hero-left.png]
+[IMG refs/hero-right.png]
+Your Focus
+See what to apply for now, what is blocking you, and what to do next.
+TARGET
+Data Analyst
+·
+Dhaka
+·
+Full-time · Hybrid
+Change
+⌕
+Search jobs, internships, skills, companies…
+⌕
+[IMG refs/i/px-blocker.png]
+Biggest blocker
+Missing one key skill for 12 roles you want.
+See What’s Missing
+→
+[IMG refs/i/px-wrench.png]
+Fastest fix
+Add SQL to unlock 8 more roles this week.
+See Your Top Fix
+→
+[IMG refs/i/px-map.png]
+View My Roadmap
+Your personalized plan to reach your goals.
+Open Roadmap
+→
+[IMG refs/i/px-apply.png]
+Apply Now
+Great matches you can apply for today.
+12
+Junior Data Analyst
+Walton Hi-Tech
+Dhaka
+Full-time
+Frontend Developer
+Optimizely
+Remote
+Full-time
+Business Analyst
+BRACNet
+Dhaka
+Full-time
+Browse More Opportunities
+→
+[IMG refs/i/px-onefix.png]
+One Fix Away
+Unlock more roles with one key improvement.
+Data Analyst
+bKash
+Add SQL
+Backend Developer
+BJIT Group
+Add Django
+Product Associate
+Pathao
+Add Excel
+See More One-Fix Roles
+→
+[IMG refs/i/px-skip.png]
+Skip
+Not a good fit right now.
+iOS Developer
+Synesis IT
+Need Swift
+DevOps Engineer
+BJIT Group
+Need AWS
+UI/UX Designer
+Dream71
+Need Figma
+View More Skipped Roles
+→
+Connect your world. Unlock more.
+EVIDENCE SOURCES
+— what we judge your fit from
+[IMG refs/i/px-github.png]
+GitHub
+14 repos synced
+[IMG refs/i/px-linkedin.png]
+LinkedIn
+Synced yesterday
+[IMG refs/i/px-pportfolio.png]
+Kaggle
+Optional for this target
+ANALYSIS ENGINE
+— who runs the analysis, never evidence
+[IMG refs/i/g-engine.png]
+REACH-hosted engine
+Default · nothing to connect
+Change in Settings
+Evidence sources decide what we can prove about you. Engines only decide who runs the analysis — detailed configuration lives in Profile → Settings.
+Profile
+82%
+complete
+82%
+[IMG refs/i/px-cv.png]
+CV
+Connected
+[IMG refs/i/px-pgithub.png]
+GitHub
+Connected
+[IMG refs/i/px-plinkedin.png]
+LinkedIn
+Connected
+[IMG refs/i/px-pportfolio.png]
+Portfolio
+Missing
+Adding a portfolio strengthens 7 of your One Fix Away roles.
+Add Portfolio
+Corrections applied to Concept A — nothing else touched
+Navigation is Focus / Discover / Roadmap / Resume / Profile. Jobs and Internships became Discover filters; Resources moved inside Roadmap.
+Active career target reads as a pill directly under the hero copy — role, city, employment type and work mode, with one Change action.
+Sage is Apply Now only. The Apply Now card carries the sage verdict rule and its count badge; Fastest Fix moved to brand-secondary styling.
+Apricot is One Fix Away — its CTA and every evidence chip in that list (Add SQL, Add Django, Add Excel) now read apricot instead of sage.
+Terracotta is Skip — quiet bordered CTA and terracotta chips, never a large fill.
+Violet stays brand and action: primary CTAs, active nav, links, selection, profile completion. It is never used as a verdict.
+Connect your world preserved and split into two labelled groups — Evidence sources (what fit is judged from, with sync status) and AI engine connections (who runs the analysis), with configuration pointed at Profile → Settings.
+Biggest Blocker, Fastest Fix, Roadmap, Opportunity Delta and profile completion all retained in their original positions and proportions.
+Accessibility: placeholder and search glyphs raised to #6E7490, control borders to 1.5px #C3BCEC, apricot small text to #A85C22, meter fills on family button tones, equal card heights with CTAs pinned to the bottom edge.
+Untouched: canvas #F5F3FB, the 316px pixel scenery band, 74px Baloo display, 22px gutters, 64px inset, card radii and every section and its order.

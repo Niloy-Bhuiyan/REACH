@@ -1,0 +1,226 @@
+ITERATION 06 · ONE FIX AWAY · DESKTOP + MOBILE · SIGNATURE SCREEN
+One Fix Away
+The screen REACH is remembered for. It names the exact blocker, types the gap as knowledge, proof or signal, states the smallest useful intervention, and proves the Opportunity Delta by listing every posting it is counted from. Narrative density — more artwork than Discovery, far less than Home — and one destination at the end: the roadmap.
+Discover
+→
+Job Detail
+→
+One Fix Away
+→
+Roadmap
+6A
+Desktop · full page
+Entered from the One Fix Away group or from a job’s “See the One Fix”
+[IMG refs/i/px-logo.png]
+REACH
+Focus
+Discover
+Roadmap
+Resume
+Profile
+Verified 6 min ago
+NM
+[IMG refs/horizon-right.png]
+← Back to Data Analyst · bKash
+FIX 1 OF 3 IDENTIFIED IN TODAY’S RUN
+[IMG refs/i/px-wrench.png]
+SIGNAL GAP
+You have the work — it is not described where employers can read it
+Say SQL out loud.
+Two of your projects run real queries — a reporting pipeline and a sales dashboard — but neither your CV nor your GitHub READMEs use the words these postings screen for. Nothing needs to be learned from scratch. It needs to be written down and shown once.
+Open the roadmap
+→
+Fix my CV wording now
+Signal gaps are usually a CV job, not a course.
+[IMG refs/i/px-onefix.png]
+Which kind of gap this is
+The type decides the fix — and how long it takes
+K
+Knowledge gap
+You cannot do it yet. Needs real learning — weeks, and a project to prove it.
+Not this one
+P
+Proof gap
+You can do it, but nothing public shows it. Needs one shipped artefact — days.
+Partly true — one repo is private
+S
+Signal gap
+You have done it and it is visible — but not in the words screeners match on. Hours.
+This is your gap
+[IMG refs/i/px-wrench.png]
+The smallest useful fix
+~6 hours total
+Three steps · each produces something an employer can see
+1
+Make the two query projects public and name the SQL
+Rewrite both READMEs to state joins, window functions and the tables involved
+Produces: 2 public repos
+~2 H
+2
+Write one query set that proves the advanced part
+Window functions over your existing reporting data — one notebook, published
+Produces: 1 portfolio entry
+~3 H
+3
+Add two CV lines in the posting’s language
+Reviewed edit — we suggest the wording, you accept or reject each line
+Produces: 2 CV lines
+~1 H
+No course or certificate is needed for a signal gap. If you want one anyway, the roadmap says whether it is worth it.
+See certificate verdict →
+[IMG refs/i/px-apply.png]
+The 8 roles this unlocks
+Every posting where SQL is the only unmet requirement
+FROM TODAY’S RUN
+ROLE
+OTHER REQS
+SOURCE · VERIFIED
+AFTER THE FIX
+Data Analyst
+bKash · Dhaka · On-site
+3 of 3 met
+CAREERS · 6 H
+Apply Now
+Analytics Associate
+Grameenphone · Dhaka · Hybrid
+4 of 4 met
+CAREERS · 2 H
+Apply Now
+Business Intelligence Intern
+Chaldal · Dhaka · On-site
+2 of 2 met
+JOB BOARD · 1 D
+Apply Now
+Reporting Analyst
+ShopUp · Remote · BD
+3 of 3 met
+CAREERS · 9 H
+Apply Now
+MIS Officer
+BRAC Bank · Dhaka · On-site
+3 of 3 met
+CAREERS · 4 H
+Apply Now
+Show the other 3 roles
+Two of the 8 close in under 10 days — those are worth doing first.
+OPPORTUNITY DELTA
+COUNTED, NOT PREDICTED
+12
+reachable now
+→
+20
+after this fix
++8
+12 of 54 today
+20 of 54 after
+HOW THIS WAS COUNTED
+Verified postings in today’s run
+54
+Already Apply Now
+12
+Blocked by SQL only
+8
+Blocked by SQL + something else
+4 · not counted
+Only postings where this is the sole remaining requirement are counted. The 4 that need a second fix stay out of the number — you can see them under Roadmap.
+Evidence we already have
+[IMG refs/i/px-github.png]
+reporting-pipeline
+14 files with SQL · README says “data cleaning”
+[IMG refs/i/px-github.png]
+sales-dashboard
+Private repo · 9 queries, 3 with joins
+[IMG refs/i/px-cv.png]
+CV · Experience
+No line mentions SQL or databases
+This is why we call it a signal gap and not a knowledge gap — the work exists in your own sources.
+[IMG refs/i/px-map.png] Next after this
+Close this and Django becomes your next blocker — 4 roles, a genuine knowledge gap, about two weeks. The roadmap sequences both.
+See the full roadmap
+→
+6B
+Mobile · two screens, one flow
+The fix, then the audit of the number · 390 × 844
+Primary — gap type, delta, steps, roadmap action
+9:41
+[IMG refs/horizon-right.png]
+← bKash · Data Analyst
+FIX 1 OF 3
+[IMG refs/i/px-wrench.png]
+SIGNAL GAP
+Say SQL out loud.
+Two projects already run real queries — they just don’t say so in the words these postings screen for.
+OPPORTUNITY DELTA
+COUNTED
+12
+now
+→
+20
+after the fix
++8
+8 postings, SQL the only gap
+Inspect all 8
+[IMG refs/i/px-wrench.png] Smallest useful fix
+~6 h · no course
+1
+Name the SQL in two READMEs
+Produces 2 public repos · ~2 h
+2
+Publish one window-function query set
+Produces 1 portfolio entry · ~3 h
+3
+Accept two suggested CV lines
+Reviewed edit, you approve each · ~1 h
+Fix my CV wording now
+Open the roadmap
+→
+[IMG refs/i/g-nav-focus.png]
+Focus
+[IMG refs/i/g-nav-discover.png]
+Discover
+[IMG refs/i/g-nav-roadmap.png]
+Roadmap
+[IMG refs/i/g-nav-resume.png]
+Resume
+[IMG refs/i/g-nav-profile.png]
+Profile
+Inspect sheet — the +8 audited, role by role
+9:41
+[IMG refs/i/px-wrench.png]
+Say SQL out loud.
+Where the +8 comes from
+TODAY’S RUN
+Verified postings
+54
+Already Apply Now
+12
+SQL is the only gap
+8
+SQL + another gap
+4 · excluded
+Data Analyst
+→ Apply Now
+bKash · Dhaka · 3 of 3 other reqs met
+CAREERS PAGE · VERIFIED 6 H · CLOSES 30 AUG
+Analytics Associate
+→ Apply Now
+Grameenphone · Dhaka · 4 of 4 other reqs met
+CAREERS PAGE · VERIFIED 2 H · CLOSES 07 SEP
+BI Intern
+→ Apply Now
+Chaldal · Dhaka · 2 of 2 other reqs met
+JOB BOARD · VERIFIED 1 D · CLOSES 28 AUG
+Show the other 5 roles
+Two of these close within 10 days — the roadmap puts them first.
+Open the roadmap
+→
+One Fix Away decisions
+The blocker is the headline. A 52px Baloo sentence — “Say SQL out loud.” — with the gap-type badge above it. The user knows what to do before scrolling.
+All three gap types are shown, not just yours. Knowledge / Proof / Signal appear as a row with your one highlighted in apricot and the others explicitly ruled out — the classification is legible, not asserted.
+Gap type sets the intervention. Signal gaps get a CV-and-README fix in hours; the copy says outright that no course is needed, and the certificate verdict lives on Roadmap.
+Each step names its artefact. 2 public repos, 1 portfolio entry, 2 CV lines, with hours in mono — effort and output are both visible.
+The Delta is audited on the page. 54 verified → 12 already Apply Now → 8 blocked by SQL alone → 4 excluded because they need a second fix. The exclusion is stated, which is what makes the number trustworthy.
+Affected jobs are a real table with other-requirement status, source, verified age and the verdict each row becomes after the fix — every one clickable back into Job Detail.
+Evidence for the classification is shown — the two repos with SQL inside, the private one, the CV with no mention — so “signal gap” is a conclusion the user can check.
+Mobile splits the job in two. Screen one is the decision (gap type, delta, three steps, roadmap); screen two is the audit sheet listing the 8. Sticky bar carries the CV shortcut and the roadmap primary.
+Narrative density: one 96px wrench object, a 50%-opacity scenery bookend behind the header, and 22–30px section glyphs — above Discovery, below Home, per DNA v2. The three gap-type emblems and a “doors opening” delta motif are still on the missing-asset list; letters K / P / S stand in per the fallback ladder. Roadmap itself is untouched.

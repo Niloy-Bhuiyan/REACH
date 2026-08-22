@@ -1,0 +1,289 @@
+ITERATION 05 · JOB DETAIL · DESKTOP + MOBILE · WORKING MODE
+Job Detail
+Opens as a drawer over the Discovery list on desktop and a sheet on mobile, so the run is never lost. Six questions answered top to bottom: what the role is, whether the listing is real and current, whether you are eligible, why you fit, what is missing, and which of the three verdicts to act on. Two variants shown — an Apply Now role and a One Fix Away role that hands off to the fix screen.
+Discover
+→
+Job Detail
+→
+One Fix Away
+→
+Roadmap
+5A
+Desktop · drawer over Discovery
+Apply Now verdict · list stays behind at 40% width
+[IMG refs/i/px-logo.png]
+REACH
+Discover
+54 opportunities
+VERIFIED 2 MIN AGO
+Apply
+12
+One fix
+18
+Skip
+24
+Junior Data Analyst
+4 H
+Walton Hi-Tech · Dhaka · Hybrid
+Open in detail
+Business Analyst
+1 D
+BRACNet · Dhaka · On-site
+Reporting Analyst
+6 H
+Pathao · Remote · BD
+Data Quality Associate
+2 H
+Grameenphone · Dhaka · Hybrid
+← Back to results
+ROLE 1 OF 54
+Previous
+Next
+W
+Junior Data Analyst
+Walton Hi-Tech Industries
+·
+Dhaka, Bangladesh
+·
+Hybrid
+·
+Full-time
+BDT 45–60k / month
+0–2 years
+Analytics team
+APPLY NOW
+DEADLINE 04 SEP · 14 DAYS
+[IMG refs/i/px-apply.png]
+You meet every hard requirement for this role.
+Four of four essentials are backed by evidence we can point to, you are eligible on graduation date and work authorisation, and the listing was verified four hours ago. Nothing is blocking an application today.
+Apply on company site
+→
+Save
+Tailor CV
+[IMG refs/i/px-cv.png]
+Hard requirements
+4 of 4 met
+Every row shows the evidence behind it
+✓
+Bachelor’s in a quantitative field
+Statistics, CS, engineering or economics
+BSc Statistics, Dhaka University — expected Dec 2026
+CV
+✓
+Excel and spreadsheet modelling
+Pivots, lookups, basic forecasting
+Sales-forecast workbook, 3 modules
+Portfolio ↗
+✓
+Python for data analysis
+pandas or equivalent
+4 repos using pandas, 118 commits
+GitHub ↗
+✓
+Written Bangla and English
+Reporting to non-technical stakeholders
+Stated on profile, two report samples
+CV
+[IMG refs/i/px-onefix.png]
+Preferred, and what you are missing
+2 of 3 met
+Preferred items never block an application
+✓
+Dashboarding tool
+Power BI, Tableau or Looker
+Power BI coursework dashboard
+Portfolio ↗
+✓
+Manufacturing or FMCG exposure
+Industry context
+Summer internship, Pran-RFL
+CV
+–
+Advanced SQL
+Window functions and query optimisation
+No evidence in your sources yet
+Closing this unlocks 8 other roles →
+[IMG refs/i/px-skip.png]
+Eligibility
+No blockers
+Work authorisation
+Bangladesh citizen — clear
+Graduation window
+Dec 2026 — accepted
+Location & mode
+Dhaka hybrid — matches target
+Experience floor
+0–2 years — within range
+Listing is live
+Source
+Company careers page
+First seen
+12 AUG
+Last verified
+4 H AGO
+Posting age
+9 DAYS
+Deadline
+04 SEP
+Found once on the company site and once on a job board — deduplicated to the original source.
+EVIDENCE USED HERE
+[IMG refs/i/px-cv.png]
+CV
+3 rows
+[IMG refs/i/px-github.png]
+GitHub
+4 repos
+[IMG refs/i/px-pportfolio.png]
+Portfolio
+2 items
+Every ✓ above links to the row it came from. Nothing is inferred.
+One optional gain
+Advanced SQL is only preferred here — but it is the single item blocking 8 other roles in today’s run.
+See the One Fix
+→
+5B
+Desktop · One Fix Away verdict
+Same anatomy, different verdict header and primary action — the hand-off into the fix screen
+← Back to results
+ONE FIX AWAY GROUP · ROLE 1 OF 18
+b
+Data Analyst
+bKash
+·
+Dhaka
+·
+On-site
+·
+Full-time
+Company careers page
+FIRST SEEN 15 AUG
+VERIFIED 6 H AGO
+DEADLINE 30 AUG · 9 DAYS
+ONE FIX AWAY
+[IMG refs/i/px-wrench.png]
+One requirement stands between you and this role: advanced SQL.
+Three of four essentials are met and you are fully eligible. This is a signal gap — you have written queries in two projects, but nothing on your CV or GitHub states SQL in the language this posting uses.
+See the One Fix
+→
+Save
+Apply anyway
+[IMG refs/i/px-cv.png]
+Hard requirements
+3 of 4 met
+✓
+Python for analysis
+4 repos, 118 commits
+GitHub ↗
+✓
+Statistics or quantitative degree
+BSc Statistics, DU
+CV
+✓
+Dashboard reporting
+Power BI dashboard
+Portfolio ↗
+–
+Advanced SQL — the only gap
+Joins, window functions, and query work described in CV language.
+Two projects use queries, neither is described
+Signal gap · ~6 h to close
+[IMG refs/i/px-skip.png]
+Eligibility
+No blockers
+Work authorisation
+Clear
+Graduation Dec 2026
+Accepted
+OPPORTUNITY DELTA
+Inspect
+12
+now
+→
+20
+after SQL
++8
+This role is one of the 8. Counted from today’s verified run.
+Why this is not a Skip
+Skip is reserved for hard blockers — a missing licence, a visa you cannot get, an experience floor you are years from. SQL is learnable in a week and you already have the underlying work.
+5C
+Mobile · sheet over the results
+Verdict first, then provenance, evidence, gap, eligibility · sticky action bar
+Apply Now verdict — top of sheet
+9:41
+54 opportunities · Apply 12 · One fix 18
+W
+Junior Data Analyst
+Walton Hi-Tech · Dhaka · Hybrid
+APPLY NOW
+VERIFIED 4 H
+14 DAYS LEFT
+[IMG refs/i/px-apply.png]
+All 4 hard requirements met
+Eligible on graduation and authorisation. Nothing blocks applying today.
+[IMG refs/i/px-cv.png] Why you fit
+4 of 4
+✓
+Quantitative degree
+BSc Statistics, DU · from CV
+✓
+Python for analysis
+4 repos, 118 commits · GitHub
+✓
+Excel modelling
+Forecast workbook · Portfolio
+Show the 4th requirement and provenance
+[IMG refs/i/px-wrench.png]
+Advanced SQL — preferred only
+Blocks 8 other roles
+See fix
+Save
+Tailor CV
+Apply on company site
+→
+One Fix Away verdict — same sheet, apricot header and fix hand-off
+9:41
+One Fix Away group · 18 roles
+b
+Data Analyst
+bKash · Dhaka · On-site · Full-time
+ONE FIX AWAY
+VERIFIED 6 H
+9 DAYS LEFT
+[IMG refs/i/px-wrench.png]
+Missing one thing: advanced SQL
+A signal gap — you have the query work, it is just not described anywhere we can read.
+OPPORTUNITY DELTA
+12
+→
+20
++8
+Inspect
+This role included. Counted from today’s run, not projected.
+[IMG refs/i/px-cv.png] Requirements
+3 of 4
+✓
+Python for analysis
+GitHub
+✓
+Statistics degree
+CV
+✓
+Dashboard reporting
+Portfolio
+–
+Advanced SQL
+~6 h to close
+Save
+Apply anyway
+See the One Fix
+→
+Job Detail decisions
+One anatomy, three verdict skins. Header, verdict block, hard requirements, preferred + missing, eligibility, provenance rail. Only the verdict colour, the sentence and the primary action change.
+The verdict is a sentence, not a score. “You meet every hard requirement” / “One requirement stands between you and this role: advanced SQL.” No percentages anywhere on this screen.
+Every requirement row carries its evidence and the source it came from — CV, GitHub, Portfolio — so the verdict is auditable line by line.
+Provenance is a rail, not a footnote: source, first seen, last verified, posting age, deadline, plus the dedupe note explaining why one listing appears once.
+Missing items are separated by consequence. A missing hard requirement drives the verdict; a missing preferred item is shown as an optional gain with its cross-role impact.
+Eligibility is explicit — work authorisation, graduation window, location/mode, experience floor — because these are the only things that produce a true Skip.
+Desktop keeps context: a 452px Discovery list stays visible at 68% opacity with the open row selected, and Previous / Next walk the group without returning to the list.
+Mobile is a sheet over the dimmed results, ordered verdict → why you fit → gap → actions, with a sticky bar carrying Save, a secondary, and the one verdict-coloured primary at 50px.
+Art density here is the DNA’s functional band: one 40–50px verdict object per screen plus 22–26px section glyphs. Company marks are lettered tiles until real logos exist; requirement met/missing glyph pairs, a provenance mark and a deadline glyph remain on the missing-asset list.

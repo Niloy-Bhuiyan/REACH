@@ -1,0 +1,510 @@
+[IMG refs/i/px-logo.png]
+REACH
+DESIGN DNA · v2.0 · CONCEPT A LOCKED
+One language, two densities, zero ambiguity.
+v2 keeps Concept A’s canvas, navy display type, violet / sage / apricot richness and substantial pixel-art identity. What changes is the rulebook: semantics are now single-valued, navigation matches on both platforms, working screens get their own density profile and components, and every state, motion and breakpoint is specified.
+SEMANTICS RESOLVED
+2 DENSITY MODES
+11 NEW COMPONENTS
+ART FLOOR REMOVED
+00
+Changelog v1 → v2
+1 · Verdict colour is single-valued. Sage = Apply Now only. Fastest Fix moved to brand-secondary styling, One Fix Away CTA to apricot, Skip CTA to terracotta. Violet is action/brand and never a verdict.
+2 · Navigation unified to Focus · Discover · Roadmap · Resume · Profile on both platforms. Jobs and Internships became Discover filters; Resources moved inside Roadmap.
+3 · Accessibility tokens corrected: apricot small-text tone, placeholder, meter fills, control borders, disabled text.
+4 · Three elevation tiers added (flat / grouped / overlay) so grouping survives ordinary displays without shadow-heavy cards.
+5 · Summary Mode vs Working Mode. Home’s 9-surface / 3-row / 4-chip limits now apply to summary screens only.
+6 · Working components defined: console, reading surface, mono face, data table, tabs, filter bar + sheet, meter, diff, accept/reject, ATS Readiness + JD Match pair, editor/preview.
+7 · Universal 8–14% art floor removed; replaced by context bands (brand / moderate / functional / empty-state).
+8 · Home intent line added to Concept A as a single restrained pill — hero composition untouched.
+9 · Opportunity Delta is now a full component with desktop and mobile forms, evidence and drill-down.
+10 · “Connect your world” preserved but split into Evidence sources and AI engine connections , with configuration still living in Profile → Settings.
+11 · Terminology, interaction states and motion sections added; responsive contradictions resolved with a seven-breakpoint matrix and one 44px touch standard.
+12 · Asset hygiene rules added, including the alpha-export debt on the currently extracted icons and a fallback ladder for missing art.
+01
+Corrected token table
+Contrast noted where it governs use.
+TOKEN
+VALUE
+USE
+CONTRAST
+canvas
+#F5F3FB
+Page base on every screen
+—
+surface
+#FBFAFE
+Cards, nav, panels, drawers
+—
+surface-inset
+#FFFFFF
+Tiles nested in a card, table head cells
+—
+surface-read
+(new)
+#FFFDF8
+Resume preview, pasted JD, any document body — border #E7E1D6
+—
+surface-console
+(new)
+#1B233A
+Activity Console only. Text #C4CBE0, meta #7C88AC, accent #9AA0F0, ok #8FBF9A
+≥ 7:1 text
+border · hairline
+#E7E4F0 · #F1EFF8
+Flat card edge · in-card row divider
+decorative
+border-group
+(new)
+#DCD8EC
+Tier-2 grouping: any card whose boundary carries meaning
+1.4:1 vs canvas
+border-control
+(new)
+#C3BCEC
+Inputs, selects, secondary buttons at rest (1.5px)
+paired with fill + label
+border-active
+(new)
+#574FC0
+Focus ring, selected control, active tab underline (2px)
+3.9:1 vs surface
+ink · ink-link · ink-body
+#101B49 · #2E2A8C · #4A5170
+Display & headings · navigable names · body
+14.9 · 9.8 · 6.7
+ink-muted
+#666C8C
+Meta, labels, timestamps — 12px floor
+4.6:1
+ink-placeholder
+(fixed)
+#6E7490
+Was #8B90AB (3.1:1). Placeholders and inline glyphs
+4.2:1
+ink-disabled
+(new)
+#8A8FA8
+Disabled labels — never opacity alone on text
+3.2:1 (non-essential)
+violet fill · text · tint
+#6C63D8 · #574FC0 · #F3EFFC
+Brand & action only. CTAs, active nav, links, completion, selection
+white on fill 4.7
+sage fill · text · tint
+#3F7D53 · #2E6742 · #EEF5EF
+Apply Now / eligible / verified / connected only
+5.6 on tint
+apricot fill · text · tint
+(fixed)
+#C4762F · #A85C22 · #FDF4EA
+One Fix Away, Roadmap, improvement. #A85C22 replaces #B4652A below 16px; #E0904F is decoration only, never text
+5.0 on tint
+terracotta text · tint · border
+#A33F28 · #FBEDE9 · #E3BCB2
+Skip, hard blockers, destructive. Quiet buttons only — no large fills
+4.9 on tint
+meter track · fill rule
+(fixed)
+#EDEAF7 / family
+Fills use the family button tone (#6C63D8 / #3F7D53 / #C4762F), never the light accent, so the indicator clears 3:1
+≥ 3.4:1
+mono face
+(new)
+IBM Plex Mono
+Console log, timestamps, counts in dense tables, keyword diffs, ids. 400/500, 12–13px (amended from 11.5 — the 12px floor wins)
+—
+elevation 1 / 2 / 3
+(new)
+flat / grouped / overlay
+1: 1px #E7E4F0, no shadow. 2: 1px #DCD8EC + 0 2px 6px -3px rgba(16,27,73,.12) . 3: 1px #DCD8EC + 0 18px 40px -24px rgba(16,27,73,.40) — drawers, sheets, dialogs, search
+max one tier per row
+02
+Navigation model
+Identical IA on desktop and mobile.
+[IMG refs/i/px-logo.png]
+REACH
+Focus
+Discover
+Roadmap
+Resume
+Profile
+Focus
+Home. Target intent, verdict counts, Biggest Blocker, Fastest Fix, roadmap shortcut, evidence & engine status.
+Discover
+Live Discovery. Search, the run console, all filters — Jobs and Internships are filter values here , not destinations. Results grouped Apply Now / One Fix Away / Skip.
+Roadmap
+The plan, milestones, evidence artefacts, certificate verdicts — and Resources live inside it , attached to the milestone that needs them.
+Resume
+Upload or build, editor + preview, ATS Readiness and JD Match, auto-fix review queue.
+Profile
+Career profile, evidence sources, eligibility, targets — plus Settings, where AI engine configuration lives.
+Contextual
+Job Detail, One Fix Away and the assistant are reached from an opportunity — drawer on desktop, sheet on mobile, deep-linkable, never a nav item.
+Mobile parity
+Focus
+Discover
+Roadmap
+Resume
+Profile
+Same five, same order, same labels. Bottom bar 74px including safe area, each target ≥ 44×44, active item = violet label + 3px violet rule. No hamburger, no nested drawer navigation.
+Rules
+Five destinations, permanently. A new capability joins an existing one or becomes contextual.
+Nav labels are the canonical terms from §06 — the nav is where terminology is enforced.
+Right cluster on desktop: one status line, one bell, one avatar. Nothing else.
+Every contextual destination must be reachable in ≤ 2 taps from its parent list.
+03
+Summary Mode vs Working Mode
+Same tokens, different density contracts.
+DIMENSION
+SUMMARY MODE — Focus, dashboards, empty states
+WORKING MODE — Discover, Job Detail, One Fix, Roadmap, Resume
+Purpose
+Orient and route. Answer five questions in five seconds.
+Operate on real data: search, compare, edit, decide.
+Surfaces
+≤ 9 top-level, ≤ 3 per row, equal heights.
+No cap — but ≤ 2 scroll regions and one dominant work area (≥ 55% of width).
+Lists
+Exactly 3 rows + “see all”.
+20–50 rows per page, virtualised beyond that; sticky header; pagination or infinite load with a visible count.
+Chips
+≤ 4 per row, one line.
+Wrapping collections allowed; collapse past 12 with “+n more”; groups labelled (matched / missing / high-priority).
+Controls
+1 CTA per card; search is the only input.
+Toolbar of up to 5 controls + “More filters” sheet; tabs for mode; inline row actions; bulk actions allowed with per-item review.
+Layout
+Hero + three tiers, 22px gutters, 64px inset.
+Page header (≤ 140px) + 8/4 or 60/40 two-pane; 20–22px gutters; 32–48px inset; detail in a drawer over the list.
+Whitespace floor
+≥ 34% of viewport.
+≥ 22%, concentrated in the header and between panes.
+Pixel art
+Scenery band 300–330px; 72–84px objects in status cards.
+Optional 80–120px header strip; 30–34px glyphs at section heads only; never behind data.
+Type
+Display 56–74px, body 14.5–17px.
+Page title 28–36px, body 14.5px, table text 13.5px, mono meta 11.5–13px.
+Row height
+54–62px, hairline divided.
+48–56px desktop, 64px touch; hover highlight #F7F5FD; no zebra striping.
+04
+Working-screen components
+Live specimens. All inherit Concept A’s tokens.
+ACTIVITY CONSOLE — RUNNING / COLLAPSED
+Discovery run
+STEP 4 OF 9
+10:22:14
+Loading your evidence record
+done
+10:22:17
+Checking company career pages
+8 / 12
+10:22:21
+Deduplicating results
+3,142 → 1,682
+10:22:24
+Applying hard eligibility filters
+…
+45%
+1,682 scanned · 54 kept · verified 2 min ago
+Details
+The only dark surface in REACH. Exists while a run is active, then collapses to the single summary line. Mono face, observable events only, no chain-of-thought, no fake code, never on Focus.
+TABS · FILTER BAR · DATA TABLE
+Apply Now
+12
+One Fix Away
+18
+Skip
+24
+Role: Data Analyst ▾
+Dhaka ▾
+Full-time ▾
+Hybrid ▾
+More filters · 3
+54 RESULTS · SORTED BY FIT
+ROLE
+LOCATION · MODE
+EVIDENCE
+VERIFIED
+Junior Data Analyst
+Walton Hi-Tech
+Dhaka · Hybrid
+3 of 3 met
+4 h
+Business Analyst
+BRACNet · hover state
+Dhaka · On-site
+3 of 3 met
+1 d
+Reporting Analyst
+Pathao
+Remote · BD
+2 of 3 met
+6 h
+Tabs carry the verdict counts (colour + number + word). Filter bar: 4 visible controls + “More filters · n” opening a sheet; sticky under the page header. Table: white head row, hairline rows, mono for counts and freshness, hover #F7F5FD, no zebra.
+METER PAIR — ATS READINESS + JD MATCH
+ATS Readiness
+Good
+Parsing, structure, headings, readability. A property of the document — no job involved.
+JD Match
+Partial
+Against one posting: 2 of 3 hard requirements, 14 of 19 keywords, 1 high-priority missing.
+See what these are computed from
+Always shown as a pair, never summed. Verdict word leads, the bar supports, the derivation is one click away. Meter fills use family button tones.
+BEFORE → AFTER DIFF + ACCEPT / REJECT
+SUGGESTED EDIT · 1 OF 6
+EXPERIENCE · BULLET 2
+BEFORE
+Worked on microcontroller coursework project.
+AFTER
+Built an STM32 motor-driver in embedded C, using RTOS tasks and bare-metal peripheral drivers.
+Why: 18 target postings use these exact terms. Evidence: stm32-motor-driver repo, 41 commits, Mar 2026.
+Accept
+Reject
+No-evidence variant: “We can’t support this claim from your sources” — the Accept control is disabled until evidence exists.
+Diffs render on the reading surface. Four parts always: before, after, why, evidence. Accept is sage, Reject is neutral, bulk accept only after per-item review.
+OPPORTUNITY DELTA — DESKTOP & MOBILE
+OPPORTUNITY DELTA
+Inspect the 8
+12
+reachable now
+→
+20
+after this fix
++8
+bKash · 3 roles
+SQL only gap
++ 3 companies
+listed
+Counted from live postings where this is the only unmet requirement. Never a projection, never a score.
+MOBILE FORM
+12
+→
+20
++8
+Inspect
+One row, tap to expand the affected-jobs list as a sheet.
+Five required parts: current set, projected set, delta badge, plain-language basis, drill-down. Used on One Fix Away and Roadmap; optional on Focus.
+EDITOR / PREVIEW & READING SURFACE
+EDITOR · 60%
+Experience
+⠿
+Projects
+⠿
+Skills — selected
+⠿
+PREVIEW · 40% · READING SURFACE
+Niloy M.
+Data Analyst · Dhaka
+Built an STM32 motor-driver in embedded C, using RTOS tasks and bare-metal peripheral drivers.
+Desktop 60/40 side by side. Tablet: preview collapses to a toggle button, editor full width. Mobile: two tabs (Edit / Preview) with a sticky save bar; the preview never renders below 320px wide.
+FILTER SHEET · MOBILE
+Filters
+Reset
+TYPE
+Internship
+Full-time
+WORK MODE
+Remote
+Hybrid
+On-site
+Show 54 results
+Sheet holds every filter the toolbar hides, grouped and labelled, 44px minimum targets, result count live on the primary button. Same component serves Discovery, Roadmap resources and Profile lists.
+05
+Pixel-art density by context
+The universal floor is gone; identity is not.
+BRAND MOMENTS
+Strong presence
+Focus, onboarding, auth, empty states, milestone celebrations.
+10–18% of page area. Full scenery band 300–330px + 72–84px status objects + section glyphs.
+NARRATIVE SCREENS
+Moderate, purposeful
+Roadmap, One Fix Away, Job Detail header.
+5–10%. Header strip 120–200px, milestone/gap emblems at 48–72px, glyphs at section heads. Art must carry meaning (progress, gap type, verdict).
+FUNCTIONAL SCREENS
+Low, glyphs only
+Discovery results, Resume editor, filters, settings, tables.
+1–5%. 30–34px glyphs at section heads and tab labels; optional 80–120px header strip; zero art behind data, rows or forms.
+NO-DATA STATES
+Art leads
+Empty results, no target yet, nothing to apply for today, failed run.
+Up to 25%. One scenery vignette + one sentence + one action. This is where personality does the emotional work.
+Non-negotiable minimum: every screen carries the pixel wordmark plus at least one pixel glyph. A screen with zero pixel art fails review even in Working Mode.
+Still banned everywhere: mascots, robots, faces, AI pets, animated loops, HUD frames, XP bars, art behind numbers or dense text, mid-size per-row decoration, smoothed scaling.
+Scenery contrast limit: ≤ 55% contrast against canvas, masked to transparent before content begins, so navy type always dominates.
+06
+Terminology
+One concept, one name, product-wide.
+CANONICAL
+MEANING
+NEVER SAY
+Apply Now
+All hard requirements met; worth applying today.
+Ready to apply · Strong match · Best fit · Recommended
+One Fix Away
+Exactly one meaningful unmet item stands between you and a strong fit.
+Almost there · Near match · Close fit · Quick wins
+Skip
+A hard blocker makes this not worth your time now.
+Not a fit · Rejected · Ignore · Poor match
+Biggest Blocker
+The single item closing the most opportunities.
+Top gap · Main issue · Weakness · Problem area
+Fastest Fix
+The smallest useful intervention against that blocker.
+Quick win · Top fix · Best next move · Fastest path
+Opportunity Delta
+Reachable set now → after a named fix, with the affected postings listed.
+Impact score · Unlock score · Potential · Boost
+ATS Readiness
+Document-level parsing, structure and readability health.
+ATS score · Resume score · 82/100
+JD Match
+Alignment to one specific job description.
+Match % · Fit score · Compatibility
+Knowledge / Proof / Signal gap
+Skill absent · skill present but undocumented · documented but not communicated.
+Skill gap · Missing item · Weak area
+Evidence source
+CV, GitHub, LinkedIn, Kaggle, portfolio — what fit is judged from.
+Integration · Account · Plugin (for these five)
+AI engine connection
+ChatGPT, Claude, Codex, Cloud — who runs the analysis.
+AI login · Provider · Bot · Assistant (for connections)
+Discover · Activity Console
+The destination; the run log inside it.
+Live feed · Terminal · Logs · Agent thoughts
+Evidence record
+The structured set of facts and artefacts REACH holds about you, assembled from your evidence sources. It is what a run is matched against, and what the Career Profile screen edits.
+Career Twin · Digital twin · AI profile · Candidate model · Your AI
+07
+Interaction states & motion
+STATE
+SPECIFICATION
+Hover
+Rows/cards → background #F7F5FD, border → #DCD8EC. Filled buttons darken ~6% (#5A51C0 · #366B49 · #AE6828). No lift, no scale.
+Pressed
+Darken ~12%, scale .99, 80ms. Ripples and bounces are banned.
+Selected
+Violet tint fill + 1.5px #C3BCEC + 3px violet rule on the leading edge, and the label goes 600 weight.
+Focus
+2px #574FC0 ring at 2px offset, radius + 2, visible on keyboard only. Never removed, never colour-only inside a dark surface (use #9AA0F0 there).
+Disabled
+Fill → #EDEAF7, label → #8A8FA8, border → #E7E4F0, no shadow, cursor not-allowed, and a reason string within 1 row.
+Error
+2px #A33F28 border, #FBEDE9 fill, 13px #A33F28 message below with a word — never a red border alone.
+Empty
+Scenery vignette + one sentence naming what is missing + exactly one action. Never a blank card, never a spinner.
+Loading
+Skeleton bars #EDEAF7 at the real row geometry, 1.2s shimmer; runs use the Activity Console instead. Max one spinner per screen, 20px, only for < 1s actions.
+Stale
+Apricot chip “Last verified 3 d ago” on the affected rows + a Re-verify action. Content stays visible; it is never silently hidden.
+Success
+Sage chip or row tint fading over 240ms + a plain-language confirmation. No confetti, no sound, no full-screen takeover.
+Motion tokens
+Durations: 100 (chip), 120 (fade, tab), 180 (drawer), 220 (sheet), 240 (count-up, tint fade), 320 (progress).
+Easing: entering cubic-bezier(.2,.8,.2,1) , exiting cubic-bezier(.4,0,1,1) , progress linear.
+Discovery progression: each console event fades up 2px over 120ms, ≥ 300ms apart; the progress bar animates width 240ms; completion collapses the console to its summary line over 220ms.
+Opportunity Delta: the projected number counts up once over 240ms when it enters view, then the +n badge fades in over 120ms. Never loops, never re-runs on scroll.
+Roadmap progress: bar width 320ms; a completed milestone marker settles once, 240ms.
+Accepted resume edit: the after-text tints sage for 240ms, the row settles 160ms, the queue advances 120ms.
+Drawers / sheets: drawer translates 24px + fades 180ms with a 120ms backdrop; mobile sheet 220ms from the bottom edge; both trap focus and return it on close.
+Reduced motion: all translations and count-ups become instant; the console renders as a static list with the final counts; transitions collapse to ≤ 100ms opacity.
+Motion never
+Looping ambient animation, floating artwork, parallax scenery, sparkle on AI output, animated mascots, bouncing CTAs, or anything that moves while the user is reading a number.
+08
+Responsive rules
+Seven widths. One touch standard: 44×44 minimum, 48 preferred on primary actions.
+WIDTH
+GRID & PANES
+TABLES & FILTERS
+VERDICTS & INTEGRATIONS
+SCENERY & TYPE
+1440+
+Content 1312 max, 64px inset, 3-up rows; work screens 8/4 with a 480–560px drawer.
+Full table, 4–5 columns + 5 toolbar controls inline.
+Three verdict columns side by side; evidence sources and engines as two labelled rows.
+Scenery 300–330px, both bookends; display 66–74px.
+1280–1439
+48px inset, same 3-up; drawer 440px.
+Table drops its least-important column; toolbar keeps 4 controls.
+Unchanged; engine row may wrap to 2 × 2.
+Scenery 280–300px; display 56–66px.
+1024–1279
+32px inset; 3-up becomes 2 + 1 with the ranking card full-width; panes 60/40 → 55/45.
+3 columns; secondary data moves into the row’s second line; toolbar 3 controls + sheet.
+Verdicts stack to 2 + 1; integrations 3-up per group.
+Scenery 240–260px, right bookend only; display 44–52px.
+768–1023
+tablet
+24px inset, single column of full-width blocks; editor/preview becomes editor + preview toggle.
+Tables → 2-line stacked rows; all filters in a sheet behind one button.
+Verdicts become a 3-up count strip; integrations 2-up per group.
+Scenery 200–240px; display 40–48px.
+< 768
+boundary
+Bottom nav appears, top nav disappears, detail becomes a sheet, one sticky primary action.
+No horizontal scroll ever; tables are stacked label/value rows.
+Verdict counts always visible above the first list.
+One bookend only, behind the target block.
+430 · 390
+20px inset, 8px card gaps; content max 1 column; sheets 92% height.
+2 rows per list + “see all”; filter sheet full width, 48px controls.
+3-up count strip; integrations as two labelled chip rows.
+Scenery 150–190px; display 26–34px; body 14.5px.
+360–389
+16px inset; nav labels may truncate to 9 characters but never disappear.
+Toolbar collapses to Search + Filters only.
+Count strip stacks numbers over labels; integrations one per row.
+Scenery 130–150px; display 24–28px; nothing below 12px, targets still 44px.
+Forbidden at every width: horizontal scrolling of primary content, hiding search, dropping the verdict counts, shrinking type below the floors, side-by-side cards under 768px, and desktop grids scaled down rather than recomposed.
+09
+Asset hygiene
+Production rules
+Transparent PNG only. No baked rectangular backing plates, no white boxes, no card-coloured fills behind a glyph — the art must sit on any tint.
+Debt cleared: the 17 icons extracted from the reference screenshots all carried a baked tinted backing and anti-aliased edges. They have been restored to true alpha and live at refs/i/px-*.png , which is what every screen now references. The opaque originals remain at refs/px-*.png and must not be used.
+Glyph family: 52 purpose-drawn glyphs at refs/i/g-*.png — authored on a 24×24 grid, exported 4× at 96px, hard edges, DNA palette, one-pixel outline. Regenerate or extend them from refs/glyphgen.js rather than hand-editing a PNG.
+Authoring: 32 / 64 / 96px canvases, exported at 2×, integer scaling only, image-rendering: pixelated . Outline is one pixel of #2E2A5A; no anti-aliasing, no drop shadow, no glow.
+One icon language: the pixel glyph set is the only icon system. No line-icon library, no emoji, no mixed sets on a screen — including nav, tabs, toolbars and empty states.
+Scenery: authored ≥ 720 × 360, desaturated toward lavender, ≤ 55% contrast vs canvas, always masked to transparent at the content edge.
+Naming: px-<domain>-<name>@2x.png , e.g. px-roadmap-milestone-done@2x.png . Scenery: scene-<screen>-<variant>.png .
+Fallback ladder when art does not exist yet
+1. Use the nearest existing motif from the same family (briefcase for opportunities, wrench for fixes, map for plans, locked case for blockers).
+2. If none fits, ship the section with a type-only head — eyebrow label + Baloo title. A missing glyph is acceptable; a wrong glyph is not.
+3. For a missing scenery band, use a flat canvas header at the same height rather than stretching or repeating an existing scene.
+4. Never substitute an emoji, a stock illustration, a line icon or an AI-generated image in a different style.
+5. The DNA v1 §09 backlog is closed — every entry on it has been drawn. Log any new gap in the asset inventory of the Final Handoff Index instead, and add the glyph to refs/glyphgen.js so the family stays reproducible.
+10
+Ship checklist v2
+Mode-aware. All of column one, plus the column for the screen’s mode.
+Every screen
+Canvas #F5F3FB, surfaces #FBFAFE, no white or grey page.
+Nav is Focus · Discover · Roadmap · Resume · Profile, same on both platforms.
+One Baloo display anchor; type floors respected (12 / 14.5px, tabular numbers).
+Sage = Apply Now, apricot = One Fix Away, terracotta = Skip, violet = action. No exceptions.
+Every status colour paired with a word; every number over 24px has a derivation.
+Canonical terminology from §06 in every label and empty state.
+Pixel wordmark + ≥ 1 pixel glyph present; density inside the band for that context.
+Elevation tier chosen deliberately; shadows only on tier 3 and search.
+All ten interaction states defined for every interactive element and data region.
+Focus ring visible, 44×44 targets, AA contrast, reduced-motion path.
+Mobile version recomposed with bottom nav and sheets — never scaled.
+Summary Mode also
+≤ 9 surfaces, ≤ 3 per row, equal heights, one CTA per card.
+Lists show exactly 3 rows + “see all”.
+≤ 4 chips per row; no tables, no toolbars, no tabs.
+Scenery band 300–330px; 72–84px objects in status cards.
+≥ 34% whitespace; no fourth content tier.
+Target intent visible without scrolling.
+Working Mode also
+One dominant work area ≥ 55% of width; ≤ 2 scroll regions.
+Toolbar ≤ 5 controls + “More filters · n” sheet; result count always visible.
+Tables: white head, hairline rows, mono counts, hover tint, no zebra, no horizontal scroll on mobile.
+Detail opens in a drawer/sheet over the list; context is never lost.
+Scores appear as pairs with derivations (ATS Readiness + JD Match), never merged.
+AI output arrives as reviewable rows with accept / reject and a no-evidence state.
+Art ≤ 5% and none behind data; console only while a run is active.
+≥ 22% whitespace, concentrated in the header and between panes.
+Concept A corrections applied this iteration (nothing else touched): navigation relabelled to the five destinations; Fastest Fix moved off sage to brand-secondary; One Fix Away CTA apricot; Skip CTA terracotta and quiet; Apply Now gained its sage verdict rule and count badge; a single restrained target pill added under the hero copy; the integration area split into Evidence sources and AI engine connections with the section itself preserved; placeholder and control-border tokens raised to accessible values. Canvas, type, artwork, composition and density are unchanged.

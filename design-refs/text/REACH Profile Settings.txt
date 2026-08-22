@@ -1,0 +1,189 @@
+ITERATION 11 · PROFILE → SETTINGS · AI-ENGINE CONFIGURATION · DESKTOP + MOBILE
+Profile → Settings
+The one place engine identity is allowed to appear. Two groups that are never mixed: evidence sources decide what REACH can prove about you; the analysis engine only decides who runs the reasoning. Provider logos live here at row scale and nowhere else in the product.
+EVIDENCE ≠ ENGINE
+INFRASTRUCTURE, NOT IDENTITY
+ENGINE CANNOT WRITE
+11A
+Desktop · 1440
+Settings rail · engine selection · evidence sources kept separate below the fold line
+[IMG refs/i/px-logo.png]
+REACH
+Focus
+Discover
+Roadmap
+Resume
+Profile
+Profile 82% · 2 gaps
+NM
+[IMG refs/i/g-engine.png]
+← Profile
+Settings
+Everything that changes how REACH judges you, and nothing that changes what it knows about you. Evidence is edited in Profile; this page governs targets, eligibility, engines and data.
+Export my data
+Save changes
+SETTINGS
+Target & preferences
+Work authorisation
+Evidence sources
+3
+Analysis engine
+Discovery & alerts
+Data & privacy
+Account
+CURRENT ENGINE
+REACH-hosted
+HEALTHY · 41 MS
+ANALYSIS ENGINE
+Who runs the reasoning · one active, one fallback
+[IMG refs/i/g-engine.png]
+REACH-hosted engine
+DEFAULT
+Nothing to connect. Included, rate-limited to 40 analyses a day.
+Healthy
+12 / 40 TODAY
+SEES
+Your CV text, JD text, skills list
+NEVER SEES
+Contact details, documents you have not analysed
+RETENTION
+Not retained for training
+[IMG refs/i/px-claude.png]
+Claude API
+Your own key. Higher limits, billed to you by Anthropic.
+[IMG refs/i/g-verified.png]Key valid
+Use this engine
+[IMG refs/i/g-key.png]
+sk-ant-•••••••••••••••••••••4f2c
+Replace
+Test connection
+[IMG refs/i/px-chatgpt.png]
+[IMG refs/i/px-codex.png]
+ChatGPT / Codex-supported mode
+Sign in with an OpenAI account instead of pasting a key.
+Not connected
+Connect
+[IMG refs/i/g-local.png]
+Local model
+ADVANCED
+Nothing leaves your machine. Slower, and JD parsing quality drops on long postings.
+LOCALHOST:11434
+Detect
+FALLBACK
+If the active engine fails mid-run, REACH retries once, then falls back to REACH-hosted and says so in the run summary. It never silently switches.
+Change order
+EVIDENCE SOURCES
+What REACH can prove about you · never confused with engines
+Manage in Profile
+[IMG refs/i/px-github.png]
+GitHub
+14 REPOS · 2 USED AS EVIDENCE
+[IMG refs/i/g-verified.png]Synced 2 h ago
+[IMG refs/i/px-linkedin.png]
+LinkedIn
+EXPERIENCE · EDUCATION
+[IMG refs/i/g-verified.png]Synced yesterday
+[IMG refs/i/g-noevidence.png]
+Kaggle
+Optional for Data Analyst — adds nothing your repos do not already prove
+Connect
+[IMG refs/i/g-citation.png]
+What the engine cannot do
+Write to your CV or profile. Every suggestion goes through accept / reject.
+Invent employers, metrics, skills or projects. Missing evidence is shown as missing.
+Decide eligibility. Hard filters are rules, not model output.
+Change your Opportunity Delta. Counts come from the verified run.
+Data & privacy
+Share anonymised fit outcomes
+Improves ranking for students like you
+Keep analysed JD text
+Needed to re-check a posting later
+Let engines see contact details
+Off — never needed for fit analysis
+Deleting your account removes evidence, runs and roadmaps within 30 days. Exports are JSON plus your CV files.
+[IMG refs/i/g-stale.png]
+One setting affects your results
+Changing the engine re-runs analysis on next discovery — your Opportunity Delta may move by a point or two. Eligibility verdicts will not change.
+11B
+Mobile
+Settings as a grouped list · engine choice in a sheet · one active engine visible at all times
+Settings list — grouped, engine state summarised in the row
+9:41
+← Profile
+[IMG refs/i/g-engine.png]
+Settings
+YOUR TARGET
+Target & preferences
+Data Analyst
+Work authorisation
+Bangladesh
+EVIDENCE SOURCES
+[IMG refs/i/px-github.png]
+GitHub
+14 repos
+[IMG refs/i/px-linkedin.png]
+LinkedIn
+Synced
+[IMG refs/i/g-noevidence.png]
+Kaggle
+Optional
+ANALYSIS ENGINE
+[IMG refs/i/g-engine.png]
+REACH-hosted
+HEALTHY · 12 / 40 TODAY
+Change
+Engines run the reasoning. They never write to your CV and never decide eligibility.
+DATA
+Discovery & alerts
+Daily
+Data & privacy
+2 on
+[IMG refs/i/g-nav-focus.png]
+Focus
+[IMG refs/i/g-nav-discover.png]
+Discover
+[IMG refs/i/g-nav-roadmap.png]
+Roadmap
+[IMG refs/i/g-nav-resume.png]
+Resume
+[IMG refs/i/g-nav-profile.png]
+Profile
+Engine sheet — one choice, its cost, what it can see
+9:41
+[IMG refs/i/g-engine.png]
+Settings
+Choose an analysis engine
+This changes who does the reasoning, not what REACH knows about you.
+[IMG refs/i/g-engine.png]
+REACH-hosted
+Included · 40 analyses a day
+ACTIVE
+Sees CV + JD text
+Not retained
+[IMG refs/i/px-claude.png]
+Claude API
+Key valid · billed to you
+Use
+[IMG refs/i/px-chatgpt.png]
+ChatGPT / Codex
+Sign in instead of a key
+Connect
+[IMG refs/i/g-local.png]
+Local model
+Advanced · slower parsing
+Detect
+FALLBACK
+One retry, then REACH-hosted — and the run summary says it happened.
+Takes effect on your next discovery run.
+Cancel
+Keep REACH-hosted
+Settings decisions
+Two groups, two label colours, never adjacent by accident. Evidence sources are sage-labelled and answer “what can REACH prove”; the analysis engine is violet-labelled and answers “who runs the reasoning”. The copy states the distinction in both places.
+This is the only screen with provider logos , and they appear at 24–30px inside rows — never as promotional login cards, never on Home, never in a hero. Home now shows one engine status row that links here.
+Engines are rows with radios, not cards. Selection, health, quota, and what each engine can and cannot see all live on the same row, so choosing is an informed act rather than a brand preference.
+Every engine declares its data exposure — sees / never sees / retention — and the local option states its real cost (slower, weaker long-JD parsing) instead of being sold as strictly better.
+Fallback is explicit and announced. One retry, then REACH-hosted, with the substitution named in the run summary. The product never silently swaps engines.
+“What the engine cannot do” is a standing panel — no writes without accept / reject, no fabrication, no eligibility decisions, no influence on Opportunity Delta. It repeats the guarantees the rest of the product relies on.
+Changing the engine warns about consequence, not about danger: the Delta may move a point or two, verdicts will not. Apricot, because it is attention rather than error.
+Mobile is a grouped list at 48px rows with the active engine summarised in place, and the choice made in a sheet. Nothing is buried more than one tap from Profile.
+Working Mode art density: a 38–52px engine object in the page head, 22–30px functional glyphs (engine, key, local, verified, citation, stale) and no scenery band. Provider logos are third-party marks, deliberately not pixel art, and are the one sanctioned exception to the pixel family — bounded to this screen.

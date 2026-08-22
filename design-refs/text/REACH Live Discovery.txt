@@ -1,0 +1,393 @@
+ITERATION 04 · LIVE DISCOVERY · DESKTOP + MOBILE · WORKING MODE
+Live Discovery
+Same REACH identity as Home — canvas, navy Baloo display, violet / sage / apricot semantics, pixel glyphs — but Working Mode density: a compact page header instead of a hero, a persistent toolbar, a dominant results column and a supporting rail. The Activity Console is the signature moment while a run is live, then collapses to a one-line summary.
+4A
+Desktop · run in progress
+Console leads; verified results stream in beneath it
+[IMG refs/i/px-logo.png]
+REACH
+Focus
+Discover
+Roadmap
+Resume
+Profile
+Run in progress
+NM
+[IMG refs/i/px-apply.png]
+Live Discovery
+TARGET
+Data Analyst
+·
+Dhaka
+·
+Full-time · Hybrid
+Change target
+⌕
+data analyst
+Enter to re-run
+⌕
+Role: Data Analyst ▾
+Dhaka ▾
+Hybrid ▾
+Full-time ▾
+More filters · 3
+Sort: Best fit ▾
+SCANNING · 1,682 DEDUPED · 31 VERIFIED SO FAR
+Activity Console
+STEP 9 OF 13 · ELAPSED 00:24
+Stop run
+10:22:08
+Loading your evidence record
+done
+10:22:11
+Searching opportunity index
+3,142 found
+10:22:16
+Checking company career pages
+12 / 12
+10:22:19
+Querying trusted sources
+6 sources
+10:22:22
+Deduplicating
+3,142 → 1,682
+10:22:25
+Verifying listings
+1,682 live
+10:22:27
+Applying eligibility filters
+→ 214
+10:22:29
+Matching candidate evidence
+4 sources used
+10:22:31
+Ranking opportunities
+31 / 54
+—
+Identifying blockers
+queued
+—
+Calculating Opportunity Delta
+queued
+—
+Preparing results
+queued
+69%
+Verified so far
+Results appear as each listing clears verification and eligibility.
+[IMG refs/i/px-apply.png]
+Apply Now
+7
+STILL RANKING
+Junior Data Analyst
+Walton Hi-Tech · Dhaka · Hybrid
+3 of 3 met
+Company careers page
+VERIFIED 4 H AGO
+Save
+Open
+Business Analyst
+BRACNet · Dhaka · On-site
+3 of 3 met
+Trusted job board
+VERIFIED 1 D AGO
+Save
+Open
+[IMG refs/i/px-onefix.png]
+One Fix Away
+Grouped once blockers are identified
+PENDING · STEP 10
+This run
+Index results
+3,142
+After dedupe
+1,682
+Eligible for you
+214
+Ranked so far
+31
+12 career pages
+6 trusted sources
+1 referral network
+EVIDENCE IN USE
+[IMG refs/i/px-cv.png]
+CV
+Parsed
+[IMG refs/i/px-github.png]
+GitHub
+14 repos
+[IMG refs/i/px-linkedin.png]
+LinkedIn
+Synced
+[IMG refs/i/px-pportfolio.png]
+Portfolio
+Missing
+Matching quality is limited by what we can prove. A portfolio would strengthen 7 of today’s roles.
+4B
+Desktop · run complete
+Console collapses to one summary line; results own the screen
+[IMG refs/i/px-logo.png]
+REACH
+Focus
+Discover
+Roadmap
+Resume
+Profile
+Verified 2 min ago
+NM
+[IMG refs/i/px-apply.png]
+Live Discovery
+54 opportunities
+TARGET
+Data Analyst
+·
+Dhaka
+·
+Full-time · Hybrid
+Change target
+⌕
+data analyst
+⌕
+Role: Data Analyst ▾
+Dhaka ▾
+Hybrid ▾
+Full-time ▾
+More filters · 3
+Sort: Best fit ▾
+Saved · 4
+Apply Now
+12
+One Fix Away
+18
+Skip
+24
+Showing all three groups · Apply Now first
+RUN COMPLETE · 3,142 found · 1,682 deduped · 214 eligible · 54 kept · verified 2 min ago
+Open log
+Re-run
+[IMG refs/i/px-apply.png]
+Apply Now
+12
+All hard requirements met
+Collapse
+ROLE
+EVIDENCE
+SOURCE · FRESHNESS
+ACTIONS
+Junior Data Analyst
+Walton Hi-Tech · Dhaka · Hybrid · Full-time
+3 of 3 met
+Company careers page
+VERIFIED 4 H AGO
+Save
+Open
+Business Analyst
+BRACNet · Dhaka · On-site · Full-time
+3 of 3 met
+Trusted job board
+VERIFIED 1 D AGO
+Saved
+Open
+Reporting Analyst
+Pathao · Remote · BD · Full-time
+3 of 3 met
+Company careers page
+VERIFIED 6 H AGO
+Save
+Open
+Data Quality Associate
+Grameenphone · Dhaka · Hybrid · Full-time
+4 of 4 met
+Referral network
+VERIFIED 2 H AGO
+Save
+Open
+Show the other 8 Apply Now roles
+[IMG refs/i/px-onefix.png]
+One Fix Away
+18
+One unmet item each · SQL closes 8 of them
+Collapse
+Data Analyst
+bKash · Dhaka · On-site · Full-time
+Add SQL
+Signal gap
+Company careers page
+VERIFIED 6 H AGO
+Save
+See fix
+Backend Developer
+BJIT Group · Dhaka · Hybrid · Full-time
+Add Django
+Knowledge gap
+Trusted job board
+VERIFIED 2 D AGO
+Save
+See fix
+Product Associate
+Pathao · Dhaka · Hybrid · Full-time
+Add Excel
+Proof gap
+Company careers page
+VERIFIED 9 H AGO
+Save
+See fix
+Show the other 15 one-fix roles
+[IMG refs/i/px-skip.png]
+Skip
+24
+Hard blockers: Swift (9) · AWS (7) · Figma (5) · visa (3)
+Expand group
+OPPORTUNITY DELTA
+Inspect the 8
+12
+reachable now
+→
+20
+after adding SQL
++8
+Counted from today’s run: 8 postings where SQL is the only unmet requirement.
+Open the fix
+→
+What is blocking the rest
+SQL
+8 roles · fixable
+Django
+4 roles · fixable
+Swift
+9 roles · hard
+Work authorisation
+3 roles · hard
+Where these came from
+54 KEPT
+Company career pages
+31
+Trusted job boards
+17
+Referral network
+6
+Every row keeps its source and last-verified time. Stale rows are re-checked before you open them.
+4C
+Mobile · genuinely recomposed
+Console as a live sheet, then a one-line strip · 390 × 844
+Running — console sheet at 46% height, partial results behind it
+9:41
+[IMG refs/i/px-apply.png]
+Live Discovery
+Data Analyst · Dhaka · Hybrid
+Change
+⌕
+data analyst
+⌕
+Filters · 3
+Dhaka
+Hybrid
+Full-time
+APPLY NOW · 7 SO FAR
+RANKING…
+Junior Data Analyst
+4 h ago
+Walton Hi-Tech · Dhaka · Hybrid
+3 of 3 met
+Careers page
+Activity Console
+9 / 13
+22:16
+Checking company career pages
+12/12
+22:19
+Querying trusted sources
+6
+22:22
+Deduplicating
+3,142 → 1,682
+22:25
+Verifying listings
+live
+22:27
+Applying eligibility filters
+→ 214
+22:29
+Matching candidate evidence
+4 src
+22:31
+Ranking opportunities
+31/54
+—
+Identifying blockers
+queued
+—
+Calculating Opportunity Delta
+queued
+69%
+Stop run
+Hide console
+[IMG refs/i/g-nav-focus.png]
+Focus
+[IMG refs/i/g-nav-discover.png]
+Discover
+[IMG refs/i/g-nav-roadmap.png]
+Roadmap
+[IMG refs/i/g-nav-resume.png]
+Resume
+[IMG refs/i/g-nav-profile.png]
+Profile
+Complete — console is one tappable strip; verdict tabs own the screen
+9:41
+[IMG refs/i/px-apply.png]
+54 opportunities
+Data Analyst · Dhaka · Hybrid
+Change
+⌕
+data analyst
+⌕
+1,682 deduped · 214 eligible · 54 kept · 2 min ago
+Log
+Apply
+12
+One fix
+18
+Skip
+24
+Filters · 3
+Junior Data Analyst
+4 H AGO
+Walton Hi-Tech · Dhaka · Hybrid · Full-time
+3 of 3 met
+Careers page
+Save
+Open role
+Business Analyst
+1 D AGO
+BRACNet · Dhaka · On-site · Full-time
+3 of 3 met
+Job board
+Saved
+Open role
+Reporting Analyst
+6 H AGO
+Pathao · Remote · BD · Full-time
+3 of 3 met
+Careers page
+18 one-fix roles
+→
+[IMG refs/i/g-nav-focus.png]
+Focus
+[IMG refs/i/g-nav-discover.png]
+Discover
+[IMG refs/i/g-nav-roadmap.png]
+Roadmap
+[IMG refs/i/g-nav-resume.png]
+Resume
+[IMG refs/i/g-nav-profile.png]
+Profile
+Working Mode decisions
+No hero, no scenery band. Discovery earns a 120px page header instead: title, live count, target line, search. Pixel art appears only as the 30px section glyphs — the DNA’s functional band, 1–5%.
+Results are the dominant work area at ~65% of the width, with a 372px rail for the run summary, Opportunity Delta, blocker tally and source provenance.
+Console is the signature while running — full dark panel above the streaming results, thirteen observable events with real counts, progress bar, one Stop control. It never shows reasoning, only what the system did.
+On completion it collapses to a single mono line — found, deduped, eligible, kept, verified — with Open log and Re-run. That line is the only dark surface left on the screen.
+Four filters visible + “More filters · 3” plus sort and saved count, matching the Working Mode toolbar cap. Verdict tabs carry the counts; groups are collapsible with Apply Now expanded first.
+Every row carries provenance: source, last-verified time in mono, evidence verdict (“3 of 3 met”) or the single blocker with its gap type, then Save and one verdict-coloured primary action.
+Mobile is recomposed, not scaled. The rail disappears; its content becomes the collapsed strip, the tab counts and the sticky one-fix action. Rows become stacked cards with 44px Save / Open buttons.
+Mobile console is a bottom sheet at 46% height with a Hide control, so the results it describes stay visible behind it — then it becomes the 10.5px strip under the search field once the run completes.
+Still on the missing-asset list for this screen: a scanning/radar motif for the active run, dedicated source glyphs (career page, job board, referral), a “verified live” stamp and a freshness clock glyph. Section glyphs here reuse the existing briefcase / fix / skip motifs per the fallback ladder.

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style data-omelette-injected>html,body{background:transparent}</style><script data-omelette-injected>(()=>{{const n=new URLSearchParams(location.search).get("theme");if(n==="light"||n==="dark"){document.documentElement.dataset.theme=n}}{if(new URLSearchParams(location.search).get("_omthumb")==="1"){const n=(f)=>{const g=f.focus;if(!g)return;f.focus=function(h){g.call(this,{...h,preventScroll:true})}};n(HTMLElement.prototype);n(SVGElement.prototype);if(typeof MathMLElement!=="undefined"){n(MathMLElement.prototype)}const d=(f)=>{f.removeAttribute("autofocus");f.inert=true;if(!(f instanceof HTMLElement))f.removeAttribute("tabindex")};const p=(f)=>{if(f.hasAttribute("autofocus"))d(f);for(const g of f.querySelectorAll("[autofocus]")){d(g)}};p(document.documentElement);new MutationObserver((f)=>{for(const g of f){for(const h of g.addedNodes){if(h.nodeType===1)p(h)}}}).observe(document,{childList:true,subtree:true})}}{const n=()=>{try{if(document.querySelector('meta[name="color-scheme"]'))return;const d=getComputedStyle(document.documentElement).getPropertyValue("color-scheme").trim();if(d&&d!=="normal")return;const p=(y)=>{if(!y)return null;const m=getComputedStyle(y).backgroundColor.match(/^rgba?\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)(?:[,\s/]+([\d.]+%?))?\s*\)$/);if(!m)return null;const w=m[4]==null?1:parseFloat(m[4])/(m[4].endsWith("%")?100:1);if(w<0.99)return null;return[+m[1],+m[2],+m[3]]};const f=p(document.body)||p(document.documentElement);if(!f)return;const g=(y)=>{const m=y/255;return m<=0.04045?m/12.92:((m+0.055)/1.055)**2.4};const h=0.2126*g(f[0])+0.7152*g(f[1])+0.0722*g(f[2]);document.documentElement.style.setProperty("color-scheme",h<0.4?"dark":"light")}catch{}};if(document.readyState==="complete")n();else window.addEventListener("load",n)}var I=["https://claude.ai","https://preview.claude.ai","https://bdc0e802-b4e5-4df8-a031-deff395257db.claudeusercontent.com"];var B=true;var K=false;var C=()=>{};if(K===true){try{const n=setTimeout.bind(window);const d=1e4;const p=15;const f=1e4;const g=120000;const h=200;const y=(o)=>{try{let r;if(typeof o==="string")r=o;else if(o instanceof URL)r=o.href;else if(typeof Request!=="undefined"&&o instanceof Request)r=o.url;else return null;if(!r)return null;const l=document.baseURI;const i=new URL(r,l);if(i.protocol!=="http:"&&i.protocol!=="https:")return null;if(i.origin!==new URL(l).origin)return null;return i.origin+i.pathname}catch{return null}};const m=new Map;const w=(o)=>{let r=m.get(o);if(!r){if(m.size>=h){const l=m.keys().next().value;if(l!==undefined)m.delete(l)}r={fails:[],until:0,cooldown:f,hard:false};m.set(o,r)}return r};const R=(o)=>{const r=m.get(o);return r!==undefined&&r.until>Date.now()};const O=(o,r)=>{const l=Date.now();const i=w(o);if(r)i.hard=true;if(i.until>l)return;i.fails.push(l);while(i.fails.length>0&&i.fails[0]<=l-d)i.fails.shift();if(i.fails.length>=p){i.until=l+i.cooldown;if(i.hard)i.cooldown=Math.min(i.cooldown*2,g);i.fails.length=0;try{n(()=>{try{S(true)}catch{}},i.until-l+100)}catch{}console.warn("[omelette] asset circuit breaker: pausing requests to "+o+" for "+Math.round((i.until-l)/1000)+"s after "+p+" failures in "+d/1000+"s")}};const e=(o)=>{m.delete(o)};const t=100;const a=new WeakMap;const u=new Set;let s=null;const S=(o)=>{for(const r of Array.from(u)){try{const l=a.get(r);if(l===undefined){u.delete(r);continue}if(o){const i=y(l);if(i!==null&&R(i))continue}a.delete(r);u.delete(r);if(s!==null)s.call(r,l)}catch{}}};C=()=>{try{m.clear();S(false)}catch{}};document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")C()});const _=window.fetch;if(typeof _==="function"){const o=function(...r){let l=null;try{l=y(r[0])}catch{}if(l!==null&&R(l)){let c;try{if(r[1]&&r[1].signal!==undefined){c=r[1].signal||undefined}else if(typeof Request!=="undefined"&&r[0]instanceof Request){c=r[0].signal||undefined}}catch{c=undefined}return new Promise((k,b)=>{const E=()=>{try{return c.reason!==undefined?c.reason:new DOMException("The operation was aborted.","AbortError")}catch{return new DOMException("The operation was aborted.","AbortError")}};try{if(c&&c.aborted){b(E());return}}catch{}let T=false;const j=()=>{if(T)return;T=true;b(E())};try{if(c)c.addEventListener("abort",j,{once:true})}catch{}n(()=>{if(T)return;T=true;try{if(c)c.removeEventListener("abort",j)}catch{}let L;try{L=new Response(null,{status:429,statusText:"Too Many Requests",headers:{"Retry-After":"10"}})}catch{L={ok:false,status:429}}k(L)},250)})}const i=_.apply(window,r);if(l!==null){const c=l;i.then((k)=>{try{if(k.ok)e(c);else if(k.status===401||k.status===403||k.status===404||k.status===429){O(c,k.status!==404)}}catch{}},()=>{})}return i};window.fetch=o}const v=Object.getOwnPropertyDescriptor(HTMLImageElement.prototype,"src");if(v!==undefined&&v.set!==undefined&&v.get!==undefined){const o=v.set;s=o;Object.defineProperty(HTMLImageElement.prototype,"src",{configurable:true,enumerable:v.enumerable,get:v.get,set(r){const l=`${r}`;try{const i=y(l);if(i!==null&&R(i)){a.set(this,l);if(u.size<t)u.add(this);return}}catch{}try{a.delete(this);u.delete(this)}catch{}o.call(this,l)}})}try{const o=HTMLImageElement.prototype.setAttribute;HTMLImageElement.prototype.setAttribute=function(r,l){if(arguments.length<2){o.apply(this,arguments);return}if(typeof r==="string"&&r.toLowerCase()==="src"){const i=`${l}`;try{const c=y(i);if(c!==null&&R(c)){a.set(this,i);if(u.size<t)u.add(this);return}a.delete(this);u.delete(this)}catch{}o.call(this,r,i);return}o.call(this,r,l)}}catch{}window.addEventListener("error",(o)=>{try{const r=o.target;if(r instanceof HTMLImageElement){const l=y(r.currentSrc||r.src||"");if(l!==null)O(l,true)}}catch{}},true);window.addEventListener("load",(o)=>{try{const r=o.target;if(r instanceof HTMLImageElement){const l=y(r.currentSrc||r.src||"");if(l!==null)e(l);const i=a.get(r);if(i!==undefined){let c=false;try{c=new URL(i,document.baseURI).href===new URL(r.currentSrc||r.src||"",document.baseURI).href}catch{c=false}if(c){a.delete(r);u.delete(r)}}}}catch{}},true)}catch{}}var J=30000;var G=3000;document.addEventListener("DOMContentLoaded",()=>{const n=window.Babel;const d="om-src-id";if(n&&n.registerPlugin&&!(n.availablePlugins&&n.availablePlugins[d])){n.registerPlugin(d,({types:h})=>({visitor:{JSXOpeningElement(y,m){const w=y.node;if(w.name&&w.name.type==="JSXMemberExpression")return;for(let t=0;t<w.attributes.length;t++){const a=w.attributes[t];if(a.type==="JSXAttribute"&&a.name&&a.name.name==="data-om-id")return}const R=m.file&&m.file.opts&&m.file.opts.filename||"?";const O=w.loc&&w.loc.start;const e=`jsx:${R}:${w.start??0}:${O?O.line:0}:${O?O.column+1:0}`;w.attributes.push(h.jsxAttribute(h.jsxIdentifier("data-om-id"),h.stringLiteral(e)))}}}))}const p="om-text-extract";let f=false;if(B&&n&&n.registerPlugin&&!(n.availablePlugins&&n.availablePlugins[p])){const h=window.React;if(h&&h.useSyncExternalStore&&h.createElement){f=true;const y={};const m=new Set;let w=0;window.__omTextO=y;window.__omTextSet=(e)=>{for(const t in e){const a=e[t];if(a==null)delete y[t];else y[t]=a}w++;m.forEach((t)=>t())};const R=(e)=>{m.add(e);return()=>m.delete(e)};const O=()=>w;window.__OmT=function e(t){h.useSyncExternalStore(R,O,O);return h.createElement("span",{"data-om-text":t.i,className:"__om-t"},t.i in y?y[t.i]:t.children)};n.registerPlugin(p,({types:e})=>{const t={style:1,script:1,noscript:1,textarea:1,title:1,option:1,text:1,tspan:1,textPath:1};const a={placeholder:1,alt:1,title:1,label:1,"aria-label":1,"aria-description":1,"aria-placeholder":1};const u=(o,r)=>e.logicalExpression("??",e.memberExpression(e.logicalExpression("||",e.memberExpression(e.identifier("window"),e.identifier("__omTextO")),e.objectExpression([])),e.stringLiteral(o),true),r);const s=(o)=>o.file&&o.file.opts&&o.file.opts.filename||"?";const S=(o)=>o.file&&o.file.code||"";const _=(o,r)=>{const l=(c)=>c&&c.start!=null&&c.end!=null&&(c.type==="StringLiteral"||c.type==="TemplateLiteral"&&c.expressions.length===0)?[c.start,c.end]:null;const i=l(r);if(i)return i;if(r&&r.type==="Identifier"){const c=o.scope.getBinding(r.name);if(c&&c.constant&&c.path.node.type==="VariableDeclarator"){return l(c.path.node.init)}}return null};const v=(o,r,l)=>{const i=o.node;let c=false;const k=(E,T)=>{c=true;return e.jsxElement(e.jsxOpeningElement(e.jsxIdentifier("__OmT"),[e.jsxAttribute(e.jsxIdentifier("i"),e.stringLiteral(E))],false),e.jsxClosingElement(e.jsxIdentifier("__OmT")),[T],false)};const b=i.children.map((E)=>{if(E.type==="JSXText"){if(E.start==null||E.end==null)return E;const T=l.slice(E.start,E.end);const j=T.length-T.trimStart().length;const L=T.length-T.trimEnd().length;if(j+L>=T.length)return E;return k(`txt:${r}:${E.start+j}:${E.end-L}`,E)}if(E.type==="JSXExpressionContainer"){const T=_(o,E.expression);if(T)return k(`str:${r}:${T[0]}:${T[1]}`,E)}return E});if(c)i.children=b};return{visitor:{JSXOpeningElement(o,r){const l=o.node;const i=s(r);const c={};for(let k=0;k<l.attributes.length;k++){const b=l.attributes[k];if(b.type!=="JSXAttribute"||!b.name)continue;const E=b.name.name;if(!a[E])continue;if(!b.value||b.value.type!=="StringLiteral")continue;if(b.value.start==null||b.value.end==null)continue;const T=`txt:${i}:${b.value.start}:${b.value.end}`;c[E]=T;b.value=e.jsxExpressionContainer(u(T,e.stringLiteral(b.value.value)))}if(Object.keys(c).length){l.attributes.push(e.jsxAttribute(e.jsxIdentifier("data-om-text-attrs"),e.stringLiteral(JSON.stringify(c))))}},JSXElement(o,r){const l=o.node.openingElement;const i=l&&l.name&&l.name.name;if(i==="__OmT")return;if(typeof i==="string"&&t[i])return;v(o,s(r),S(r))},JSXFragment(o,r){v(o,s(r),S(r))}}}})}}const g=f?["transform-react-jsx-source",d,p]:["transform-react-jsx-source",d];document.querySelectorAll('script[type="text/babel"],script[type="text/jsx"]').forEach((h,y)=>{const m=h.getAttribute("data-plugins")||"";const w=g.filter((R)=>m.indexOf(R)<0);if(w.length){h.setAttribute("data-plugins",m?`${m},${w.join(",")}`:w.join(","))}if(!h.hasAttribute("data-filename")){h.setAttribute("data-filename",h.getAttribute("src")||`inline-${y}`)}})});var A=window.parent;var U="not editable here — open the project in the Claude Design editor to save";var W=()=>Promise.resolve({persisted:false,noHost:true,reason:U});var H=W;var M="data/storage.json";var z=()=>{try{const n=new URL(document.baseURI);const d=n.pathname.match(/\/projects\/([^/]+)\/serve\//);if(d)return d[1];return n.hostname.split(".")[0]||""}catch{return location.hostname.split(".")[0]||""}};var Z=()=>{try{const n=new URL(document.baseURI);const d=n.pathname.indexOf("/serve/");if(d>=0)return n.origin+n.pathname.slice(0,d+"/serve/".length)+M}catch{}return"./"+M};var x=null;var N=()=>{if(!x){x=fetch(Z(),{cache:"no-store"}).then((n)=>{if(n.ok)return n.text();return n.status===404?"":null}).catch(()=>null).then((n)=>{if(n===null){x=null;return null}const d=new Map;if(!n)return d;let p;try{p=JSON.parse(n)}catch{console.warn("[omelette.storage] "+M+" is not valid JSON; treating the store as unreadable so a save cannot overwrite the "+"hand-edited bytes. Fix the JSON (or delete the file) to re-enable persistence.");x=null;return null}if(p===null||typeof p!=="object"||Array.isArray(p)){console.warn("[omelette.storage] "+M+" doesn't hold a JSON object; treating the store as unreadable so a save cannot "+"overwrite the hand-edited bytes. Make the top level a JSON object to re-enable persistence.");x=null;return null}const f=p;if("data"in f){const g=f.data;if(g===null||typeof g!=="object"||Array.isArray(g)){console.warn("[omelette.storage] "+M+' has a "data" field that is not a JSON object; treating the store as unreadable so a '+'save cannot overwrite the hand-edited bytes. Make "data" a JSON object to re-enable persistence.');x=null;return null}const h=f._meta;const y=h!==null&&typeof h==="object"?h.project:undefined;if(typeof y==="string"&&y!==""&&y!==z())return d;for(const m of Object.keys(g))d.set(m,g[m]);return d}for(const g of Object.keys(f)){if(g!=="_meta")d.set(g,f[g])}return d})}return x};var F=(n)=>H(M,JSON.stringify({_meta:{project:z(),version:1},data:Object.fromEntries(n)},null,2));var D=Promise.resolve();var $=(n)=>{const d=D.then(n);D=d.then(()=>{return},()=>{return});return d};var V=/sk-(?:ant-)?[A-Za-z0-9_-]{16,}|AKIA[0-9A-Z]{16}|gh[pousr]_[A-Za-z0-9]{20,}|xox[a-z]-[A-Za-z0-9][A-Za-z0-9-]{9,}|AIza[0-9A-Za-z_-]{30,}|-----BEGIN [A-Z ]*PRIVATE KEY-----/;var Y=/password|passwd|secret|api[_-]?key|access[_-]?token|auth[_-]?token|credential/i;var Q=(n,d,p)=>{if(V.test(d)||Y.test(n)&&typeof p==="string"&&p.length>=8){console.warn('[omelette.storage] the value for "'+n+'" looks like a credential. The storage file is a plaintext project file — visible to '+"everyone with project access and copied when the project is duplicated. Do not store secrets here.")}};var q={persisted:false,reason:"could not load the existing store — not overwriting it"};var X={persisted:false,reason:"stored value changed since a failed read — re-read this key before saving"};var P=new Set;var ee={get:(n)=>{if(typeof n!=="string"){return Promise.reject(new TypeError("storage.get: key must be a string"))}return $(N).then((d)=>{if(d===null){P.add(n);return null}P.delete(n);if(!d.has(n))return null;const p=d.get(n);return p==null?null:JSON.parse(JSON.stringify(p))})},set:(n,d)=>{if(typeof n!=="string"){return Promise.reject(new TypeError("storage.set: key must be a string"))}let p;try{p=JSON.stringify(d)}catch(g){return Promise.reject(new TypeError("storage.set: value must be JSON-serializable ("+String(g)+")"))}if(p===undefined){return Promise.reject(new TypeError("storage.set: value must be JSON-serializable"))}Q(n,p,d);const f=JSON.parse(p);return $(()=>N().then((g)=>{if(g===null)return q;if(P.has(n)){if(g.has(n))return X;P.delete(n)}g.set(n,f);return F(g)}))},delete:(n)=>{if(typeof n!=="string"){return Promise.reject(new TypeError("storage.delete: key must be a string"))}return $(()=>N().then((d)=>{if(d===null)return q;if(P.has(n)){if(d.has(n))return X;P.delete(n)}d.delete(n);return F(d)}))},keys:()=>$(N).then((n)=>n===null?[]:Array.from(n.keys()))};window.omelette={writeFile:(n,d)=>H(n,d).then((p)=>{if(!p.persisted&&!p.noHost){throw new Error(p.reason||"write failed")}}),storage:ee};if(A&&A!==window){const n=(e,t)=>{try{A.postMessage({__omelette_log:true,type:e,data:t},"*")}catch{}};["log","warn","error"].forEach((e)=>{const t=console[e];console[e]=(...a)=>{const u=a.map((s)=>{try{return typeof s==="object"?JSON.stringify(s):String(s)}catch{try{return String(s)}catch{return"[unstringifiable]"}}}).join(" ");n(e,u);t.apply(console,a)}});window.addEventListener("error",(e)=>{const t=e.target;if(t&&t!==window&&t.tagName){const a=t.src||t.href||"";n("resource_error",`${t.tagName} failed to load: ${a}`)}else{n("error",`${e.message||"Unknown error"} at ${e.filename||"?"}:${e.lineno||0}:${e.colno||0}`)}},true);window.addEventListener("unhandledrejection",(e)=>{const t=e.reason;const a=t instanceof Error?`${t.message} ${t.stack}`:String(t);n("error",`Unhandled rejection: ${a}`)});window.addEventListener("click",(e)=>{if(e.defaultPrevented||e.button!==0)return;if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;const t=e.composedPath?e.composedPath():[];const a=["button","input","select","textarea","summary","label"];let u=null;for(const v of t){if(!(v instanceof Element))continue;if(v.localName==="a"){if(!(v instanceof HTMLAnchorElement))return;u=v;break}if(a.indexOf(v.localName)!==-1)return}if(!u)return;if(u.isContentEditable)return;const s=u.closest("[contenteditable]");if(s&&s.getAttribute("contenteditable")!=="false")return;const S=(u.getAttribute("target")||"_self").toLowerCase();if(S!=="_self"&&S!=="_top"&&S!=="_parent")return;let _;try{_=new URL(u.href)}catch{return}if(_.protocol!=="http:"&&_.protocol!=="https:")return;if(location.origin==="null")return;if(_.origin===location.origin)return;e.preventDefault();window.open(_.href,"_blank","noopener,noreferrer")});const d=()=>{try{A.postMessage({type:"omelette:height",height:document.documentElement.scrollHeight},"*")}catch{}};if(window.ResizeObserver)new ResizeObserver(d).observe(document.documentElement);const p=()=>{d();if(!document.querySelector('script[type="text/babel"],script[type="text/jsx"]'))return;const e=()=>document.getElementById("root")||document.querySelector("body > div[id]");const t=e()?.firstElementChild??null;let a=0;const u=()=>{const s=e();if(s&&s.firstElementChild!==t||++a>30){d();return}setTimeout(u,100)};setTimeout(u,100)};if(document.readyState==="complete")p();else window.addEventListener("load",p);const f={};let g=0;const h=(e)=>new Promise((t,a)=>{if(!I.length){a(new Error("claude.complete: no parent origin"));return}const u=`c${++g}`;const s=()=>setTimeout(()=>{delete f[u];a(new Error(`claude.complete: no data for ${J/1000}s`))},J);const S=s();f[u]={resolve:t,reject:a,text:"",t:S,arm:s};try{for(const _ of I){A.postMessage({__om_api:true,id:u,body:e},_)}}catch(_){clearTimeout(S);delete f[u];a(_)}});const y=8;const m=async(e,t)=>{if(!Array.isArray(e.messages)){throw new Error("claude.complete: tools require a messages array")}const a=e.messages.slice();const u={...e,tools:e.tools.map((_)=>{if(_===null||typeof _!=="object")return _;const v={};for(const o of Object.keys(_)){if(typeof _[o]!=="function")v[o]=_[o]}return v})};const s=u.tool_choice;const S=s!=null&&(s.type==="any"||s.type==="tool")?{...u,tool_choice:s.disable_parallel_tool_use!==undefined?{type:"auto",disable_parallel_tool_use:s.disable_parallel_tool_use}:{type:"auto"}}:u;for(let _=0;_<y;_++){const v=await h({..._===0?u:S,messages:a});const o=v.message;const r=o&&Array.isArray(o.content)?o.content:null;const l=r?r.filter((c)=>c?.type==="tool_use"):[];if(o?.stop_reason!=="tool_use"||l.length===0){return v.text}const i=[];for(const c of l){const k=t.get(c.name);if(!k){i.push({type:"tool_result",tool_use_id:c.id,content:`no handler for tool "${c.name}"`,is_error:true});continue}try{const b=await k(c.input);const E=typeof b==="string"?b:O(b)??"";i.push({type:"tool_result",tool_use_id:c.id,content:E})}catch(b){i.push({type:"tool_result",tool_use_id:c.id,content:String(b?.message??b??"tool handler failed"),is_error:true})}}a.push({role:"assistant",content:r},{role:"user",content:i})}throw new Error(`claude.complete: exceeded ${y} tool turns`)};window.claude={complete(e){const t=e;if(t!==null&&typeof t==="object"&&Array.isArray(t.tools)&&t.tools.some((a)=>a!==null&&typeof a==="object"&&typeof a.run==="function")){const a=new Map;for(const u of t.tools){if(u!==null&&typeof u==="object"&&typeof u.run==="function"){a.set(String(u.name),u.run)}}return m(t,a)}return h(e).then((a)=>a.text)}};const w={};let R=0;H=(e,t)=>new Promise((a)=>{if(!I.length){a({persisted:false,noHost:true,reason:U});return}const u=`f${++R}`;const s=setTimeout(()=>{delete w[u];a({persisted:false,noHost:true,reason:U})},G);w[u]={settle:a,t:s};try{for(const S of I){A.postMessage({__om_file:true,id:u,op:"write",path:e,content:t},S)}}catch{clearTimeout(s);delete w[u];a({persisted:false,noHost:true,reason:U})}});const O=(e)=>{try{return JSON.stringify(e)}catch{return JSON.stringify(String(e))}};window.addEventListener("message",(e)=>{if(I.indexOf(e.origin)<0)return;if(e.source!==A)return;const t=e.data;if(!t)return;if(t.type==="omelette-preview-refresh"){if(typeof t.token!=="string"||!/^[0-9a-f.-]+(\.(rc|pr-[0-9]+))?(\.[0-9]+\.[0-9a-f]{16})?$/.test(t.token))return;const s=Math.max(1,Math.floor((t.expiresAt||0)-Date.now()/1000));document.cookie="__Host-omelette-preview="+t.token+"; Path=/; Secure; SameSite=None; Partitioned; Max-Age="+s;C();return}if(t.__om_file_r){const s=w[t.id];if(!s)return;clearTimeout(s.t);delete w[t.id];s.settle(t.ok?{persisted:true}:{persisted:false,reason:t.error||"write failed"});return}if(t.__om_api_r){const s=f[t.id];if(!s)return;if(t.error!=null){clearTimeout(s.t);delete f[t.id];s.reject(new Error(t.error));return}if(t.chunk!=null){clearTimeout(s.t);s.t=s.arm();s.text+=t.chunk;return}if(t.done){clearTimeout(s.t);delete f[t.id];s.resolve({text:t.text!=null?t.text:s.text,message:t.message});return}return}if(!t.__om_eval)return;const a=t;const u=(s)=>{e.source.postMessage({...s,__om_eval_r:1,id:a.id},e.origin)};try{const s=(0,eval)(a.code);if(s&&typeof s.then==="function"){s.then((S)=>u({ok:1,v:O(S)}),(S)=>u({ok:0,e:String(S)}))}else{u({ok:1,v:O(s)})}}catch(s){u({ok:0,e:String(s)})}})}})();
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  body { margin: 0; background: #E8E5F2; -webkit-font-smoothing: antialiased; }
+  a { color: #574FC0; text-decoration: none; }
+  a:hover { color: #3F3799; }
+  ::selection { background: #DED7F6; }
+</style>
+</helmet>
+<div style="font-family: 'Instrument Sans', system-ui, sans-serif; color: #101B49; padding: 44px 48px 96px; display: flex; flex-direction: column; gap: 34px">
+
+  <div style="display: flex; flex-direction: column; gap: 10px; max-width: 980px">
+    <span style="font-size: 12px; font-weight: 600; letter-spacing: .16em; color: #666C8C">ITERATION 04 · LIVE DISCOVERY · DESKTOP + MOBILE · WORKING MODE</span>
+    <h1 style="font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 44px; letter-spacing: -.025em; margin: 0; line-height: 1.08">Live Discovery</h1>
+    <p style="margin: 0; font-size: 15.5px; line-height: 1.65; color: #4A5170">Same REACH identity as Home — canvas, navy Baloo display, violet / sage / apricot semantics, pixel glyphs — but Working Mode density: a compact page header instead of a hero, a persistent toolbar, a dominant results column and a supporting rail. The Activity Console is the signature moment while a run is live, then collapses to a one-line summary.</p>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 16px">
+    <div style="display: flex; align-items: baseline; gap: 12px">
+      <span style="font-size: 12px; font-weight: 700; letter-spacing: .1em; color: #FBFAFE; background: #6C63D8; border-radius: 6px; padding: 6px 10px">4A</span>
+      <strong style="font-family: 'Baloo 2', sans-serif; font-size: 24px; font-weight: 700">Desktop · run in progress</strong>
+      <span style="font-size: 13.5px; color: #4A5170">Console leads; verified results stream in beneath it</span>
+    </div>
+
+    <div style="width: 1440px; background: #F5F3FB; border: 1px solid #DCD8EC; border-radius: 16px; overflow: hidden; box-shadow: 0 30px 70px -40px rgba(16, 27, 73, .5)">
+      <div style="height: 72px; background: #FBFAFE; border-bottom: 1px solid #E7E4F0; display: flex; align-items: center; justify-content: space-between; padding: 0 40px">
+        <div style="display: flex; align-items: center; gap: 44px">
+          <div style="display: flex; align-items: center; gap: 10px">
+            <img src="refs/i/px-logo.png" alt="" width="34" height="33" decoding="async" style="width: 34px; height: 33px; image-rendering: pixelated" />
+            <span style="font-family: 'Baloo 2', sans-serif; font-size: 24px; font-weight: 800; letter-spacing: -.01em">REACH</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 30px; font-size: 15px">
+            <span style="color: #4A5170; padding: 25px 2px 22px">Focus</span>
+            <span style="font-weight: 700; color: #101B49; border-bottom: 3px solid #6C63D8; padding: 25px 2px 22px">Discover</span>
+            <span style="color: #4A5170; padding: 25px 2px 22px">Roadmap</span>
+            <span style="color: #4A5170; padding: 25px 2px 22px">Resume</span>
+            <span style="color: #4A5170; padding: 25px 2px 22px">Profile</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 18px">
+          <span style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #4A5170; background: #F3EFFC; border: 1px solid #DED7F6; border-radius: 999px; padding: 7px 13px"><span style="width: 7px; height: 7px; border-radius: 50%; background: #6C63D8"></span>Run in progress</span>
+          <span style="width: 36px; height: 36px; border-radius: 10px; background: #F3EFFC; border: 1px solid #DED7F6; display: flex; align-items: center; justify-content: center; font-family: 'Baloo 2', sans-serif; font-size: 14px; font-weight: 700; color: #574FC0">NM</span>
+        </div>
+      </div>
+
+      <div style="background: #FBFAFE; border-bottom: 1px solid #E7E4F0; padding: 22px 48px 0; display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 32px">
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <div style="display: flex; align-items: center; gap: 12px">
+              <img src="refs/i/px-apply.png" alt="" width="30" height="27" decoding="async" style="width: 30px; height: 27px; image-rendering: pixelated" />
+              <h2 style="font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 34px; line-height: 1; letter-spacing: -.025em; margin: 0">Live Discovery</h2>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: #4A5170">
+              <span style="font-size: 12px; font-weight: 700; letter-spacing: .12em; color: #574FC0">TARGET</span>
+              <span style="width: 1px; height: 12px; background: #DED7F6"></span>
+              <span style="font-weight: 600">Data Analyst</span><span style="color: #B7B4C6">·</span><span>Dhaka</span><span style="color: #B7B4C6">·</span><span>Full-time · Hybrid</span>
+              <span style="font-weight: 600; color: #574FC0">Change target</span>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; width: 620px; background: #FBFAFE; border: 1.5px solid #C3BCEC; border-radius: 12px; padding: 6px 6px 6px 16px; box-shadow: 0 8px 20px -14px rgba(16, 27, 73, .35)">
+            <span style="font-size: 16px; color: #6E7490">⌕</span>
+            <span style="flex: 1; font-size: 15px; color: #101B49">data analyst</span>
+            <span style="font-size: 12.5px; color: #6E7490">Enter to re-run</span>
+            <span style="width: 40px; height: 40px; border-radius: 9px; background: #6C63D8; display: flex; align-items: center; justify-content: center; color: #FBFAFE; font-size: 16px">⌕</span>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 8px; padding-bottom: 16px; flex-wrap: wrap">
+          <span style="font-size: 13px; font-weight: 600; color: #101B49; background: #F3EFFC; border: 1.5px solid #C3BCEC; border-radius: 9px; padding: 9px 13px">Role: Data Analyst ▾</span>
+          <span style="font-size: 13px; color: #4A5170; background: #FBFAFE; border: 1.5px solid #C3BCEC; border-radius: 9px; padding: 9px 13px">Dhaka ▾</span>
+          <span style="font-size: 13px; color: #4A5170; background: #FBFAFE; border: 1.5px solid #C3BCEC; border-radius: 9px; padding: 9px 13px">Hybrid ▾</span>
+          <span style="font-size: 13px; color: #4A5170; background: #FBFAFE; border: 1.5px solid #C3BCEC; border-radius: 9px; padding: 9px 13px">Full-time ▾</span>
+          <span style="font-size: 13px; font-weight: 600; color: #574FC0; background: #F3EFFC; border: 1px solid #DED7F6; border-radius: 9px; padding: 9px 13px">More filters · 3</span>
+          <span style="width: 1px; height: 20px; background: #E7E4F0; margin: 0 4px"></span>
+          <span style="font-size: 13px; color: #4A5170; background: #FBFAFE; border: 1px solid #E7E4F0; border-radius: 9px; padding: 9px 13px">Sort: Best fit ▾</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #666C8C; margin-left: auto">SCANNING · 1,682 DEDUPED · 31 VERIFIED SO FAR</span>
+        </div>
+      </div>
+
+      <div style="padding: 22px 48px 44px; display: grid; grid-template-columns: minmax(0, 1fr) 372px; gap: 22px; align-items: start">
+
+        <div style="display: flex; flex-direction: column; gap: 16px; min-width: 0">
+          <div style="background: #1B233A; border: 1px solid #29314C; border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 14px">
+            <div style="display: flex; align-items: center; gap: 12px">
+              <span style="width: 8px; height: 8px; border-radius: 50%; background: #9AA0F0"></span>
+              <strong style="font-family: 'Baloo 2', sans-serif; font-size: 20px; font-weight: 700; color: #E7EAF4">Activity Console</strong>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7C88AC">STEP 9 OF 13 · ELAPSED 00:24</span>
+              <span style="font-size: 12.5px; font-weight: 600; color: #C4CBE0; border: 1px solid #3A4568; border-radius: 8px; padding: 7px 12px; margin-left: auto">Stop run</span>
+            </div>
+            <div style="display: grid; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: #C4CBE0">
+              <span style="display: flex; gap: 16px"><span style="color: #7C88AC">10:22:08</span><span>Loading your evidence record</span><span style="color: #8FBF9A; margin-left: auto">done</span></span>
+              <span style="display: flex; gap: 16px"><span style="color: #7C88AC">10:22:11</span><span>Searching opportunity index</span><span style="color: #8FBF9A; margin-left: auto">3,142 found</span></span>
+              <span style="display: flex; gap: 16px"><span style="color: #7C88AC">10:22:16</span><span>Checking company career pages</span><span style="color: #8FBF9A; margin-left: auto">12 / 12</span></span>
+              <span style="display: flex; gap: 16px"><span style="color: #7C88AC">10:22:19</span><span>Querying trusted sources</span><span style="color: #8FBF9A; margin-left: auto">6 sources</span></span>
+              <span style="display: flex; gap: 16px"><span style="color: #7C88AC">10:22:22</span><span>Deduplicating</span><span style="color: #8FBF9A; margin-left: auto">3,142 → 1,682</span></span>
+              <span style="display: flex; gap: 16px"><span style="color: #7C88AC">10:22:25</span><span>Verifying listings</span><span style="color: #8FBF9A; margin-left: auto">1,682 live</span></span>
+              <span style="display: flex; gap: 16px"><span style="color: #7C88AC">10:22:27</span><span>Applying eligibility filters</span><span style="color: #8FBF9A; margin-left: auto">→ 214</span></span>
+              <span style="display: flex; gap: 16px"><span style="color: #7C88AC">10:22:29</span><span>Matching candidate evidence</span><span style="color: #8FBF9A; margin-left: auto">4 sources used</span></span>
+              <span style="display: flex; gap: 16px; color: #E7EAF4"><span style="color: #9AA0F0">10:22:31</span><span>Ranking opportunities</span><span style="color: #9AA0F0; margin-left: auto">31 / 54</span></span>
+              <span style="display: flex; gap: 16px; color: #6E7BA0"><span>—</span><span>Identifying blockers</span><span style="margin-left: auto">queued</span></span>
+              <span style="display: flex; gap: 16px; color: #6E7BA0"><span>—</span><span>Calculating Opportunity Delta</span><span style="margin-left: auto">queued</span></span>
+              <span style="display: flex; gap: 16px; color: #6E7BA0"><span>—</span><span>Preparing results</span><span style="margin-left: auto">queued</span></span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 14px; border-top: 1px solid #2A3352; padding-top: 14px">
+              <span style="flex: 1; height: 6px; border-radius: 3px; background: #2A3352; display: block; position: relative; overflow: hidden"><span style="position: absolute; inset: 0 31% 0 0; background: #9AA0F0; border-radius: 3px"></span></span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #C4CBE0">69%</span>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px">
+            <strong style="font-family: 'Baloo 2', sans-serif; font-size: 20px; font-weight: 700">Verified so far</strong>
+            <span style="font-size: 12.5px; color: #666C8C">Results appear as each listing clears verification and eligibility.</span>
+          </div>
+
+          <div style="background: #FBFAFE; border: 1px solid #E7E4F0; border-radius: 14px; overflow: hidden; box-shadow: inset 0 3px 0 #3F7D53">
+            <div style="padding: 14px 22px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #EFEDF7">
+              <img src="refs/i/px-apply.png" alt="" width="28" height="25" decoding="async" style="width: 28px; height: 25px; image-rendering: pixelated" />
+              <strong style="font-family: 'Baloo 2', sans-serif; font-size: 19px; font-weight: 700">Apply Now</strong>
+              <span style="font-size: 14px; font-weight: 700; color: #2E6742; background: #EEF5EF; border: 1px solid #D3E4D8; border-radius: 7px; padding: 3px 9px; font-variant-numeric: tabular-nums">7</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #666C8C; margin-left: auto">STILL RANKING</span>
+            </div>
+            <div style="padding: 0 22px">
+              <div style="display: grid; grid-template-columns: minmax(0, 1.7fr) 150px 170px 150px; gap: 18px; padding: 15px 0; border-bottom: 1px solid #F1EFF8; align-items: center">
+                <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><strong style="font-size: 15px; font-weight: 600; color: #2E2A8C">Junior Data Analyst</strong><span style="font-size: 12.5px; color: #666C8C">Walton Hi-Tech · Dhaka · Hybrid</span></div>
+                <span style="font-size: 12.5px; font-weight: 600; color: #2E6742; background: #EEF5EF; border: 1px solid #D3E4D8; border-radius: 6px; padding: 5px 9px; justify-self: start">3 of 3 met</span>
+                <div style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 12.5px; color: #4A5170">Company careers page</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #666C8C">VERIFIED 4 H AGO</span></div>
+                <div style="display: flex; gap: 8px; justify-self: end"><span style="font-size: 13px; font-weight: 600; color: #574FC0; border: 1px solid #C3BCEC; border-radius: 8px; padding: 8px 12px">Save</span><span style="font-size: 13px; font-weight: 600; color: #FBFEFB; background: #3F7D53; border-radius: 8px; padding: 8px 14px">Open</span></div>
+              </div>
+              <div style="display: grid; grid-template-columns: minmax(0, 1.7fr) 150px 170px 150px; gap: 18px; padding: 15px 0; border-bottom: 1px solid #F1EFF8; align-items: center">
+                <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><strong style="font-size: 15px; font-weight: 600; color: #2E2A8C">Business Analyst</strong><span style="font-size: 12.5px; color: #666C8C">BRACNet · Dhaka · On-site</span></div>
+                <span style="font-size: 12.5px; font-weight: 600; color: #2E6742; background: #EEF5EF; border: 1px solid #D3E4D8; border-radius: 6px; padding: 5px 9px; justify-self: start">3 of 3 met</span>
+                <div style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 12.5px; color: #4A5170">Trusted job board</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #666C8C">VERIFIED 1 D AGO</span></div>
+                <div style="display: flex; gap: 8px; justify-self: end"><span style="font-size: 13px; font-weight: 600; color: #574FC0; border: 1px solid #C3BCEC; border-radius: 8px; padding: 8px 12px">Save</span><span style="font-size: 13px; font-weight: 600; color: #FBFEFB; background: #3F7D53; border-radius: 8px; padding: 8px 14px">Open</span></div>
+              </div>
+              <div style="display: grid; grid-template-columns: minmax(0, 1.7fr) 150px 170px 150px; gap: 18px; padding: 15px 0; align-items: center">
+                <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0"><span style="width: 190px; height: 13px; border-radius: 4px; background: #EDEAF7"></span><span style="width: 250px; height: 11px; border-radius: 4px; background: #F1EFF8"></span></div>
+                <span style="width: 78px; height: 22px; border-radius: 6px; background: #EDEAF7"></span>
+                <span style="width: 120px; height: 22px; border-radius: 6px; background: #EDEAF7"></span>
+                <span style="width: 110px; height: 30px; border-radius: 8px; background: #EDEAF7; justify-self: end"></span>
+              </div>
+            </div>
+          </div>
+
+          <div style="background: #FBFAFE; border: 1px solid #E7E4F0; border-radius: 14px; padding: 14px 22px; display: flex; align-items: center; gap: 12px; box-shadow: inset 0 3px 0 #C4762F">
+            <img src="refs/i/px-onefix.png" alt="" width="26" height="27" decoding="async" style="width: 26px; height: 27px; image-rendering: pixelated" />
+            <strong style="font-family: 'Baloo 2', sans-serif; font-size: 18px; font-weight: 700">One Fix Away</strong>
+            <span style="font-size: 13px; color: #666C8C">Grouped once blockers are identified</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #A85C22; margin-left: auto">PENDING · STEP 10</span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 16px">
+          <div style="background: #FBFAFE; border: 1px solid #DCD8EC; border-radius: 14px; padding: 20px 22px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 2px 6px -3px rgba(16, 27, 73, .12)">
+            <strong style="font-family: 'Baloo 2', sans-serif; font-size: 19px; font-weight: 700">This run</strong>
+            <div style="display: flex; flex-direction: column">
+              <div style="display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid #F1EFF8; font-size: 13px"><span style="color: #4A5170">Index results</span><span style="font-family: 'IBM Plex Mono', monospace; color: #101B49">3,142</span></div>
+              <div style="display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid #F1EFF8; font-size: 13px"><span style="color: #4A5170">After dedupe</span><span style="font-family: 'IBM Plex Mono', monospace; color: #101B49">1,682</span></div>
+              <div style="display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid #F1EFF8; font-size: 13px"><span style="color: #4A5170">Eligible for you</span><span style="font-family: 'IBM Plex Mono', monospace; color: #101B49">214</span></div>
+              <div style="display: flex; justify-content: space-between; padding: 9px 0; font-size: 13px"><span style="color: #4A5170">Ranked so far</span><span style="font-family: 'IBM Plex Mono', monospace; color: #574FC0">31</span></div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 7px; border-top: 1px solid #EFEDF7; padding-top: 13px">
+              <span style="font-size: 12px; color: #4A5170; background: #F3F2F9; border: 1px solid #E4E1EF; border-radius: 6px; padding: 4px 8px">12 career pages</span>
+              <span style="font-size: 12px; color: #4A5170; background: #F3F2F9; border: 1px solid #E4E1EF; border-radius: 6px; padding: 4px 8px">6 trusted sources</span>
+              <span style="font-size: 12px; color: #4A5170; background: #F3F2F9; border: 1px solid #E4E1EF; border-radius: 6px; padding: 4px 8px">1 referral network</span>
+            </div>
+          </div>
+
+          <div style="background: #FBFAFE; border: 1px solid #DCD8EC; border-radius: 14px; padding: 20px 22px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 2px 6px -3px rgba(16, 27, 73, .12)">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: .12em; color: #666C8C">EVIDENCE IN USE</span>
+            <div style="display: flex; flex-direction: column; gap: 8px">
+              <div style="display: flex; align-items: center; gap: 10px"><img src="refs/i/px-cv.png" alt="" width="26" height="25" decoding="async" style="width: 26px; height: 25px" /><span style="font-size: 13px; font-weight: 600">CV</span><span style="font-size: 12px; color: #2E6742; margin-left: auto">Parsed</span></div>
+              <div style="display: flex; align-items: center; gap: 10px"><img src="refs/i/px-github.png" alt="" width="24" height="24" decoding="async" style="width: 24px; height: 24px" /><span style="font-size: 13px; font-weight: 600">GitHub</span><span style="font-size: 12px; color: #2E6742; margin-left: auto">14 repos</span></div>
+              <div style="display: flex; align-items: center; gap: 10px"><img src="refs/i/px-linkedin.png" alt="" width="24" height="24" decoding="async" style="width: 24px; height: 24px" /><span style="font-size: 13px; font-weight: 600">LinkedIn</span><span style="font-size: 12px; color: #2E6742; margin-left: auto">Synced</span></div>
+              <div style="display: flex; align-items: center; gap: 10px"><img src="refs/i/px-pportfolio.png" alt="" width="24" height="24" decoding="async" style="width: 24px; height: 24px" /><span style="font-size: 13px; font-weight: 600">Portfolio</span><span style="font-size: 12px; color: #A85C22; margin-left: auto">Missing</span></div>
+            </div>
+            <span style="font-size: 12.5px; color: #666C8C; line-height: 1.45; border-top: 1px solid #EFEDF7; padding-top: 12px">Matching quality is limited by what we can prove. A portfolio would strengthen 7 of today’s roles.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 16px">
+    <div style="display: flex; align-items: baseline; gap: 12px">
+      <span style="font-size: 12px; font-weight: 700; letter-spacing: .1em; color: #FBFAFE; background: #6C63D8; border-radius: 6px; padding: 6px 10px">4B</span>
+      <strong style="font-family: 'Baloo 2', sans-serif; font-size: 24px; font-weight: 700">Desktop · run complete</strong>
+      <span style="font-size: 13.5px; color: #4A5170">Console collapses to one summary line; results own the screen</span>
+    </div>
+
+    <div style="width: 1440px; background: #F5F3FB; border: 1px solid #DCD8EC; border-radius: 16px; overflow: hidden; box-shadow: 0 30px 70px -40px rgba(16, 27, 73, .5)">
+      <div style="height: 72px; background: #FBFAFE; border-bottom: 1px solid #E7E4F0; display: flex; align-items: center; justify-content: space-between; padding: 0 40px">
+        <div style="display: flex; align-items: center; gap: 44px">
+          <div style="display: flex; align-items: center; gap: 10px">
+            <img src="refs/i/px-logo.png" alt="" width="34" height="33" decoding="async" style="width: 34px; height: 33px; image-rendering: pixelated" />
+            <span style="font-family: 'Baloo 2', sans-serif; font-size: 24px; font-weight: 800; letter-spacing: -.01em">REACH</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 30px; font-size: 15px">
+            <span style="color: #4A5170; padding: 25px 2px 22px">Focus</span>
+            <span style="font-weight: 700; color: #101B49; border-bottom: 3px solid #6C63D8; padding: 25px 2px 22px">Discover</span>
+            <span style="color: #4A5170; padding: 25px 2px 22px">Roadmap</span>
+            <span style="color: #4A5170; padding: 25px 2px 22px">Resume</span>
+            <span style="color: #4A5170; padding: 25px 2px 22px">Profile</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 18px">
+          <span style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #2E6742; background: #EEF5EF; border: 1px solid #D3E4D8; border-radius: 999px; padding: 7px 13px"><span style="width: 7px; height: 7px; border-radius: 50%; background: #3F7D53"></span>Verified 2 min ago</span>
+          <span style="width: 36px; height: 36px; border-radius: 10px; background: #F3EFFC; border: 1px solid #DED7F6; display: flex; align-items: center; justify-content: center; font-family: 'Baloo 2', sans-serif; font-size: 14px; font-weight: 700; color: #574FC0">NM</span>
+        </div>
+      </div>
+
+      <div style="background: #FBFAFE; border-bottom: 1px solid #E7E4F0; padding: 22px 48px 0; display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 32px">
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <div style="display: flex; align-items: center; gap: 12px">
+              <img src="refs/i/px-apply.png" alt="" width="30" height="27" decoding="async" style="width: 30px; height: 27px; image-rendering: pixelated" />
+              <h2 style="font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 34px; line-height: 1; letter-spacing: -.025em; margin: 0">Live Discovery</h2>
+              <span style="font-family: 'Baloo 2', sans-serif; font-size: 20px; font-weight: 700; color: #666C8C; font-variant-numeric: tabular-nums">54 opportunities</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: #4A5170">
+              <span style="font-size: 12px; font-weight: 700; letter-spacing: .12em; color: #574FC0">TARGET</span>
+              <span style="width: 1px; height: 12px; background: #DED7F6"></span>
+              <span style="font-weight: 600">Data Analyst</span><span style="color: #B7B4C6">·</span><span>Dhaka</span><span style="color: #B7B4C6">·</span><span>Full-time · Hybrid</span>
+              <span style="font-weight: 600; color: #574FC0">Change target</span>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; width: 620px; background: #FBFAFE; border: 1.5px solid #C3BCEC; border-radius: 12px; padding: 6px 6px 6px 16px; box-shadow: 0 8px 20px -14px rgba(16, 27, 73, .35)">
+            <span style="font-size: 16px; color: #6E7490">⌕</span>
+            <span style="flex: 1; font-size: 15px; color: #101B49">data analyst</span>
+            <span style="width: 40px; height: 40px; border-radius: 9px; background: #6C63D8; display: flex; align-items: center; justify-content: center; color: #FBFAFE; font-size: 16px">⌕</span>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+          <span style="font-size: 13px; font-weight: 600; color: #101B49; background: #F3EFFC; border: 1.5px solid #C3BCEC; border-radius: 9px; padding: 9px 13px">Role: Data Analyst ▾</span>
+          <span style="font-size: 13px; color: #4A5170; background: #FBFAFE; border: 1.5px solid #C3BCEC; border-radius: 9px; padding: 9px 13px">Dhaka ▾</span>
+          <span style="font-size: 13px; color: #4A5170; background: #FBFAFE; border: 1.5px solid #C3BCEC; border-radius: 9px; padding: 9px 13px">Hybrid ▾</span>
+          <span style="font-size: 13px; color: #4A5170; background: #FBFAFE; border: 1.5px solid #C3BCEC; border-radius: 9px; padding: 9px 13px">Full-time ▾</span>
+          <span style="font-size: 13px; font-weight: 600; color: #574FC0; background: #F3EFFC; border: 1px solid #DED7F6; border-radius: 9px; padding: 9px 13px">More filters · 3</span>
+          <span style="width: 1px; height: 20px; background: #E7E4F0; margin: 0 4px"></span>
+          <span style="font-size: 13px; color: #4A5170; background: #FBFAFE; border: 1px solid #E7E4F0; border-radius: 9px; padding: 9px 13px">Sort: Best fit ▾</span>
+          <span style="font-size: 13px; color: #4A5170; background: #FBFAFE; border: 1px solid #E7E4F0; border-radius: 9px; padding: 9px 13px">Saved · 4</span>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 28px">
+          <span style="font-size: 14.5px; font-weight: 700; color: #101B49; border-bottom: 2px solid #574FC0; padding: 6px 2px 12px">Apply Now <span style="color: #2E6742; font-variant-numeric: tabular-nums">12</span></span>
+          <span style="font-size: 14.5px; color: #4A5170; padding: 6px 2px 12px">One Fix Away <span style="color: #A85C22; font-variant-numeric: tabular-nums">18</span></span>
+          <span style="font-size: 14.5px; color: #4A5170; padding: 6px 2px 12px">Skip <span style="color: #A33F28; font-variant-numeric: tabular-nums">24</span></span>
+          <span style="font-size: 13px; color: #666C8C; margin-left: auto; padding-bottom: 12px">Showing all three groups · Apply Now first</span>
+        </div>
+      </div>
+
+      <div style="padding: 18px 48px 44px; display: grid; grid-template-columns: minmax(0, 1fr) 372px; gap: 22px; align-items: start">
+
+        <div style="display: flex; flex-direction: column; gap: 16px; min-width: 0">
+          <div style="background: #1B233A; border: 1px solid #29314C; border-radius: 12px; padding: 13px 20px; display: flex; align-items: center; gap: 16px">
+            <span style="width: 7px; height: 7px; border-radius: 50%; background: #8FBF9A"></span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: #C4CBE0">RUN COMPLETE · 3,142 found · 1,682 deduped · 214 eligible · 54 kept · verified 2 min ago</span>
+            <span style="display: flex; gap: 10px; margin-left: auto"><span style="font-size: 12.5px; font-weight: 600; color: #9AA0F0">Open log</span><span style="font-size: 12.5px; font-weight: 600; color: #C4CBE0; border: 1px solid #3A4568; border-radius: 8px; padding: 6px 12px">Re-run</span></span>
+          </div>
+
+          <div style="background: #FBFAFE; border: 1px solid #E7E4F0; border-radius: 14px; overflow: hidden; box-shadow: inset 0 3px 0 #3F7D53">
+            <div style="padding: 15px 22px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #EFEDF7">
+              <img src="refs/i/px-apply.png" alt="" width="28" height="25" decoding="async" style="width: 28px; height: 25px; image-rendering: pixelated" />
+              <strong style="font-family: 'Baloo 2', sans-serif; font-size: 20px; font-weight: 700">Apply Now</strong>
+              <span style="font-size: 14px; font-weight: 700; color: #2E6742; background: #EEF5EF; border: 1px solid #D3E4D8; border-radius: 7px; padding: 3px 9px; font-variant-numeric: tabular-nums">12</span>
+              <span style="font-size: 13px; color: #666C8C">All hard requirements met</span>
+              <span style="font-size: 13px; font-weight: 600; color: #574FC0; margin-left: auto">Collapse</span>
+            </div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1.7fr) 152px 176px 150px; gap: 18px; padding: 10px 22px; background: #F5F3FB; border-bottom: 1px solid #E7E4F0; font-size: 12px; font-weight: 700; letter-spacing: .1em; color: #666C8C">
+              <span>ROLE</span><span>EVIDENCE</span><span>SOURCE · FRESHNESS</span><span style="justify-self: end">ACTIONS</span>
+            </div>
+            <div style="padding: 0 22px">
+              <div style="display: grid; grid-template-columns: minmax(0, 1.7fr) 152px 176px 150px; gap: 18px; padding: 15px 0; border-bottom: 1px solid #F1EFF8; align-items: center">
+                <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><strong style="font-size: 15px; font-weight: 600; color: #2E2A8C">Junior Data Analyst</strong><span style="font-size: 12.5px; color: #666C8C">Walton Hi-Tech · Dhaka · Hybrid · Full-time</span></div>
+                <span style="font-size: 12.5px; font-weight: 600; color: #2E6742; background: #EEF5EF; border: 1px solid #D3E4D8; border-radius: 6px; padding: 5px 9px; justify-self: start">3 of 3 met</span>
+                <div style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 12.5px; color: #4A5170">Company careers page</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #666C8C">VERIFIED 4 H AGO</span></div>
+                <div style="display: flex; gap: 8px; justify-self: end"><span style="font-size: 13px; font-weight: 600; color: #574FC0; border: 1px solid #C3BCEC; border-radius: 8px; padding: 8px 12px">Save</span><span style="font-size: 13px; font-weight: 600; color: #FBFEFB; background: #3F7D53; border-radius: 8px; padding: 8px 14px">Open</span></div>
+              </div>
+              <div style="display: grid; grid-template-columns: minmax(0, 1.7fr) 152px 176px 150px; gap: 18px; padding: 15px 0; border-bottom: 1px solid #F1EFF8; align-items: center; background: #F7F5FD">
+                <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><strong style="font-size: 15px; font-weight: 600; color: #2E2A8C">Business Analyst</strong><span style="font-size: 12.5px; color: #666C8C">BRACNet · Dhaka · On-site · Full-time</span></div>
+                <span style="font-size: 12.5px; font-weight: 600; color: #2E6742; background: #EEF5EF; border: 1px solid #D3E4D8; border-radius: 6px; padding: 5px 9px; justify-self: start">3 of 3 met</span>
+                <div style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 12.5px; color: #4A5170">Trusted job board</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #666C8C">VERIFIED 1 D AGO</span></div>
+                <div style="display: flex; gap: 8px; justify-self: end"><span style="font-size: 13px; font-weight: 600; color: #574FC0; border: 1px solid #C3BCEC; border-radius: 8px; padding: 8px 12px">Saved</span><span style="font-size: 13px; font-weight: 600; color: #FBFEFB; background: #3F7D53; border-radius: 8px; padding: 8px 14px">Open</span></div>
+              </div>
+              <div style="display: grid; grid-template-columns: minmax(0, 1.7fr) 152px 176px 150px; gap: 18px; padding: 15px 0; border-bottom: 1px solid #F1EFF8; align-items: center">
+                <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><strong style="font-size: 15px; font-weight: 600; color: #2E2A8C">Reporting Analyst</strong><span style="font-size: 12.5px; color: #666C8C">Pathao · Remote · BD · Full-time</span></div>
+                <span style="font-size: 12.5px; font-weight: 600; color: #2E6742; background: #EEF5EF; border: 1px solid #D3E4D8; border-radius: 6px; padding: 5px 9px; justify-self: start">3 of 3 met</span>
+                <div style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 12.5px; color: #4A5170">Company careers page</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #666C8C">VERIFIED 6 H AGO</span></div>
+                <div style="display: flex; gap: 8px; justify-self: end"><span style="font-size: 13px; font-weight: 600; color: #574FC0; border: 1px solid #C3BCEC; border-radius: 8px; padding: 8px 12px">Save</span><span style="font-size: 13px; font-weight: 600; color: #FBFEFB; background: #3F7D53; border-radius: 8px; padding: 8px 14px">Open</span></div>
+              </div>
+              <div style="display: grid; grid-template-columns: minmax(0, 1.7fr) 152px 176px 150px; gap: 18px; padding: 15px 0; align-items: center">
+                <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><strong style="font-size: 15px; font-weight: 600; color: #2E2A8C">Data Quality Associate</strong><span style="font-size: 12.5px; color: #666C8C">Grameenphone · Dhaka · Hybrid · Full-time</span></div>
+                <span style="font-size: 12.5px; font-weight: 600; color: #2E6742; background: #EEF5EF; border: 1px solid #D3E4D8; border-radius: 6px; padding: 5px 9px; justify-self: start">4 of 4 met</span>
+                <div style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 12.5px; color: #4A5170">Referral network</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #666C8C">VERIFIED 2 H AGO</span></div>
+                <div style="display: flex; gap: 8px; justify-self: end"><span style="font-size: 13px; font-weight: 600; color: #574FC0; border: 1px solid #C3BCEC; border-radius: 8px; padding: 8px 12px">Save</span><span style="font-size: 13px; font-weight: 600; color: #FBFEFB; background: #3F7D53; border-radius: 8px; padding: 8px 14px">Open</span></div>
+              </div>
+            </div>
+            <div style="padding: 13px 22px 18px; border-top: 1px solid #EFEDF7"><span style="font-size: 13px; font-weight: 600; color: #574FC0">Show the other 8 Apply Now roles</span></div>
+          </div>
+
+          <div style="background: #FBFAFE; border: 1px solid #E7E4F0; border-radius: 14px; overflow: hidden; box-shadow: inset 0 3px 0 #C4762F">
+            <div style="padding: 15px 22px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #EFEDF7">
+              <img src="refs/i/px-onefix.png" alt="" width="27" height="28" decoding="async" style="width: 27px; height: 28px; image-rendering: pixelated" />
+              <strong style="font-family: 'Baloo 2', sans-serif; font-size: 20px; font-weight: 700">One Fix Away</strong>
+              <span style="font-size: 14px; font-weight: 700; color: #A85C22; background: #FDF4EA; border: 1px solid #F1DFC8; border-radius: 7px; padding: 3px 9px; font-variant-numeric: tabular-nums">18</span>
+              <span style="font-size: 13px; color: #666C8C">One unmet item each · SQL closes 8 of them</span>
+              <span style="font-size: 13px; font-weight: 600; color: #574FC0; margin-left: auto">Collapse</span>
+            </div>
+            <div style="padding: 0 22px">
+              <div style="display: grid; grid-template-columns: minmax(0, 1.7fr) 152px 176px 150px; gap: 18px; padding: 15px 0; border-bottom: 1px solid #F1EFF8; align-items: center">
+                <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><strong style="font-size: 15px; font-weight: 600; color: #2E2A8C">Data Analyst</strong><span style="font-size: 12.5px; color: #666C8C">bKash · Dhaka · On-site · Full-time</span></div>
+                <div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 12.5px; font-weight: 600; color: #A85C22; background: #FDF4EA; border: 1px solid #F1DFC8; border-radius: 6px; padding: 5px 9px; align-self: start">Add SQL</span><span style="font-size: 12px; color: #666C8C">Signal gap</span></div>
+                <div style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 12.5px; color: #4A5170">Company careers page</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #666C8C">VERIFIED 6 H AGO</span></div>
+                <div style="display: flex; gap: 8px; justify-self: end"><span style="font-size: 13px; font-weight: 600; color: #574FC0; border: 1px solid #C3BCEC; border-radius: 8px; padding: 8px 12px">Save</span><span style="font-size: 13px; font-weight: 600; color: #FFFCF8; background: #C4762F; border-radius: 8px; padding: 8px 14px">See fix</span></div>
+              </div>
+              <div style="display: grid; grid-template-columns: minmax(0, 1.7fr) 152px 176px 150px; gap: 18px; padding: 15px 0; border-bottom: 1px solid #F1EFF8; align-items: center">
+                <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><strong style="font-size: 15px; font-weight: 600; color: #2E2A8C">Backend Developer</strong><span style="font-size: 12.5px; color: #666C8C">BJIT Group · Dhaka · Hybrid · Full-time</span></div>
+                <div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 12.5px; font-weight: 600; color: #A85C22; background: #FDF4EA; border: 1px solid #F1DFC8; border-radius: 6px; padding: 5px 9px; align-self: start">Add Django</span><span style="font-size: 12px; color: #666C8C">Knowledge gap</span></div>
+                <div style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 12.5px; color: #4A5170">Trusted job board</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #666C8C">VERIFIED 2 D AGO</span></div>
+                <div style="display: flex; gap: 8px; justify-self: end"><span style="font-size: 13px; font-weight: 600; color: #574FC0; border: 1px solid #C3BCEC; border-radius: 8px; padding: 8px 12px">Save</span><span style="font-size: 13px; font-weight: 600; color: #FFFCF8; background: #C4762F; border-radius: 8px; padding: 8px 14px">See fix</span></div>
+              </div>
+              <div style="display: grid; grid-template-columns: minmax(0, 1.7fr) 152px 176px 150px; gap: 18px; padding: 15px 0; align-items: center">
+                <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0"><strong style="font-size: 15px; font-weight: 600; color: #2E2A8C">Product Associate</strong><span style="font-size: 12.5px; color: #666C8C">Pathao · Dhaka · Hybrid · Full-time</span></div>
+                <div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 12.5px; font-weight: 600; color: #A85C22; background: #FDF4EA; border: 1px solid #F1DFC8; border-radius: 6px; padding: 5px 9px; align-self: start">Add Excel</span><span style="font-size: 12px; color: #666C8C">Proof gap</span></div>
+                <div style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 12.5px; color: #4A5170">Company careers page</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #666C8C">VERIFIED 9 H AGO</span></div>
+                <div style="display: flex; gap: 8px; justify-self: end"><span style="font-size: 13px; font-weight: 600; color: #574FC0; border: 1px solid #C3BCEC; border-radius: 8px; padding: 8px 12px">Save</span><span style="font-size: 13px; font-weight: 600; color: #FFFCF8; background: #C4762F; border-radius: 8px; padding: 8px 14px">See fix</span></div>
+              </div>
+            </div>
+            <div style="padding: 13px 22px 18px; border-top: 1px solid #EFEDF7"><span style="font-size: 13px; font-weight: 600; color: #A85C22">Show the other 15 one-fix roles</span></div>
+          </div>
+
+          <div style="background: #FBFAFE; border: 1px solid #E7E4F0; border-radius: 14px; padding: 15px 22px; display: flex; align-items: center; gap: 14px; box-shadow: inset 0 3px 0 #C9553B">
+            <img src="refs/i/px-skip.png" alt="" width="26" height="27" decoding="async" style="width: 26px; height: 27px; image-rendering: pixelated" />
+            <strong style="font-family: 'Baloo 2', sans-serif; font-size: 19px; font-weight: 700">Skip</strong>
+            <span style="font-size: 14px; font-weight: 700; color: #A33F28; background: #FBEDE9; border: 1px solid #F0D5CC; border-radius: 7px; padding: 3px 9px; font-variant-numeric: tabular-nums">24</span>
+            <span style="font-size: 13px; color: #666C8C">Hard blockers: Swift (9) · AWS (7) · Figma (5) · visa (3)</span>
+            <span style="font-size: 13px; font-weight: 600; color: #A33F28; margin-left: auto">Expand group</span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 16px">
+          <div style="background: #FBFAFE; border: 1px solid #DCD8EC; border-radius: 14px; padding: 20px 22px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 2px 6px -3px rgba(16, 27, 73, .12)">
+            <div style="display: flex; align-items: baseline; justify-content: space-between"><span style="font-size: 12px; font-weight: 700; letter-spacing: .12em; color: #666C8C">OPPORTUNITY DELTA</span><span style="font-size: 12.5px; font-weight: 600; color: #574FC0">Inspect the 8</span></div>
+            <div style="display: flex; align-items: baseline; gap: 12px; font-family: 'Baloo 2', sans-serif; font-variant-numeric: tabular-nums">
+              <div style="display: flex; flex-direction: column"><span style="font-size: 36px; font-weight: 700; color: #666C8C; line-height: 1">12</span><span style="font-family: 'Instrument Sans', sans-serif; font-size: 12px; color: #666C8C">reachable now</span></div>
+              <span style="font-size: 18px; color: #6E7490">→</span>
+              <div style="display: flex; flex-direction: column"><span style="font-size: 36px; font-weight: 800; line-height: 1">20</span><span style="font-family: 'Instrument Sans', sans-serif; font-size: 12px; color: #666C8C">after adding SQL</span></div>
+              <span style="font-family: 'Instrument Sans', sans-serif; font-size: 13px; font-weight: 700; color: #2E6742; background: #EEF5EF; border: 1px solid #D3E4D8; border-radius: 7px; padding: 4px 9px">+8</span>
+            </div>
+            <span style="font-size: 12.5px; color: #666C8C; line-height: 1.45">Counted from today’s run: 8 postings where SQL is the only unmet requirement.</span>
+            <span style="display: flex; align-items: center; justify-content: center; gap: 8px; height: 46px; background: #C4762F; color: #FFFCF8; font-size: 14.5px; font-weight: 600; border-radius: 10px">Open the fix <span style="font-family: 'Baloo 2', sans-serif">→</span></span>
+          </div>
+
+          <div style="background: #FBFAFE; border: 1px solid #DCD8EC; border-radius: 14px; padding: 20px 22px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 2px 6px -3px rgba(16, 27, 73, .12)">
+            <strong style="font-family: 'Baloo 2', sans-serif; font-size: 19px; font-weight: 700">What is blocking the rest</strong>
+            <div style="display: flex; flex-direction: column">
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #F1EFF8"><span style="font-size: 13.5px; color: #4A5170">SQL</span><span style="font-size: 12.5px; font-weight: 600; color: #A85C22">8 roles · fixable</span></div>
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #F1EFF8"><span style="font-size: 13.5px; color: #4A5170">Django</span><span style="font-size: 12.5px; font-weight: 600; color: #A85C22">4 roles · fixable</span></div>
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #F1EFF8"><span style="font-size: 13.5px; color: #4A5170">Swift</span><span style="font-size: 12.5px; font-weight: 600; color: #A33F28">9 roles · hard</span></div>
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 0"><span style="font-size: 13.5px; color: #4A5170">Work authorisation</span><span style="font-size: 12.5px; font-weight: 600; color: #A33F28">3 roles · hard</span></div>
+            </div>
+          </div>
+
+          <div style="background: #FBFAFE; border: 1px solid #DCD8EC; border-radius: 14px; padding: 20px 22px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 2px 6px -3px rgba(16, 27, 73, .12)">
+            <div style="display: flex; align-items: baseline; justify-content: space-between"><strong style="font-family: 'Baloo 2', sans-serif; font-size: 19px; font-weight: 700">Where these came from</strong><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #666C8C">54 KEPT</span></div>
+            <div style="display: flex; flex-direction: column">
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid #F1EFF8; font-size: 13px"><span style="color: #4A5170">Company career pages</span><span style="font-family: 'IBM Plex Mono', monospace; color: #101B49">31</span></div>
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid #F1EFF8; font-size: 13px"><span style="color: #4A5170">Trusted job boards</span><span style="font-family: 'IBM Plex Mono', monospace; color: #101B49">17</span></div>
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 9px 0; font-size: 13px"><span style="color: #4A5170">Referral network</span><span style="font-family: 'IBM Plex Mono', monospace; color: #101B49">6</span></div>
+            </div>
+            <span style="font-size: 12.5px; color: #666C8C; line-height: 1.45; border-top: 1px solid #EFEDF7; padding-top: 12px">Every row keeps its source and last-verified time. Stale rows are re-checked before you open them.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 16px">
+    <div style="display: flex; align-items: baseline; gap: 12px">
+      <span style="font-size: 12px; font-weight: 700; letter-spacing: .1em; color: #FBFAFE; background: #6C63D8; border-radius: 6px; padding: 6px 10px">4C</span>
+      <strong style="font-family: 'Baloo 2', sans-serif; font-size: 24px; font-weight: 700">Mobile · genuinely recomposed</strong>
+      <span style="font-size: 13.5px; color: #4A5170">Console as a live sheet, then a one-line strip · 390 × 844</span>
+    </div>
+
+    <div style="display: flex; gap: 34px; flex-wrap: wrap">
+
+      <div style="display: flex; flex-direction: column; gap: 12px">
+        <span style="font-size: 12.5px; font-weight: 600; color: #4A5170">Running — console sheet at 46% height, partial results behind it</span>
+        <div style="width: 390px; height: 844px; background: #F5F3FB; border: 1px solid #DCD8EC; border-radius: 30px; overflow: hidden; box-shadow: 0 30px 70px -40px rgba(16, 27, 73, .5); display: flex; flex-direction: column">
+          <div style="height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px 0 26px; font-size: 13px; font-weight: 600; background: #FBFAFE"><span>9:41</span><span style="width: 22px; height: 11px; border: 1.5px solid #101B49; border-radius: 3px; padding: 1.5px; display: flex"><span style="flex: 1; background: #101B49; border-radius: 1px"></span></span></div>
+
+          <div style="background: #FBFAFE; border-bottom: 1px solid #E7E4F0; padding: 8px 20px 12px; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; align-items: center; gap: 10px">
+              <img src="refs/i/px-apply.png" alt="" width="24" height="22" decoding="async" style="width: 24px; height: 22px; image-rendering: pixelated" />
+              <div style="display: flex; flex-direction: column"><strong style="font-family: 'Baloo 2', sans-serif; font-size: 18px; font-weight: 700; line-height: 1.15; white-space: nowrap">Live Discovery</strong><span style="font-size: 12px; color: #666C8C">Data Analyst · Dhaka · Hybrid</span></div>
+              <span style="font-size: 12.5px; font-weight: 600; color: #574FC0; margin-left: auto; flex-shrink: 0">Change</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; background: #FBFAFE; border: 1.5px solid #C3BCEC; border-radius: 10px; padding: 5px 5px 5px 12px">
+              <span style="font-size: 15px; color: #6E7490">⌕</span>
+              <span style="flex: 1; font-size: 13.5px; color: #101B49">data analyst</span>
+              <span style="width: 38px; height: 38px; border-radius: 8px; background: #6C63D8; display: flex; align-items: center; justify-content: center; color: #FBFAFE; font-size: 15px">⌕</span>
+            </div>
+            <div style="display: flex; gap: 7px; align-items: center">
+              <span style="font-size: 12.5px; font-weight: 600; color: #574FC0; background: #F3EFFC; border: 1.5px solid #C3BCEC; border-radius: 8px; padding: 8px 11px; white-space: nowrap">Filters · 3</span>
+              <span style="font-size: 12.5px; color: #4A5170; background: #FBFAFE; border: 1px solid #E7E4F0; border-radius: 8px; padding: 8px 11px; white-space: nowrap">Dhaka</span>
+              <span style="font-size: 12.5px; color: #4A5170; background: #FBFAFE; border: 1px solid #E7E4F0; border-radius: 8px; padding: 8px 11px; white-space: nowrap">Hybrid</span>
+              <span style="font-size: 12.5px; color: #4A5170; background: #FBFAFE; border: 1px solid #E7E4F0; border-radius: 8px; padding: 8px 11px; white-space: nowrap">Full-time</span>
+            </div>
+          </div>
+
+          <div style="padding: 12px 20px 0; display: flex; flex-direction: column; gap: 10px; opacity: .55">
+            <div style="display: flex; align-items: center; gap: 10px">
+              <span style="font-size: 12px; font-weight: 700; letter-spacing: .1em; color: #2E6742">APPLY NOW · 7 SO FAR</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #666C8C; margin-left: auto">RANKING…</span>
+            </div>
+            <div style="background: #FBFAFE; border: 1px solid #E7E4F0; border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; box-shadow: inset 0 3px 0 #3F7D53">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px"><strong style="font-size: 14.5px; font-weight: 600; color: #2E2A8C">Junior Data Analyst</strong><span style="font-size: 12px; color: #666C8C; white-space: nowrap">4 h ago</span></div>
+              <span style="font-size: 12.5px; color: #666C8C">Walton Hi-Tech · Dhaka · Hybrid</span>
+              <div style="display: flex; gap: 6px"><span style="font-size: 12px; font-weight: 600; color: #2E6742; background: #EEF5EF; border: 1px solid #D3E4D8; border-radius: 6px; padding: 4px 8px">3 of 3 met</span><span style="font-size: 12px; color: #4A5170; background: #F3F2F9; border: 1px solid #E4E1EF; border-radius: 6px; padding: 4px 8px">Careers page</span></div>
+            </div>
+            <div style="background: #FBFAFE; border: 1px solid #E7E4F0; border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 9px">
+              <span style="width: 170px; height: 13px; border-radius: 4px; background: #EDEAF7"></span>
+              <span style="width: 220px; height: 11px; border-radius: 4px; background: #F1EFF8"></span>
+              <span style="width: 130px; height: 20px; border-radius: 6px; background: #EDEAF7"></span>
+            </div>
+          </div>
+
+          <div style="margin-top: auto; background: #1B233A; border-top: 1px solid #29314C; border-radius: 18px 18px 0 0; padding: 12px 20px 16px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 -18px 44px -22px rgba(16, 27, 73, .6)">
+            <span style="width: 44px; height: 4px; border-radius: 2px; background: #3A4568; align-self: center"></span>
+            <div style="display: flex; align-items: center; gap: 10px">
+              <span style="width: 7px; height: 7px; border-radius: 50%; background: #9AA0F0"></span>
+              <strong style="font-family: 'Baloo 2', sans-serif; font-size: 17px; font-weight: 700; color: #E7EAF4">Activity Console</strong>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7C88AC; margin-left: auto">9 / 13</span>
+            </div>
+            <div style="display: grid; gap: 7px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #C4CBE0">
+              <span style="display: flex; gap: 10px"><span style="color: #7C88AC">22:16</span><span>Checking company career pages</span><span style="color: #8FBF9A; margin-left: auto">12/12</span></span>
+              <span style="display: flex; gap: 10px"><span style="color: #7C88AC">22:19</span><span>Querying trusted sources</span><span style="color: #8FBF9A; margin-left: auto">6</span></span>
+              <span style="display: flex; gap: 10px"><span style="color: #7C88AC">22:22</span><span>Deduplicating</span><span style="color: #8FBF9A; margin-left: auto">3,142 → 1,682</span></span>
+              <span style="display: flex; gap: 10px"><span style="color: #7C88AC">22:25</span><span>Verifying listings</span><span style="color: #8FBF9A; margin-left: auto">live</span></span>
+              <span style="display: flex; gap: 10px"><span style="color: #7C88AC">22:27</span><span>Applying eligibility filters</span><span style="color: #8FBF9A; margin-left: auto">→ 214</span></span>
+              <span style="display: flex; gap: 10px"><span style="color: #7C88AC">22:29</span><span>Matching candidate evidence</span><span style="color: #8FBF9A; margin-left: auto">4 src</span></span>
+              <span style="display: flex; gap: 10px; color: #E7EAF4"><span style="color: #9AA0F0">22:31</span><span>Ranking opportunities</span><span style="color: #9AA0F0; margin-left: auto">31/54</span></span>
+              <span style="display: flex; gap: 10px; color: #6E7BA0"><span>—</span><span>Identifying blockers</span><span style="margin-left: auto">queued</span></span>
+              <span style="display: flex; gap: 10px; color: #6E7BA0"><span>—</span><span>Calculating Opportunity Delta</span><span style="margin-left: auto">queued</span></span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px">
+              <span style="flex: 1; height: 5px; border-radius: 3px; background: #2A3352; display: block; position: relative; overflow: hidden"><span style="position: absolute; inset: 0 31% 0 0; background: #9AA0F0; border-radius: 3px"></span></span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #C4CBE0">69%</span>
+            </div>
+            <div style="display: flex; gap: 10px">
+              <span style="flex: 1; display: flex; align-items: center; justify-content: center; height: 44px; border: 1px solid #3A4568; color: #C4CBE0; font-size: 13.5px; font-weight: 600; border-radius: 10px">Stop run</span>
+              <span style="flex: 1; display: flex; align-items: center; justify-content: center; height: 44px; background: #6C63D8; color: #FBFAFE; font-size: 13.5px; font-weight: 600; border-radius: 10px">Hide console</span>
+            </div>
+          </div>
+
+          <div style="background: #FBFAFE; border-top: 1px solid #E7E4F0; padding: 8px 8px 0; display: flex; align-items: stretch">
+            <span style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px"><span style="width: 22px; height: 3px; background: transparent"></span><img src="refs/i/g-nav-focus.png" alt="" width="22" height="22" decoding="async" style="width: 22px; height: 22px; image-rendering: pixelated; opacity: .62" /><span style="font-size: 12px; color: #666C8C">Focus</span></span>
+            <span style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px"><span style="width: 22px; height: 3px; border-radius: 2px; background: #6C63D8"></span><img src="refs/i/g-nav-discover.png" alt="" width="22" height="22" decoding="async" style="width: 22px; height: 22px; image-rendering: pixelated" /><span style="font-size: 12px; font-weight: 700; color: #574FC0">Discover</span></span>
+            <span style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px"><span style="width: 22px; height: 3px; background: transparent"></span><img src="refs/i/g-nav-roadmap.png" alt="" width="22" height="22" decoding="async" style="width: 22px; height: 22px; image-rendering: pixelated; opacity: .62" /><span style="font-size: 12px; color: #666C8C">Roadmap</span></span>
+            <span style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px"><span style="width: 22px; height: 3px; background: transparent"></span><img src="refs/i/g-nav-resume.png" alt="" width="22" height="22" decoding="async" style="width: 22px; height: 22px; image-rendering: pixelated; opacity: .62" /><span style="font-size: 12px; color: #666C8C">Resume</span></span>
+            <span style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px"><span style="width: 22px; height: 3px; background: transparent"></span><img src="refs/i/g-nav-profile.png" alt="" width="22" height="22" decoding="async" style="width: 22px; height: 22px; image-rendering: pixelated; opacity: .62" /><span style="font-size: 12px; color: #666C8C">Profile</span></span>
+          </div>
+          <div style="height: 22px; background: #FBFAFE; display: flex; align-items: flex-start; justify-content: center"><span style="width: 134px; height: 5px; border-radius: 3px; background: #DCD8EC"></span></div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 12px">
+        <span style="font-size: 12.5px; font-weight: 600; color: #4A5170">Complete — console is one tappable strip; verdict tabs own the screen</span>
+        <div style="width: 390px; height: 844px; background: #F5F3FB; border: 1px solid #DCD8EC; border-radius: 30px; overflow: hidden; box-shadow: 0 30px 70px -40px rgba(16, 27, 73, .5); display: flex; flex-direction: column">
+          <div style="height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px 0 26px; font-size: 13px; font-weight: 600; background: #FBFAFE"><span>9:41</span><span style="width: 22px; height: 11px; border: 1.5px solid #101B49; border-radius: 3px; padding: 1.5px; display: flex"><span style="flex: 1; background: #101B49; border-radius: 1px"></span></span></div>
+
+          <div style="background: #FBFAFE; border-bottom: 1px solid #E7E4F0; padding: 8px 20px 0; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 6px 16px -12px rgba(16, 27, 73, .35)">
+            <div style="display: flex; align-items: center; gap: 10px">
+              <img src="refs/i/px-apply.png" alt="" width="24" height="22" decoding="async" style="width: 24px; height: 22px; image-rendering: pixelated" />
+              <div style="display: flex; flex-direction: column"><strong style="font-family: 'Baloo 2', sans-serif; font-size: 18px; font-weight: 700; line-height: 1.15; white-space: nowrap">54 opportunities</strong><span style="font-size: 12px; color: #666C8C">Data Analyst · Dhaka · Hybrid</span></div>
+              <span style="font-size: 12.5px; font-weight: 600; color: #574FC0; margin-left: auto; flex-shrink: 0">Change</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; background: #FBFAFE; border: 1.5px solid #C3BCEC; border-radius: 10px; padding: 5px 5px 5px 12px">
+              <span style="font-size: 15px; color: #6E7490">⌕</span>
+              <span style="flex: 1; font-size: 13.5px; color: #101B49">data analyst</span>
+              <span style="width: 38px; height: 38px; border-radius: 8px; background: #6C63D8; display: flex; align-items: center; justify-content: center; color: #FBFAFE; font-size: 15px">⌕</span>
+            </div>
+            <div style="background: #1B233A; border-radius: 10px; padding: 10px 12px; display: flex; align-items: center; gap: 10px">
+              <span style="width: 6px; height: 6px; border-radius: 50%; background: #8FBF9A; flex-shrink: 0"></span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #C4CBE0; line-height: 1.35">1,682 deduped · 214 eligible · 54 kept · 2 min ago</span>
+              <span style="font-size: 12px; font-weight: 600; color: #9AA0F0; margin-left: auto; flex-shrink: 0">Log</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 18px">
+              <span style="font-size: 13.5px; font-weight: 700; color: #101B49; border-bottom: 2px solid #574FC0; padding: 4px 2px 10px; white-space: nowrap">Apply <span style="color: #2E6742">12</span></span>
+              <span style="font-size: 13.5px; color: #4A5170; padding: 4px 2px 10px; white-space: nowrap">One fix <span style="color: #A85C22">18</span></span>
+              <span style="font-size: 13.5px; color: #4A5170; padding: 4px 2px 10px; white-space: nowrap">Skip <span style="color: #A33F28">24</span></span>
+              <span style="font-size: 12.5px; font-weight: 600; color: #574FC0; margin-left: auto; padding-bottom: 10px; white-space: nowrap">Filters · 3</span>
+            </div>
+          </div>
+
+          <div style="padding: 10px 20px 0; display: flex; flex-direction: column; gap: 8px; overflow: hidden; min-height: 0">
+            <div style="background: #FBFAFE; border: 1px solid #E7E4F0; border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 9px; box-shadow: inset 0 3px 0 #3F7D53">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px"><strong style="font-size: 15px; font-weight: 600; color: #2E2A8C">Junior Data Analyst</strong><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #666C8C; white-space: nowrap">4 H AGO</span></div>
+              <span style="font-size: 12.5px; color: #666C8C">Walton Hi-Tech · Dhaka · Hybrid · Full-time</span>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap"><span style="font-size: 12px; font-weight: 600; color: #2E6742; background: #EEF5EF; border: 1px solid #D3E4D8; border-radius: 6px; padding: 4px 8px">3 of 3 met</span><span style="font-size: 12px; color: #4A5170; background: #F3F2F9; border: 1px solid #E4E1EF; border-radius: 6px; padding: 4px 8px">Careers page</span></div>
+              <div style="display: flex; gap: 8px; border-top: 1px solid #F1EFF8; padding-top: 10px">
+                <span style="flex: 1; display: flex; align-items: center; justify-content: center; height: 44px; border: 1.5px solid #C3BCEC; color: #574FC0; font-size: 13.5px; font-weight: 600; border-radius: 10px">Save</span>
+                <span style="flex: 1.4; display: flex; align-items: center; justify-content: center; height: 44px; background: #3F7D53; color: #FBFEFB; font-size: 13.5px; font-weight: 600; border-radius: 10px">Open role</span>
+              </div>
+            </div>
+            <div style="background: #FBFAFE; border: 1px solid #E7E4F0; border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 9px; box-shadow: inset 0 3px 0 #3F7D53">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px"><strong style="font-size: 15px; font-weight: 600; color: #2E2A8C">Business Analyst</strong><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #666C8C; white-space: nowrap">1 D AGO</span></div>
+              <span style="font-size: 12.5px; color: #666C8C">BRACNet · Dhaka · On-site · Full-time</span>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap"><span style="font-size: 12px; font-weight: 600; color: #2E6742; background: #EEF5EF; border: 1px solid #D3E4D8; border-radius: 6px; padding: 4px 8px">3 of 3 met</span><span style="font-size: 12px; color: #4A5170; background: #F3F2F9; border: 1px solid #E4E1EF; border-radius: 6px; padding: 4px 8px">Job board</span></div>
+              <div style="display: flex; gap: 8px; border-top: 1px solid #F1EFF8; padding-top: 10px">
+                <span style="flex: 1; display: flex; align-items: center; justify-content: center; height: 44px; border: 1.5px solid #C3BCEC; color: #574FC0; font-size: 13.5px; font-weight: 600; border-radius: 10px">Saved</span>
+                <span style="flex: 1.4; display: flex; align-items: center; justify-content: center; height: 44px; background: #3F7D53; color: #FBFEFB; font-size: 13.5px; font-weight: 600; border-radius: 10px">Open role</span>
+              </div>
+            </div>
+            <div style="background: #FBFAFE; border: 1px solid #E7E4F0; border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 9px; box-shadow: inset 0 3px 0 #3F7D53">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px"><strong style="font-size: 15px; font-weight: 600; color: #2E2A8C">Reporting Analyst</strong><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #666C8C; white-space: nowrap">6 H AGO</span></div>
+              <span style="font-size: 12.5px; color: #666C8C">Pathao · Remote · BD · Full-time</span>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap"><span style="font-size: 12px; font-weight: 600; color: #2E6742; background: #EEF5EF; border: 1px solid #D3E4D8; border-radius: 6px; padding: 4px 8px">3 of 3 met</span><span style="font-size: 12px; color: #4A5170; background: #F3F2F9; border: 1px solid #E4E1EF; border-radius: 6px; padding: 4px 8px">Careers page</span></div>
+            </div>
+          </div>
+
+          <div style="margin-top: auto; padding: 10px 20px 12px; background: linear-gradient(to top, #F5F3FB 58%, rgba(245,243,251,0)); display: flex; gap: 10px">
+            <span style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; height: 48px; background: #C4762F; color: #FFFCF8; font-size: 14px; font-weight: 600; border-radius: 10px">18 one-fix roles <span style="font-family: 'Baloo 2', sans-serif">→</span></span>
+          </div>
+
+          <div style="background: #FBFAFE; border-top: 1px solid #E7E4F0; padding: 8px 8px 0; display: flex; align-items: stretch">
+            <span style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px"><span style="width: 22px; height: 3px; background: transparent"></span><img src="refs/i/g-nav-focus.png" alt="" width="22" height="22" decoding="async" style="width: 22px; height: 22px; image-rendering: pixelated; opacity: .62" /><span style="font-size: 12px; color: #666C8C">Focus</span></span>
+            <span style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px"><span style="width: 22px; height: 3px; border-radius: 2px; background: #6C63D8"></span><img src="refs/i/g-nav-discover.png" alt="" width="22" height="22" decoding="async" style="width: 22px; height: 22px; image-rendering: pixelated" /><span style="font-size: 12px; font-weight: 700; color: #574FC0">Discover</span></span>
+            <span style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px"><span style="width: 22px; height: 3px; background: transparent"></span><img src="refs/i/g-nav-roadmap.png" alt="" width="22" height="22" decoding="async" style="width: 22px; height: 22px; image-rendering: pixelated; opacity: .62" /><span style="font-size: 12px; color: #666C8C">Roadmap</span></span>
+            <span style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px"><span style="width: 22px; height: 3px; background: transparent"></span><img src="refs/i/g-nav-resume.png" alt="" width="22" height="22" decoding="async" style="width: 22px; height: 22px; image-rendering: pixelated; opacity: .62" /><span style="font-size: 12px; color: #666C8C">Resume</span></span>
+            <span style="flex: 1; height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px"><span style="width: 22px; height: 3px; background: transparent"></span><img src="refs/i/g-nav-profile.png" alt="" width="22" height="22" decoding="async" style="width: 22px; height: 22px; image-rendering: pixelated; opacity: .62" /><span style="font-size: 12px; color: #666C8C">Profile</span></span>
+          </div>
+          <div style="height: 22px; background: #FBFAFE; display: flex; align-items: flex-start; justify-content: center"><span style="width: 134px; height: 5px; border-radius: 3px; background: #DCD8EC"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 12px; max-width: 1440px; background: #FBFAFE; border: 1px solid #DCD8EC; border-radius: 14px; padding: 24px 26px; box-shadow: 0 2px 6px -3px rgba(16, 27, 73, .12)">
+    <strong style="font-family: 'Baloo 2', sans-serif; font-size: 21px; font-weight: 700">Working Mode decisions</strong>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 11px 32px; font-size: 13.5px; line-height: 1.55; color: #4A5170">
+      <span><strong style="font-weight: 600; color: #101B49">No hero, no scenery band.</strong> Discovery earns a 120px page header instead: title, live count, target line, search. Pixel art appears only as the 30px section glyphs — the DNA’s functional band, 1–5%.</span>
+      <span><strong style="font-weight: 600; color: #101B49">Results are the dominant work area</strong> at ~65% of the width, with a 372px rail for the run summary, Opportunity Delta, blocker tally and source provenance.</span>
+      <span><strong style="font-weight: 600; color: #101B49">Console is the signature while running</strong> — full dark panel above the streaming results, thirteen observable events with real counts, progress bar, one Stop control. It never shows reasoning, only what the system did.</span>
+      <span><strong style="font-weight: 600; color: #101B49">On completion it collapses</strong> to a single mono line — found, deduped, eligible, kept, verified — with Open log and Re-run. That line is the only dark surface left on the screen.</span>
+      <span><strong style="font-weight: 600; color: #101B49">Four filters visible + “More filters · 3”</strong> plus sort and saved count, matching the Working Mode toolbar cap. Verdict tabs carry the counts; groups are collapsible with Apply Now expanded first.</span>
+      <span><strong style="font-weight: 600; color: #101B49">Every row carries provenance:</strong> source, last-verified time in mono, evidence verdict (“3 of 3 met”) or the single blocker with its gap type, then Save and one verdict-coloured primary action.</span>
+      <span><strong style="font-weight: 600; color: #101B49">Mobile is recomposed, not scaled.</strong> The rail disappears; its content becomes the collapsed strip, the tab counts and the sticky one-fix action. Rows become stacked cards with 44px Save / Open buttons.</span>
+      <span><strong style="font-weight: 600; color: #101B49">Mobile console is a bottom sheet at 46% height</strong> with a Hide control, so the results it describes stay visible behind it — then it becomes the 10.5px strip under the search field once the run completes.</span>
+    </div>
+    <span style="font-size: 13px; color: #666C8C; line-height: 1.55; border-top: 1px solid #EFEDF7; padding-top: 14px">Still on the missing-asset list for this screen: a scanning/radar motif for the active run, dedicated source glyphs (career page, job board, referral), a “verified live” stamp and a freshness clock glyph. Section glyphs here reuse the existing briefcase / fix / skip motifs per the fallback ladder.</span>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1560}}"></script>
+</body>
+</html>

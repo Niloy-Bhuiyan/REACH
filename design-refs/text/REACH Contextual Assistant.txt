@@ -1,0 +1,149 @@
+ITERATION 10 · CONTEXTUAL ASSISTANT · DESKTOP DRAWER + MOBILE SHEET
+Contextual Assistant
+Secondary infrastructure, not a product of its own. Closed by default, summoned from a page, scoped to the object you are looking at, and answering with the same evidence rows the rest of REACH uses. No mascot, no avatar, no presence indicator, no hero. One drawer on desktop, one sheet on mobile, reused everywhere.
+CLOSED BY DEFAULT
+ANSWERS CITE EVIDENCE
+WRITES ONLY VIA ACCEPT / REJECT
+10A
+Desktop · 460px drawer over Job Detail
+Page stays live behind it · scope named at the top
+[IMG refs/i/px-logo.png]
+REACH
+Focus
+Discover
+Roadmap
+Resume
+Profile
+b
+Data Analyst
+bKash · Dhaka · On-site · Full-time
+ONE FIX AWAY
+[IMG refs/i/px-wrench.png]
+One requirement stands between you and this role: advanced SQL.
+Three of four essentials met. Signal gap — the work exists, the words do not.
+[IMG refs/i/px-cv.png] Hard requirements
+3 of 4 met
+✓
+Python for analysis
+4 repos, 118 commits
+✓
+Statistics degree
+BSc Statistics, DU
+–
+Advanced SQL
+Signal gap · ~6 h
+[IMG refs/i/px-onefix.png]
+Ask REACH
+Clear
+✕
+SCOPE
+This job · Data Analyst at bKash
+Change
+You · 12:06
+Why am I One Fix Away rather than Apply Now?
+[IMG refs/i/px-logo.png]
+REACH · 12:06
+Three of the four hard requirements are backed by your evidence. The fourth — advanced SQL — has no readable source, so the verdict cannot be Apply Now. It is not a knowledge gap: two of your repos contain query work, but neither describes it.
+BASED ON
+[IMG refs/i/px-github.png]
+reporting-pipeline · 14 SQL files, README says “data cleaning”
+[IMG refs/i/px-cv.png]
+CV · no line mentions SQL or databases
+JD
+bKash posting · requirement 4 of 4, verified 6 h ago
+Open the fix
+Fix my CV wording
+SUGGESTED FOR THIS PAGE
+Is this posting still open?
+What would make me a strong candidate here, not just eligible?
+Which of my projects should I mention in the application?
+Ask about this job…
+→
+Answers use your connected evidence and this posting only. The assistant can suggest CV changes but cannot write them — those go through accept / reject.
+10B
+Entry point & states
+Collapsed · loading · error · scoped variants
+COLLAPSED ENTRY · DESKTOP
+[IMG refs/i/px-logo.png]
+Ask about this job
+⌘K
+A bordered control in the page’s action row — never a floating bubble, never open on load. Its label names the current object, so the entry point is the context.
+THINKING · LOADING
+[IMG refs/i/px-logo.png]
+READING YOUR EVIDENCE · 3 SOURCES
+Skeleton lines at answer geometry plus a mono status naming what it is reading. No spinner, no typing dots, no “thinking…” theatre.
+ERROR · RETRY
+Could not reach the engine. Claude did not respond in 20 seconds. Nothing was changed.
+Retry
+Use ChatGPT instead
+Errors name the engine, state that nothing changed, and offer the configured fallback — engines are swappable because they are configuration, not evidence.
+SCOPE · SKIP VERDICT
+Why should I skip this?
+Could this ever become reachable?
+SCOPE · ROADMAP
+Is this certificate worth it?
+Can I do this in one week instead of two?
+SCOPE · RESUME BULLET
+Improve this bullet without inventing anything
+Is this line readable for an ATS?
+SCOPE · PROFILE
+What is my weakest evidence?
+Which source should I connect next?
+10C
+Mobile sheet
+Closed entry in the action bar · sheet at 78% · write-back stays reviewable
+Closed — entry point sits in the page action bar
+9:41
+b
+Data Analyst
+bKash · Dhaka · On-site
+[IMG refs/i/px-wrench.png]
+Missing one thing: advanced SQL
+Signal gap · ~6 h to close
+✓
+Python for analysis
+GitHub
+–
+Advanced SQL
+~6 h
+Save
+[IMG refs/i/px-logo.png]Ask about this job
+See the One Fix
+→
+Open — answer with cited evidence, suggested questions below
+9:41
+b
+Data Analyst · bKash
+[IMG refs/i/px-logo.png]
+Ask REACH
+✕
+SCOPE
+This job
+Change
+You · 12:06
+Why am I One Fix Away rather than Apply Now?
+[IMG refs/i/px-logo.png]
+REACH · 12:06
+Three of four hard requirements are backed by your evidence. Advanced SQL has no readable source — so the verdict cannot be Apply Now. Not a knowledge gap: two repos contain query work, neither describes it.
+BASED ON
+[IMG refs/i/px-github.png]
+reporting-pipeline · 14 SQL files
+[IMG refs/i/px-cv.png]
+CV · no SQL mention
+Open the fix
+SUGGESTED
+Is this posting still open?
+Which projects should I mention?
+Ask about this job…
+→
+Uses your connected evidence and this posting. Suggested CV changes still go through accept / reject.
+Assistant decisions
+The entry point is a labelled control, not a bubble. “Ask about this job” sits in the page’s action row with ⌘K; on mobile it shares the action bar as a secondary. Never floating, never open on load.
+Scope is stated and changeable. A violet SCOPE row names the object — this job, this bullet, this milestone, my profile — so the user always knows what the answer is about.
+Suggested questions are page-specific and drawn from the verdict on screen. Four scope variants are specimened: Skip, Roadmap, Resume bullet, Profile.
+Answers cite their sources as the same sage evidence rows used on Job Detail and One Fix Away — repo, file count, CV line, JD requirement — so an answer is checkable, not authoritative.
+Answers end in product actions , not more conversation: Open the fix, Fix my CV wording. The assistant routes into REACH rather than replacing it.
+It cannot write. A standing footer note says suggested CV changes go through accept / reject — the assistant proposes, the review queue disposes.
+Loading is a skeleton plus a mono status naming what is being read. No typing dots, no thinking animation, no sparkles — consistent with the console’s observability model.
+Errors name the engine and confirm nothing changed , with Retry and the configured fallback. Engine identity appears only here and in Profile → Settings.
+Identity is the 17–22px REACH pixel mark as the answer’s attribution — no avatar, no character, no glow, no dark surface. Still on the missing-asset list: a non-character assistant mark (object, not creature) to replace the wordmark in the attribution slot, and a citation glyph for source rows.

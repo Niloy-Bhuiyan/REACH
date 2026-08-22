@@ -1,0 +1,242 @@
+ITERATION 12 · SECONDARY MOBILE STATES · SIX FRAMES · NO NEW CONCEPTS
+The six states a developer would have had to guess
+Only states where the primary frame does not imply the answer — an empty result set, a failed run, a Skip verdict whose action bar cannot be the Apply bar, a JD Match with no JD, a finished roadmap, an invalid key. Every other secondary state is a direct substitution inside a drawn frame and is intentionally not redrawn here. Components, tokens and copy voice are unchanged.
+FAILURE NEVER LOSES WORK
+EMPTY STATES NAME THE CAUSE
+UNAVAILABLE ≠ ZERO
+12A
+Discover · no results
+Resolves: an empty set must name which filter emptied it and offer the single loosening most likely to help — never a generic “no results found”.
+9:41
+[IMG refs/i/px-logo.png]
+Discover
+0 RESULTS
+[IMG refs/i/g-nav-discover.png]
+Data Analyst
+Dhaka
+Posted < 3 days
+Onsite
++2
+[IMG refs/i/g-empty-noresults.png]
+Nothing matches all five filters
+Today’s run verified 54 live Data Analyst roles in Dhaka. Posted under 3 days removes 51 of them.
+LOOSEN ONE
+Posted in the last 2 weeks
++31
+Include hybrid
++9
+Clear all filters
+[IMG refs/i/g-nav-focus.png]
+Focus
+[IMG refs/i/g-nav-discover.png]
+Discover
+[IMG refs/i/g-nav-roadmap.png]
+Roadmap
+[IMG refs/i/g-nav-resume.png]
+Resume
+[IMG refs/i/g-nav-profile.png]
+Profile
+12B
+Discover · run failed
+Resolves: a failed run must keep the last good results visible and readable, name where it stopped, and stamp what is shown as stale rather than blanking the screen.
+9:41
+[IMG refs/i/px-logo.png]
+Discover
+[IMG refs/i/g-failed.png]
+Run stopped part-way
+Failed while verifying live status. 31 of 54 roles were checked. Nothing you had was lost.
+ENGINE: REACH-HOSTED · TIMEOUT
+View log
+Keep these results
+Retry the run
+[IMG refs/i/g-stale.png]
+SHOWING YESTERDAY’S VERIFIED RUN
+APPLY NOW
+VERIFIED 1 D AGO
+Data Analyst
+bKash · Dhaka · Hybrid
+ONE FIX AWAY
+VERIFIED 1 D AGO
+BI Intern
+Chaldal · Dhaka · Onsite
+Roles are shown but not counted toward your Opportunity Delta until a run completes.
+[IMG refs/i/g-nav-focus.png]
+Focus
+[IMG refs/i/g-nav-discover.png]
+Discover
+[IMG refs/i/g-nav-roadmap.png]
+Roadmap
+[IMG refs/i/g-nav-resume.png]
+Resume
+[IMG refs/i/g-nav-profile.png]
+Profile
+12C
+Job Detail · Skip verdict
+Resolves: the Skip sheet cannot reuse the Apply action bar. The blocker is stated as a fact, applying is available but demoted, and the primary action moves the user onward.
+9:41
+[IMG refs/i/px-logo.png]
+Discover
+54 ROLES
+SKIP
+VERIFIED 2 H AGO
+Senior Data Scientist
+Grameenphone · Dhaka · Onsite
+[IMG refs/i/g-req-missing.png]
+HARD BLOCKER
+Requires 5+ years of professional experience
+You have 4 months of internship experience. This is stated as a minimum in the posting, not a preference — it is not something a project or a CV rewrite can close.
+ALSO UNMET
+[IMG refs/i/g-req-missing.png]
+Team leadership
+Preferred
+[IMG refs/i/g-req-met.png]
+Python, SQL
+Met
+[IMG refs/i/g-nav-discover.png]
+6 similar roles you can apply to
+Same company family and skill set, at 0–2 years. Three are Apply Now today.
+Disagree? Applying is still your call.
+Apply anyway ↗
+Hide this role
+Show the 6
+→
+12D
+Resume · no JD selected
+Resolves: with no job description, JD Match has no value — it must read unavailable , not 0%. ATS Readiness is document-level and stays live.
+9:41
+[IMG refs/i/g-nav-resume.png]
+Resume
+V3 · SAVED
+Analysis
+Edits
+Preview
+[IMG refs/i/g-ats.png]
+ATS READINESS
+Good
+Parses cleanly. One date format inconsistency.
+[IMG refs/i/g-jdmatch.png]
+JD MATCH
+Not yet
+measured
+Needs one job description. It is never a score on its own.
+Pick a job to measure against
+Keyword coverage, hard-requirement checks and suggested edits are all relative to one posting — so they stay off until you choose one.
+1 FIX
+Data Analyst · bKash
+Use
+APPLY
+BI Analyst · Chaldal
+Use
+Or paste a job description
+AVAILABLE WITHOUT A JOB
+[IMG refs/i/g-diff.png]
+Fix the date formats
+2 EDITS
+[IMG refs/i/g-reorder.png]
+Reorder sections
+Manual
+[IMG refs/i/g-nav-focus.png]
+Focus
+[IMG refs/i/g-nav-discover.png]
+Discover
+[IMG refs/i/g-nav-roadmap.png]
+Roadmap
+[IMG refs/i/g-nav-resume.png]
+Resume
+[IMG refs/i/g-nav-profile.png]
+Profile
+12E
+Roadmap · plan complete
+Resolves: completion reports the realised delta against the predicted one, and hands off to the queued plan. No trophy, no celebration screen.
+9:41
+[IMG refs/scene-path-390.png]
+← Roadmap
+9 OF 9 STEPS
+[IMG refs/i/g-run-complete.png]
+SIGNAL GAP · CLOSED
+Your SQL is legible
+DELTA · REALISED
+PREDICTED +8
+12
+before
+→
+21
+today
++9
+One more than predicted — a role posted this week also names window functions. Counted from this morning’s verified run.
+EVIDENCE THIS PLAN ADDED
+[IMG refs/i/g-repo.png]
+2 public repos
+Verified
+[IMG refs/i/g-portfolio.png]
+1 published query set
+Verified
+[IMG refs/i/g-cvline.png]
+2 CV lines
+Accepted
+NEXT BLOCKER
+Django — a knowledge gap, 4 roles, about two weeks. Queued, not started.
+Apply to the 9 that opened
+→
+Start the Django plan
+[IMG refs/i/g-nav-focus.png]
+Focus
+[IMG refs/i/g-nav-discover.png]
+Discover
+[IMG refs/i/g-nav-roadmap.png]
+Roadmap
+[IMG refs/i/g-nav-resume.png]
+Resume
+[IMG refs/i/g-nav-profile.png]
+Profile
+12F
+Settings · key invalid
+Resolves: an invalid key must show that the fallback already took over, so the user knows the product still works while they fix it.
+9:41
+← Profile
+[IMG refs/i/g-engine.png]
+Settings
+[IMG refs/i/g-failed.png]
+Your Claude API key was rejected
+Anthropic returned
+401 invalid_api_key
+at 09:12. The key may have been revoked or rotated.
+[IMG refs/i/g-engine.png]
+REACH-hosted is running your analyses in the meantime. Nothing is blocked.
+Remove key
+Replace key
+ANALYSIS ENGINE
+[IMG refs/i/g-engine.png]
+REACH-hosted
+ACTIVE VIA FALLBACK
+IN USE
+[IMG refs/i/px-claude.png]
+Claude API
+KEY INVALID
+Fix
+EVIDENCE SOURCES
+[IMG refs/i/px-github.png]
+GitHub
+14 repos
+[IMG refs/i/px-linkedin.png]
+LinkedIn
+Synced
+Unaffected — an engine problem never touches your evidence.
+[IMG refs/i/g-nav-focus.png]
+Focus
+[IMG refs/i/g-nav-discover.png]
+Discover
+[IMG refs/i/g-nav-roadmap.png]
+Roadmap
+[IMG refs/i/g-nav-resume.png]
+Resume
+[IMG refs/i/g-nav-profile.png]
+Profile
+State rules these six establish
+An empty state names its cause and quantifies the remedy. “Posted under 3 days removes 51 of them”, then one loosening with the count it would return. Never a shrug.
+Failure preserves and labels. Last good results stay on screen, stamped stale in apricot, explicitly excluded from the Delta until a run completes. The engine and the stage of failure are both named.
+Verdict determines the action bar. Skip gets Hide / Show alternatives as its pair, with “Apply anyway” present but demoted to a text link — the product advises, it does not forbid.
+Unavailable is never zero. JD Match with no JD reads “Not yet measured” on a dashed surface with an empty track — a 0% bar would be a false statement about the CV.
+Completion reports against the prediction. Realised +9 against predicted +8, with the reason for the difference. The plan ends in applying, and the next plan stays queued rather than auto-starting.
+Recoverable errors show the workaround already in effect. The invalid key is terracotta, but the fallback row says REACH-hosted is running and evidence is untouched.
+Deliberately not redrawn, because each is a substitution inside a frame that already exists: Profile edit sheets (the Career Profile sheet pattern with a different field set), Discovery loading (the drawn console at 0 events), assistant scope variants beyond the four specimened, Roadmap skipped-step (locked row with a struck label), and Resume accepted / rejected diff rows (the drawn card with its state chip swapped).

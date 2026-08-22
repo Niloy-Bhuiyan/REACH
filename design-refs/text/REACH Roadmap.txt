@@ -1,0 +1,210 @@
+ITERATION 07 · PERSONALIZED ROADMAP · DESKTOP + MOBILE · NARRATIVE DENSITY
+Personalized Roadmap
+A sequenced plan against one named blocker, not a catalogue. Every milestone produces an artefact REACH can later verify, resources hang off the milestone that needs them, and the certificate question is answered with a verdict rather than a store. Desktop supports inspection; mobile is built around progression and one action at a time.
+Discover
+→
+Job Detail
+→
+One Fix Away
+→
+Roadmap
+7A
+Desktop
+Vertical timeline · one milestone expanded with its resources and certificate verdict
+[IMG refs/i/px-logo.png]
+REACH
+Focus
+Discover
+Roadmap
+Resume
+Profile
+Step 3 of 9 · on track
+NM
+[IMG refs/horizon-right.png]
+← Back to the SQL fix
+CREATED 21 AUG · UPDATED AFTER TODAY’S RUN
+[IMG refs/i/px-map.png]
+TARGET
+Data Analyst
+·
+Dhaka · Hybrid
+SIGNAL GAP
+Make your SQL legible
+Three milestones over two weeks. Each one ends with something an employer — and REACH — can actually read: a public repo, a published query set, two CV lines.
+PROGRESS
+3 OF 9 STEPS
+33%
+Total effort
+~6 h across 2 weeks
+Spent so far
+2 H
+Artefacts produced
+1 OF 5
+[IMG refs/i/px-map.png]
+The plan
+Week by week · each milestone names the evidence it produces
+Collapse all
+✓
+WEEK 1 · DONE
+2 H
+Name the SQL in your two query projects
+Rewrote both READMEs to state joins, window functions and the tables involved.
+2 public repos ✓
+Verified on GitHub 2 d ago
+2
+WEEK 1–2 · IN PROGRESS
+~3 H REMAINING
+Publish one query set that proves the advanced part
+Window functions over your existing reporting data — running totals, rank within category, a month-over-month comparison. One notebook, published with a short readme explaining the business question.
+Produces: 1 portfolio entry
+Blocks 8 opportunities
+BEST FREE RESOURCE
+PostgreSQL window functions tutorial
+Official docs walkthrough plus 12 exercises. Covers exactly the three functions this milestone needs — nothing more.
+FREE · ~90 MIN
+Open ↗
+PAID ALTERNATIVE — ONLY IF
+Structured SQL course · BDT 1,200
+Worth it only if you want guided practice with graded exercises. It teaches the same three functions — you would be paying for structure, not content.
+PAID · ~6 H
+Not required
+[IMG refs/i/px-cv.png]
+CERTIFICATE VERDICT
+UNNECESSARY
+None of the 8 affected postings ask for a SQL certificate. A published query set is stronger evidence and costs nothing — spend the money only if an employer names a specific credential.
+How we decide ↗
+Mark done when the notebook is published — REACH re-checks GitHub automatically.
+Skip this step
+Start this milestone
+→
+3
+WEEK 2 · LOCKED UNTIL STEP 2
+~1 H
+Update CV and profile, then apply
+Two suggested lines in the postings’ language, reviewed one by one, then the 8 roles reopen as Apply Now.
+Produces: 2 CV lines
+Closes the roadmap
+→
+Next roadmap after this one: Django — a genuine knowledge gap, 4 roles, about two weeks. It stays queued until this plan closes.
+Preview ↗
+OPPORTUNITY DELTA
+Inspect the 8
+12
+now
+→
+20
+when this closes
++8
+Counted from today’s verified run — 8 postings where SQL is the only unmet requirement. Re-counted every time discovery runs.
+Opportunities waiting
+8
+Data Analyst
+bKash
+CLOSES 30 AUG
+BI Intern
+Chaldal
+CLOSES 28 AUG
+Analytics Associate
+Grameenphone
+CLOSES 07 SEP
+Show all 8
+2 close within 10 days
+Evidence this plan will add
+[IMG refs/i/px-github.png]
+2 public repos
+Done
+[IMG refs/i/px-pportfolio.png]
+1 published query set
+In progress
+[IMG refs/i/px-cv.png]
+2 CV lines
+Queued
+Artefacts feed your profile automatically, so the next discovery run scores you higher without re-entry.
+7B
+Mobile
+Progression first · one step open, the rest collapsed · resources and verdict in a sheet
+Plan — progress, current step expanded, others collapsed
+9:41
+[IMG refs/horizon-right.png]
+← SQL fix
+STEP 3 OF 9
+[IMG refs/i/px-map.png]
+SIGNAL GAP
+Make your SQL legible
+33%
+~6 h total · 2 h spent
+·
+1 of 5 artefacts
+✓
+Name the SQL in two READMEs
+2 public repos · done
+2 H
+2
+WEEK 1–2 · NOW
+~3 H LEFT
+Publish one query set that proves the advanced part
+Window functions over your reporting data — running totals and rank within category.
+Produces 1 portfolio entry
+Blocks 8 roles
+Free: window functions tutorial
+FREE · ~90 MIN
+Open ↗
+CERTIFICATE
+UNNECESSARY
+Why · paid option
+3
+Update CV, then apply
+2 CV lines · locked until step 2
+~1 H
+12 → 20 OPPORTUNITIES · +8
+Inspect
+Start this milestone
+→
+[IMG refs/i/g-nav-focus.png]
+Focus
+[IMG refs/i/g-nav-discover.png]
+Discover
+[IMG refs/i/g-nav-roadmap.png]
+Roadmap
+[IMG refs/i/g-nav-resume.png]
+Resume
+[IMG refs/i/g-nav-profile.png]
+Profile
+Milestone sheet — resources, certificate verdict, artefact, actions
+9:41
+[IMG refs/i/px-map.png]
+Make your SQL legible
+2
+MILESTONE 2 · WEEK 1–2
+~3 H
+Publish one query set that proves the advanced part
+WHAT YOU BUILD
+A notebook using running totals and rank within category, with a short readme naming the business question.
+[IMG refs/i/px-pportfolio.png]
+Artefact: 1 portfolio entry
+Auto-verified from GitHub once published
+BEST FREE RESOURCE
+PostgreSQL window functions tutorial
+Docs walkthrough plus 12 exercises.
+FREE · ~90 MIN
+Open ↗
+PAID ALTERNATIVE — ONLY IF
+SQL course · BDT 1,200
+Structure only · not required
+CERTIFICATE VERDICT
+UNNECESSARY
+None of the 8 postings ask for one. A published query set is stronger evidence.
+Skip step
+Mark done
+Start now
+→
+Roadmap decisions
+A timeline, not a card grid. One rail with three node states — done (sage ✓), current (apricot ring, expanded), locked (grey, collapsed) — so progression is the layout rather than a decoration.
+Only the current milestone is open. Completed and locked steps stay one row tall. That is what keeps a nine-step plan readable without pagination.
+Every milestone names its artefact — 2 public repos, 1 portfolio entry, 2 CV lines — and the rail tracks 1 of 5 produced, so progress is evidence, not a percentage of activity.
+Resources hang off the milestone that needs them. Free first at full weight in sage; the paid option is a dashed, quieter card headed “only if”, with the reason stated. There is no catalogue, no provider logos, no browsing.
+The certificate verdict is a word plus a reason — Unnecessary here, because none of the 8 postings ask for one — with “how we decide” inspectable. Recommended / Optional / Low ROI use the same row.
+The Delta stays auditable and re-counted per run, with the affected roles listed and their closing dates shown, so urgency comes from real deadlines rather than nudging.
+The plan ends by applying. Step 3 is “update CV and profile, then apply”, and the queued Django roadmap is previewed but explicitly not started — one plan at a time.
+Mobile recomposes around progression: header carries the blocker, gap type, progress bar and effort; steps are a collapsed list with the current one expanded; the sticky footer shows the delta and one action; full resources and the verdict live in a milestone sheet.
+No XP, streaks, badges or levels — narrative density means one 92px map object, a 50%-opacity scenery bookend and 22–30px glyphs. Milestone node states use type and colour, not trophies. Still on the missing-asset list: the three-state milestone node, evidence-artefact glyphs, the certificate crest in four variants and a stepping-stone scenery band.

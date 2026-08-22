@@ -1,14 +1,21 @@
-node_modules
-.next
-out
-build
+# Dependencies and build output are ignored per package as well — see
+# frontend/.gitignore and backend/.gitignore.
+node_modules/
+dist/
+coverage/
 .DS_Store
-*.pem
-npm-debug.log*
-.env*
+
+# Secrets never enter the repository. Every service ships a .env.example instead.
+.env
+.env.*
 !.env.example
-next-env.d.ts
-/playwright-report/
-/test-results/
-/blob-report/
-/playwright/.cache/
+
+# Local tooling scratch
+.playwright-mcp/
+reach-audit.json
+
+# Local Claude Code configuration and skills — tooling, not product source.
+.claude/
+
+# Build screenshots taken during QA. Regenerated on demand, never referenced by code.
+shots/

@@ -1,0 +1,299 @@
+ITERATION 09 · RESUME BUILDER + JD ANALYSIS · DESKTOP + MOBILE · WORKING MODE
+Resume Builder
+An evidence-constrained workspace. Two meters that never merge — ATS Readiness is a property of the document, JD Match is a property of one posting. Every suggested change arrives as before / after / why / evidence with accept and reject, and anything your sources cannot support is visibly blocked rather than quietly written.
+EDITOR · ANALYSIS · PREVIEW
+TWO METERS, NEVER SUMMED
+NO-EVIDENCE EDITS BLOCKED
+9A
+Desktop workspace
+Editor 34% · analysis tab 26% · ivory preview 40%
+[IMG refs/i/px-logo.png]
+REACH
+Focus
+Discover
+Roadmap
+Resume
+Profile
+SAVED 12:04
+Export PDF
+NM
+[IMG refs/i/px-cv.png]
+Resume Builder
+Version 4 · analyst
+Versions (4) ▾
+Upload a CV
+Start from scratch
+Duplicate for a role
+TARGET JOB
+Data Analyst · bKash ▾
+Paste a JD instead
+JD PARSED · 19 REQUIREMENTS FOUND · 6 H AGO
+Open job detail ↗
+EDITOR
+Drag to reorder · click to edit
+Add section
+⠿
+Header & contact
+Name, city, email, GitHub, portfolio
+Complete
+⠿
+Experience
+Editing · 3 items
+ROLE
+Data Analyst Intern — Pran-RFL
+BULLET 2 · SELECTED
+Worked on monthly reporting for the sales team using spreadsheets and queries.
+1 suggested edit
+Ask the assistant to improve this →
+⠿
+Projects
+3 items · 2 linked to GitHub
+1 needs a link
+⠿
+Skills
+9 listed · 7 evidence-backed
+2 unproven
+⠿
+Education
+BSc Statistics · HSC
+Complete
+⠿
+Certificates
+Google Data Analytics
+Verified
+⠿
+Publications
+Empty · hidden from the PDF
+Optional
+Analysis
+Suggested edits
+6
+Keywords
+ATS READINESS
+ⓘ
+Good
+the document itself
+Parsing & structure
+Clean
+Standard headings
+All 5 found
+Readability
+2 long bullets
+Risky elements
+None
+No job involved. This is how safely any system can read your file.
+JD MATCH
+bKash · Data Analyst
+Partial
+this posting only
+Hard requirements
+3 of 4
+Skills coverage
+7 of 9
+Evidence quality
+Strong
+Experience relevance
+Adjacent
+Recomputed per job. Never averaged with ATS Readiness.
+Keywords from this JD
+14 OF 19 PRESENT
+HIGH PRIORITY · MISSING
+SQL
+window functions
+MISSING · LOWER PRIORITY
+stakeholder reporting
+data quality
+ETL
+MATCHED
+Python
+pandas
+Power BI
+Excel
+statistics
+dashboards
++8 more
+[IMG refs/i/px-onefix.png]
+Suggested edit 1 of 6
+EXPERIENCE · BULLET 2
+BEFORE
+Worked on monthly reporting for the sales team using spreadsheets and queries.
+AFTER
+Built monthly sales reports in SQL and Excel, using joins and window functions over the transactions table.
+Why: “SQL” and “window functions” are high-priority terms in this JD and appear in 8 of your target postings. The claim itself is unchanged.
+[IMG refs/i/px-github.png]
+Supporting evidence: reporting-pipeline repo — 14 files with SQL, 3 using window functions, last commit Jun 2026.
+Accept
+Reject
+Edit wording
+EDIT 4 · BLOCKED
+NO SUPPORTING EVIDENCE
+Suggested: “Reduced reporting turnaround by 40%.” We cannot support a metric like this from your CV, GitHub or portfolio — REACH will not write a number you have not shown us.
+Accept · disabled
+Dismiss
+Add the evidence to your profile →
+LIVE PREVIEW
+A4 · 1 page
+Highlights on
+Niloy Mahmud
+Dhaka, Bangladesh · niloy@example.com · github.com/niloy-m
+EXPERIENCE
+Data Analyst Intern — Pran-RFL
+JUN–AUG 2025
+· Cleaned and consolidated weekly sales data across 40 outlets.
+· Built monthly sales reports in SQL and Excel, using joins and window functions over the transactions table.
+pending
+· Presented a monthly summary to the regional sales lead.
+PROJECTS
+reporting-pipeline
+Python, SQL · 14 files · github.com/niloy-m/reporting-pipeline
+churn-analysis
+pandas, scikit-learn · 41 commits
+SKILLS
+Python (pandas, NumPy) ·
+SQL
+· Excel modelling · Power BI · statistics · Bangla & English reporting
+EDUCATION
+BSc Statistics — Dhaka University
+2022–2026
+Violet marks show pending accepted edits. Nothing is written to your file until you accept it.
+9B
+Mobile · three tabs, never three panes
+Analysis · Edits queue · Preview — one job at a time
+Analysis tab — the two meters stay separate
+9:41
+[IMG refs/i/px-cv.png]
+Resume · v4
+Target: Data Analyst · bKash
+Change
+Analysis
+Edits
+6
+Preview
+Sections
+ATS READINESS
+Good
+Parsing clean · 5 headings found · 2 long bullets · no risky elements. No job involved.
+JD MATCH
+Partial
+Hard requirements
+3 of 4
+Skills coverage
+7 of 9
+Keywords
+14 of 19
+HIGH PRIORITY · MISSING
+SQL
+window functions
+ETL
++2 lower priority
+6 suggested edits · 1 blocked for lack of evidence
+Review suggested edits
+→
+[IMG refs/i/g-nav-focus.png]
+Focus
+[IMG refs/i/g-nav-discover.png]
+Discover
+[IMG refs/i/g-nav-roadmap.png]
+Roadmap
+[IMG refs/i/g-nav-resume.png]
+Resume
+[IMG refs/i/g-nav-profile.png]
+Profile
+Edits queue — one card at a time, blocked state included
+9:41
+← Analysis
+EDIT 1 OF 6
+Suggested edits
+5 to review
+1 blocked
+WORDING
+EXPERIENCE · BULLET 2
+BEFORE
+Worked on monthly reporting for the sales team using spreadsheets and queries.
+AFTER
+Built monthly sales reports in SQL and Excel, using joins and window functions .
+Why: high-priority JD terms, present in 8 of your target roles. The claim is unchanged.
+[IMG refs/i/px-github.png]
+Evidence: reporting-pipeline · 14 SQL files, 3 with window functions
+Accept
+Reject
+EDIT 4 · BLOCKED
+NO EVIDENCE
+“Reduced reporting turnaround by 40%.” No source of yours supports this metric, so it cannot be accepted.
+Accept · off
+Dismiss
+Accepted edits apply on save
+Preview
+Next edit
+Preview tab — ivory reading surface, pending marks visible
+9:41
+[IMG refs/i/px-cv.png]
+Preview · v4
+Export PDF
+Analysis
+Edits
+6
+Preview
+Niloy Mahmud
+Dhaka · niloy@example.com · github.com/niloy-m
+EXPERIENCE
+Data Analyst Intern — Pran-RFL
+2025
+· Cleaned weekly sales data across 40 outlets.
+· Built monthly sales reports in SQL and Excel, using joins and window functions .
+pending
+· Presented a monthly summary to the regional lead.
+PROJECTS
+reporting-pipeline
+Python, SQL · 14 files
+churn-analysis
+pandas · 41 commits
+SKILLS
+Python ·
+SQL
+· Excel · Power BI · statistics
+1 pending edit not yet saved
+Save version
+[IMG refs/i/g-nav-focus.png]
+Focus
+[IMG refs/i/g-nav-discover.png]
+Discover
+[IMG refs/i/g-nav-roadmap.png]
+Roadmap
+[IMG refs/i/g-nav-resume.png]
+Resume
+[IMG refs/i/g-nav-profile.png]
+Profile
+9C
+Entry & state specimens
+EMPTY · NO RESUME YET
+[IMG refs/i/px-cv.png]
+Start from your CV, or build one from your profile evidence.
+Upload a CV
+Build from scratch
+PARSING · LOADING
+READING SECTIONS · 3 OF 6
+Skeletons at real row geometry — no spinner, per the DNA.
+VERSIONS
+v4 · analyst
+TODAY
+v3 · internship
+12 AUG
+v2 · general
+02 AUG
+One version per target role. Accepting edits creates a new version, never overwrites.
+JD PASTE · MANUAL
+We are looking for a Data Analyst with strong SQL, including window functions…
+1,840 CHARS
+Analyse this JD
+Pasted JDs produce a JD Match only — ATS Readiness is unaffected.
+Resume Builder decisions
+Two meters, permanently separate. ATS Readiness carries “no job involved” in its own footer; JD Match names the posting and says “recomputed per job, never averaged”. Neither shows a 0–100 number — both lead with a word.
+Analysis is a tab over the editor, not a third column. Editor 480px, analysis fluid, ivory preview 494px — three panes, but the middle one switches between Analysis / Suggested edits / Keywords rather than stacking more surfaces.
+Keywords are grouped by consequence: high-priority missing in terracotta, lower-priority missing in apricot, matched in sage. Colour never carries the meaning alone — each group is labelled.
+Every edit is before / after / why / evidence / accept / reject. The evidence row names the repo, the file count and the date, so the user can check the claim rather than trust it.
+Unsupported claims are visibly blocked. The fabricated-metric case ships as a terracotta card with a disabled Accept, an explanation, and a route to add real evidence — the only path to that sentence is proving it first.
+The editor states evidence health per section — 7 of 9 skills backed, 1 project without a link, publications empty and hidden — so gaps are visible where they are edited.
+Pending edits are marked in the preview with a violet rule and the word “pending”; nothing is written to the document until accepted, and accepting creates a new version rather than overwriting.
+Mobile is three tabs, never three panes. Analysis (both meters + priority keywords), Edits (one card at a time with the blocked state), Preview (ivory, pending marks, save). Each has one sticky primary action at 48–50px.
+Art density is the DNA’s functional floor: a 24–30px CV glyph in the page header and one 22px glyph on the edits section. No scenery, nothing behind the reading surface or the tables. Still on the missing-asset list: the ATS-readiness and JD-match emblem pair, a section-reorder handle, a version glyph, matched/missing keyword marks and a “no evidence” caution mark.

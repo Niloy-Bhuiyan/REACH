@@ -1,0 +1,450 @@
+[IMG refs/i/px-logo.png]
+REACH
+FINAL HANDOFF INDEX · v1.1 · DESIGN CLOSED
+Nine screens, one authority, nothing left to invent.
+Design DNA v2 is the locked authority. This index names the authoritative file for every screen, retires the rest, maps routes, inventories components and states, lists every asset now in the repository, and states the interaction, responsive and data contracts. Where something is deliberately not designed, it says so and why. Revision 1.1 adds the secondary-state supplement, closes the terminology decision, and turns the freshness and Delta questions into a written data contract.
+9 SCREENS + 6 STATE FRAMES
+72 ASSETS, TRUE ALPHA
+DESIGN BLOCKERS: NONE
+1 DATA DECISION, SPECIFIED §11
+01
+Authoritative file per screen
+Build from these. Nothing else.
+SCREEN
+AUTHORITATIVE FILE
+WHAT IT SPECIFIES
+FRAMES
+MODE
+Home / Your Focus
+FINAL HOME - DESKTOP.dc.html
+REACH Home Mobile.dc.html
+Target intent, verdict triage, Biggest Blocker, Fastest Fix, Roadmap shortcut, evidence sources, engine status row, profile completion
+1440 · 390 (3A canonical, 3B/3C states)
+SUMMARY
+Live Discovery
+REACH Live Discovery.dc.html
+Search + progressive filters, run console, results grouped Apply / One Fix / Skip, freshness and provenance, mobile console sheet
+1440 · 390 ×2
+WORKING
+Job Detail
+REACH Job Detail.dc.html
+Drawer over Discovery, six answered questions, hard vs preferred requirements, provenance, eligibility verdict, apply / fix / skip
+1440 drawer · 390 sheet
+WORKING
+One Fix Away
+REACH One Fix Away.dc.html
+Named blocker, gap typing (knowledge / proof / signal), smallest intervention, Opportunity Delta with audit table, roadmap handoff
+1440 · 390 ×2
+WORKING
+Roadmap
+REACH Roadmap.dc.html
+Milestone timeline with three node states, artefact per milestone, free-first resources, certificate verdict, delta sidebar
+1440 · 390 ×2
+NARRATIVE
+Career Profile
+REACH Career Profile.dc.html
+Evidence record, completion as consequence not score, projects / publications / certifications, eligibility facts, nothing social
+1440 · 390 ×2
+WORKING
+Resume Builder
++ JD Analysis
+REACH Resume Builder.dc.html
+Editor / preview / analysis, ATS Readiness and JD Match kept separate, keyword coverage, accept-reject diff queue, evidence-blocked state
+1440 · 390 ×3 tabs
+WORKING
+Contextual Assistant
+REACH Contextual Assistant.dc.html
+Drawer / sheet, scope row, page-specific suggestions, cited answers, product-action endings, loading and error states
+1440 drawer · 390 sheet · 4 scope variants
+WORKING
+Profile → Settings
+REACH Profile Settings.dc.html
+NEW THIS PASS
+Evidence sources vs analysis engine, four engine options with data exposure, fallback ladder, engine limits, data & privacy toggles
+1440 · 390 ×2
+WORKING
+Secondary mobile states
+REACH Mobile Secondary States.dc.html
+SUPPLEMENT · ITERATION 12
+The six states no primary frame implies: Discover no-results and failed-run, Job Detail Skip verdict, Resume no-JD-selected, Roadmap plan-complete, Settings key-invalid — plus the six state rules they establish
+390 ×6
+STATES
+SYSTEM AUTHORITY
+REACH Design DNA v2.dc.html
+— tokens, navigation model, Summary vs Working density, working components, pixel-art density bands, terminology, interaction states, seven-breakpoint responsive matrix, asset hygiene, ship checklist. Where a screen and the DNA disagree, the DNA wins.
+02
+Superseded — do not build from these
+REACH Home.dc.html
+Iteration 01. Space Grotesk type and a different surface language, both replaced by DNA v2. Historical only.
+REACH Home Directions.dc.html
+Iteration 02, directions A/B/C. Concept A won and was carried into FINAL HOME with the DNA v2 corrections. B and C are not fallbacks.
+REACH Design System Proposal.dc.html
+The approved reference audit (works / does not work / preserve / change / remove / risks). Keep for rationale; its proposed tokens are superseded by DNA v2.
+REACH Design DNA.dc.html
+v1. Superseded by v2 on tokens, navigation, density and art floor. Retained because §09 holds the original asset backlog and §10 the sixteen-point consistency test.
+03
+Route map
+Five permanent destinations. Everything else is a child or an overlay.
+ROUTE
+NAV ITEM
+DESKTOP PRESENTATION
+MOBILE PRESENTATION
+/
+Focus
+Full page, scenery hero
+Full page, cropped scenery
+/discover
+Discover
+List + console; filters inline, progressive
+List; filters in a sheet, console in a 46% sheet
+/discover/:jobId
+Discover (child)
+Drawer over the list — the run is never lost
+Full-height sheet, swipe to dismiss
+/fix/:blockerId
+Discover / Focus (child)
+Full page, two columns, audit table
+Decision screen + audit sheet
+/roadmap
+/roadmap/:planId
+Roadmap
+Timeline + delta sidebar; one plan active
+Progression list + milestone sheet
+/resume
+/resume/:versionId?jd=
+Resume
+Three panes: editor · preview · analysis
+Three tabs: Analysis · Edits · Preview
+/profile
+Profile
+Evidence record, grouped sections
+Stacked sections, edit sheets
+/profile/settings
+Profile (child)
+Settings rail + content, two columns
+Grouped list; engine choice in a sheet
+?ask=<scope>
+none — overlay
+460px assistant drawer over the current page
+78% assistant sheet over the current page
+Resources have no route: DNA v2 folded them into Roadmap milestones. Jobs and Internships have no routes: they are Discover filters. The assistant has no route of its own — it is a URL parameter so a scoped conversation is shareable and restorable without becoming a destination.
+04
+Component & state inventory
+Reused across two or more screens. Build these once.
+COMPONENT
+STATES / VARIANTS
+APPEARS IN
+AppNav
+Desktop top bar / mobile bottom bar · 5 items × active, inactive · right cluster: status line, notifications, avatar
+All nine screens
+VerdictBadge
+Apply Now (sage) · One Fix Away (apricot) · Skip (terracotta) · always word + colour, never colour alone
+Home, Discovery, Job Detail, One Fix Away, Roadmap, Assistant
+JobRow / JobCard
+Table row (desktop) · compact card (mobile) · drawer header · with-blocker · skipped-with-reason
+Home, Discovery, Job Detail, One Fix Away, Roadmap
+RunConsole
+Idle · running (timestamped events, counts) · complete (collapsed summary) · failed · mobile sheet at 46%
+Discovery; summary echoed on Home
+FilterBar + FilterSheet
+Collapsed (4 primary) · expanded · active-count chip · sheet (mobile) · cleared
+Discovery
+EvidenceRow
+Met (sage, cites the artefact) · missing hard (terracotta) · missing preferred (stone) · partial
+Job Detail, One Fix Away, Resume Builder, Assistant, Profile
+OpportunityDelta
+Desktop full (now → after, +n, derivation line) · mobile inline strip · drill-down list of affected roles with closing dates
+Home, One Fix Away, Roadmap, Discovery summary
+GapTypeBadge
+Knowledge · Proof · Signal — each with its own glyph and a one-line diagnosis
+One Fix Away, Roadmap, Job Detail, Assistant
+MilestoneNode
+Done (sage ✓) · current (apricot ring, expanded) · locked (stone, collapsed) · skipped
+Roadmap
+ResourceCard
+Free (sage, full weight, first) · paid alternative (dashed, quieter, headed “only if”, reason required)
+Roadmap
+CertificateVerdict
+Recommended · Optional · Unnecessary · Low ROI — one row, word + reason + “how we decide”
+Roadmap, Assistant
+MeterPair
+ATS Readiness and JD Match side by side, never summed, never averaged, each with its own derivation · no-JD-selected state
+Resume Builder
+DiffCard
+Before · after · why · supporting evidence · accept · reject · blocked: no evidence exists · accepted · rejected
+Resume Builder, Assistant
+KeywordTag
+Matched · missing · high-priority missing
+Resume Builder
+AssistantSurface
+Closed entry point · loading (skeleton + mono status) · answered (with citations + product action) · error (engine named, nothing changed) · 4 scope variants
+Every screen, as an overlay
+IntegrationRow
+Evidence source: synced · stale · optional-for-this-target · not connected. Engine: active · available · not connected · key invalid · unhealthy
+Home (status only), Profile, Settings
+EmptyState
+No results · no target set · nothing to apply for today · run failed · stale data
+Discovery, Home, Roadmap
+Primitives
+Button (primary / secondary / tertiary / destructive · default, hover, active, focus, disabled, loading) · Input · Select · Toggle · Tabs · Drawer · Sheet · DataTable · Meter · Badge
+DNA v2 §04 and §07 are the specification
+05
+Asset inventory
+Everything now in the repository, and what each set is for.
+[IMG refs/i/g-verified.png] 52 new glyphs · refs/i/g-*.png
+Authored on a 24×24 grid, exported 4× at 96px, hard edges, true alpha, DNA palette with the canonical dark violet-navy outline. Covers every entry that was on the backlog: three gap types, three milestone node states, four certificate verdicts, evidence artefacts, discovery scan / verified / freshness / three source types / run-complete, requirement met-missing pair, visa and graduation, deadline, company placeholder, ATS and JD-match pair, keyword pair, diff, no-evidence, reorder, version, assistant object, citation, three empty states, success / failed / stale, five nav glyphs, engine / key / local, and the delta motif.
+SOURCE OF TRUTH: refs/glyphgen.js — re-render any glyph, or add one in the same family
+[IMG refs/i/g-key.png] 17 restored icons · refs/i/px-*.png
+The original extracted icons had zero transparency — every one carried a baked lavender or white rectangle and anti-aliased edges, so they showed as mismatched squares on any surface that was not exactly the bake colour. Backgrounds were flood-removed from the borders inward, fringe pixels cleared, and alpha hardened to 0 or 255. All nine screens now reference the restored set.
+ORIGINALS KEPT AT refs/px-*.png — UNREFERENCED
+Scenery
+scene-path.png
+720×360 — the stepping-stone progression band for Roadmap, with sage / apricot / stone stones matching the three node states.
+scene-path-390.png
+is the mobile crop;
+scene-profile.png
+the shorter Profile variant. Existing
+horizon*.png
+and
+hero-*.png
+remain the Home and header bookends.
+Scenery is opaque by design — it is only ever a background layer at 40–50% opacity behind a masked edge, never an inline object.
+Third-party marks
+px-github
+,
+px-linkedin
+— evidence-source marks, legal anywhere an integration row appears.
+px-chatgpt
+,
+px-claude
+,
+px-codex
+,
+px-cloud
+— engine marks, permitted only on Profile → Settings , at 24–30px, inside a row.
+These are vector brand marks, not pixel art. That is deliberate and is the single sanctioned exception to the pixel family — it also keeps engines reading as infrastructure rather than as REACH’s own identity.
+06
+Responsive contract
+DNA v2 §08 in build terms. One touch standard throughout.
+WIDTH
+NAVIGATION
+LAYOUT
+OVERLAYS & DENSE DATA
+≤ 479
+Bottom bar, 5 items, 56px
+Single column, sections stacked
+Sheets only; tables become stacked rows
+480 – 767
+Bottom bar
+Single column, wider gutters
+Sheets; two-up chip rows allowed
+768 – 1023
+Top bar, labels visible
+Two columns; sidebars drop below
+Drawers become full-height sheets; tables scroll horizontally with a pinned first column
+1024 – 1279
+Top bar
+Main + one sidebar; Resume drops to two panes
+Drawer at 420px
+1280 – 1439
+Top bar
+Full composition, tighter gutters
+Drawer at 460px
+1440
+Top bar
+Canonical. Every desktop frame is drawn here.
+Drawer 460px; three panes on Resume
+≥ 1600
+Top bar full width
+Content capped at 1440 and centred; canvas extends
+Unchanged — no third sidebar appears
+TOUCH
+44×44 minimum on every interactive element, 48px on primary actions. This pass raised three controls that were at 42px — “Open the fix” in the assistant sheet, and Accept / Dismiss in the mobile resume queue — to 46px.
+07
+Interaction requirements
+Non-negotiable behaviours. Motion clarifies state or causality, or it does not ship.
+Motion — permitted
+Console event append, 120 ms fade, newest last
+Console collapse into run summary, 200 ms height
+Drawer 240 ms slide from the right; sheet 280 ms from the bottom
+Opportunity Delta count-up on first reveal only, 400 ms, tabular numerals so width never jumps
+Milestone completion: node fill + rail colour, 300 ms
+Accepted diff collapses into the resume preview, 200 ms
+Behaviour — required
+Opening a job never unmounts the run or loses scroll position
+Every number over 24px has an inspectable derivation on the same screen
+No AI-proposed text reaches a document without accept / reject
+Assistant opens closed, scoped, and never on load
+Engine failure states name the engine and confirm nothing changed
+⌘K opens the assistant scoped to the current object; Esc closes any overlay
+Accessibility
+Every status colour is paired with a word — colour is never the only cue
+Visible focus ring: 2px #6C63D8 at 2px offset, on canvas and on surfaces
+Drawers and sheets trap focus and restore it to the trigger on close
+Console is an aria-live polite region; it is not read event by event
+prefers-reduced-motion: count-ups resolve instantly, slides become fades, nothing else changes
+Motion — forbidden
+Looping or decorative animation of any kind
+Typing dots, thinking indicators, sparkles, glows
+Confetti, trophies, streaks, XP, level-ups
+Parallax or animated scenery
+Any motion that runs while the user is reading dense data
+08
+Audit result — corrections made this pass
+Screens that already passed were left untouched.
+DIMENSION
+FINDING
+FIX
+STATUS
+Pixel-art integrity
+All 17 extracted icons were fully opaque with a baked background and anti-aliased edges — visible plates on any non-matching surface
+Backgrounds removed, alpha hardened, all screens repointed to
+refs/i/
+FIXED
+Missing assets
+Every screen from iteration 04 onward was borrowing an approximate glyph and logging the real one as outstanding
+52-glyph family drawn to the DNA spec, plus the stepping-stone scenery band and its mobile crop
+FIXED
+AI-engine placement
+Home — desktop and mobile — carried a four-up grid of provider logos with “Login” actions. The brief forbids provider logos outside Settings and forbids integration panels on Home
+Replaced with one engine status row that links to Settings. Provider marks now exist only on Profile → Settings
+FIXED
+Surfaces
+Pure white surfaces in nine places — seven nested cards on Home, two data-table headers on Discovery and One Fix Away — against the DNA’s “no white page, no white surface” rule
+Nested cards to #FBFAFE; table headers to #F5F3FB, which is the DNA-legal way to quiet a header row
+FIXED
+Touch targets
+Three mobile controls at 42px, below the 44px standard
+Raised to 46px in the assistant sheet and the mobile resume queue
+FIXED
+Mobile navigation
+The bottom bar reused unrelated icons at 62% opacity — the map object for Roadmap, the LinkedIn mark for Profile — a logged gap on every mobile frame
+Five purpose-drawn nav glyphs swapped into all 50 bar slots across six files
+FIXED
+Missing screen
+Profile → Settings was referenced by Home, Profile and the Assistant but had never been designed
+Built as iteration 11, desktop + mobile, with the evidence-vs-engine separation the brief requires
+FIXED
+Navigation
+Checked all nine screens: Focus · Discover · Roadmap · Resume · Profile, in that order, on both platforms. No stray Jobs, Internships, Resources or Home items
+No change needed
+PASSED
+Semantic colour
+Sage appears only on Apply Now, done, verified and free-resource contexts. No screen uses sage for Fastest Fix, One Fix Away, Skip or Roadmap. Violet is never a verdict
+No change needed
+PASSED
+Opportunity Delta
+Consistently 12 → 20, +8, derived from the same verified run, on Home, One Fix Away and Roadmap. No screen shows an unexplained figure
+No change needed
+PASSED
+ATS vs JD Match
+The two meters appear only in Resume Builder, are never summed or averaged, and no screen anywhere uses the phrase “ATS score”
+No change needed
+PASSED
+Typography & spacing
+Baloo 2 display, Instrument Sans body, IBM Plex Mono for data, identically loaded in all nine files. No body copy set in a display or mono face
+No change needed
+PASSED
+Terminology
+Apply Now / One Fix Away / Skip / Biggest Blocker / Fastest Fix / Opportunity Delta / ATS Readiness / JD Match are used consistently. “Career Twin” appears once, in the Discovery console, and comes from the brief’s own event vocabulary but is absent from the DNA terminology table
+Resolved in DNA §06: Evidence record is canonical, “Career Twin” now sits in the NEVER SAY column beside “digital twin” and “candidate model”, and the Discovery console event reads “Loading your evidence record”
+FIXED
+09
+Unresolved-issues checklist — final disposition
+Every item from the reconstruction report, closed one way or another.
+ITEM
+WAS OUTSTANDING
+DISPOSITION
+STATUS
+3a
+The pixel-art backlog: gap-type emblems, milestone nodes, evidence artefacts, certificate crests, scenery band, discovery scan and source glyphs, requirement pair, ATS/JD emblems, assistant mark, empty states, mobile nav glyphs
+All drawn — 52 glyphs plus three scenery bands — and the nav set is already wired into every mobile frame. Remaining glyphs are available at
+refs/i/g-*.png
+for placement during build
+RESOLVED
+3b
+Alpha-export debt on the extracted icons
+Worse than logged — none of the 17 had any transparency. All restored and repointed. Originals retained unreferenced for comparison
+RESOLVED
+3c
+No consolidation artefact: ten separate canvases, no component library page, no handoff package, no screen index
+This document is the index, the route map, the component inventory and the asset inventory. A rendered component-library page was deliberately not built — DNA v2 §04 already carries live specimens of every working component, and a second copy would be a divergence risk, not a deliverable
+RESOLVED
+3d
+Resources surface, and Profile → Settings / AI-engine configuration never specimened
+Settings now exists as iteration 11. Resources stays folded into Roadmap milestones — that was a deliberate DNA v2 decision (a resource exists because it unblocks a named milestone, so a catalogue would reintroduce the course-marketplace failure mode the brief forbids)
+RESOLVED
+3e
+Uneven mobile coverage — later screens have one or two frames each, secondary states described in prose rather than drawn
+Closed. The state matrix in §04 enumerates every state each component must have and §06 fixes the recomposition rule per breakpoint; iteration 12 then drew the six states that no drawn frame implies . The rest are documented substitutions inside existing frames — listed explicitly at the foot of the supplement so the omission is a decision, not a gap
+RESOLVED
+10
+Blocker disposition
+Two closed this pass. One is a data decision, and §11 states the rules the design already assumes.
+CLOSED 01 · DESIGN
+Secondary mobile states are drawn
+Iteration 12 draws the six that no existing frame implies — Discover no-results and failed-run, Job Detail Skip verdict, Resume no-JD-selected, Roadmap plan-complete, Settings key-invalid — and states the six rules they establish. Profile edit sheets, Discovery loading, Roadmap skipped-step and accepted / rejected diff rows are named there as deliberate substitutions inside drawn frames.
+No judgement calls left for the developer.
+OPEN 02 · PRODUCT + BACKEND
+Delta and freshness need a data owner
+The design guarantees every Delta is auditable and every posting shows a last-verified time. The thresholds behind those guarantees are engineering decisions, not design ones. §11 now states each rule the screens depend on, with the value the design assumes, so this is a confirmation exercise rather than an open question — but the numbers still need an owner’s signature.
+Confirm or amend the eight rules in §11.
+CLOSED 03 · COPY
+“Career Twin” is retired
+Decided against the term. Evidence record is canonical, because it says what the thing is — a structured set of facts assembled from your sources — rather than implying a second self doing the applying. “Career Twin”, “digital twin”, “AI profile” and “candidate model” are now in the NEVER SAY column, and the one console event that used it reads “Loading your evidence record”.
+DNA §06 amended; the specimen console amended with it.
+11
+Data contract — freshness & Opportunity Delta
+Eight rules. The screens already behave as if these are true.
+Every one of these is visible somewhere in the design, so a different answer is not a configuration change — it changes what a screen is allowed to say. Design-required means the screen breaks its own promise without it. Assumed means the design picked a defensible value and will follow whatever engineering decides instead.
+#
+RULE
+WHAT THE DESIGN ASSUMES
+WHERE IT IS VISIBLE
+STANDING
+01
+Re-verification cadence
+Every posting in the active target is re-checked once per scheduled run, plus on demand when the user opens Discover more than 6 hours after the last run. A run verifies live status, not the full parse.
+Console event counts; “verified 2 h ago” stamps on every row
+ASSUMED
+02
+Freshness bands
+≤ 24 h reads normally in stone. 24–72 h renders apricot and the word stale . Beyond 72 h the posting is shown but excluded from every count. Three bands, because the design only has three treatments.
+Discovery rows, Job Detail header, 12B stale banner
+DESIGN-REQUIRED
+03
+Disappeared postings
+A posting that vanishes from source is retained 48 h, labelled no longer listed at source , then dropped. It never disappears from under a user mid-session, and it stops counting the moment it is flagged.
+Discovery row state; Delta drill-down list
+ASSUMED
+04
+Delta is computed per run, never client-side
+Both sides of the Delta are computed server-side at the end of a completed run and cached against that run id. The client renders a stored figure; it never derives one, so the same number cannot differ between two screens.
+Home, One Fix Away, Roadmap — all read 12 → 20, +8
+DESIGN-REQUIRED
+05
+A partial run never moves a number
+A failed or cancelled run writes no Delta and updates no count. The last completed run stays authoritative and is labelled as such.
+12B — “not counted toward your Opportunity Delta until a run completes”
+DESIGN-REQUIRED
+06
+The audit set is stored, not reconstructed
+Each Delta persists the explicit posting ids of its before and after sets, with each one’s closing date. The drill-down is a lookup. If the ids are not stored, the audit table is a guess and the guarantee that every number is inspectable fails.
+One Fix Away audit table; Roadmap delta sidebar
+DESIGN-REQUIRED
+07
+Predicted and realised are both kept
+The predicted Delta is frozen at plan creation. The realised Delta is computed from the first completed run after the last milestone closes. Both persist, and the difference is explained by naming the postings that entered or left the set.
+12E — realised +9 against predicted +8, with the reason
+DESIGN-REQUIRED
+08
+Evidence-source staleness is separate
+Source sync age is tracked per source and shown as stale past 14 days. It never blocks a run and never marks a posting stale — evidence freshness and posting freshness are different clocks and are never merged into one indicator.
+Profile, Settings, 12F — “an engine problem never touches your evidence”
+ASSUMED
+CLOCKS
+All timestamps are stored UTC and rendered in the user’s local zone, in
+IBM Plex Mono
+with tabular numerals. Ages under an hour read in minutes, under a day in hours, then in days — never a bare date, because the point of the stamp is recency rather than history.
+[IMG refs/i/g-run-complete.png]
+Design is closed. Nine authoritative screens plus the six-frame state supplement, one locked system document, seventy-two assets with correct alpha, and every backlog item either built or documented above with a reason. No design blocker remains. The one open item is a set of data thresholds — written out in §11 with the values the screens assume, waiting on an engineering signature rather than on a drawing.

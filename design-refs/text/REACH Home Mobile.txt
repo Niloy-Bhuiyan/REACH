@@ -1,0 +1,201 @@
+ITERATION 03 · HOME / YOUR FOCUS · MOBILE · 390 × 844 · FINAL
+Recomposed, not shrunk.
+Every Concept A section survives — target search, verdict triage, Biggest Blocker, Fastest Fix, Roadmap, Apply Now, One Fix Away, Skip, Connect your world, profile completion. What changes is arrangement: three status cards become a tap-through count strip, three list cards become stacked sections of two rows each, and the desktop top nav becomes a five-item bottom bar. 3A is the canonical screen; 3B and 3C are states of it, not alternatives. Canvas, navy display type, violet / sage / apricot semantics and the pixel scenery are unchanged.
+3A
+Mobile Home — canonical
+Default state · top of scroll · the reference build for every mobile screen
+9:41
+[IMG refs/i/px-logo.png]
+REACH
+NM
+[IMG refs/horizon-mobile.png]
+Your Focus
+What to apply for now, what is blocking you, what to do next.
+TARGET
+Data Analyst · Dhaka
+Change
+⌕
+Search jobs, skills, companies…
+⌕
+12
+Apply Now
+18
+One Fix Away
+24
+Skip
+[IMG refs/i/px-blocker.png]
+BIGGEST BLOCKER
+Missing SQL
+One key skill stands between you and 12 roles you want.
+See What’s Missing
+→
+[IMG refs/i/px-wrench.png]
+FASTEST FIX
+Add SQL basics
+About 6 hours of practice plus one query project on GitHub.
+OPPORTUNITY DELTA
+12
+→
+20
++8
+Inspect
+See Your Top Fix
+→
+[IMG refs/i/px-apply.png]
+Apply Now
+All requirements met today.
+12
+Junior Data Analyst
+4 h ago
+Walton Hi-Tech · Dhaka · Hybrid
+3 of 3 met
+Full-time
+Frontend Developer
+1 d ago
+Optimizely · Remote · BD
+3 of 3 met
+Full-time
+See all 12
+→
+[IMG refs/i/px-onefix.png]
+One Fix Away
+One item short of a strong fit.
+18
+Data Analyst
+6 h ago
+bKash · Dhaka · On-site
+Add SQL
+Signal gap
+Backend Developer
+2 d ago
+BJIT Group · Dhaka · Hybrid
+Add Django
+Knowledge gap
+See all 18 one-fix roles
+→
+[IMG refs/i/px-skip.png]
+Skip · 24 roles
+Hard blockers: Swift, AWS, Figma
+Review
+[IMG refs/i/px-map.png]
+YOUR ROADMAP
+Step 3 of 9
+Next: publish a small reporting query set. ~2 h, produces GitHub evidence.
+33%
+Open Roadmap
+→
+Connect your world. Unlock more.
+EVIDENCE SOURCES
+[IMG refs/i/px-github.png]
+GitHub
+14 repos synced
+[IMG refs/i/px-linkedin.png]
+LinkedIn
+Synced yesterday
+[IMG refs/i/px-pportfolio.png]
+Kaggle
+Optional here
+ANALYSIS ENGINE
+[IMG refs/i/g-engine.png]
+REACH-hosted
+Settings
+Engines only run the analysis. Configuration lives in Profile → Settings.
+Profile
+82%
+complete
+4 of 5 sources
+[IMG refs/i/px-cv.png]
+CV
+Connected
+[IMG refs/i/px-pgithub.png]
+GitHub
+Connected
+[IMG refs/i/px-plinkedin.png]
+LinkedIn
+Connected
+[IMG refs/i/px-pportfolio.png]
+Portfolio
+Missing
+Adding a portfolio strengthens 7 of your One Fix Away roles.
+Add Portfolio
+[IMG refs/i/px-logo.png]
+Verified 4 min ago · 1,682 postings scanned
+[IMG refs/i/g-nav-focus.png]
+Focus
+[IMG refs/i/g-nav-discover.png]
+Discover
+[IMG refs/i/g-nav-roadmap.png]
+Roadmap
+[IMG refs/i/g-nav-resume.png]
+Resume
+[IMG refs/i/g-nav-profile.png]
+Profile
+3B
+State · scrolled
+Hero collapses into a sticky target bar; same screen, same data
+9:41
+[IMG refs/i/px-logo.png]
+Data Analyst · Dhaka
+Full-time · Hybrid
+Change
+⌕
+Search jobs, skills, companies…
+⌕
+[IMG refs/i/px-onefix.png]
+One Fix Away
+One item short of a strong fit.
+18
+Data Analyst
+6 h ago
+bKash · Dhaka · On-site
+Add SQL
+Signal gap
+Backend Developer
+2 d ago
+BJIT Group · Dhaka · Hybrid
+Add Django
+Knowledge gap
+See all 18 one-fix roles
+→
+[IMG refs/i/g-nav-focus.png]
+Focus
+[IMG refs/i/g-nav-discover.png]
+Discover
+[IMG refs/i/g-nav-roadmap.png]
+Roadmap
+[IMG refs/i/g-nav-resume.png]
+Resume
+[IMG refs/i/g-nav-profile.png]
+Profile
+3C
+State · no target yet
+First run of the same screen: art leads, one sentence, one action
+9:41
+[IMG refs/i/px-logo.png]
+REACH
+[IMG refs/horizon-mobile.png]
+Set a target first
+Tell us the role and city you are aiming for, and we will sort live postings into Apply Now, One Fix Away and Skip.
+Choose your target
+→
+Or connect your CV and we will suggest one.
+[IMG refs/i/g-nav-focus.png]
+Focus
+[IMG refs/i/g-nav-discover.png]
+Discover
+[IMG refs/i/g-nav-roadmap.png]
+Roadmap
+[IMG refs/i/g-nav-resume.png]
+Resume
+[IMG refs/i/g-nav-profile.png]
+Profile
+Recomposition decisions
+Hero at 178px, display 34px. One scenery band, masked top and bottom so the navy headline keeps contrast. Target pill stays under the copy exactly as on desktop.
+Three status cards → a 3-up count strip. Counts are the fastest possible answer to “what do I have today”, and each tile carries colour + number + word with a 3px verdict rule.
+Approved priority order. Target hero → verdict strip → Biggest Blocker → Fastest Fix with the Delta → Apply Now preview → One Fix Away preview → Skip (collapsed) → Roadmap → Connect your world → profile completion → bottom nav. Real opportunities sit above the plan: Roadmap follows the previews rather than preceding them.
+Opportunity Delta moved into Fastest Fix as its one-row mobile form, so the 12 → 20 evidence travels with the fix rather than needing its own card.
+Lists show 2 rows + “see all n”. Rows go two-line: title and freshness on line one, company · city · mode on line two, then the evidence chip and the gap type.
+Skip collapses to a single review row directly under the two previews, closing the triage group. Nothing is hidden — the count and the three blockers stay visible — but it never outranks what you can act on.
+Connect your world keeps both groups. Evidence sources become full-width rows with status; engines stay a 4-up chip grid with the configuration pointer to Profile → Settings.
+Bottom nav = the same five destinations at 56px targets with pixel glyphs, plus the home-indicator inset. No hamburger, no nested drawers.
+3B and 3C reuse 3A's components unchanged — only the header treatment and the populated data differ. Bottom-nav glyphs are placeholders drawn from the existing motif library per the DNA fallback ladder — the five dedicated 28–34px nav glyphs are still on the missing-asset list, as is a 390-wide scenery crop authored at that width.
