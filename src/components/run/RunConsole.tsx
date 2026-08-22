@@ -3,11 +3,12 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { Mono } from "@/components/ui/Chip";
+import { Icon } from "@/components/ui/Icon";
 import { Eyebrow, Hairline } from "@/components/ui/Surface";
 import type { DiscoveryRun } from "@/lib/api/types";
 import { useReducedMotion } from "@/lib/hooks";
 import { cn } from "@/lib/utils/cn";
-import { ago, clock } from "@/lib/utils/time";
+import { ago } from "@/lib/utils/time";
 
 /**
  * The console is the signature moment while a run is live — and only then.
@@ -33,9 +34,13 @@ export function RunConsole({
   }, [run.events.length]);
 
   return (
-    <section className={cn("overflow-hidden rounded-xl bg-console", className)}>
-      <header className="flex items-center justify-between gap-3 px-5 pt-4 pb-3">
-        <div className="flex items-baseline gap-2.5">
+    <section className={cn("overflow-hidden rounded-2xl bg-console", className)}>
+      <header className="flex items-center justify-between gap-3 px-5 pt-4 pb-3.5">
+        <div className="flex items-center gap-2.5">
+          <span aria-hidden className="relative flex size-2.5 items-center justify-center">
+            <span className="absolute size-2.5 rounded-full bg-console-ok/30" />
+            <span className="size-[6px] rounded-full bg-console-ok" />
+          </span>
           <span className="text-subhead text-console-text">Finding opportunities</span>
           <span className="tnum font-mono text-meta text-console-meta">
             step {run.step} of {run.totalSteps}
@@ -44,7 +49,7 @@ export function RunConsole({
         <button
           type="button"
           onClick={onStop}
-          className="min-h-[36px] rounded-lg px-2.5 text-sm font-medium text-console-meta transition-colors duration-100 hover:bg-white/10 hover:text-console-text focus-visible:outline-console-accent"
+          className="min-h-[38px] rounded-full px-4 text-sm font-medium text-console-meta transition-colors duration-150 hover:bg-white/10 hover:text-console-text focus-visible:outline-console-accent"
         >
           Stop
         </button>
@@ -55,31 +60,39 @@ export function RunConsole({
         aria-live="polite"
         aria-label="Discovery run activity"
         className={cn(
-          "flex flex-col overflow-y-auto px-5 pb-1",
-          compact ? "max-h-[34vh]" : "max-h-[212px]",
+          "no-scrollbar flex flex-col overflow-y-auto px-5 pb-1",
+          compact ? "max-h-[34vh]" : "max-h-[232px]",
         )}
       >
         <AnimatePresence initial={false}>
           {run.events.map((event) => (
             <motion.li
               key={event.id}
-              initial={reduced ? { opacity: 1 } : { opacity: 0, y: 2 }}
+              initial={reduced ? { opacity: 1 } : { opacity: 0, y: 3 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.12 }}
-              className="tnum grid grid-cols-[58px_1fr_auto] items-baseline gap-3 py-[5px] font-mono text-meta"
+              transition={{ duration: 0.14 }}
+              className="grid grid-cols-[16px_minmax(0,1fr)_auto] items-center gap-3 py-[7px]"
             >
-              <span className="text-console-meta">{clock(event.at)}</span>
-              <span className="text-console-text">{event.label}</span>
-              <span className="text-console-ok">{event.detail}</span>
+              <Icon name="check" size={13} className="text-console-ok" strokeWidth={2.2} />
+              <span className="min-w-0 truncate text-sm text-console-text">{event.label}</span>
+              <span className="tnum font-mono text-meta text-console-accent">{event.detail}</span>
             </motion.li>
           ))}
         </AnimatePresence>
+
+        {/* The stage now running. Named by its own event the moment it lands. */}
+        <li className="grid grid-cols-[16px_minmax(0,1fr)_auto] items-center gap-3 py-[7px]">
+          <span aria-hidden className="flex size-4 items-center justify-center">
+            <span className="size-[7px] animate-pulse rounded-full bg-console-meta" />
+          </span>
+          <span className="text-sm text-console-meta">Working…</span>
+        </li>
       </ol>
 
-      <div className="flex items-center gap-3 px-5 pt-2 pb-4">
-        <div className="h-[3px] flex-1 overflow-hidden rounded-full bg-white/15">
+      <div className="flex items-center gap-3 px-5 pt-2.5 pb-4">
+        <div className="h-[3px] flex-1 overflow-hidden rounded-full bg-white/12">
           <div
-            className="h-full rounded-full bg-console-accent transition-[width] duration-[240ms] ease-linear"
+            className="h-full rounded-full bg-console-ok transition-[width] duration-[240ms] ease-linear"
             style={{ width: `${run.progress}%` }}
           />
         </div>

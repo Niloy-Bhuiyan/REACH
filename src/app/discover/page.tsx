@@ -13,6 +13,7 @@ import { RunConsole, RunStats, RunSummaryLine } from "@/components/run/RunConsol
 import { useSetStatusLine } from "@/components/shell/AppShell";
 import { SearchField } from "@/components/shell/SearchField";
 import { Button } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
 import { Meta, Mono } from "@/components/ui/Chip";
 import { Tabs } from "@/components/ui/Controls";
 import { Disclosure } from "@/components/ui/Disclosure";
@@ -179,19 +180,27 @@ function Discover() {
     <Page className="pt-8 pb-20 sm:pt-10">
       <Stack gap="md">
         <header>
-          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-            <h1 className="text-title text-ink">Discover</h1>
-            {!running && counts && (
-              <Meta>
-                {total} opportunities for {target?.role} in {target?.location}
-              </Meta>
-            )}
-            <div className="ml-auto hidden sm:block">
+          <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2">
+            <div className="min-w-0">
+              <p className="flex items-center gap-2 text-sm text-brand-text">
+                <Icon name="spark" size={16} />
+                Roles that fit you, checked against your evidence
+              </p>
+              <h1 className="font-display mt-2 text-display text-ink">Discover</h1>
+              {!running && counts && (
+                <p className="mt-1.5">
+                  <Meta>
+                    {total} opportunities for {target?.role} in {target?.location}
+                  </Meta>
+                </p>
+              )}
+            </div>
+            <div className="hidden sm:block">
               <AssistantEntry />
             </div>
           </div>
 
-          <SearchField defaultValue={query.q ?? ""} size="md" className="mt-4 w-full" />
+          <SearchField defaultValue={query.q ?? ""} size="md" className="mt-6 w-full" />
         </header>
 
         {/* Toolbar: the essentials, plus one door to the rest. */}
@@ -237,6 +246,8 @@ function Discover() {
           <div className="min-w-0">
             {counts && (
               <Tabs
+                variant="segmented"
+                className="mb-1"
                 ariaLabel="Filter by verdict"
                 value={(query.verdict ?? "all") as string}
                 onChange={(value) => patchQuery({ verdict: value as Verdict | "all" })}
@@ -586,7 +597,7 @@ function RunLogSheet({
           {run.id} · {run.events.length} events ·{" "}
           {run.authoritative ? "authoritative" : "not counted"}
         </Mono>
-        <ol className="mt-4 min-h-0 flex-1 overflow-y-auto rounded-xl bg-console px-4 py-3">
+        <ol className="no-scrollbar mt-4 min-h-0 flex-1 overflow-y-auto rounded-2xl bg-console px-4 py-3">
           {run.events.map((event) => (
             <li
               key={event.id}

@@ -191,7 +191,7 @@ export function Tabs<T extends string>({
         role="tablist"
         aria-label={ariaLabel}
         className={cn(
-          "no-scrollbar flex items-stretch gap-1 overflow-x-auto rounded-full border border-line bg-surface p-1",
+          "no-scrollbar flex w-full items-stretch gap-1 overflow-x-auto rounded-full border border-line bg-surface p-1 sm:w-fit",
           className,
         )}
       >
@@ -205,7 +205,7 @@ export function Tabs<T extends string>({
               aria-selected={active}
               onClick={() => onChange(item.value)}
               className={cn(
-                "flex min-h-[42px] flex-1 items-center justify-center gap-1.5 rounded-full px-3.5 text-sm whitespace-nowrap transition-colors duration-150",
+                "flex min-h-[42px] flex-1 items-center justify-center gap-1.5 rounded-full px-4 text-sm whitespace-nowrap transition-colors duration-150 sm:flex-none",
                 active
                   ? "bg-brand font-semibold text-white"
                   : "font-medium text-ink-body hover:bg-surface-sunken",

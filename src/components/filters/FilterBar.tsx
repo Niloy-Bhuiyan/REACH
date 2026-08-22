@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
 import { Select } from "@/components/ui/Controls";
 import { Sheet, SheetGrip } from "@/components/ui/Overlay";
 import { Eyebrow } from "@/components/ui/Surface";
@@ -40,6 +41,7 @@ export function FilterBar({
   return (
     <div className={cn("flex flex-wrap items-center gap-2", className)}>
       <Select
+        icon="pin"
         value={query.location ?? ""}
         onChange={(value) => onChange({ location: value || undefined })}
         options={[
@@ -49,6 +51,7 @@ export function FilterBar({
         ]}
       />
       <Select
+        icon="briefcase"
         value={query.mode ?? ""}
         onChange={(value) => onChange({ mode: (value || undefined) as WorkMode })}
         options={[
@@ -58,11 +61,13 @@ export function FilterBar({
       />
 
       <Button variant="secondary" size="md" onClick={onOpenSheet}>
+        <Icon name="sliders" size={16} className="text-ink-muted" />
         More filters
         {extra > 0 && <span className="tnum font-semibold text-brand-text">{extra}</span>}
       </Button>
 
       <Select
+        icon="sort"
         label="Sort"
         value={query.sort ?? "best-fit"}
         onChange={(value) => onChange({ sort: value as JobQuery["sort"] })}
@@ -105,7 +110,7 @@ export function ActiveFilterChips({
           type="button"
           onClick={() => onChange({ [chip.key]: undefined })}
           aria-label={`Remove filter ${chip.label}`}
-          className="inline-flex min-h-[36px] items-center gap-1.5 rounded-lg bg-brand-tint px-2.5 text-meta font-medium text-brand-text transition-colors duration-100 hover:bg-brand-line"
+          className="inline-flex min-h-[36px] items-center gap-1.5 rounded-full bg-brand-tint px-3 text-meta font-medium text-brand-text transition-colors duration-100 hover:bg-brand-line"
         >
           {chip.label}
           <svg

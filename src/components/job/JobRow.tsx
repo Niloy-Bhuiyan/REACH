@@ -3,16 +3,17 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { Meta, Mono } from "@/components/ui/Chip";
+import { Chip, Meta, Mono } from "@/components/ui/Chip";
+import { Icon } from "@/components/ui/Icon";
 import { saveJob } from "@/lib/api";
 import type { JobSummary } from "@/lib/api/types";
 import { cn } from "@/lib/utils/cn";
 import { closingDate, daysUntil, freshness, verifiedAgo } from "@/lib/utils/time";
-import { GAP_LABEL, VERDICT_TONE } from "@/lib/utils/verdict";
+import { GAP_LABEL, VERDICT_LABEL, VERDICT_TONE } from "@/lib/utils/verdict";
 
 /** "Remote · BD" already says the mode; do not say it twice. */
 function placeLine(job: JobSummary) {
-  const parts = [job.company, job.location];
+  const parts = [job.location];
   if (!job.location.toLowerCase().includes(job.mode.toLowerCase())) parts.push(job.mode);
   return parts.join(" · ");
 }
@@ -22,6 +23,22 @@ const SOURCE_SHORT = {
   "job-board": "Job board",
   referral: "Referral",
 } as const;
+
+/**
+ * A company tile, lettered until real logos exist. Warm and neutral on purpose:
+ * the verdict already has a colour, and a coloured tile would say it twice.
+ */
+export function CompanyTile({ name, size = 46 }: { name: string; size?: number }) {
+  return (
+    <span
+      aria-hidden
+      className="font-display flex shrink-0 items-center justify-center rounded-xl bg-canvas-deep text-ink-body"
+      style={{ width: size, height: size, fontSize: Math.round(size * 0.42) }}
+    >
+      {name.slice(0, 1).toUpperCase()}
+    </span>
+  );
+}
 
 /**
  * Freshness is mono and muted until it matters. Stale content stays on screen
@@ -47,7 +64,7 @@ export function FreshnessStamp({
   }
   const band = freshness(iso);
   return (
-    <span className={cn("inline-flex items-center gap-1.5", className)}>
+    <span className={cn("inline-flex flex-wrap items-baseline gap-x-1.5", className)}>
       <span
         className={cn(
           "tnum font-mono text-meta whitespace-nowrap",
@@ -61,7 +78,7 @@ export function FreshnessStamp({
         <button
           type="button"
           onClick={onReverify}
-          className="text-meta font-medium text-brand-text hover:underline"
+          className="min-h-[36px] text-meta font-medium text-brand-text hover:underline"
         >
           Re-verify
         </button>
@@ -86,7 +103,8 @@ function Signal({ job }: { job: JobSummary }) {
   if (job.blocker) {
     return (
       <span className="text-sm text-apricot-text">
-        Needs {job.blocker.label.replace(/^Add /, "")} · {GAP_LABEL[job.blocker.gapType].toLowerCase()}
+        Needs {job.blocker.label.replace(/^Add /, "")} ·{" "}
+        {GAP_LABEL[job.blocker.gapType].toLowerCase()}
       </span>
     );
   }
@@ -97,6 +115,22 @@ function Signal({ job }: { job: JobSummary }) {
     <span className="text-sm text-sage-text">
       {job.evidence.met} of {job.evidence.total} requirements met
     </span>
+  );
+}
+
+const VERDICT_CHIP_TONE = {
+  "apply-now": "sage",
+  "one-fix-away": "apricot",
+  skip: "terracotta",
+} as const;
+
+/** The verdict, as a word in its own colour. Never a colour on its own. */
+export function VerdictChip({ job }: { job: JobSummary }) {
+  return (
+    <Chip tone={VERDICT_CHIP_TONE[job.verdict]}>
+      <span aria-hidden className="size-[6px] rounded-full bg-current" />
+      {VERDICT_LABEL[job.verdict]}
+    </Chip>
   );
 }
 
@@ -122,7 +156,7 @@ export function JobRow({
   return (
     <div
       className={cn(
-        "group relative flex items-center gap-4 border-t border-hairline py-3.5 pl-4 transition-colors duration-100 first:border-t-0 hover:bg-row-hover",
+        "group relative flex items-center gap-4 rounded-xl border-t border-hairline py-3.5 pl-4 transition-colors duration-150 first:border-t-0 hover:bg-row-hover",
         selected && "bg-brand-tint",
       )}
     >
@@ -132,11 +166,16 @@ export function JobRow({
       />
 
       <div className="min-w-0 flex-1">
-        <Link href={`/jobs/${job.id}`} className="text-subhead text-ink hover:underline">
+        <Link
+          href={`/jobs/${job.id}`}
+          className="font-display text-[1.0625rem] text-ink hover:underline"
+        >
           {job.role}
         </Link>
         <p className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5">
-          <Meta>{placeLine(job)}</Meta>
+          <Meta>
+            {job.company} · {placeLine(job)}
+          </Meta>
         </p>
       </div>
 
@@ -147,7 +186,7 @@ export function JobRow({
         </p>
       </div>
 
-      <div className="hidden w-[164px] shrink-0 lg:block">
+      <div className="hidden w-[196px] shrink-0 lg:block">
         <FreshnessStamp
           iso={job.provenance.verifiedAt}
           delisted={job.provenance.delisted}
@@ -174,7 +213,7 @@ export function JobRow({
         </Button>
         <Link
           href={href}
-          className="inline-flex min-h-[36px] items-center rounded-lg border border-control bg-surface px-3 text-sm font-medium text-ink transition-colors duration-100 hover:bg-surface-sunken"
+          className="inline-flex min-h-[38px] items-center rounded-full border border-control bg-surface px-4 text-sm font-medium text-ink transition-colors duration-150 hover:bg-surface-sunken"
         >
           {job.verdict === "one-fix-away" ? "See fix" : "Open"}
         </Link>
@@ -183,7 +222,11 @@ export function JobRow({
   );
 }
 
-/** Mobile card. Same information, stacked, with one action pair. */
+/**
+ * Mobile card. The same information as the row, composed for a thumb: a tile to
+ * anchor the eye, the role in the display face, the verdict as a word, and one
+ * filled action.
+ */
 export function JobCard({
   job,
   compact,
@@ -198,56 +241,87 @@ export function JobCard({
   const href =
     job.verdict === "one-fix-away" ? `/one-fix/${job.blocker?.fixId ?? "sql"}` : `/jobs/${job.id}`;
 
-  // Freshness sits on its own line: beside the title it steals the width the
-  // role name needs to stay on one line.
-  const inner = (
-    <div className="flex items-start gap-2.5">
-      <span aria-hidden className={cn("mt-[7px] size-[7px] shrink-0 rounded-full", tone.rule)} />
-      <div className="min-w-0 flex-1">
-        <span className="text-subhead text-ink">{job.role}</span>
-        <p className="mt-0.5">
-          <Meta>{placeLine(job)}</Meta>
-        </p>
-        <p className="mt-1.5">
-          <Signal job={job} />
-        </p>
-        <p className="mt-1">
-          <FreshnessStamp
-            iso={job.provenance.verifiedAt}
-            delisted={job.provenance.delisted}
-            onReverify={onReverify}
-          />
-        </p>
-      </div>
-    </div>
-  );
-
   if (compact) {
     return (
       <Link
         href={href}
-        className="-mx-2 block rounded-lg px-2 py-3 transition-colors duration-100 hover:bg-surface-sunken"
+        className="-mx-2 block rounded-xl px-2 py-3 transition-colors duration-150 hover:bg-surface-sunken"
       >
-        {inner}
+        <div className="flex items-start gap-2.5">
+          <span
+            aria-hidden
+            className={cn("mt-[7px] size-[7px] shrink-0 rounded-full", tone.rule)}
+          />
+          <div className="min-w-0 flex-1">
+            <span className="font-display text-[1.0625rem] text-ink">{job.role}</span>
+            <p className="mt-0.5">
+              <Meta>
+                {job.company} · {placeLine(job)}
+              </Meta>
+            </p>
+            <p className="mt-1.5">
+              <Signal job={job} />
+            </p>
+          </div>
+        </div>
       </Link>
     );
   }
 
   return (
-    <div className="border-t border-hairline py-3.5 first:border-t-0">
-      {inner}
-      <div className="mt-3 flex items-center gap-2 pl-[17px]">
-        <Button variant="secondary" size="md" onClick={() => save.mutate()} aria-pressed={job.saved}>
-          {job.saved ? "Saved" : "Save"}
-        </Button>
-        <Link
-          href={href}
-          className="inline-flex min-h-[40px] flex-1 items-center justify-center rounded-lg border border-control bg-surface text-sm font-medium text-ink transition-colors duration-100 hover:bg-surface-sunken"
-        >
-          {job.verdict === "one-fix-away" ? "See the fix" : "Open role"}
-        </Link>
+    <article className="mt-3 rounded-2xl border border-line bg-surface p-4 first:mt-0">
+      <div className="flex items-start gap-3.5">
+        <CompanyTile name={job.company} />
+        <div className="min-w-0 flex-1">
+          <Link href={`/jobs/${job.id}`} className="font-display text-[1.25rem] text-ink">
+            {job.role}
+          </Link>
+          <p className="mt-0.5 flex items-center gap-1.5">
+            <Meta>{job.company}</Meta>
+            {!job.provenance.delisted && (
+              <Icon name="checkCircle" size={13} className="text-sage" />
+            )}
+          </p>
+        </div>
+        <VerdictChip job={job} />
       </div>
-    </div>
+
+      <p className="mt-3 flex items-center gap-1.5 text-sm text-ink-body">
+        <Icon name="pin" size={14} className="text-ink-muted" />
+        {placeLine(job)}
+      </p>
+
+      <p className="mt-1.5">
+        <Signal job={job} />
+      </p>
+
+      {/* Provenance gets its own line: beside two buttons it wraps to shreds. */}
+      <div className="mt-4 border-t border-hairline pt-3">
+        <FreshnessStamp
+          iso={job.provenance.verifiedAt}
+          delisted={job.provenance.delisted}
+          onReverify={onReverify}
+        />
+        <div className="mt-2.5 flex items-center gap-2">
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => save.mutate()}
+            aria-pressed={job.saved}
+            className="shrink-0"
+          >
+            {job.saved ? "Saved" : "Save"}
+          </Button>
+          <Link
+            href={href}
+            className="inline-flex min-h-[42px] flex-1 items-center justify-center gap-1.5 rounded-full bg-brand px-4 text-sm font-medium text-white transition-colors duration-150 hover:bg-brand-hover"
+          >
+            {job.verdict === "one-fix-away" ? "See the fix" : "View role"}
+            <Icon name="arrowRight" size={14} className="opacity-80" />
+          </Link>
+        </div>
+      </div>
+    </article>
   );
 }
 
@@ -256,9 +330,11 @@ export function JobPreviewRow({ job }: { job: JobSummary }) {
   return (
     <Link
       href={`/jobs/${job.id}`}
-      className="-mx-2 flex items-baseline justify-between gap-4 rounded-lg px-2 py-2.5 transition-colors duration-100 hover:bg-surface-sunken"
+      className="-mx-2 flex items-baseline justify-between gap-4 rounded-xl px-2 py-2.5 transition-colors duration-150 hover:bg-surface-sunken"
     >
-      <span className="min-w-0 flex-1 truncate text-body font-medium text-ink">{job.role}</span>
+      <span className="font-display min-w-0 flex-1 truncate text-[1.0625rem] text-ink">
+        {job.role}
+      </span>
       <span className="shrink-0">
         {job.blocker ? (
           <span className="text-sm text-apricot-text">
