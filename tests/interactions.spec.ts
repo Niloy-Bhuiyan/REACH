@@ -336,14 +336,14 @@ test.describe("Contextual assistant", () => {
 test.describe("Settings", () => {
   test("provider marks appear here and nowhere else", async ({ page }) => {
     await goto(page, "/profile/settings", "Analysis engine");
-    const providerMarks = page.locator('img[src*="px-claude"], img[src*="px-chatgpt"]');
-    expect(await providerMarks.count()).toBeGreaterThan(0);
+    const MARKS = '[data-engine="claude"], [data-engine="openai"]';
+    expect(await page.locator(MARKS).count()).toBeGreaterThan(0);
 
     await goto(page, "/", "Find what fits");
-    expect(await page.locator('img[src*="px-claude"], img[src*="px-chatgpt"]').count()).toBe(0);
+    expect(await page.locator(MARKS).count()).toBe(0);
 
     await goto(page, "/profile", "Niloy Mahmud");
-    expect(await page.locator('img[src*="px-claude"], img[src*="px-chatgpt"]').count()).toBe(0);
+    expect(await page.locator(MARKS).count()).toBe(0);
   });
 
   test("every engine declares its exposure and the fallback is explicit", async ({ page }) => {

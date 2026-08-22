@@ -4,6 +4,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
 import { Input } from "@/components/ui/Controls";
 import { Drawer, Sheet, SheetGrip } from "@/components/ui/Overlay";
 import { Eyebrow } from "@/components/ui/Surface";
@@ -79,7 +80,7 @@ export function AssistantSurface() {
   const body = (
     <div className="flex h-full flex-col">
       <header className="flex shrink-0 items-center justify-between border-b border-line px-5 py-4">
-        <span className="text-section text-ink">Ask REACH</span>
+        <span className="font-display text-[1.375rem] text-ink">Ask REACH</span>
         <div className="flex items-center gap-1">
           {thread.length > 0 && (
             <Button
@@ -98,9 +99,9 @@ export function AssistantSurface() {
             type="button"
             onClick={closeAssistant}
             aria-label="Close the assistant"
-            className="flex h-[44px] w-[44px] items-center justify-center rounded-[9px] text-ink-body transition-colors duration-100 hover:bg-row-hover"
+            className="flex size-[44px] items-center justify-center rounded-full text-ink-body transition-colors duration-150 hover:bg-row-hover"
           >
-            ✕
+            <Icon name="close" size={17} />
           </button>
         </div>
       </header>
@@ -112,7 +113,7 @@ export function AssistantSurface() {
         <Link
           href="/profile"
           onClick={closeAssistant}
-          className="text-[13px] font-semibold text-brand-text hover:underline"
+          className="min-h-[36px] text-meta font-semibold text-brand-text hover:underline"
         >
           Change
         </Link>
@@ -171,7 +172,7 @@ export function AssistantSurface() {
                           "inline-flex min-h-[46px] items-center rounded-full px-4.5 text-[14px] font-semibold",
                           action.tone === "primary"
                             ? "bg-brand text-surface hover:bg-brand-hover"
-                            : "border-[1.5px] border-control bg-surface text-brand-text hover:bg-brand-tint",
+                            : "border border-control bg-surface text-brand-text hover:bg-brand-tint",
                         )}
                       >
                         {action.label}
@@ -201,7 +202,7 @@ export function AssistantSurface() {
           {error && (
             <div
               role="alert"
-              className="rounded-[12px] border-2 border-terracotta-line bg-terracotta-tint p-4"
+              className="rounded-2xl border border-terracotta-line bg-terracotta-tint p-4"
             >
               <p className="text-[14px] leading-relaxed text-ink-body">
                 Could not reach the engine.{" "}
@@ -264,12 +265,12 @@ export function AssistantSurface() {
             aria-label="Send"
             disabled={!draft.trim() || ask.isPending}
             reason="Type a question first"
-            className="w-[46px] px-0"
+            className="size-[46px] shrink-0 px-0"
           >
-            →
+            <Icon name="arrowRight" size={17} />
           </Button>
         </form>
-        <p className="mt-2 text-[12px] leading-snug text-ink-muted">
+        <p className="mt-2 text-meta leading-snug text-ink-muted">
           Suggested CV changes still go through accept / reject.
         </p>
       </footer>
@@ -303,7 +304,7 @@ export function AssistantEntry({ className }: { className?: string }) {
       type="button"
       onClick={openAssistant}
       className={cn(
-        "inline-flex min-h-[40px] items-center gap-2 rounded-lg border border-control bg-surface px-3 text-sm font-medium text-ink-body transition-colors duration-100 hover:bg-surface-sunken hover:text-ink",
+        "inline-flex min-h-[44px] items-center gap-2 rounded-full border border-control bg-surface px-4 text-sm font-medium text-ink-body transition-colors duration-150 hover:bg-surface-sunken hover:text-ink",
         className,
       )}
     >

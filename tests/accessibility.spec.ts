@@ -26,7 +26,7 @@ test("the focus ring is visible and is never removed", async ({ page }) => {
 
   expect(ring.outlineStyle).not.toBe("none");
   expect(parseFloat(ring.outlineWidth)).toBeGreaterThanOrEqual(2);
-  expect(ring.outlineColor).toBe("rgb(87, 79, 192)");
+  expect(ring.outlineColor).toBe("rgb(74, 101, 81)");
   expect(ring.offset).toBe("2px");
 });
 
@@ -120,15 +120,19 @@ for (const route of ROUTES) {
   });
 }
 
-test("art is pixel-rendered and carries true alpha", async ({ page }) => {
+test("every drawn mark is either hidden or named", async ({ page }) => {
+  // Icons and scenery are SVG now, so the guarantee moved with them: an icon
+  // either sits beside a word and is hidden, or it carries its own label.
   await goto(page, "/", "Find what fits");
-  const smoothed = await page.evaluate(() =>
-    [...document.querySelectorAll("img")]
-      .filter((img) => (img.getAttribute("src") ?? "").includes("/art/"))
-      .filter((img) => getComputedStyle(img).imageRendering !== "pixelated")
-      .map((img) => img.getAttribute("src") ?? ""),
+  const exposed = await page.evaluate(() =>
+    [...document.querySelectorAll("svg")]
+      .filter(
+        (svg) =>
+          svg.getAttribute("aria-hidden") !== "true" && !svg.getAttribute("aria-label"),
+      )
+      .map((svg) => svg.outerHTML.slice(0, 70)),
   );
-  expect(smoothed, `art rendered smoothed: ${smoothed.join(", ")}`).toEqual([]);
+  expect(exposed, `unlabelled, unhidden marks: ${exposed.join(" | ")}`).toEqual([]);
 });
 
 test("no dead controls: every rendered button does something", async ({ page }) => {

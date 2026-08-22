@@ -103,6 +103,7 @@ export function EngineMark({
       width={size}
       height={size}
       aria-hidden
+      data-engine={key}
       className={cn("shrink-0", className)}
       style={{ width: size, height: size }}
       fill="none"
