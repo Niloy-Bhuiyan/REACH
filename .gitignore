@@ -19,3 +19,9 @@ reach-audit.json
 
 # Build screenshots taken during QA. Regenerated on demand, never referenced by code.
 shots/
+
+# local agent tooling
+.claude/
+CLAUDE.md
+AGENTS.md
+.mcp.json
